@@ -18,7 +18,7 @@ const BlackBar = () => {
                 <MdOutlineAssignmentReturn />
             </div>
             <div className="BlackBar__item">
-                <span>Descarga la app de Temu</span>
+                <span>Descarga la app de Temu</span>{/* Probando 123 */}
                 <IoIosPhonePortrait />
             </div>
         </div>
