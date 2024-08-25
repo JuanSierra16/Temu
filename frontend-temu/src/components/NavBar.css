@@ -2,33 +2,45 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 15px;
     background-color: #ff5e6c;
     width: 100%;
-    position: fixed;
-    top: 50px; /* Deja espacio para la barra superior */
+    position: absolute;
+    top: 70px; /* Deja espacio para la barra superior 50px */
     left: 0;
     z-index: 1000;
   }
   
 .navbar__logo img {
-    height: 40px;
+    height: 60px;
 }
   
-.navbar__links a {
-    margin: 0 10px;
+.navbar__links {
+    display: flex; /* Usamos flexbox para alinear los elementos en fila */
+    align-items: center; /* +Alinea verticalmente al centro */
+    /*justify-items: center;*/
+  }
+  
+  .navbar__links a {
+    margin: 0 10px; /* Espacio entre los enlaces */
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-}
+    display: flex;
+    align-items: center; /* Alinea verticalmente al centro */
+  }
+
+  .navbar__link-item{
+        display: flex;
+        align-content: center;
+        /* flex-wrap: wrap; */
+        align-items: center;
+  }
   
-.navbar__links a.hot {
-    background-color: #f90;
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: #fff;
-}
-  
+  .navbar__links a img {
+    margin-right: 5px; /* Espacio entre el icono y el texto */
+  }
+    
 .navbar__search {
     display: flex;
     align-items: center;
@@ -41,6 +53,7 @@
     padding: 8px 12px;
     border-radius: 20px 0 0 20px;
     border: none;
+    background-color: #000000;
 }
   
 .navbar__search button {
@@ -55,13 +68,19 @@
     height: 16px;
     width: 16px;
 }
-  
-.navbar__actions a {
-    margin-left: 15px;
-    color: #fff;
-    text-decoration: none;
+
+.navbar__actions {
     display: flex;
     align-items: center;
+}
+  
+.navbar__actions a {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
 }
   
 .navbar__actions a img {
