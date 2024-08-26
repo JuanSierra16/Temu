@@ -28,17 +28,16 @@ const Login = ({ isOpen, onClose }) => {
 
     if (!isOpen) return null;
 
-    const handleSumbit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("Correo electronico ingresado:", email);
         console.log("Contraseña ingresada:", password);
-        try{
-            login(email, password)
-            .then((response) => {
-                console.log("Respuesta de la API:", response);
-            })
-        }catch(error){
-            console.error("Error durante Login", error)
+    
+        try {
+            const response = await login(email, password);
+            console.log("Respuesta de la API:", response);
+        } catch (error) {
+            console.error("Error durante Login", error);
         }
     }
 
@@ -63,7 +62,7 @@ const Login = ({ isOpen, onClose }) => {
                         <small> desde la fecha de compra</small>
                     </div>
                 </div>
-                <form onSubmit={handleSumbit}>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Email o número de telefono:</label>
                         <input 
