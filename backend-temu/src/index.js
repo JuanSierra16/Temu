@@ -2,11 +2,13 @@ import express from 'express';
 import usersRoutes from './routes/users.routes.js';
 import cors from 'cors';
 
+import './config.js'
+
 const app = express();
 
 // Configurar CORS con opciones avanzadas
 const corsOptions = {
-    origin: 'http://localhost:5173', // URL de tu frontend
+    origin: '*', // URL de tu frontend
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type,Authorization'
 };
