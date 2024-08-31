@@ -17,6 +17,7 @@
     padding: 20px;
     border-radius: 10px;
     max-width: 80%;
+<<<<<<< Updated upstream
     width: 400px;
 }
 
@@ -34,6 +35,16 @@
     cursor: pointer;
 }
 
+=======
+    width: 450px;
+    height: 510px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+>>>>>>> Stashed changes
 .close-button {
     position: relative;
     top: 10px;
@@ -62,7 +73,7 @@
     border: 1px solid #ccc;
 }
 
-button[type="submit"] {
+button[type='submit'] {
     width: 100%;
     padding: 10px;
     background-color: #ff5e00;
