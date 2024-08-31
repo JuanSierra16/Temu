@@ -45,7 +45,7 @@ const Login = ({ isOpen, onClose }) => {
         <div className="modal-overlay">
             <div className="modal-content">
                 <div className='CloseButtom'>
-                    <button className="close-button" onClick={onClose}>&times;</button>
+                    <span className="close-button" onClick={onClose}>&times;</span>
                 </div>
                 <div className='IniciarSesion'>
                     <h3>Iniciar Sesión/Registrarse</h3>
@@ -76,13 +76,16 @@ const Login = ({ isOpen, onClose }) => {
                     {<div className="form-group">
                         <label>Contraseña:</label>
                         <input 
-                            type="password" placeholder="Ingresa tu contraseña"
+                            type="password"
                             id='password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required 
                         />
                     </div>}
+                    <div className='ContinueButtom'>
+
+                    </div>
                     <button type="submit">Continuar</button>
                 </form>
             </div>

@@ -9,39 +9,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .modal-content {
+    position: relative;
     background: white;
     padding: 20px;
     border-radius: 10px;
     max-width: 80%;
-    width: 400px;
+    width: 450px;
+    height: 510px;
 }
 
-.close{
-    color: #aaa;
-    float: right;  
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
 
 .close-button {
-    position: relative;
+    position: absolute;
     top: 10px;
     right: 10px;
     /*background: none;*/
     border: none;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
+    color: black;
 }
 
 .form-group {
@@ -60,6 +50,8 @@
     box-sizing: border-box;
     border-radius: 4px;
     border: 1px solid #ccc;
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 button[type="submit"] {
