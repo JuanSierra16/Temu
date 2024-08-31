@@ -18,8 +18,6 @@
     padding: 20px;
     border-radius: 10px;
     max-width: 80%;
-    width: 450px;
-    height: 510px;
 }
 
 
@@ -54,7 +52,7 @@
     color: black;
 }
 
-button[type="submit"] {
+button[type='submit'] {
     width: 100%;
     padding: 10px;
     background-color: #ff5e00;
@@ -63,4 +61,5 @@ button[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+}
 }

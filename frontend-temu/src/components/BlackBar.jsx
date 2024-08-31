@@ -1,8 +1,8 @@
 import React from 'react';
 import './BlackBar.css'; // Asegúrate de crear y aplicar este archivo CSS
-import { FaTruckFast } from "react-icons/fa6";
-import { MdOutlineAssignmentReturn } from "react-icons/md";
-import { IoIosPhonePortrait } from "react-icons/io";
+import { FaTruckFast } from 'react-icons/fa6';
+import { MdOutlineAssignmentReturn } from 'react-icons/md';
+import { IoIosPhonePortrait } from 'react-icons/io';
 
 const BlackBar = () => {
     return (
@@ -18,7 +18,8 @@ const BlackBar = () => {
                 <MdOutlineAssignmentReturn />
             </div>
             <div className="BlackBar__item">
-                <span>Descarga la app de Temu</span>{/* Probando 123 */}
+                <span>Descarga la app de Temu</span>
+                {/* Probando 123 */}
                 <IoIosPhonePortrait />
             </div>
         </div>
