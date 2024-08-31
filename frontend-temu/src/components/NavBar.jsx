@@ -8,14 +8,7 @@ import { BsBagHeart } from 'react-icons/bs';
 import { MdOutlineLiveHelp } from 'react-icons/md';
 import { FaShoppingCart } from 'react-icons/fa';
 import Login from './Login';
-<<<<<<< Updated upstream
-
-
-=======
-{
-    /*import { Flag } from 'react-flagkit';*/
-}
->>>>>>> Stashed changes
+/*import { Flag } from 'react-flagkit';*/
 
 const NavBar = () => {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -70,10 +63,6 @@ const NavBar = () => {
                             <MdOutlineLiveHelp />
                             <a href="#">Ayuda</a>
                         </div>
-<<<<<<< Updated upstream
-                        <div className='navbar__action-item'>
-                            <a href="#"><img src="/path/to/flag-icon.png" alt="Idioma" /></a>
-=======
                         <div className="navbar__action-item">
                             <a href="#">
                                 <img
@@ -82,10 +71,11 @@ const NavBar = () => {
                                 />
                             </a>
                             {/* <a href="#"><Flag country="US" /></a> */}
->>>>>>> Stashed changes
                         </div>
                         <div className="navbar__action-item">
-                            <FaShoppingCart />
+                            <button>
+                                <FaShoppingCart />
+                            </button>
                         </div>
                     </div>
                 </div>

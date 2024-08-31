@@ -43,15 +43,10 @@ const Login = ({ isOpen, onClose }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-<<<<<<< Updated upstream
-                <div className='CloseButtom'>
-                    <button className="close-button" onClick={onClose}>&times;</button>
-=======
                 <div className="CloseButtom">
                     <span className="close-button" onClick={onClose}>
                         &times;
                     </span>
->>>>>>> Stashed changes
                 </div>
                 <div className="IniciarSesion">
                     <h3>Iniciar Sesión/Registrarse</h3>
@@ -79,18 +74,6 @@ const Login = ({ isOpen, onClose }) => {
                             required
                         />
                     </div>
-<<<<<<< Updated upstream
-                    {<div className="form-group">
-                        <label>Contraseña:</label>
-                        <input 
-                            type="password" placeholder="Ingresa tu contraseña"
-                            id='password'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required 
-                        />
-                    </div>}
-=======
                     {
                         <div className="form-group">
                             <label>Contraseña:</label>
@@ -104,7 +87,6 @@ const Login = ({ isOpen, onClose }) => {
                         </div>
                     }
                     <div className="ContinueButtom"></div>
->>>>>>> Stashed changes
                     <button type="submit">Continuar</button>
                 </form>
             </div>

@@ -1,17 +1,4 @@
 .BlackBar {
-<<<<<<< Updated upstream
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 15px;
-  background-color: #000; /* Fondo negro */
-  color: #fff; /* Texto blanco */
-  width: 100%; /* Ancho completo */
-  position: fixed; /* Posición fija en la parte superior */
-  top: 0; /* Fija en la parte superior de la pantalla */
-  left: 0; /* Alineado a la izquierda */
-  z-index: 1001; /* Asegúrate de que esté por encima de la barra de navegación */
-=======
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -23,7 +10,6 @@
     top: 0; /* Fija en la parte superior de la pantalla */
     left: 0; /* Alineado a la izquierda */
     z-index: 1001; /* Asegúrate de que esté por encima de la barra de navegación */
->>>>>>> Stashed changes
 }
 
 .BlackBar__item {

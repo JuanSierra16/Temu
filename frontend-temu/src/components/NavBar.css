@@ -9,21 +9,26 @@
     top: 70px; /* Deja espacio para la barra superior 50px */
     left: 0;
     z-index: 1000;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   }
+=======
+}
+>>>>>>> main
   
 =======
 }
 
 >>>>>>> Stashed changes
 .navbar__logo img {
-    height: 60px;
+    height: 50px;
 }
 
 .navbar__links {
     display: flex; /* Usamos flexbox para alinear los elementos en fila */
     align-items: center; /* +Alinea verticalmente al centro */
     /*justify-items: center;*/
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   }
   
@@ -33,25 +38,35 @@
 
 .navbar__links a {
 >>>>>>> Stashed changes
+=======
+}
+  
+.navbar__links a {
+>>>>>>> main
     margin: 0 10px; /* Espacio entre los enlaces */
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     display: flex;
     align-items: center; /* Alinea verticalmente al centro */
-  }
+    font-size: 14px;
+}
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   .navbar__link-item{
+=======
+.navbar__link-item{
+>>>>>>> main
         display: flex;
         align-content: center;
         /* flex-wrap: wrap; */
         align-items: center;
-  }
+}
   
-  .navbar__links a img {
+.navbar__links a img {
     margin-right: 5px; /* Espacio entre el icono y el texto */
-  }
+}
     
 =======
 .navbar__link-item {
@@ -70,7 +85,7 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
-    max-width: 400px;
+    max-width: 200px;
 }
 
 .navbar__search input {
@@ -78,31 +93,44 @@
     padding: 8px 12px;
     border-radius: 20px 0 0 20px;
     border: none;
-    background-color: #000000;
+    background-color: #ffffff; /* Color de fondo de barra de busqueda */
+    color: #000; /* Color de letra de barra de busqueda */
 }
 
 .navbar__search button {
-    background-color: #000;
+    background-color: #000000;
     border: none;
     border-radius: 0 20px 20px 0;
     padding: 8px 12px;
     cursor: pointer;
+    color: rgb(255, 255, 255);
 }
 
 .navbar__search button img {
-    height: 16px;
-    width: 16px;
+    height: 12px;
+    width: 12px;
 }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 .navbar__actions {
     display: flex;
     align-items: center;
 }
+=======
+
+/* NavBar.css */
+
+.navbar__icons {
+    display: flex; /* Alinea los elementos en fila */
+    align-items: center; /* Centra los elementos verticalmente */
+  }
+>>>>>>> main
   
-.navbar__actions a {
+  .navbar__icons div {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     margin: 0 10px;
 =======
 /* NavBar.css */
@@ -127,9 +155,25 @@
     color: #fff;
     font-weight: bold;
 <<<<<<< Updated upstream
-    text-decoration: none;
-}
+=======
+    margin-left: 15px;
+  }
   
+  .navbar__icons div img {
+    margin-right: 5px; /* Añade un espacio entre el icono y el texto */
+  }
+  
+  .navbar__icons div a {
+    color: #fff;
+>>>>>>> main
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Alinea verticalmente al centro */
+    font-size: 14px;
+  }
+  
+<<<<<<< HEAD
 .navbar__actions a img {
     height: 24px;
     width: 24px;
@@ -142,11 +186,18 @@
 }
 
 .navbar__action-item button {
+=======
+  .navbar__action-item button {
+>>>>>>> main
     background-color: #ff5e6c;
     border: none;
     border-radius: 0 20px 20px 0;
     padding: 8px 12px;
     cursor: pointer;
     color: black;
+<<<<<<< HEAD
 }
 >>>>>>> Stashed changes
+=======
+}
+>>>>>>> main
