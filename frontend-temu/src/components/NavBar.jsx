@@ -8,6 +8,7 @@ import { BsBagHeart } from "react-icons/bs";
 import { MdOutlineLiveHelp } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import Login from './Login';
+{/*import { Flag } from 'react-flagkit';*/}
 
 
 
@@ -66,9 +67,12 @@ const NavBar = () => {
                         </div>
                         <div className='navbar__action-item'>
                             <a href="#"><img src="/path/to/flag-icon.png" alt="Idioma" /></a>
+                            { /* <a href="#"><Flag country="US" /></a> */ }
                         </div>
                         <div className="navbar__action-item">
-                            <FaShoppingCart />
+                            <button>
+                                <FaShoppingCart />
+                            </button>
                         </div>
                     </div>
                 </div>
