@@ -1,138 +1,53 @@
 // src/components/LoginModal.jsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
-import { login } from '../API/Login.API';
 import Select from './Select';
 
 import { FaXTwitter, FaTruckFast } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
+import { supportPrefixPhone } from '../utils/data';
+
 import './Login.css';
+import InputCode from './InputCode';
 
-const supportPrefixPhone = [
-    {
-        country: 'Australia',
-        countryCode: 'AU',
-        prefix: '+61',
-    },
-    {
-        country: 'Brasil',
-        countryCode: 'BR',
-        prefix: '+55',
-    },
-    {
-        country: 'Brunéi Darusalam',
-        countryCode: 'BN',
-        prefix: '+673',
-    },
-    {
-        country: 'Canada',
-        countryCode: 'CA',
-        prefix: '+1',
-    },
-    {
-        country: 'Chile',
-        countryCode: 'CL',
-        prefix: '+56',
-    },
-    {
-        country: 'Colombia',
-        countryCode: 'CO',
-        prefix: '+57',
-    },
-    {
-        country: 'Corea del Sur',
-        countryCode: 'KR',
-        prefix: '+82',
-    },
-    {
-        country: 'Ecuador',
-        countryCode: 'EC',
-        prefix: '+593',
-    },
-    {
-        country: 'El Salvador',
-        countryCode: 'SV',
-        prefix: '+503',
-    },
-    {
-        country: 'Estados Unidos',
-        countryCode: 'US',
-        prefix: '+1',
-    },
-    {
-        country: 'Filipinas',
-        countryCode: 'PH',
-        prefix: '+63',
-    },
-    {
-        country: 'Japón',
-        countryCode: 'JP',
-        prefix: '+81',
-    },
-    {
-        country: 'Malasia',
-        countryCode: 'MY',
-        prefix: '+60',
-    },
-    {
-        country: 'Mexico',
-        countryCode: 'MX',
-        prefix: '+52',
-    },
-    {
-        country: 'Nueva Zelanda',
-        countryCode: 'NZ',
-        prefix: '+64',
-    },
-    {
-        country: 'Panamá',
-        countryCode: 'PA',
-        prefix: '+507',
-    },
-    {
-        country: 'Perú',
-        countryCode: 'PE',
-        prefix: '+51',
-    },
-    {
-        country: 'República Dominicana',
-        countryCode: 'DO',
-        prefix: '+1',
-    },
-    {
-        country: 'Tailandia',
-        countryCode: 'TH',
-        prefix: '+66',
-    },
-    {
-        country: 'Trinidad y Tobago',
-        countryCode: 'TT',
-        prefix: '+1868',
-    },
-    {
-        country: 'Uruguay',
-        countryCode: 'UY',
-        prefix: '+598',
-    },
-];
-
-const Login = () => {
+const Login = ({ clear }) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [phonePrefix, setPhonePrefix] = useState('');
     const [isPhoneNumber, setIsPhoneNumber] = useState(false);
-    const [show, setShow] = useState(true);
-
+    const [putPassword, setPutPassword] = useState(false);
+    const [password, setPassword] = useState('');
     const [countryValue, setCountryValue] = useState('');
+    const [showPhoneCode, setShowPhoneCode] = useState(false);
 
-    useState(() => {
+    useEffect(() => {
         const { countryCode, prefix } = supportPrefixPhone[0];
         setCountryValue(`${countryCode} ${prefix}`);
+        setPhonePrefix(prefix);
     }, []);
+
+    useEffect(() => {
+        if (clear) {
+            setEmail('');
+            setPhone('');
+            setPhonePrefix('');
+            setIsPhoneNumber(false);
+            setPutPassword(false);
+            setPassword('');
+            setCountryValue('');
+            setShowPhoneCode(false);
+
+            const { countryCode, prefix } = supportPrefixPhone[0];
+            setCountryValue(`${countryCode} ${prefix}`);
+            setPhonePrefix(prefix);
+        }
+    }, [clear]);
 
     const handleEmail = event => {
         const newInputValue = event.target.value;
+        setPutPassword(false);
 
         if (/^\d+$/.test(newInputValue)) {
             setIsPhoneNumber(true);
@@ -149,6 +64,7 @@ const Login = () => {
 
         if (/^\d+$/.test(newInputValue) === false) {
             setIsPhoneNumber(false);
+            setPutPassword(false);
             setPhone('');
             setEmail(newInputValue);
         }
@@ -160,107 +76,179 @@ const Login = () => {
         );
 
         setCountryValue(`${countryCode} ${prefix}`);
+        setPhonePrefix(prefix);
+    };
+
+    const handleContinue = () => {
+        setPutPassword(!isPhoneNumber);
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        setPutPassword(!isPhoneNumber && emailPattern.test(email));
+
+        if (isPhoneNumber) {
+            setShowPhoneCode(true);
+        }
     };
 
     return (
-        <div style={{ backgroundColor: 'red' }}>
-            <dialog open={show}>
-                <div className="close-button"></div>
-
-                <h3>Inicias sesión/Registrarse</h3>
-
-                <div className="flex-row green">
-                    <FaLock />
-                    <p>Todos los datos se cifrarán</p>
-                </div>
-
-                <div className="flex-row space-around">
+        <div className="login">
+            {!showPhoneCode && (
+                <>
                     <div className="flex-col">
-                        <FaTruckFast size={42} className="icon" />
-                        <p>
-                            <strong>Envío gratis</strong>
-                        </p>
-                        <small>En todos los pedidos</small>
+                        <h3>Inicias sesión/Registrarse</h3>
+
+                        <div className="flex-row green">
+                            <FaLock />
+                            <p>Todos los datos se cifrarán</p>
+                        </div>
                     </div>
 
-                    <div className="flex-col">
-                        <MdOutlineAssignmentReturn size={42} className="icon" />
-                        <p>
-                            <strong>Devoluciones: 90 días</strong>
-                        </p>
-                        <small>Desde la fecha de compra</small>
-                    </div>
-                </div>
+                    <div className="flex-row space-around icons">
+                        <div className="flex-col">
+                            <FaTruckFast size={42} className="icon" />
+                            <p>
+                                <strong>Envío gratis</strong>
+                            </p>
+                            <small>En todos los pedidos</small>
+                        </div>
 
-                <form action="">
-                    <label htmlFor="emailPhone">
-                        Email o número de teléfono
-                    </label>
-
-                    {isPhoneNumber && (
-                        <div className={`phone-input`}>
-                            <Select
-                                onChange={handleSelectChange}
-                                value={countryValue}
-                            >
-                                {supportPrefixPhone.map(
-                                    ({ country, prefix }) => (
-                                        <span key={country} value={country}>
-                                            {country} {prefix}
-                                        </span>
-                                    ),
-                                )}
-                            </Select>
-
-                            <input
-                                type="tel"
-                                value={phone}
-                                onChange={handlePhone}
-                                required
-                                autoFocus
+                        <div className="flex-col">
+                            <MdOutlineAssignmentReturn
+                                size={42}
+                                className="icon"
                             />
-                        </div>
-                    )}
-
-                    {!isPhoneNumber && (
-                        <input
-                            name="emailPhone"
-                            type="email"
-                            value={email}
-                            required
-                            autoFocus
-                            onChange={handleEmail}
-                        />
-                    )}
-
-                    <button type="submit" className="orange-button">
-                        Continuar
-                    </button>
-
-                    <a href="#">¿Tienes problemas para iniciar sesión?</a>
-
-                    <div className="flex-col login-with">
-                        <div className="flex-row">
-                            <hr />
-                            <p>O continúa de otras maneras</p>
-                            <hr />
-                        </div>
-
-                        <div className="flex-row">
-                            <FaGoogle size={32} />
-                            <FaFacebook size={32} />
-                            <FaApple size={32} />
-                            <FaXTwitter size={32} />
+                            <p>
+                                <strong>Devoluciones: 90 días</strong>
+                            </p>
+                            <small>Desde la fecha de compra</small>
                         </div>
                     </div>
-                </form>
 
-                <p className="terms">
-                    Al continuar, aceptas nuestros{' '}
-                    <a href="#">Términos de uso</a> y{' '}
-                    <a href="#">Política de privacidad.</a>
-                </p>
-            </dialog>
+                    <form action="">
+                        <div className="input-container">
+                            <label htmlFor="emailPhone">
+                                Email o número de teléfono
+                            </label>
+
+                            {isPhoneNumber && (
+                                <div className={`phone-input`}>
+                                    <Select
+                                        onChange={handleSelectChange}
+                                        value={countryValue}
+                                    >
+                                        {supportPrefixPhone.map(
+                                            ({ country, prefix }) => (
+                                                <span
+                                                    key={country}
+                                                    value={country}
+                                                >
+                                                    {country} {prefix}
+                                                </span>
+                                            ),
+                                        )}
+                                    </Select>
+
+                                    <input
+                                        type="tel"
+                                        value={phone}
+                                        onChange={handlePhone}
+                                        required
+                                        autoFocus
+                                    />
+                                </div>
+                            )}
+
+                            {!isPhoneNumber && (
+                                <input
+                                    name="emailPhone"
+                                    type="email"
+                                    value={email}
+                                    required
+                                    autoFocus
+                                    onChange={handleEmail}
+                                />
+                            )}
+                        </div>
+
+                        {putPassword && (
+                            <div className="input-container">
+                                <label htmlFor="password">Contraseña</label>
+
+                                <input
+                                    name="password"
+                                    type="password"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    required
+                                    autoFocus
+                                />
+
+                                <a href="#" className="forgot">
+                                    ¿Has olvidado tu contraseña?
+                                </a>
+                            </div>
+                        )}
+
+                        {!putPassword && (
+                            <button
+                                className="orange-button"
+                                onClick={handleContinue}
+                            >
+                                Continuar
+                            </button>
+                        )}
+
+                        {putPassword && (
+                            <button type="submit" className="orange-button">
+                                Iniciar sesion
+                            </button>
+                        )}
+
+                        <a href="#">¿Tienes problemas para iniciar sesión?</a>
+
+                        <div className="flex-col login-with">
+                            <div className="flex-row">
+                                <hr />
+                                <p>O continúa de otras maneras</p>
+                                <hr />
+                            </div>
+
+                            <div className="flex-row">
+                                <FaGoogle size={32} />
+                                <FaFacebook size={32} />
+                                <FaApple size={32} />
+                                <FaXTwitter size={32} />
+                            </div>
+                        </div>
+                    </form>
+
+                    <p className="terms">
+                        Al continuar, aceptas nuestros{' '}
+                        <a href="#">Términos de uso</a> y{' '}
+                        <a href="#">Política de privacidad.</a>
+                    </p>
+                </>
+            )}
+
+            {showPhoneCode && (
+                <div className="flex-col">
+                    <h3>Ingresa el código de verificación</h3>
+                    <small>
+                        Enviamos un código de verificación a{' '}
+                        <span className="orange">
+                            {phonePrefix} {}
+                            {phone}
+                        </span>
+                    </small>
+
+                    <div className="phone-code">
+                        <label htmlFor="phoneCode">
+                            Código de verificación
+                        </label>
+
+                        <InputCode />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 @import '../index.css';
 
-dialog {
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,6 +9,10 @@ dialog {
     max-width: 450px;
     border: none;
     margin: auto;
+}
+
+h3 {
+    text-align: center;
 }
 
 .block {
@@ -31,6 +35,14 @@ dialog {
     color: var(--compromise-color);
 }
 
+.orange {
+    color: var(--temu-color);
+}
+
+.icons {
+    padding: 1em 0;
+}
+
 .icon {
     background-color: var(--gray-color);
     padding: 0.5em;
@@ -49,13 +61,13 @@ form a {
     font-size: smaller;
     font-weight: 400;
     margin: auto;
-    color: var(--dark-color);
+    color: var(--dark-color) !important;
     text-decoration: underline;
 }
 
 form a:hover {
     cursor: pointer;
-    color: var(--dark-color);
+    color: var(--dark-color) !important;
 }
 
 .login-with {
@@ -73,5 +85,26 @@ hr {
 }
 
 .terms a {
+    color: var(--link-color) !important;
     text-decoration: underline;
+}
+
+.phone-code {
+    margin-top: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.forgot {
+    display: block;
+    width: 100%;
+    text-align: end;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5;
 }

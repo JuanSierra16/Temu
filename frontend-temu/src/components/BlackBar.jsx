@@ -12,39 +12,41 @@ const BlackBar = () => {
 
     return (
         <>
-            <section className="bar flex-row space-around">
-                <article
-                    className="flex-row"
-                    onClick={() => setShowFirstModal(true)}
-                >
-                    <FaTruckFast size={32} />
+            <section className="bar">
+                <div className="max-width flex-row space-around">
+                    <article
+                        className="flex-row"
+                        onClick={() => setShowFirstModal(true)}
+                    >
+                        <FaTruckFast size={32} />
 
-                    <div className="flex-col align-start">
-                        <span>Envío gratis en cada pedido</span>
-                        <small>Oferta exclusiva</small>
-                    </div>
-                </article>
+                        <div className="flex-col align-start">
+                            <span>Envío gratis en cada pedido</span>
+                            <small>Oferta exclusiva</small>
+                        </div>
+                    </article>
 
-                <div className="vertical-line"></div>
+                    <div className="vertical-line"></div>
 
-                <article
-                    className="flex-row"
-                    onClick={() => setShowSecondModal(true)}
-                >
-                    <MdOutlineAssignmentReturn size={32} />
+                    <article
+                        className="flex-row"
+                        onClick={() => setShowSecondModal(true)}
+                    >
+                        <MdOutlineAssignmentReturn size={32} />
 
-                    <div className="flex-col align-start">
-                        <span>Devoluciones: 90 días</span>
-                        <small>desde la fecha de compra</small>
-                    </div>
-                </article>
+                        <div className="flex-col align-start">
+                            <span>Devoluciones: 90 días</span>
+                            <small>desde la fecha de compra</small>
+                        </div>
+                    </article>
 
-                <div className="vertical-line"></div>
+                    <div className="vertical-line"></div>
 
-                <article className="flex-row">
-                    <IoIosPhonePortrait size={32} />
-                    <span>Descarga la app de Temu</span>
-                </article>
+                    <article className="flex-row">
+                        <IoIosPhonePortrait size={32} />
+                        <span>Descarga la app de Temu</span>
+                    </article>
+                </div>
             </section>
 
             <Modal show={showFirstModal} setShow={setShowFirstModal}>

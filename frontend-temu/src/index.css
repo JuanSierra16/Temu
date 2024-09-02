@@ -21,11 +21,12 @@
     --gray-color: #e1e1e1;
     --temu-color: #fb7701;
     --green-cyan-color: #70efa2;
+    --link-color: #646cff;
 }
 
 a {
     font-weight: 500;
-    color: #646cff;
+    color: var(--link-color);
     text-decoration: inherit;
 }
 
@@ -112,10 +113,24 @@ button {
     height: 100%;
 }
 
-ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
+.max-width {
+    margin: auto;
+    max-width: 1480px;
+}
+
+details {
+    padding: 0.5em 2em;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: 500;
+    margin-bottom: 10px;
 }
