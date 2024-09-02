@@ -1,110 +1,82 @@
+@import '../index.css';
+
 .navbar {
+    background-color: var(--special-color);
+    width: 100%;
+}
+
+.navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
-    background-color: #ff5e6c;
-    width: 100%;
-    position: absolute;
-    top: 70px; /* Deja espacio para la barra superior 50px */
-    left: 0;
-    z-index: 1000;
-}
-  
-.navbar__logo img {
-    height: 50px;
-}
-  
-.navbar__links {
-    display: flex; /* Usamos flexbox para alinear los elementos en fila */
-    align-items: center; /* +Alinea verticalmente al centro */
-    /*justify-items: center;*/
-    margin-right: 80px;
-}
-  
-.navbar__links a {
-    margin: 0 10px; /* Espacio entre los enlaces */
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    display: flex;
-    align-items: center; /* Alinea verticalmente al centro */
-    font-size: 12px;
+    padding: 0.5em 1em;
 }
 
-.navbar__link-item{
-        display: flex;
-        align-content: center;
-        /* flex-wrap: wrap; */
-        align-items: center;
-        color: #fff;
-        font-size: 20px;
-        margin-right: 0px;
-}
-  
-.navbar__links a img {
-    margin-right: 5px; /* Espacio entre el icono y el texto */
-}
-    
-.navbar__search {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    max-width: 200px;
-}
-  
-.navbar__search input {
-    width: 100%;
-    padding: 8px 12px;
-    border-radius: 20px 0 0 20px;
-    border: none;
-    background-color: #ffffff; /* Color de fondo de barra de busqueda */
-    color: #000; /* Color de letra de barra de busqueda */
-}
-  
-.navbar__search button {
-    background-color: #000000;
-    border: none;
-    border-radius: 0 20px 20px 0;
-    padding: 8px 12px;
-    cursor: pointer;
-    color: rgb(255, 255, 255);
-}
-  
-.navbar__search button img {
-    height: 12px;
-    width: 12px;
+.logo {
+    width: 100px;
+    height: auto;
 }
 
-.navbar__icons {
-    display: flex; /* Alinea los elementos en fila */
-    align-items: center; /* Centra los elementos verticalmente */
-  }
-  
-  .navbar__icons div {
+.links {
     display: flex;
     align-items: center;
-    margin-left: 15px;
-  }
-  
-  .navbar__icons div img {
-    margin-right: 5px; /* Añade un espacio entre el icono y el texto */
-  }
-  
-  .navbar__icons div a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+    justify-content: center;
+    list-style: none;
+    gap: 1em;
+    color: var(--light-color);
+}
+
+.links li {
     display: flex;
-    align-items: center; /* Alinea verticalmente al centro */
-    font-size: 14px;
-  }
-  
-  .navbar__action-item button {
-    background-color: #ff5e6c;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 0.5em;
+}
+
+.links li:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+a {
+    color: var(--light-color) !important;
+}
+
+.search {
+    background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.search {
+    background-color: var(--light-color);
+}
+
+.search input {
     border: none;
-    border-radius: 0 20px 20px 0;
-    padding: 8px 12px;
-    cursor: pointer;
-    color: black;
+    outline: none;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.search button {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 0.5em 1em;
 }

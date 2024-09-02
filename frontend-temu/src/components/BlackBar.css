@@ -1,36 +1,20 @@
-.BlackBar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: #000; /* Fondo negro */
-    color: #70efa2; /* Texto blanco */
-    width: 100%; /* Ancho completo */
-    position: fixed; /* Posición fija en la parte superior */
-    top: 0; /* Fija en la parte superior de la pantalla */
-    left: 0; /* Alineado a la izquierda */
-    z-index: 1001; /* Asegúrate de que esté por encima de la barra de navegación */
+@import '../index.css';
+
+.bar {
+    display: block;
+    padding: 0.5em 1em;
+    background-color: var(--dark-color);
+    color: var(--green-cyan-color);
+    width: 100%;
 }
 
-.BlackBar__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 0 10px;
+.bar article:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-.BlackBar__item img {
-    height: 24px;
-    margin-bottom: 5px;
-}
-
-.BlackBar__item span {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.BlackBar__item small {
-    font-size: 12px;
-    color: #ccc; /* Color de texto secundario */
+@media screen and (max-width: 1024px) {
+    .bar {
+        display: none !important;
+    }
 }

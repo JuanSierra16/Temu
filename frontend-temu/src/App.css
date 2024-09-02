@@ -17,6 +17,18 @@
     transition:
         filter 300ms,
         -webkit-filter 300ms;
+    transition:
+        filter 300ms,
+        -webkit-filter 300ms;
+    transition:
+        filter 300ms,
+        -webkit-filter 300ms;
+    transition:
+        filter 300ms,
+        -webkit-filter 300ms;
+    transition:
+        filter 300ms,
+        -webkit-filter 300ms;
 }
 .logo:hover {
     -webkit-filter: drop-shadow(0 0 2em #646cffaa);
