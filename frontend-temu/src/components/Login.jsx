@@ -1,5 +1,5 @@
 // src/components/LoginModal.jsx
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
 import Select from './Select';
 
@@ -11,6 +11,7 @@ import { supportPrefixPhone } from '../utils/data';
 
 import './Login.css';
 import InputCode from './InputCode';
+import { UserContext } from '../provider/UserContext';
 
 const Login = ({ clear }) => {
     const [email, setEmail] = useState('');
@@ -21,6 +22,8 @@ const Login = ({ clear }) => {
     const [password, setPassword] = useState('');
     const [countryValue, setCountryValue] = useState('');
     const [showPhoneCode, setShowPhoneCode] = useState(false);
+
+    const { loginAction, waitLogin, loginError } = useContext(UserContext);
 
     useEffect(() => {
         const { countryCode, prefix } = supportPrefixPhone[0];
@@ -89,6 +92,11 @@ const Login = ({ clear }) => {
         }
     };
 
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        loginAction(email, password);
+    };
+
     return (
         <div className="login">
             {!showPhoneCode && (
@@ -123,7 +131,7 @@ const Login = ({ clear }) => {
                         </div>
                     </div>
 
-                    <form action="">
+                    <form onSubmit={handleFormSubmit}>
                         <div className="input-container">
                             <label htmlFor="emailPhone">
                                 Email o número de teléfono
@@ -151,6 +159,7 @@ const Login = ({ clear }) => {
                                         type="tel"
                                         value={phone}
                                         onChange={handlePhone}
+                                        disabled={waitLogin}
                                         required
                                         autoFocus
                                     />
@@ -162,6 +171,7 @@ const Login = ({ clear }) => {
                                     name="emailPhone"
                                     type="email"
                                     value={email}
+                                    disabled={waitLogin}
                                     required
                                     autoFocus
                                     onChange={handleEmail}
@@ -178,6 +188,7 @@ const Login = ({ clear }) => {
                                     type="password"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
+                                    disabled={waitLogin}
                                     required
                                     autoFocus
                                 />
@@ -185,6 +196,10 @@ const Login = ({ clear }) => {
                                 <a href="#" className="forgot">
                                     ¿Has olvidado tu contraseña?
                                 </a>
+
+                                {loginError && (
+                                    <p className="error">{loginError}</p>
+                                )}
                             </div>
                         )}
 
@@ -198,7 +213,11 @@ const Login = ({ clear }) => {
                         )}
 
                         {putPassword && (
-                            <button type="submit" className="orange-button">
+                            <button
+                                type="submit"
+                                className="orange-button"
+                                disabled={waitLogin}
+                            >
                                 Iniciar sesion
                             </button>
                         )}

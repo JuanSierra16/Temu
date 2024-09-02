@@ -7,10 +7,13 @@ import Login from './Login.jsx';
 import Modal from './Modal.jsx';
 import Logo from '../assets/TemuLogo.png';
 import './NavBar.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../provider/UserContext.jsx';
 
 const NavBar = () => {
     const [showLogin, setShowLogin] = useState(false);
+
+    const { userData, isUserLogin } = useContext(UserContext);
 
     return (
         <>
@@ -52,16 +55,28 @@ const NavBar = () => {
                     </div>
 
                     <ul className="links">
-                        <li onClick={() => setShowLogin(true)}>
-                            <a href="#" className="flex-row">
-                                <FaRegUser size={20} />
+                        {!isUserLogin && (
+                            <li onClick={() => setShowLogin(true)}>
+                                <a href="#" className="flex-row">
+                                    <FaRegUser size={20} />
 
-                                <div className="flex-col align-start">
-                                    <p>Iniciar sesión/Registra</p>
+                                    <div className="flex-col align-start">
+                                        <p>Iniciar sesión/Registra</p>
+                                        <p>Pedidos y cuenta</p>
+                                    </div>
+                                </a>
+                            </li>
+                        )}
+
+                        {isUserLogin && (
+                            <li className="flex-row">
+                                <a href="#">
+                                    <FaRegUser size={20} />
+                                    {userData.name}
                                     <p>Pedidos y cuenta</p>
-                                </div>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        )}
 
                         <li className="flex-row">
                             <LuMessageCircle size={20} />
