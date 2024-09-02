@@ -8,13 +8,19 @@ import Modal from '../elements/Modal.jsx';
 import Logo from '../../assets/TemuLogo.png';
 import './NavBar.css';
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../provider/UserContext.jsx';
 
 const NavBar = () => {
     const [showLogin, setShowLogin] = useState(false);
 
-    const { userData, isUserLogin } = useContext(UserContext);
+    const { userData, userIsLogin } = useContext(UserContext);
+
+    useEffect(() => {
+        if (userIsLogin) {
+            setShowLogin(false);
+        }
+    }, [userIsLogin]);
 
     return (
         <>
@@ -56,7 +62,7 @@ const NavBar = () => {
                     </div>
 
                     <ul className="links">
-                        {!isUserLogin && (
+                        {!userIsLogin && (
                             <li onClick={() => setShowLogin(true)}>
                                 <a href="#" className="flex-row">
                                     <FaRegUser size={20} />
@@ -69,11 +75,11 @@ const NavBar = () => {
                             </li>
                         )}
 
-                        {isUserLogin && (
+                        {userIsLogin && (
                             <li className="flex-row">
                                 <a href="#">
                                     <FaRegUser size={20} />
-                                    {userData.name}
+                                    {userData.username}
                                     <p>Pedidos y cuenta</p>
                                 </a>
                             </li>
