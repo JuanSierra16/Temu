@@ -2,7 +2,7 @@ import { FaAngleDown } from 'react-icons/fa';
 import './Select.css';
 import { useEffect, useRef, Children } from 'react';
 
-const Select = ({ children, onChange }) => {
+const Select = ({ children, onChange, value }) => {
     const selectedRef = useRef(null);
     const contentRef = useRef(null);
     const selectedItemRef = useRef(null);
@@ -15,9 +15,8 @@ const Select = ({ children, onChange }) => {
     const handleSelect = e => {
         selectedRef.current.classList.remove('active');
         contentRef.current.classList.remove('active');
-        selectedItemRef.current.innerHTML = e.target.innerHTML;
 
-        onChange(e.target.innerHTML);
+        onChange(e);
     };
 
     const handleClickOutside = event => {
@@ -34,7 +33,7 @@ const Select = ({ children, onChange }) => {
 
     useEffect(() => {
         document.addEventListener('click', handleClickOutside);
-        if (selectedItemRef.current) {
+        if (selectedItemRef.current && !value) {
             selectedItemRef.current.innerHTML =
                 Children.toArray(children)[0].props.children;
         }
@@ -42,7 +41,7 @@ const Select = ({ children, onChange }) => {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [children]);
+    }, [children, value]);
 
     return (
         <div className="select-box">
@@ -52,7 +51,9 @@ const Select = ({ children, onChange }) => {
                 onClick={handleClick}
             >
                 <div className="select-content" ref={selectedRef}>
-                    <div className="selected" ref={selectedItemRef}></div>
+                    <div className="selected">
+                        <p>{value}</p>
+                    </div>
                 </div>
 
                 <FaAngleDown />

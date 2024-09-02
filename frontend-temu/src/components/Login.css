@@ -1,63 +1,96 @@
-/* src/components/LoginModal.css */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+@import '../index.css';
+
+dialog {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    z-index: 1001;
-}
-
-.modal-content {
-    position: relative;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 80%;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    /*background: none;*/
+    justify-content: center;
+    gap: 1em;
+    max-width: 450px;
     border: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: black;
+    margin: auto;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
+.block {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: rgb(255, 255, 255);
-    color: black;
+.hidden {
+    display: none;
 }
 
-button[type='submit'] {
+.flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.space-around {
     width: 100%;
-    padding: 10px;
-    background-color: #ff5e00;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    justify-content: space-around;
+}
+
+.phone-input {
+    display: flex;
+}
+
+.phone-input input {
+    width: 65%;
+}
+
+.green {
+    color: var(--compromise-color);
+}
+
+.icon {
+    background-color: var(--gray-color);
+    padding: 0.5em;
+    border-radius: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1em;
+    gap: 1em;
+}
+
+form a {
+    font-size: smaller;
+    font-weight: 400;
+    margin: auto;
+    color: var(--dark-color);
+    text-decoration: underline;
+}
+
+form a:hover {
     cursor: pointer;
-    font-size: 16px;
+    color: var(--dark-color);
+}
+
+.login-with {
+    gap: 1em;
+    width: 100%;
+}
+
+hr {
+    color: var(--gray-color);
+    width: 80px;
+}
+
+.terms {
+    text-align: center;
+}
+
+.terms a {
+    text-decoration: underline;
 }

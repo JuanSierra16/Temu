@@ -52,6 +52,7 @@
     scrollbar-color: var(--gray-color) var(--light-color);
     display: none;
     margin-top: 1em;
+    background-color: var(--light-color);
 }
 
 .select-dropdown.active {
@@ -64,6 +65,10 @@
     -o-border-radius: 5px;
 }
 
+.select-item {
+    width: 100%;
+}
+
 .select-item:hover {
     background-color: var(--gray-color);
     cursor: pointer;
@@ -72,6 +77,7 @@
 @media screen and (min-width: 768px) {
     .select-dropdown {
         position: absolute;
+        max-height: 300px;
         min-width: 200px;
         width: fit-content;
         width: -webkit-fit-content;
