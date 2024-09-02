@@ -20,6 +20,7 @@
     --light-color: #fafeff;
     --gray-color: #e1e1e1;
     --temu-color: #fb7701;
+    --green-cyan-color: #70efa2;
 }
 
 a {
@@ -79,4 +80,33 @@ button {
     -moz-transform: scale(1.025);
     -ms-transform: scale(1.025);
     -o-transform: scale(1.025);
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.align-start {
+    align-items: start;
+}
+
+.space-around {
+    width: 100%;
+    justify-content: space-around;
+}
+
+.vertical-line {
+    border-left: 1px solid var(--gray-color);
+    min-height: 40px;
+    height: 100%;
 }
