@@ -72,6 +72,7 @@ button {
     font-weight: 500;
     color: var(--light-color);
     background-color: var(--temu-color);
+    width: 100%;
 }
 
 .orange-button:hover {
@@ -109,4 +110,12 @@ button {
     border-left: 1px solid var(--gray-color);
     min-height: 40px;
     height: 100%;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
 }
