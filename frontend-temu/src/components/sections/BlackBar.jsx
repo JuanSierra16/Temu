@@ -3,7 +3,7 @@ import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { IoIosPhonePortrait } from 'react-icons/io';
 import { useState } from 'react';
 
-import Modal from './Modal';
+import Modal from '../elements/Modal';
 import './BlackBar.css';
 
 const BlackBar = () => {

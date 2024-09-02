@@ -1,17 +1,15 @@
 // src/components/LoginModal.jsx
 import { useContext, useEffect, useState } from 'react';
-import { FaLock } from 'react-icons/fa';
-import Select from './Select';
-
+import { FaGoogle, FaFacebook, FaApple, FaLock } from 'react-icons/fa';
 import { FaXTwitter, FaTruckFast } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
-import { supportPrefixPhone } from '../utils/data';
+import { supportPrefixPhone } from '../../utils/data';
 
+import Select from '../elements/Select';
+import InputCode from '../elements/InputCode';
+import { UserContext } from '../../provider/UserContext';
 import './Login.css';
-import InputCode from './InputCode';
-import { UserContext } from '../provider/UserContext';
 
 const Login = ({ clear }) => {
     const [email, setEmail] = useState('');

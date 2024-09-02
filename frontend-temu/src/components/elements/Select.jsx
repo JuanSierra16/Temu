@@ -1,6 +1,7 @@
 import { FaAngleDown } from 'react-icons/fa';
-import './Select.css';
 import { useEffect, useRef, Children } from 'react';
+
+import './Select.css';
 
 const Select = ({ children, onChange, value }) => {
     const selectedRef = useRef(null);

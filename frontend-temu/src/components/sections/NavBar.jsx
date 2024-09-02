@@ -3,12 +3,13 @@ import { LuMessageCircle } from 'react-icons/lu';
 import { AiFillLike } from 'react-icons/ai';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 
-import Login from './Login.jsx';
-import Modal from './Modal.jsx';
-import Logo from '../assets/TemuLogo.png';
+import Login from '../widgets/Login.jsx';
+import Modal from '../elements/Modal.jsx';
+import Logo from '../../assets/TemuLogo.png';
 import './NavBar.css';
+
 import { useContext, useState } from 'react';
-import { UserContext } from '../provider/UserContext.jsx';
+import { UserContext } from '../../provider/UserContext.jsx';
 
 const NavBar = () => {
     const [showLogin, setShowLogin] = useState(false);
