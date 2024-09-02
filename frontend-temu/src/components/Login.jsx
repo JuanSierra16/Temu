@@ -1,95 +1,266 @@
 // src/components/LoginModal.jsx
-import React, { useEffect, useState } from 'react';
-import './Login.css';
-import { FaTruckFast } from 'react-icons/fa6';
-import { MdOutlineAssignmentReturn } from 'react-icons/md';
+import { useState } from 'react';
+import { FaLock } from 'react-icons/fa';
 import { login } from '../API/Login.API';
+import Select from './Select';
 
-const Login = ({ isOpen, onClose }) => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+import { FaXTwitter, FaTruckFast } from 'react-icons/fa6';
+import { MdOutlineAssignmentReturn } from 'react-icons/md';
+import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
 
-    useEffect(() => {
-        const handleOutsideClick = event => {
-            if (event.target === event.currentTarget) {
-                onClose();
-            }
-        };
+import './Login.css';
 
-        if (!isOpen) {
-            window.addEventListener('click', handleOutsideClick);
-        }
+const supportPrefixPhone = [
+    {
+        country: 'Australia',
+        countryCode: 'AU',
+        prefix: '+61',
+    },
+    {
+        country: 'Brasil',
+        countryCode: 'BR',
+        prefix: '+55',
+    },
+    {
+        country: 'Brunéi Darusalam',
+        countryCode: 'BN',
+        prefix: '+673',
+    },
+    {
+        country: 'Canada',
+        countryCode: 'CA',
+        prefix: '+1',
+    },
+    {
+        country: 'Chile',
+        countryCode: 'CL',
+        prefix: '+56',
+    },
+    {
+        country: 'Colombia',
+        countryCode: 'CO',
+        prefix: '+57',
+    },
+    {
+        country: 'Corea del Sur',
+        countryCode: 'KR',
+        prefix: '+82',
+    },
+    {
+        country: 'Ecuador',
+        countryCode: 'EC',
+        prefix: '+593',
+    },
+    {
+        country: 'El Salvador',
+        countryCode: 'SV',
+        prefix: '+503',
+    },
+    {
+        country: 'Estados Unidos',
+        countryCode: 'US',
+        prefix: '+1',
+    },
+    {
+        country: 'Filipinas',
+        countryCode: 'PH',
+        prefix: '+63',
+    },
+    {
+        country: 'Japón',
+        countryCode: 'JP',
+        prefix: '+81',
+    },
+    {
+        country: 'Malasia',
+        countryCode: 'MY',
+        prefix: '+60',
+    },
+    {
+        country: 'Mexico',
+        countryCode: 'MX',
+        prefix: '+52',
+    },
+    {
+        country: 'Nueva Zelanda',
+        countryCode: 'NZ',
+        prefix: '+64',
+    },
+    {
+        country: 'Panamá',
+        countryCode: 'PA',
+        prefix: '+507',
+    },
+    {
+        country: 'Perú',
+        countryCode: 'PE',
+        prefix: '+51',
+    },
+    {
+        country: 'República Dominicana',
+        countryCode: 'DO',
+        prefix: '+1',
+    },
+    {
+        country: 'Tailandia',
+        countryCode: 'TH',
+        prefix: '+66',
+    },
+    {
+        country: 'Trinidad y Tobago',
+        countryCode: 'TT',
+        prefix: '+1868',
+    },
+    {
+        country: 'Uruguay',
+        countryCode: 'UY',
+        prefix: '+598',
+    },
+];
 
-        return () => {
-            window.removeEventListener('click', handleOutsideClick);
-        };
-    }, [isOpen, onClose]);
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [isPhoneNumber, setIsPhoneNumber] = useState(false);
+    const [show, setShow] = useState(true);
 
-    if (!isOpen) return null;
+    const [countryValue, setCountryValue] = useState('');
 
-    const handleSubmit = async event => {
-        event.preventDefault();
-        console.log('Correo electronico ingresado:', email);
-        console.log('Contraseña ingresada:', password);
+    useState(() => {
+        const { countryCode, prefix } = supportPrefixPhone[0];
+        setCountryValue(`${countryCode} ${prefix}`);
+    }, []);
 
-        try {
-            const response = await login(email, password);
-            console.log('Respuesta de la API:', response);
-        } catch (error) {
-            console.error('Error durante Login', error);
+    const handleEmail = event => {
+        const newInputValue = event.target.value;
+
+        if (/^\d+$/.test(newInputValue)) {
+            setIsPhoneNumber(true);
+            setPhone(newInputValue);
+            setEmail('');
+        } else {
+            setEmail(newInputValue);
         }
     };
 
+    const handlePhone = event => {
+        const newInputValue = event.target.value;
+        setPhone(newInputValue);
+
+        if (/^\d+$/.test(newInputValue) === false) {
+            setIsPhoneNumber(false);
+            setPhone('');
+            setEmail(newInputValue);
+        }
+    };
+
+    const handleSelectChange = e => {
+        const { countryCode, prefix } = supportPrefixPhone.find(
+            item => item.country == e.target.getAttribute('value'),
+        );
+
+        setCountryValue(`${countryCode} ${prefix}`);
+    };
+
     return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <div className="CloseButtom">
-                    <span className="close-button" onClick={onClose}>
-                        &times;
-                    </span>
+        <div style={{ backgroundColor: 'red' }}>
+            <dialog open={show}>
+                <div className="close-button"></div>
+
+                <h3>Inicias sesión/Registrarse</h3>
+
+                <div className="flex-row green">
+                    <FaLock />
+                    <p>Todos los datos se cifrarán</p>
                 </div>
-                <div className="IniciarSesion">
-                    <h3>Iniciar Sesión/Registrarse</h3>
+
+                <div className="flex-row space-around">
+                    <div className="flex-col">
+                        <FaTruckFast size={42} className="icon" />
+                        <p>
+                            <strong>Envío gratis</strong>
+                        </p>
+                        <small>En todos los pedidos</small>
+                    </div>
+
+                    <div className="flex-col">
+                        <MdOutlineAssignmentReturn size={42} className="icon" />
+                        <p>
+                            <strong>Devoluciones: 90 días</strong>
+                        </p>
+                        <small>Desde la fecha de compra</small>
+                    </div>
                 </div>
-                <div className="LoginLogos">
-                    <div className="LoginImg">
-                        <FaTruckFast />
-                        <span>Envio gratis</span>
-                        <small> En todos los pedidos</small>
-                    </div>
-                    <div className="LoginImg">
-                        <MdOutlineAssignmentReturn />
-                        <span>Devoluciones 90 días</span>
-                        <small> desde la fecha de compra</small>
-                    </div>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Email o número de telefono:</label>
-                        <input
-                            type="Email"
-                            id="email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {
-                        <div className="form-group">
-                            <label>Contraseña:</label>
+
+                <form action="">
+                    <label htmlFor="emailPhone">
+                        Email o número de teléfono
+                    </label>
+
+                    {isPhoneNumber && (
+                        <div className={`phone-input`}>
+                            <Select
+                                onChange={handleSelectChange}
+                                value={countryValue}
+                            >
+                                {supportPrefixPhone.map(
+                                    ({ country, prefix }) => (
+                                        <span key={country} value={country}>
+                                            {country} {prefix}
+                                        </span>
+                                    ),
+                                )}
+                            </Select>
+
                             <input
-                                type="password"
-                                id="password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
+                                type="tel"
+                                value={phone}
+                                onChange={handlePhone}
                                 required
+                                autoFocus
                             />
                         </div>
-                    }
-                    <div className="ContinueButtom"></div>
-                    <button type="submit">Continuar</button>
+                    )}
+
+                    {!isPhoneNumber && (
+                        <input
+                            name="emailPhone"
+                            type="email"
+                            value={email}
+                            required
+                            autoFocus
+                            onChange={handleEmail}
+                        />
+                    )}
+
+                    <button type="submit" className="orange-button">
+                        Continuar
+                    </button>
+
+                    <a href="#">¿Tienes problemas para iniciar sesión?</a>
+
+                    <div className="flex-col login-with">
+                        <div className="flex-row">
+                            <hr />
+                            <p>O continúa de otras maneras</p>
+                            <hr />
+                        </div>
+
+                        <div className="flex-row">
+                            <FaGoogle size={32} />
+                            <FaFacebook size={32} />
+                            <FaApple size={32} />
+                            <FaXTwitter size={32} />
+                        </div>
+                    </div>
                 </form>
-            </div>
+
+                <p className="terms">
+                    Al continuar, aceptas nuestros{' '}
+                    <a href="#">Términos de uso</a> y{' '}
+                    <a href="#">Política de privacidad.</a>
+                </p>
+            </dialog>
         </div>
     );
 };
