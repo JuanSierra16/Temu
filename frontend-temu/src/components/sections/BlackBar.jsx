@@ -13,7 +13,7 @@ const BlackBar = () => {
     return (
         <>
             <section className="bar">
-                <div className="max-width flex-row space-around">
+                <div className="max-width flex-row space-between">
                     <article
                         className="flex-row"
                         onClick={() => setShowFirstModal(true)}

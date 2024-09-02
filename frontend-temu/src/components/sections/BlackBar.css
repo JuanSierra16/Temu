@@ -1,11 +1,10 @@
-/* @import '../index.css'; */
-
 .bar {
     display: block;
-    padding: 0.5em 1em;
+    padding: 0.4em;
     background-color: var(--dark-color);
     color: var(--green-cyan-color);
     width: 100%;
+    font-weight: bold;
 }
 
 .bar article:hover {

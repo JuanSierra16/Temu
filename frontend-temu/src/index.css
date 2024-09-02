@@ -6,16 +6,10 @@
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 
     --special-color: #f9697f;
     --compromise-color: #0a8800;
-    --dark-color: #0d161a;
+    --dark-color: #000000;
     --dark-color-90: #1e1e1e;
     --light-color: #fafeff;
     --gray-color: #e1e1e1;
@@ -88,7 +82,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em;
+    gap: 0.5em;
 }
 
 .flex-col {
@@ -107,15 +101,27 @@ button {
     justify-content: space-around;
 }
 
+.space-between {
+    width: 100%;
+    justify-content: space-between;
+}
+
 .vertical-line {
-    border-left: 1px solid var(--gray-color);
-    min-height: 40px;
+    /* border-left: 1px solid var(--gray-color); */
+    width: 1px;
+    background: linear-gradient(
+        0deg,
+        var(--dark-color) 0%,
+        var(--gray-color) 50%,
+        var(--dark-color) 100%
+    );
+    min-height: 30px;
     height: 100%;
 }
 
 .max-width {
     margin: auto;
-    max-width: 1480px;
+    max-width: 1380px;
 }
 
 details {
