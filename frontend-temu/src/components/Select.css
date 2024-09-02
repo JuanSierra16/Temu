@@ -48,11 +48,12 @@
     position: fixed;
     width: 90%;
     border: 1px solid var(--gray-color);
+    background-color: var(--light-color);
     overflow-y: auto;
     scrollbar-color: var(--gray-color) var(--light-color);
     display: none;
     margin-top: 1em;
-    background-color: var(--light-color);
+    z-index: 200;
 }
 
 .select-dropdown.active {
