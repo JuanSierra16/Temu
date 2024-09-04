@@ -8,7 +8,7 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
     --special-color: #f9697f;
-    --compromise-color: #0a8800;
+    --compromise-color: #0b8900;
     --dark-color: #000000;
     --dark-color-90: #1e1e1e;
     --light-color: #fafeff;
@@ -29,8 +29,7 @@ a:hover {
 }
 
 input {
-    font-size: medium;
-    padding: 10px;
+    padding: 0.9em;
     outline: none;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
@@ -53,14 +52,15 @@ h1 {
 button {
     border: 1px solid var(--gray-color);
     background-color: transparent;
-    padding: 10px;
+    padding: 0.8em;
+    font-size: medium;
     font-family: inherit;
     cursor: pointer;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
 }
 
 .orange-button {
@@ -78,36 +78,7 @@ button {
     -o-transform: scale(1.025);
 }
 
-.flex-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5em;
-}
-
-.flex-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.align-start {
-    align-items: start;
-}
-
-.space-around {
-    width: 100%;
-    justify-content: space-around;
-}
-
-.space-between {
-    width: 100%;
-    justify-content: space-between;
-}
-
 .vertical-line {
-    /* border-left: 1px solid var(--gray-color); */
     width: 1px;
     background: linear-gradient(
         0deg,
@@ -125,7 +96,7 @@ button {
 }
 
 details {
-    padding: 0.5em 2em;
+    padding: 0.5em 1em;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
     -webkit-border-radius: 5px;

@@ -1,5 +1,3 @@
-/* @import '../index.css'; */
-
 .select-box {
     position: relative;
 }
@@ -64,15 +62,6 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-}
-
-.select-item {
-    width: 100%;
-}
-
-.select-item:hover {
-    background-color: var(--gray-color);
-    cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

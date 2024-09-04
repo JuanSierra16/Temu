@@ -1,11 +1,16 @@
-import { FaHeart, FaStar, FaSearch, FaRegUser } from 'react-icons/fa';
+import {
+    FaSearch,
+    FaChevronDown,
+    FaHeart,
+    FaStar,
+    FaRegUser,
+} from 'react-icons/fa';
 import { LuMessageCircle } from 'react-icons/lu';
 import { AiFillLike } from 'react-icons/ai';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 
 import Login from '../widgets/Login.jsx';
 import Modal from '../elements/Modal.jsx';
-import Logo from '../../assets/TemuLogo.png';
 import './NavBar.css';
 
 import { useContext, useEffect, useState } from 'react';
@@ -26,22 +31,27 @@ const NavBar = () => {
         <>
             <nav className="navbar">
                 <div className="navbar-container max-width">
-                    <img src={Logo} alt="logo" className="logo" />
+                    <img src="/TemuLogo.png" alt="logo" className="logo" />
 
-                    <ul className="links">
+                    <ul>
                         <li>
-                            <AiFillLike />
-                            <a href="#">Más vendidos</a>
+                            <a href="#">
+                                <AiFillLike size={18} />
+                                Más vendidos
+                            </a>
                         </li>
 
                         <li>
-                            <FaStar />
-                            <a href="#">5 estrellas</a>
+                            <a href="#">
+                                <FaStar size={18} />5 estrellas
+                            </a>
                         </li>
 
                         <li>
-                            <FaHeart />
-                            <a href="#">Amor y Amistad</a>
+                            <a href="#">
+                                <FaHeart size={18} />
+                                Amor y Amistad
+                            </a>
                         </li>
 
                         <li>
@@ -49,49 +59,66 @@ const NavBar = () => {
                         </li>
 
                         <li>
-                            <a href="#">Categorías</a>
+                            <a href="#">
+                                Categorías
+                                <FaChevronDown />
+                            </a>
                         </li>
                     </ul>
 
-                    <div className="search">
-                        <input type="text" placeholder="Buscar" />
+                    <ul className="">
+                        <div className="navbar-search">
+                            <input type="text" placeholder="Buscar" />
 
-                        <button>
-                            <FaSearch />
-                        </button>
-                    </div>
+                            <button>
+                                <FaSearch size={18} />
+                            </button>
+                        </div>
 
-                    <ul className="links">
                         {!userIsLogin && (
                             <li onClick={() => setShowLogin(true)}>
-                                <a href="#" className="flex-row">
+                                <div className="navbar-hover navbar-login">
                                     <FaRegUser size={20} />
 
-                                    <div className="flex-col align-start">
-                                        <p>Iniciar sesión/Registra</p>
-                                        <p>Pedidos y cuenta</p>
+                                    <div className="navbar-login-text">
+                                        <small>Iniciar sesión/Registra</small>
+                                        <small>
+                                            <strong>Pedidos y cuenta</strong>
+                                        </small>
                                     </div>
-                                </a>
+                                </div>
                             </li>
                         )}
 
                         {userIsLogin && (
-                            <li className="flex-row">
-                                <a href="#">
-                                    <FaRegUser size={20} />
-                                    {userData.username}
-                                    <p>Pedidos y cuenta</p>
-                                </a>
+                            <li>
+                                <div className="navbar-hover navbar-login">
+                                    <div className="login-text">
+                                        <FaRegUser size={20} />
+                                        {userData.username}
+                                        <p>Pedidos y cuenta</p>
+                                    </div>
+                                </div>
                             </li>
                         )}
 
-                        <li className="flex-row">
-                            <LuMessageCircle size={20} />
-
-                            <a href="#">Ayuda</a>
+                        <li>
+                            <div className="navbar-hover">
+                                <LuMessageCircle size={20} />
+                                Ayuda
+                            </div>
                         </li>
 
-                        <li>
+                        <li className="navbar-hover">
+                            <img
+                                src="/colombia-icon.png"
+                                alt=""
+                                style={{ width: '20px', height: '20px' }}
+                            />
+                            ES
+                        </li>
+
+                        <li className="navbar-hover">
                             <MdOutlineLocalGroceryStore size={20} />
                         </li>
                     </ul>

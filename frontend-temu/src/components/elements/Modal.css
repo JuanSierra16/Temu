@@ -1,5 +1,3 @@
-/* @import '../index.css'; */
-
 .modal {
     position: fixed;
     display: none;
@@ -20,13 +18,13 @@
 .modal-container {
     position: relative;
     background-color: var(--light-color);
-    max-width: 600px;
     max-height: 80vh;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     overflow-y: auto;
     border-radius: 5px;
+    padding-top: 1em;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
@@ -52,6 +50,7 @@
 .modal-close:before,
 .modal-close:after {
     position: absolute;
+    content: '';
     top: 15%;
     left: calc(50% - 0.0625em);
     width: 0.125em;
@@ -59,7 +58,7 @@
     border-radius: 0.125em;
     transform: rotate(45deg);
     background: currentcolor;
-    content: '';
+    z-index: 88;
 }
 
 .modal-close:after {
@@ -68,9 +67,8 @@
 
 .modal-content {
     margin-top: 1em;
-    padding: 1em;
 }
 
 .modal-content ul {
-    padding: 1em;
+    padding-left: 1em;
 }

@@ -96,20 +96,20 @@ const Login = ({ clear }) => {
     };
 
     return (
-        <div className="login">
+        <div className="login-container">
             {!showPhoneCode && (
                 <>
-                    <div className="flex-col">
+                    <div className="login-title">
                         <h3>Inicias sesión/Registrarse</h3>
 
-                        <div className="flex-row green">
+                        <div className="login-row login-green">
                             <FaLock />
-                            <p>Todos los datos se cifrarán</p>
+                            <small>Todos los datos se cifrarán</small>
                         </div>
                     </div>
 
-                    <div className="flex-row space-around icons">
-                        <div className="flex-col">
+                    <div className="login-row">
+                        <div className="login-col">
                             <FaTruckFast size={42} className="icon" />
                             <p>
                                 <strong>Envío gratis</strong>
@@ -117,7 +117,7 @@ const Login = ({ clear }) => {
                             <small>En todos los pedidos</small>
                         </div>
 
-                        <div className="flex-col">
+                        <div className="login-col">
                             <MdOutlineAssignmentReturn
                                 size={42}
                                 className="icon"
@@ -130,25 +130,24 @@ const Login = ({ clear }) => {
                     </div>
 
                     <form onSubmit={handleFormSubmit}>
-                        <div className="input-container">
+                        <div className="login-input-container">
                             <label htmlFor="emailPhone">
                                 Email o número de teléfono
                             </label>
 
                             {isPhoneNumber && (
                                 <div className={`phone-input`}>
-                                    <Select
-                                        onChange={handleSelectChange}
-                                        value={countryValue}
-                                    >
+                                    <Select value={countryValue}>
                                         {supportPrefixPhone.map(
                                             ({ country, prefix }) => (
-                                                <span
+                                                <p
+                                                    className="phone-select"
                                                     key={country}
                                                     value={country}
+                                                    onClick={handleSelectChange}
                                                 >
                                                     {country} {prefix}
-                                                </span>
+                                                </p>
                                             ),
                                         )}
                                     </Select>
@@ -178,7 +177,7 @@ const Login = ({ clear }) => {
                         </div>
 
                         {putPassword && (
-                            <div className="input-container">
+                            <div className="login-input-container">
                                 <label htmlFor="password">Contraseña</label>
 
                                 <input
@@ -191,12 +190,12 @@ const Login = ({ clear }) => {
                                     autoFocus
                                 />
 
-                                <a href="#" className="forgot">
+                                <a href="#" className="login-forgot">
                                     ¿Has olvidado tu contraseña?
                                 </a>
 
                                 {loginError && (
-                                    <p className="error">{loginError}</p>
+                                    <p className="login-error">{loginError}</p>
                                 )}
                             </div>
                         )}
@@ -222,14 +221,14 @@ const Login = ({ clear }) => {
 
                         <a href="#">¿Tienes problemas para iniciar sesión?</a>
 
-                        <div className="flex-col login-with">
-                            <div className="flex-row">
+                        <div className="login-col login-with">
+                            <div className="login-row">
                                 <hr />
                                 <p>O continúa de otras maneras</p>
                                 <hr />
                             </div>
 
-                            <div className="flex-row">
+                            <div className="login-row">
                                 <FaGoogle size={32} />
                                 <FaFacebook size={32} />
                                 <FaApple size={32} />
@@ -247,21 +246,17 @@ const Login = ({ clear }) => {
             )}
 
             {showPhoneCode && (
-                <div className="flex-col">
+                <div className="login-col">
                     <h3>Ingresa el código de verificación</h3>
                     <small>
                         Enviamos un código de verificación a{' '}
-                        <span className="orange">
+                        <span className="login-orange">
                             {phonePrefix} {}
                             {phone}
                         </span>
                     </small>
 
                     <div className="phone-code">
-                        <label htmlFor="phoneCode">
-                            Código de verificación
-                        </label>
-
                         <InputCode />
                     </div>
                 </div>

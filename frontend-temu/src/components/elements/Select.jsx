@@ -3,7 +3,7 @@ import { useEffect, useRef, Children } from 'react';
 
 import './Select.css';
 
-const Select = ({ children, onChange, value }) => {
+const Select = ({ children, value }) => {
     const selectedRef = useRef(null);
     const contentRef = useRef(null);
     const selectedItemRef = useRef(null);
@@ -13,11 +13,9 @@ const Select = ({ children, onChange, value }) => {
         contentRef.current.classList.toggle('active');
     };
 
-    const handleSelect = e => {
+    const handleSelect = () => {
         selectedRef.current.classList.remove('active');
         contentRef.current.classList.remove('active');
-
-        onChange(e);
     };
 
     const handleClickOutside = event => {
@@ -62,10 +60,9 @@ const Select = ({ children, onChange, value }) => {
 
             <div className="select-dropdown" ref={contentRef}>
                 {Children.map(children, child => (
-                    <div className="select-item" onClick={handleSelect}>
-                        {child}
-                    </div>
+                    <span onClick={handleSelect}>{child}</span>
                 ))}
+                {/* {children} */}
             </div>
         </div>
     );
