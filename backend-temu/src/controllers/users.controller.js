@@ -1,5 +1,8 @@
 import { pool } from '../db.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+const SECRET_KEY = 'erdggfdjhe23';
 
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
@@ -16,6 +19,9 @@ export const loginUser = async (req, res) => {
 
             const [insertResult] = await pool.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, passwordHashed]);
 
+             // Generar el token JWT
+             const token = jwt.sign({ id: insertResult.insertId, username, email }, SECRET_KEY, { expiresIn: '1h' });
+
             return res.send({
                 message: 'Usuario creado y sesión iniciada',
                 user: {
@@ -23,6 +29,7 @@ export const loginUser = async (req, res) => {
                     username: username,
                     email,
                 },
+                token: token, // Devolver el token al front-end
             });
         }
 
@@ -35,6 +42,9 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: 'Contraseña incorrecta' });
         }
 
+        // Generar el token JWT
+        const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+
         // Si las credenciales son correctas, responder con un mensaje de éxito
         res.send({
             message: 'Inicio de sesión exitoso',
@@ -43,7 +53,7 @@ export const loginUser = async (req, res) => {
                 username: user.username,
                 email: user.email,
             },
-            // Puedes incluir un token JWT aquí si estás utilizando autenticación basada en tokens
+            token: token, // Devolver el token al front-end
         });
     } catch (error) {
         return res.status(500).json({ message: error.message });
