@@ -21,6 +21,9 @@
     align-items: center;
     gap: 0.5em;
     list-style: none;
+}
+
+.navbar ul li {
     color: var(--light-color);
 }
 

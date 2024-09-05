@@ -10,8 +10,10 @@ import {
 } from 'react-icons/ai';
 
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
+import Modal from '../../elements/Modal';
+import Login from '../../widgets/Login';
 
 const UserMenu = () => {
     const submenu = [
@@ -76,55 +78,85 @@ const UserMenu = () => {
         },
     ];
 
-    const { userData } = useContext(UserContext);
+    const [showLogin, setShowLogin] = useState(false);
+    const { userData, userIsLogin } = useContext(UserContext);
+
+    useEffect(() => {
+        if (userIsLogin) {
+            setShowLogin(false);
+        }
+    }, [userIsLogin]);
 
     return (
-        <li>
-            <div className="navbar-hover">
-                <MenuItem>
-                    <div className="navbar-hover navbar-login">
-                        <FaRegUser size={20} />
+        <>
+            <li>
+                {!userIsLogin && (
+                    <li onClick={() => setShowLogin(true)}>
+                        <div className="navbar-hover navbar-login">
+                            <FaRegUser size={20} />
 
-                        <div className="navbar-login-text">
-                            <small>Hola {userData.username}</small>
-                            <small>
-                                <strong>Pedidos y cuenta</strong>
-                            </small>
+                            <div className="navbar-login-text">
+                                <small>Iniciar sesión/Registra</small>
+                                <small>
+                                    <strong>Pedidos y cuenta</strong>
+                                </small>
+                            </div>
                         </div>
-                    </div>
+                    </li>
+                )}
 
-                    <SubMenu>
-                        <div className="login-sub-menu">
-                            <a>
+                {userIsLogin && (
+                    <div className="navbar-hover">
+                        <MenuItem>
+                            <div className="navbar-hover navbar-login">
                                 <FaRegUser size={20} />
-                                {userData.username}
-                            </a>
 
-                            <hr />
+                                <div className="navbar-login-text">
+                                    <small>Hola {userData.username}</small>
+                                    <small>
+                                        <strong>Pedidos y cuenta</strong>
+                                    </small>
+                                </div>
+                            </div>
 
-                            {submenu.map((item, index) => (
-                                <a key={index} href={item.path}>
-                                    {item.icon}
-                                    <span>{item.name}</span>
-                                </a>
-                            ))}
+                            <SubMenu>
+                                <div className="login-sub-menu">
+                                    <a>
+                                        <FaRegUser size={20} />
+                                        {userData.username}
+                                    </a>
 
-                            <hr />
+                                    <hr />
 
-                            <a href="#">
-                                <AiOutlineUserSwitch size={16} />
-                                <span>Cambiar cuenta</span>
-                            </a>
+                                    {submenu.map((item, index) => (
+                                        <a key={index} href={item.path}>
+                                            {item.icon}
+                                            <span>{item.name}</span>
+                                        </a>
+                                    ))}
 
-                            <a href="#">
-                                <TbLogout2 size={16} />
-                                <span>Cerrar sesión</span>
-                            </a>
-                        </div>
-                    </SubMenu>
-                </MenuItem>
-            </div>
-        </li>
+                                    <hr />
+
+                                    <a href="#">
+                                        <AiOutlineUserSwitch size={16} />
+                                        <span>Cambiar cuenta</span>
+                                    </a>
+
+                                    <a href="#">
+                                        <TbLogout2 size={16} />
+                                        <span>Cerrar sesión</span>
+                                    </a>
+                                </div>
+                            </SubMenu>
+                        </MenuItem>
+                    </div>
+                )}
+            </li>
+
+            <Modal show={showLogin} setShow={setShowLogin}>
+                <Login clear={showLogin} />
+            </Modal>
+        </>
     );
 };
 

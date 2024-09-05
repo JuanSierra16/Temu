@@ -1,34 +1,13 @@
-import {
-    FaSearch,
-    FaChevronDown,
-    FaHeart,
-    FaStar,
-    FaRegUser,
-} from 'react-icons/fa';
+import { FaSearch, FaChevronDown, FaHeart, FaStar } from 'react-icons/fa';
 import { LuMessageCircle } from 'react-icons/lu';
 import { AiFillLike } from 'react-icons/ai';
 import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 
 import { MenuItem, SubMenu } from '../elements/MenuItem.jsx';
-import Login from '../widgets/Login.jsx';
-import Modal from '../elements/Modal.jsx';
+import UserMenu from './navbar/UserMenu.jsx';
 import './NavBar.css';
 
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../provider/UserContext.jsx';
-import UserMenu from './navbar/UserMenu.jsx';
-
 const NavBar = () => {
-    const [showLogin, setShowLogin] = useState(false);
-
-    const { userIsLogin } = useContext(UserContext);
-
-    useEffect(() => {
-        if (userIsLogin) {
-            setShowLogin(false);
-        }
-    }, [userIsLogin]);
-
     const navigation = [
         {
             name: 'Más vendidos',
@@ -97,22 +76,7 @@ const NavBar = () => {
                     </div>
 
                     <ul className="">
-                        {!userIsLogin && (
-                            <li onClick={() => setShowLogin(true)}>
-                                <div className="navbar-hover navbar-login">
-                                    <FaRegUser size={20} />
-
-                                    <div className="navbar-login-text">
-                                        <small>Iniciar sesión/Registra</small>
-                                        <small>
-                                            <strong>Pedidos y cuenta</strong>
-                                        </small>
-                                    </div>
-                                </div>
-                            </li>
-                        )}
-
-                        {userIsLogin && <UserMenu />}
+                        <UserMenu />
 
                         <li>
                             <MenuItem>
@@ -157,6 +121,7 @@ const NavBar = () => {
                                             <input
                                                 name="country-radio"
                                                 type="radio"
+                                                checked
                                             />
                                             <small>Espanol-ES</small>
                                         </span>
@@ -189,10 +154,6 @@ const NavBar = () => {
                     </ul>
                 </div>
             </nav>
-
-            <Modal show={showLogin} setShow={setShowLogin}>
-                <Login clear={showLogin} />
-            </Modal>
         </>
     );
 };
