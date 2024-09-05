@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 import Logo from '../assets/TemuLogo.png';
+import Flag from '../assets/colombia-remove.png'
 import { FaSearch, FaRegUser } from 'react-icons/fa';
 import { BiLike } from 'react-icons/bi';
 import { FaRegStar } from 'react-icons/fa';
@@ -54,23 +55,23 @@ const NavBar = () => {
                     </button>
                 </div>
                 <div className="navbar__icons">
-                    <div className="navbar__actions-item">
+                    <div className="navbar__action-item">
                         <div onClick={handleLoginOpen}>
                             <FaRegUser />
-                            <a href="#">Pedidos y cuenta</a>
+                            <a href="#">Pedidos y <br />
+                                        cuenta</a>
                         </div>
                         <div className="navbar__action-item">
                             <MdOutlineLiveHelp />
                             <a href="#">Ayuda</a>
                         </div>
                         <div className="navbar__action-item">
-                            <a href="#">
-                                <img
-                                    src="/path/to/flag-icon.png"
-                                    alt="Idioma"
-                                />
-                            </a>
-                            {/* <a href="#"><Flag country="US" /></a> */}
+                            <div className='action_logo'>
+                                <a href="#">
+                                {/*<img src={Flag} alt="Idioma"/>*/}
+                                </a>
+                                {/* <a href="#"><Flag country="US" /></a> */}
+                            </div>
                         </div>
                         <div className="navbar__action-item">
                             <button>
