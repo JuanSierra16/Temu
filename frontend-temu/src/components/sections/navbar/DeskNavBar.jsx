@@ -125,6 +125,7 @@ const DeskNavBar = () => {
                                                 name="country-radio"
                                                 type="radio"
                                                 checked
+                                                onChange={() => {}}
                                             />
                                             <small>Espanol-ES</small>
                                         </span>

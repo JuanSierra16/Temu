@@ -8,13 +8,12 @@ import {
     AiOutlinePropertySafety,
     AiOutlineUserSwitch,
 } from 'react-icons/ai';
-import { CiCreditCard1 } from 'react-icons/ci';
 
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import Modal from '../../elements/Modal';
-import Login from '../../widgets/Login';
+import Login from '../Login';
 
 const UserMenu = () => {
     const submenu = [

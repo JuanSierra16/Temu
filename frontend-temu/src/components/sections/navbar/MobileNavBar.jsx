@@ -12,6 +12,7 @@ import { UserContext } from '../../../provider/UserContext';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 
 import './MobileNavBar.css';
+
 const MobileNavBar = () => {
     const submenuCol = [
         { name: 'Tus pedidos', icon: <CgNotes size={24} />, path: '#' },

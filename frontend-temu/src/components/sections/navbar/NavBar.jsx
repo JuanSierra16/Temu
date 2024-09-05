@@ -1,7 +1,5 @@
-import DeskNavBar from './navbar/DeskNavBar';
-import MobileNavBar from './navbar/MobileNavBar';
-
-import './NavBar.css';
+import DeskNavBar from './DeskNavBar';
+import MobileNavBar from './MobileNavBar';
 
 const NavBar = () => {
     return (

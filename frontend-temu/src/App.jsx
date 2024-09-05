@@ -1,6 +1,6 @@
-import MainContent from './components/widgets/MainContent';
+import MainContent from './components/sections/MainContent';
 import Footer from './components/sections/Footer';
-import NavBar from './components/sections/NavBar';
+import NavBar from './components/sections/navbar/NavBar';
 import BlackBar from './components/sections/BlackBar';
 
 function App() {
