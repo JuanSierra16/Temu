@@ -111,3 +111,9 @@ summary {
     font-weight: 500;
     margin-bottom: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .orange-button {
+        font-size: small;
+    }
+}

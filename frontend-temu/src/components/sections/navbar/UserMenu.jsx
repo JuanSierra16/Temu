@@ -1,4 +1,4 @@
-import { LuTicket } from 'react-icons/lu';
+import { LuCreditCard, LuTicket } from 'react-icons/lu';
 import { CgNotes, CgBox } from 'react-icons/cg';
 import { MdOutlinePlace } from 'react-icons/md';
 import { FaRegUser, FaRegClock } from 'react-icons/fa';
@@ -8,6 +8,7 @@ import {
     AiOutlinePropertySafety,
     AiOutlineUserSwitch,
 } from 'react-icons/ai';
+import { CiCreditCard1 } from 'react-icons/ci';
 
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import { useContext, useEffect, useState } from 'react';
@@ -22,55 +23,51 @@ const UserMenu = () => {
             icon: <CgNotes size={16} />,
             path: '#',
         },
-
         {
             name: 'Tus reseñas',
             icon: <TbMessageStar size={16} />,
             path: '#',
         },
-
         {
             name: 'Tu perfil',
             icon: <FaRegUser size={16} />,
             path: '#',
         },
-
         {
             name: 'Cupones y ofertas',
             icon: <LuTicket size={16} />,
             path: '#',
         },
-
+        {
+            name: 'Saldo de crédito',
+            icon: <LuCreditCard size={16} />,
+            path: '#',
+        },
         {
             name: 'Proveedores seguidos',
             icon: <CgBox size={16} />,
             path: '#',
         },
-
         {
             name: 'Historial de navegación',
             icon: <FaRegClock size={16} />,
             path: '#',
         },
-
         {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
             path: '#',
         },
-
         {
             name: 'Seguridad de la cuenta',
             icon: <AiOutlineSafety size={16} />,
             path: '#',
         },
-
         {
             name: 'Permisos',
             icon: <AiOutlinePropertySafety size={16} />,
             path: '#',
         },
-
         {
             name: 'Notificaciones',
             icon: <TbMessage2Pin size={16} />,

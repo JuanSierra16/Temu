@@ -1,0 +1,128 @@
+.mobile-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1em;
+    padding: 0 0.5em;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.mobile-navbar-search {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0 0.5em;
+    background-color: var(--gray-color);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.mobile-navbar-search span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-color);
+}
+
+.mobile-navbar-search input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.mobile-navbar-icons {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    list-style: none;
+}
+
+.mobile-navbar-sub-menu {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+}
+
+.sub-menu-list {
+    display: flex;
+    gap: 0.5em;
+}
+
+.sub-menu-list a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--dark-color);
+    text-align: center;
+    font-size: small;
+}
+
+.sub-menu-list a span {
+    background-color: var(--dark-color);
+    color: var(--gray-color);
+    padding: 0.5em;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+}
+
+.sub-menu-list-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.sub-menu-list-row a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+.sub-menu-user {
+    color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+@media screen and (max-width: 400px) {
+    .logo {
+        height: 40px;
+    }
+
+    .mobile-navbar {
+        gap: 0.25em;
+    }
+
+    .mobile-navbar-icons {
+        gap: 0.5em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .mobile-navbar {
+        display: none;
+    }
+}

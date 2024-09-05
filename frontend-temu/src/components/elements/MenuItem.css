@@ -50,3 +50,17 @@
     width: -moz-fit-content;
     width: fit-content;
 }
+
+@media screen and (max-width: 500px) {
+    .sub-menu {
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+    }
+
+    .sub-menu:before {
+        display: none;
+    }
+}
