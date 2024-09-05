@@ -1,6 +1,6 @@
 import { FaTruckFast } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-import { IoIosPhonePortrait } from 'react-icons/io';
+import { RiSmartphoneLine } from 'react-icons/ri';
 import { useState } from 'react';
 
 import Modal from '../elements/Modal';
@@ -13,14 +13,14 @@ const BlackBar = () => {
     return (
         <>
             <section className="bar">
-                <div className="max-width flex-row space-around">
+                <div className="max-width bar-container">
                     <article
-                        className="flex-row"
+                        className="bar-article"
                         onClick={() => setShowFirstModal(true)}
                     >
-                        <FaTruckFast size={32} />
+                        <FaTruckFast size={28} />
 
-                        <div className="flex-col align-start">
+                        <div className="col-start">
                             <span>Envío gratis en cada pedido</span>
                             <small>Oferta exclusiva</small>
                         </div>
@@ -29,12 +29,12 @@ const BlackBar = () => {
                     <div className="vertical-line"></div>
 
                     <article
-                        className="flex-row"
+                        className="bar-article"
                         onClick={() => setShowSecondModal(true)}
                     >
-                        <MdOutlineAssignmentReturn size={32} />
+                        <MdOutlineAssignmentReturn size={28} />
 
-                        <div className="flex-col align-start">
+                        <div className="col-start">
                             <span>Devoluciones: 90 días</span>
                             <small>desde la fecha de compra</small>
                         </div>
@@ -42,19 +42,18 @@ const BlackBar = () => {
 
                     <div className="vertical-line"></div>
 
-                    <article className="flex-row">
-                        <IoIosPhonePortrait size={32} />
+                    <article className="bar-article">
+                        <RiSmartphoneLine size={32} />
                         <span>Descarga la app de Temu</span>
                     </article>
                 </div>
             </section>
 
             <Modal show={showFirstModal} setShow={setShowFirstModal}>
-                <div className="flex-col">
+                <div className="bar-modal">
                     <h3>Envío gratis</h3>
-                    <br />
 
-                    <ul className="flex-col align-start">
+                    <ul>
                         <li>Envío estándar gratis en todos los pedidos.</li>
 
                         <li>
@@ -75,8 +74,6 @@ const BlackBar = () => {
                         </li>
                     </ul>
 
-                    <br />
-
                     <button
                         onClick={() => setShowFirstModal(false)}
                         className="orange-button"
@@ -87,15 +84,12 @@ const BlackBar = () => {
             </Modal>
 
             <Modal show={showSecondModal} setShow={setShowSecondModal}>
-                <div className="flex-col">
+                <div className="bar-modal">
                     <h3>Especial para ti</h3>
-                    <br />
 
-                    <div>
-                        <div>Devoluciones: 90 días</div>
-
+                    <div className="bar-details">
                         <details>
-                            <summary>Detalles</summary>
+                            <summary>Devoluciones: 90 días</summary>
 
                             <p>
                                 El plazo de devolución para la mayoría de los
@@ -149,8 +143,6 @@ const BlackBar = () => {
                             </ul>
                         </details>
                     </div>
-
-                    <br />
 
                     <button
                         onClick={() => setShowSecondModal(false)}

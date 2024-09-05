@@ -1,25 +1,49 @@
-/* @import '../index.css'; */
-
-.login {
+.login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1em;
-    max-width: 450px;
-    border: none;
-    margin: auto;
+    width: 500px;
+    padding: 1.5em;
+    padding-bottom: 2em;
 }
 
-h3 {
+.login-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.login-title h3 {
+    font-weight: 500;
     text-align: center;
 }
 
-.block {
+.login-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-row {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-block {
     display: block;
 }
 
-.hidden {
+.login-hidden {
     display: none;
 }
 
@@ -31,16 +55,12 @@ h3 {
     width: 65%;
 }
 
-.green {
+.login-green {
     color: var(--compromise-color);
 }
 
-.orange {
+.login-orange {
     color: var(--temu-color);
-}
-
-.icons {
-    padding: 1em 0;
 }
 
 .icon {
@@ -49,38 +69,39 @@ h3 {
     border-radius: 50%;
 }
 
-form {
+.login-container form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     padding: 1em;
     gap: 1em;
 }
 
-form a {
+.login-container form a {
     font-size: smaller;
     font-weight: 400;
     margin: auto;
-    color: var(--dark-color) !important;
+    color: var(--dark-color-90);
     text-decoration: underline;
-}
-
-form a:hover {
     cursor: pointer;
-    color: var(--dark-color) !important;
 }
 
 .login-with {
+    font-size: small;
+    margin-top: 1em;
     gap: 1em;
     width: 100%;
 }
 
 hr {
     color: var(--gray-color);
-    width: 80px;
+    width: 25%;
 }
 
 .terms {
+    margin-top: 1em;
+    font-size: smaller;
     text-align: center;
 }
 
@@ -96,19 +117,29 @@ hr {
     flex-direction: column;
 }
 
-.forgot {
+.phone-select {
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.phone-select:hover {
+    background-color: var(--gray-color);
+}
+
+.login-forgot {
     display: block;
     width: 100%;
     text-align: end;
 }
 
-.input-container {
+.login-input-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 0.5;
 }
 
-.error {
+.login-error {
     color: red;
 }
