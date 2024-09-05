@@ -38,8 +38,13 @@
     border-bottom: 15px solid transparent;
     border-left: 15px solid transparent;
     position: absolute;
-    bottom: -30px;
+    bottom: -15px;
     left: calc(50% - 15px);
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
 }
 
 .select-dropdown {

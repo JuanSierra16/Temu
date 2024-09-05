@@ -6,6 +6,7 @@
 .navbar-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0.3em 0;
     width: 100%;
 }
@@ -72,8 +73,8 @@
     -o-transform: scale(1);
 }
 
-.navbar a {
-    color: var(--light-color) !important;
+.navbar ul li a {
+    color: var(--light-color);
 }
 
 .navbar-search {
@@ -116,9 +117,77 @@
 .navbar-login {
     display: flex;
     flex-direction: row;
+    padding: 0;
 }
 
 .navbar-login-text {
     display: flex;
     flex-direction: column;
+}
+
+.login-sub-menu,
+.help-sub-menu {
+    color: var(--dark-color);
+    width: 250px;
+}
+
+.login-sub-menu a,
+.help-sub-menu a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    color: var(--dark-color) !important;
+    gap: 1em !important;
+}
+
+.login-sub-menu a:hover,
+.help-sub-menu a:hover {
+    background-color: var(--gray-color);
+}
+
+.login-sub-menu a::before,
+.help-sub-menu a::before {
+    display: none;
+}
+
+.login-sub-menu hr,
+.country-sub-menu hr {
+    border: 1px solid var(--gray-color);
+    width: 90%;
+    margin: 0.5em auto;
+}
+
+.country-sub-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    width: 200px;
+    color: var(--dark-color);
+}
+
+.country-sub-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.country-sub-menu img {
+    width: 20px;
+    height: 20px;
+}
+
+.country-sub-menu span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
 }
