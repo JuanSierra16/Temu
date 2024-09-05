@@ -7,8 +7,6 @@ import { FaTiktok } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaPinterest } from "react-icons/fa";
 
-
-
 const Footer = () => {
     return(
         <div className="Footer">

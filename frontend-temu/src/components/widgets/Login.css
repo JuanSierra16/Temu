@@ -1,0 +1,114 @@
+/* @import '../index.css'; */
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    max-width: 450px;
+    border: none;
+    margin: auto;
+}
+
+h3 {
+    text-align: center;
+}
+
+.block {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.phone-input {
+    display: flex;
+}
+
+.phone-input input {
+    width: 65%;
+}
+
+.green {
+    color: var(--compromise-color);
+}
+
+.orange {
+    color: var(--temu-color);
+}
+
+.icons {
+    padding: 1em 0;
+}
+
+.icon {
+    background-color: var(--gray-color);
+    padding: 0.5em;
+    border-radius: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1em;
+    gap: 1em;
+}
+
+form a {
+    font-size: smaller;
+    font-weight: 400;
+    margin: auto;
+    color: var(--dark-color) !important;
+    text-decoration: underline;
+}
+
+form a:hover {
+    cursor: pointer;
+    color: var(--dark-color) !important;
+}
+
+.login-with {
+    gap: 1em;
+    width: 100%;
+}
+
+hr {
+    color: var(--gray-color);
+    width: 80px;
+}
+
+.terms {
+    text-align: center;
+}
+
+.terms a {
+    color: var(--link-color) !important;
+    text-decoration: underline;
+}
+
+.phone-code {
+    margin-top: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.forgot {
+    display: block;
+    width: 100%;
+    text-align: end;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5;
+}
+
+.error {
+    color: red;
+}

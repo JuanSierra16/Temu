@@ -1,21 +1,16 @@
-// src/App.jsx
-import React from 'react';
-import Header from './components/Header';
-import MainContent from './components/MainContent';
-import Footer from './components/Footer';
-import NavBar from './components/NavBar';
-import BlackBar from './components/BlackBar';
-import Login from './components/Login';
+import MainContent from './components/widgets/MainContent';
+import Footer from './components/sections/Footer';
+import NavBar from './components/sections/NavBar';
+import BlackBar from './components/sections/BlackBar';
 
 function App() {
     return (
-        <div>
+        <>
             <BlackBar />
             <NavBar />
-            <Login />
             <MainContent />
             <Footer />
-        </div>
+        </>
     );
 }
 
