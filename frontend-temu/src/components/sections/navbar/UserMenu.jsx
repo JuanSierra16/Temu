@@ -102,50 +102,48 @@ const UserMenu = () => {
                 )}
 
                 {userIsLogin && (
-                    <div className="navbar-hover">
-                        <MenuItem>
-                            <div className="navbar-hover navbar-login">
-                                <FaRegUser size={20} />
+                    <MenuItem>
+                        <div className="navbar-hover navbar-login">
+                            <FaRegUser size={20} />
 
-                                <div className="navbar-login-text">
-                                    <small>Hola {userData.username}</small>
-                                    <small>
-                                        <strong>Pedidos y cuenta</strong>
-                                    </small>
-                                </div>
+                            <div className="navbar-login-text">
+                                <small>Hola {userData.username}</small>
+                                <small>
+                                    <strong>Pedidos y cuenta</strong>
+                                </small>
                             </div>
+                        </div>
 
-                            <SubMenu>
-                                <div className="login-sub-menu">
-                                    <a>
-                                        <FaRegUser size={20} />
-                                        {userData?.username}
+                        <SubMenu>
+                            <div className="login-sub-menu">
+                                <a>
+                                    <FaRegUser size={20} />
+                                    {userData?.username}
+                                </a>
+
+                                <hr />
+
+                                {submenu.map((item, index) => (
+                                    <a key={index} href={item.path}>
+                                        {item.icon}
+                                        <span>{item.name}</span>
                                     </a>
+                                ))}
 
-                                    <hr />
+                                <hr />
 
-                                    {submenu.map((item, index) => (
-                                        <a key={index} href={item.path}>
-                                            {item.icon}
-                                            <span>{item.name}</span>
-                                        </a>
-                                    ))}
+                                <a href="#">
+                                    <AiOutlineUserSwitch size={16} />
+                                    <span>Cambiar cuenta</span>
+                                </a>
 
-                                    <hr />
-
-                                    <a href="#">
-                                        <AiOutlineUserSwitch size={16} />
-                                        <span>Cambiar cuenta</span>
-                                    </a>
-
-                                    <a href="#" onClick={logoutAction}>
-                                        <TbLogout2 size={16} />
-                                        <span>Cerrar sesión</span>
-                                    </a>
-                                </div>
-                            </SubMenu>
-                        </MenuItem>
-                    </div>
+                                <a href="#" onClick={logoutAction}>
+                                    <TbLogout2 size={16} />
+                                    <span>Cerrar sesión</span>
+                                </a>
+                            </div>
+                        </SubMenu>
+                    </MenuItem>
                 )}
             </li>
 
