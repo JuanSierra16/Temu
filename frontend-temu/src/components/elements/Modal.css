@@ -18,7 +18,7 @@
 .modal-container {
     position: relative;
     background-color: var(--light-color);
-    max-height: 80vh;
+    max-height: 95vh;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;

@@ -1,9 +1,9 @@
 import './Modal.css';
 
-const Modal = ({ show, setShow, children }) => {
+const Modal = ({ show, setShow, children, className }) => {
     return (
         <div className={`modal ${show ? 'open' : ''}`}>
-            <div className="modal-container">
+            <div className={`modal-container ${className}`}>
                 <div
                     className="modal-close"
                     onClick={() => setShow(false)}
