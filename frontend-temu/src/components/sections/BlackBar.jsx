@@ -1,6 +1,10 @@
 import { FaTruckFast } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-import { RiSmartphoneLine } from 'react-icons/ri';
+import { RiQrScan2Line, RiSmartphoneLine } from 'react-icons/ri';
+import { FaApple } from 'react-icons/fa';
+import { FiMessageCircle } from 'react-icons/fi';
+import { CiGift } from 'react-icons/ci';
+
 import { useState } from 'react';
 
 import Modal from '../elements/Modal';
@@ -9,6 +13,7 @@ import './BlackBar.css';
 const BlackBar = () => {
     const [showFirstModal, setShowFirstModal] = useState(false);
     const [showSecondModal, setShowSecondModal] = useState(false);
+    const [showThirdModal, setShowThirdModal] = useState(false);
 
     return (
         <>
@@ -42,7 +47,10 @@ const BlackBar = () => {
 
                     <div className="vertical-line"></div>
 
-                    <article className="bar-article">
+                    <article
+                        className="bar-article"
+                        onClick={() => setShowThirdModal(true)}
+                    >
                         <RiSmartphoneLine size={32} />
                         <span>Descarga la app de Temu</span>
                     </article>
@@ -91,16 +99,22 @@ const BlackBar = () => {
                         <details>
                             <summary>Devoluciones: 90 días</summary>
 
-                            <p>
-                                El plazo de devolución para la mayoría de los
-                                artículos es de 90 días. Todos los artículos
-                                elegibles pueden devolverse en el plazo de
-                                devolución en su estado original para obtener un
-                                reembolso completo. Después de enviar una
-                                solicitud de devolución, eres responsable de
-                                cubrir los costos de envío de devolución para
-                                devolver los artículos tú mismo.
-                            </p>
+                            <ul>
+                                <li>
+                                    El plazo de devolución para la mayoría de
+                                    los artículos es de 90 días. Todos los
+                                    artículos elegibles pueden devolverse en el
+                                    plazo de devolución en su estado original
+                                    para obtener un reembolso completo.
+                                </li>
+
+                                <li>
+                                    Después de enviar una solicitud de
+                                    devolución, eres responsable de cubrir los
+                                    costos de envío de devolución para devolver
+                                    los artículos tú mismo.
+                                </li>
+                            </ul>
                         </details>
 
                         <details>
@@ -150,6 +164,79 @@ const BlackBar = () => {
                     >
                         Ok
                     </button>
+                </div>
+            </Modal>
+
+            <Modal show={showThirdModal} setShow={setShowThirdModal}>
+                <div className="bar-modal">
+                    <h3>Descarga la app de Temu para disfrutar</h3>
+
+                    <div className="bar-modal-icons">
+                        <div className="bar-modal-icon">
+                            <FaTruckFast size={32} />
+                            <p>Estado del pedido</p>
+                        </div>
+
+                        <div className="bar-modal-icon">
+                            <FiMessageCircle size={32} />
+                            <p>Atención al cliente</p>
+                        </div>
+
+                        <div className="bar-modal-icon">
+                            <CiGift size={32} />
+                            <p>Eventos únicos de la aplicación</p>
+                        </div>
+                    </div>
+
+                    <div className="bar-modal-qr">
+                        <div>
+                            <img src="/temu-qr.png" alt="" />
+
+                            <p>
+                                <RiQrScan2Line />
+                                Escanea el código QR con la cámara de tu
+                                teléfono
+                            </p>
+                        </div>
+
+                        <div>
+                            <button>
+                                <a
+                                    href="https://play.google.com/store/apps/details?id=com.einnovation.temu&hl=es&gl=co&referrer=adg_reftag%3Dafb7bf7be9b68b87e7d299f64eac28c8%26ads_channel%3Dgoogle%26ads_sub_channel%3Dsearch%26ads_account%3D1204871858%26ads_set%3D21104778154%26ads_id%3D161509618962%26ads_creative_id%3D693748223408%26ns_source%3Dg%26ns_keyword%3Dtemu%26ns_match_type%3De%26gclid%3DEAIaIQobChMI6cqLo-iuiAMVLaxaBR0HEgfMEAAYASAAEgIcOPD_BwE%26wbraid%3DCj8KCQjwreW2BhCRARIuAEiZJEBLvg2vD8bWGmalxjcoiziu-jAEapZJ_jzf63owbalug-SJtXILT8cKWRoCzKo%26gbraid%3D0AAAAAo4mICGep8aI9r4nY51cNbOusoTVK%26vst_type%3Dadg"
+                                    target="_blank"
+                                >
+                                    <img src="/google-play-icon.png" alt="" />
+
+                                    <span>
+                                        <p>
+                                            <small>Descargar en</small>
+                                        </p>
+                                        <p>
+                                            <strong>Google Play</strong>
+                                        </p>
+                                    </span>
+                                </a>
+                            </button>
+
+                            <button>
+                                <a
+                                    href="https://apps.apple.com/co/app/temu-compra-como-millonario/id1641486558"
+                                    target="_blank"
+                                >
+                                    <FaApple size={32} />
+
+                                    <span>
+                                        <p>
+                                            <small>Descargar en</small>
+                                        </p>
+                                        <p>
+                                            <strong>App Store</strong>
+                                        </p>
+                                    </span>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </Modal>
         </>
