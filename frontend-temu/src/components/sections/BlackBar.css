@@ -124,6 +124,15 @@
     color: var(--dark-color);
 }
 
+.bar-modal-qr-container {
+    background-image: url('/img-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--light-color);
+    background-blend-mode: multiply;
+}
+
 @media screen and (max-width: 800px) {
     .bar {
         display: none;

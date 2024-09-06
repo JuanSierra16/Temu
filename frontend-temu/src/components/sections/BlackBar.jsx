@@ -167,7 +167,11 @@ const BlackBar = () => {
                 </div>
             </Modal>
 
-            <Modal show={showThirdModal} setShow={setShowThirdModal}>
+            <Modal
+                show={showThirdModal}
+                setShow={setShowThirdModal}
+                className={'bar-modal-qr-container'}
+            >
                 <div className="bar-modal">
                     <h3>Descarga la app de Temu para disfrutar</h3>
 
