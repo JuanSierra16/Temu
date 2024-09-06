@@ -75,7 +75,7 @@ const UserMenu = () => {
     ];
 
     const [showLogin, setShowLogin] = useState(false);
-    const { userData, userIsLogin } = useContext(UserContext);
+    const { userData, userIsLogin, logoutAction } = useContext(UserContext);
 
     useEffect(() => {
         if (userIsLogin) {
@@ -87,7 +87,7 @@ const UserMenu = () => {
         <>
             <li>
                 {!userIsLogin && (
-                    <li onClick={() => setShowLogin(true)}>
+                    <div onClick={() => setShowLogin(true)}>
                         <div className="navbar-hover navbar-login">
                             <FaRegUser size={20} />
 
@@ -98,7 +98,7 @@ const UserMenu = () => {
                                 </small>
                             </div>
                         </div>
-                    </li>
+                    </div>
                 )}
 
                 {userIsLogin && (
@@ -119,7 +119,7 @@ const UserMenu = () => {
                                 <div className="login-sub-menu">
                                     <a>
                                         <FaRegUser size={20} />
-                                        {userData.username}
+                                        {userData?.username}
                                     </a>
 
                                     <hr />
@@ -138,7 +138,7 @@ const UserMenu = () => {
                                         <span>Cambiar cuenta</span>
                                     </a>
 
-                                    <a href="#">
+                                    <a href="#" onClick={logoutAction}>
                                         <TbLogout2 size={16} />
                                         <span>Cerrar sesión</span>
                                     </a>
