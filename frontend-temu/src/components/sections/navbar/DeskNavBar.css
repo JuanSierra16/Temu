@@ -127,7 +127,6 @@
 .navbar-login {
     display: flex;
     flex-direction: row;
-    padding: 0;
 }
 
 .navbar-login-text {
