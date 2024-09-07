@@ -1,14 +1,13 @@
-import React from "react";
-import "./Footer.css";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaTiktok } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-import { FaPinterest } from "react-icons/fa";
+import './Footer.css';
+import { FaInstagram } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { FaTiktok } from 'react-icons/fa';
+import { FaYoutube } from 'react-icons/fa';
+import { FaPinterest } from 'react-icons/fa';
 
 const Footer = () => {
-    return(
+    return (
         <div className="Footer">
             <div className="sb__footer__section__padding">
                 <div className="sb__footer-links">
@@ -81,34 +80,60 @@ const Footer = () => {
                     <div className="sb__footer-links_div">
                         <h4>Conectar con Temu</h4>
                         <div className="SocialMedia">
-                            <p><FaInstagram /></p>
-                            <p><FaFacebook /></p>
-                            <p><FaXTwitter /></p>
-                            <p><FaTiktok /></p>
-                            <p><FaYoutube /></p>
-                            <p><FaPinterest /></p>
+                            <p>
+                                <FaInstagram />
+                            </p>
+                            <p>
+                                <FaFacebook />
+                            </p>
+                            <p>
+                                <FaXTwitter />
+                            </p>
+                            <p>
+                                <FaTiktok />
+                            </p>
+                            <p>
+                                <FaYoutube />
+                            </p>
+                            <p>
+                                <FaPinterest />
+                            </p>
                         </div>
                     </div>
                 </div>
 
-            <hr></hr>
+                <hr></hr>
 
-            <div className="sb__footer-below">
-                <div className="sb__footer-copyright">
-                    <p>
-                        © 2024 WhaleCo Inc.
-                    </p>
+                <div className="sb__footer-below">
+                    <div className="sb__footer-copyright">
+                        <p>© 2024 WhaleCo Inc.</p>
+                    </div>
+                    <div className="sb__footer-below-links">
+                        <a href="/Terminos de uso">
+                            <div>
+                                <p>Terminos de uso</p>
+                            </div>
+                        </a>
+                        <a href="/Politica de privacidad">
+                            <div>
+                                <p>Politica de privacidad</p>
+                            </div>
+                        </a>
+                        <a href="/Tus preferencia de seguridad">
+                            <div>
+                                <p>Tus preferencia de seguridad</p>
+                            </div>
+                        </a>
+                        <a href="/Gestión de anuncios">
+                            <div>
+                                <p>Gestión de anuncios</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div className="sb__footer-below-links">
-                    <a href="/Terminos de uso"><div><p>Terminos de uso</p></div></a>
-                    <a href="/Politica de privacidad"><div><p>Politica de privacidad</p></div></a>
-                    <a href="/Tus preferencia de seguridad"><div><p>Tus preferencia de seguridad</p></div></a>
-                    <a href="/Gestión de anuncios"><div><p>Gestión de anuncios</p></div></a>
-                </div>
-            </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;
