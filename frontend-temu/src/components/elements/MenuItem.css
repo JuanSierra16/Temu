@@ -85,13 +85,13 @@
     -o-transform: translateX(0);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
     .sub-menu {
-        transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-        -moz-transform: translateX(-100%);
-        -ms-transform: translateX(-100%);
-        -o-transform: translateX(-100%);
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
     }
 
     .sub-menu:before {
