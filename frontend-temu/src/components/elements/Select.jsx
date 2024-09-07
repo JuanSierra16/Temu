@@ -62,7 +62,6 @@ const Select = ({ children, value }) => {
                 {Children.map(children, child => (
                     <span onClick={handleSelect}>{child}</span>
                 ))}
-                {/* {children} */}
             </div>
         </div>
     );

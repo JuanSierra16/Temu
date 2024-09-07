@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { categoriesList } from '../../../utils/categoriesList';
-import './CategoryView.css';
 
 const CategoryView = ({ categoryName }) => {
     const [category, setCategory] = useState(null);
