@@ -136,9 +136,12 @@ const MobileNavBar = () => {
                                         </a>
                                     ))}
 
-                                    <a href="" onClick={logoutAction}>
-                                        <TbLogout2 size={16} /> Cerrar sesión
-                                    </a>
+                                    {userIsLogin && (
+                                        <a href="" onClick={logoutAction}>
+                                            <TbLogout2 size={16} /> Cerrar
+                                            sesión
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </SubMenu>
