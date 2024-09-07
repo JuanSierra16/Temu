@@ -5,6 +5,7 @@ import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import UserMenu from './UserMenu';
+import Categories from './Categories';
 
 import './DeskNavBar.css';
 
@@ -65,7 +66,9 @@ const DeskNavBar = () => {
                                     <FaChevronDown />
                                 </div>
 
-                                <SubMenu></SubMenu>
+                                <SubMenu>
+                                    <Categories />
+                                </SubMenu>
                             </MenuItem>
                         </li>
                     </ul>

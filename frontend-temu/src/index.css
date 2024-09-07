@@ -15,17 +15,12 @@
     --gray-color: #e1e1e1;
     --temu-color: #fb7701;
     --green-cyan-color: #70efa2;
-    --link-color: #646cff;
+    --link-color: #007bff;
 }
 
 a {
-    font-weight: 500;
-    color: var(--link-color);
-    text-decoration: inherit;
-}
-
-a:hover {
-    color: #747ae6df;
+    text-decoration: none;
+    color: var(--dark-color);
 }
 
 input {

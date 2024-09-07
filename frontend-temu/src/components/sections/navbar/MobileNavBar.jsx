@@ -7,11 +7,13 @@ import { MdOutlinePlace } from 'react-icons/md';
 import { RiSettingsLine } from 'react-icons/ri';
 import { CiSearch } from 'react-icons/ci';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
+import Modal from '../../elements/Modal';
 
 import './MobileNavBar.css';
+import Categories from './Categories';
 
 const MobileNavBar = () => {
     const submenuCol = [
@@ -68,6 +70,7 @@ const MobileNavBar = () => {
     ];
 
     const { userData, userIsLogin } = useContext(UserContext);
+    const [showCategories, setShowCategories] = useState(false);
 
     return (
         <nav className="mobile-navbar">
@@ -82,7 +85,14 @@ const MobileNavBar = () => {
 
             <ul className="mobile-navbar-icons">
                 <li>
-                    <FaList size={20} />
+                    <FaList
+                        size={20}
+                        onClick={() => setShowCategories(!showCategories)}
+                    />
+
+                    <Modal show={showCategories} setShow={setShowCategories}>
+                        <Categories />
+                    </Modal>
                 </li>
 
                 <MenuItem>

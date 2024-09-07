@@ -5,8 +5,8 @@ const MenuItem = ({ children }) => {
         // validamos si el elemento tiene esta por fuera de la pantalla
         // agregamos clases para evitar que se rompa el menu (Cmabio del ancho de la pantalla)
         const rect = element.getBoundingClientRect();
-        const isOverflowingLeft = rect.left < 0;
-        const isOverflowingRight = rect.right + rect.width > window.innerWidth;
+        const isOverflowingLeft = rect.x < 0;
+        const isOverflowingRight = rect.x + rect.width > window.innerWidth - 20;
 
         if (isOverflowingLeft) {
             element.classList.add('sub-menu-overflowing-left');
