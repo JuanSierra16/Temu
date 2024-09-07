@@ -12,8 +12,9 @@ import { UserContext } from '../../../provider/UserContext';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import Modal from '../../elements/Modal';
 
+import Categories from '../../elements/category/Categories';
 import './MobileNavBar.css';
-import Categories from './Categories';
+import Login from '../login/Login';
 
 const MobileNavBar = () => {
     const submenuCol = [
@@ -71,76 +72,89 @@ const MobileNavBar = () => {
 
     const { userData, userIsLogin } = useContext(UserContext);
     const [showCategories, setShowCategories] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
 
     return (
-        <nav className="mobile-navbar">
-            <img src="/temu.svg" alt="" className="logo" />
+        <>
+            <nav className="mobile-navbar">
+                <img src="/temu.svg" alt="" className="logo" />
 
-            <div className="mobile-navbar-search">
-                <span>
-                    <CiSearch />
-                </span>
-                <input type="text" placeholder="Buscar..." />
-            </div>
+                <div className="mobile-navbar-search">
+                    <span>
+                        <CiSearch />
+                    </span>
+                    <input type="text" placeholder="Buscar..." />
+                </div>
 
-            <ul className="mobile-navbar-icons">
-                <li>
-                    <FaList
-                        size={20}
-                        onClick={() => setShowCategories(!showCategories)}
-                    />
+                <ul className="mobile-navbar-icons">
+                    <li>
+                        <FaList
+                            size={20}
+                            onClick={() => setShowCategories(!showCategories)}
+                        />
 
-                    <Modal show={showCategories} setShow={setShowCategories}>
-                        <Categories />
-                    </Modal>
-                </li>
+                        <Modal
+                            show={showCategories}
+                            setShow={setShowCategories}
+                        >
+                            <Categories />
+                        </Modal>
+                    </li>
 
-                <MenuItem>
-                    <FaRegUser size={20} />
+                    <MenuItem>
+                        <FaRegUser size={20} />
 
-                    <SubMenu>
-                        <div className="mobile-navbar-sub-menu">
-                            {!userIsLogin && (
-                                <button className="orange-button">
-                                    INICIAR SESIÓN/REGISTRARSE
-                                </button>
-                            )}
+                        <SubMenu>
+                            <div className="mobile-navbar-sub-menu">
+                                {!userIsLogin && (
+                                    <button
+                                        className="orange-button"
+                                        onClick={() => setShowLogin(true)}
+                                    >
+                                        INICIAR SESIÓN/REGISTRARSE
+                                    </button>
+                                )}
 
-                            {userIsLogin && (
-                                <a href="#" className="sub-menu-user">
-                                    <span>
-                                        <FaRegUser size={20} />
-                                    </span>
-                                    {userData.username}
-                                </a>
-                            )}
-
-                            <div className="sub-menu-list">
-                                {submenuCol.map(item => (
-                                    <a href={item.path} key={item.name}>
-                                        <span>{item.icon}</span>
-                                        {item.name}
+                                {userIsLogin && (
+                                    <a href="#" className="sub-menu-user">
+                                        <span>
+                                            <FaRegUser size={20} />
+                                        </span>
+                                        {userData.username}
                                     </a>
-                                ))}
-                            </div>
+                                )}
 
-                            <div className="sub-menu-list-row">
-                                {submenu.map(item => (
-                                    <a href={item.path} key={item.name}>
-                                        {item.icon}
-                                        {item.name}
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    </SubMenu>
-                </MenuItem>
+                                <div className="sub-menu-list">
+                                    {submenuCol.map(item => (
+                                        <a href={item.path} key={item.name}>
+                                            <span>{item.icon}</span>
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
 
-                <li>
-                    <FiShoppingCart size={20} />
-                </li>
-            </ul>
-        </nav>
+                                <div className="sub-menu-list-row">
+                                    {submenu.map(item => (
+                                        <a href={item.path} key={item.name}>
+                                            {item.icon}
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </SubMenu>
+                    </MenuItem>
+
+                    <li>
+                        <FiShoppingCart size={20} />
+                    </li>
+                </ul>
+            </nav>
+
+            <Modal show={showLogin} setShow={setShowLogin}>
+                <Login />
+            </Modal>
+        </>
     );
 };
 

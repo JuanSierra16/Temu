@@ -23,7 +23,11 @@ const Modal = ({ show, setShow, children, className }) => {
                 ref={modalRef}
             >
                 <div className="modal-close" ref={closeRef}>
-                    <IoClose size={32} onClick={() => setShow(false)} />
+                    <IoClose
+                        size={32}
+                        onClick={() => setShow(false)}
+                        className="modal-close-icon"
+                    />
                 </div>
 
                 <div className="modal-content">{children}</div>
