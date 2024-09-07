@@ -63,14 +63,9 @@ const MobileNavBar = () => {
             icon: <RiSettingsLine size={16} />,
             path: '#',
         },
-        {
-            name: 'Cerrar sesión',
-            icon: <TbLogout2 size={16} />,
-            path: '#',
-        },
     ];
 
-    const { userData, userIsLogin } = useContext(UserContext);
+    const { userData, userIsLogin, logoutAction } = useContext(UserContext);
     const [showCategories, setShowCategories] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
@@ -140,6 +135,10 @@ const MobileNavBar = () => {
                                             {item.name}
                                         </a>
                                     ))}
+
+                                    <a href="" onClick={logoutAction}>
+                                        <TbLogout2 size={16} /> Cerrar sesión
+                                    </a>
                                 </div>
                             </div>
                         </SubMenu>
@@ -151,7 +150,7 @@ const MobileNavBar = () => {
                 </ul>
             </nav>
 
-            <Modal show={showLogin} setShow={setShowLogin}>
+            <Modal show={showLogin && !userIsLogin} setShow={setShowLogin}>
                 <Login />
             </Modal>
         </>
