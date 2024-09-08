@@ -1,4 +1,27 @@
-.main-content {
-    padding-top: 120px; /* Suma el espacio de las dos barras */
+.small-category,
+.category-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-category > * {
+    padding: 0 0.5em;
+    width: auto;
+    text-wrap: nowrap;
+}
+
+.subcategory-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 0.5em;
     text-align: center;
+    font-size: smaller;
+}
+
+.subcategory-slider img {
+    height: 50px;
+    width: auto;
 }
