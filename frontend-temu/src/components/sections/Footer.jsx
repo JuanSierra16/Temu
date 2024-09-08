@@ -8,8 +8,8 @@ import { FaPinterest } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <div className="Footer">
-            <div className="sb__footer__section__padding">
+        <footer className="Footer">
+            <div className="sb__footer__section__padding max-width">
                 <div className="sb__footer-links">
                     <div className="sb__footer-links_div">
                         <h4> Informcion de la empresa </h4>
@@ -132,7 +132,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 };
 
