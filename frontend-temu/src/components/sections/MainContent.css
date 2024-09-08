@@ -1,4 +1,128 @@
 .main-content {
-    padding-top: 120px; /* Suma el espacio de las dos barras */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.small-category,
+.category-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-category > * {
+    padding: 0 0.5em;
+    width: auto;
+    text-wrap: nowrap;
+}
+
+.categories-slider {
+    padding: 0.25em;
+}
+
+.subcategory-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 0.5em;
     text-align: center;
+    font-size: smaller;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.subcategory-slider img {
+    height: 50px;
+    width: auto;
+}
+
+.banner-background {
+    background-color: var(--special-banner-color);
+}
+
+.banner-container {
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+}
+
+.categories-products {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    overflow: hidden;
+    gap: 1em;
+    padding: 0.5em;
+}
+
+.img-title {
+    display: none;
+}
+
+@media screen and (min-width: 500px) {
+    .small-category-container {
+        display: none;
+    }
+
+    .categories-products {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        place-content: center;
+        place-items: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .subcategory-slider {
+        max-height: unset;
+    }
+
+    .main-content {
+        gap: 2em;
+    }
+
+    .categories-products {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .img-title {
+        display: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img-title img {
+        width: 300px;
+        height: auto;
+    }
+
+    .img-title > * {
+        font-size: 1.5em;
+        text-align: center;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .subcategory-slider {
+        width: 150px;
+        font-size: large;
+        font-weight: 500;
+    }
+
+    .subcategory-slider img {
+        height: 100px;
+    }
+
+    .main-content-title {
+        display: none;
+    }
 }

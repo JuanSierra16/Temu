@@ -6,6 +6,7 @@
     background-color: #2d2d32;
     width: 100%;
     margin-top: auto;
+    padding: 0.5em;
 }
 
 html,
@@ -149,10 +150,6 @@ main {
 }
 
 @media screen and (max-width: 400px) {
-    .Footer {
-        padding: 1rem;
-    }
-
     .sb__footer-heading h1 {
         font-size: 27px;
         line-height: 38px;
