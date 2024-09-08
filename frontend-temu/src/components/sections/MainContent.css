@@ -1,3 +1,10 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
 .small-category,
 .category-slider {
     display: flex;
@@ -9,6 +16,10 @@
     padding: 0 0.5em;
     width: auto;
     text-wrap: nowrap;
+}
+
+.categories-slider {
+    padding: 0 0.25em;
 }
 
 .subcategory-slider {
@@ -24,4 +35,23 @@
 .subcategory-slider img {
     height: 50px;
     width: auto;
+}
+
+.banner-background {
+    background-color: #f6cfcc;
+}
+
+.banner-container {
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 850px) {
+    .small-category-container {
+        display: none;
+    }
 }

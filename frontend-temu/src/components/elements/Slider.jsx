@@ -16,21 +16,17 @@ const Slider = ({ children }) => {
 
     return (
         <section className="max-width slider">
-            <FaAngleLeft
-                size={32}
-                className="slider-arrow"
-                onClick={prevSlide}
-            />
+            <div className="slider-arrow" onClick={prevSlide}>
+                <FaAngleLeft size={24} />
+            </div>
 
             <div className="slider-container" ref={slider}>
                 {children}
             </div>
 
-            <FaAngleRight
-                size={32}
-                className="slider-arrow"
-                onClick={nextSlide}
-            />
+            <div className="slider-arrow" onClick={nextSlide}>
+                <FaAngleRight size={24} />
+            </div>
         </section>
     );
 };

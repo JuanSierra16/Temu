@@ -1,25 +1,42 @@
 // src/components/MainContent.jsx
 import Slider from '../elements/Slider';
 import { categoriesList } from '../../utils/categoriesList';
+import Compromise from './Compromise';
 import './MainContent.css';
 
 const MainContent = () => {
-    const firstSubs = categoriesList.map(category => {
-        return { name: category.name, sub: category.subcategories[0] };
-    });
+    const firstSubs = categoriesList
+        .map(category => {
+            return { name: category.name, sub: category.subcategories[0] };
+        })
+        .reverse();
 
     return (
-        <main>
-            <Slider>
-                <div className="small-category">
-                    {categoriesList.map(category => (
-                        <small key={category.name}>{category.name}</small>
-                    ))}
-                </div>
-            </Slider>
+        <main className="main-content">
+            <div className="small-category-container">
+                <Slider>
+                    <div className="small-category">
+                        {categoriesList.map(category => (
+                            <small key={category.name}>{category.name}</small>
+                        ))}
+                    </div>
+                </Slider>
+            </div>
 
-            <div>
-                <h5>Categorias</h5>
+            <div className="banner-background">
+                <div className="max-width banner-container">
+                    <img
+                        src="/themes/Amor y Amistad/banner.png"
+                        alt=""
+                        className="banner"
+                    />
+                </div>
+            </div>
+
+            <Compromise />
+
+            <div className="categories-slider">
+                <h6 className="max-width">Categorias</h6>
 
                 <Slider>
                     <div className="category-slider">
@@ -30,7 +47,7 @@ const MainContent = () => {
                                     alt=""
                                 />
 
-                                <small>{sub.sub}</small>
+                                <small>{sub.name}</small>
                             </div>
                         ))}
                     </div>
