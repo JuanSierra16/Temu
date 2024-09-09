@@ -1,6 +1,9 @@
-import { FaXTwitter, FaGoogle, FaFacebook, FaApple } from 'react-icons/fa6';
+import { FaXTwitter, FaFacebook, FaApple } from 'react-icons/fa6';
 import Select from '../../elements/Select';
 import { supportPrefixPhone } from '../../../utils/data';
+import { GoogleLogin } from '@react-oauth/google';
+import { useContext } from 'react';
+import { UserContext } from '../../../provider/UserContext';
 
 const LoginForm = ({
     handleFormSubmit,
@@ -18,6 +21,8 @@ const LoginForm = ({
     waitLogin,
     loginError,
 }) => {
+    const { loginGoogle, loginErrorPlatform } = useContext(UserContext);
+
     return (
         <form onSubmit={handleFormSubmit}>
             <div className="login-input-container">
@@ -114,7 +119,14 @@ const LoginForm = ({
                 </div>
 
                 <div className="login-row">
-                    <FaGoogle size={32} />
+                    <GoogleLogin
+                        onSuccess={loginGoogle}
+                        onError={loginErrorPlatform}
+                        theme="outline"
+                        type="icon"
+                        shape="pill"
+                    />
+
                     <FaFacebook size={32} />
                     <FaApple size={32} />
                     <FaXTwitter size={32} />

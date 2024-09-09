@@ -1,4 +1,3 @@
-// src/components/LoginModal.jsx
 import { useContext, useEffect, useState } from 'react';
 import { FaTruckFast, FaLock } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
