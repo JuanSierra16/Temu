@@ -6,6 +6,7 @@ import Compromise from './Compromise';
 import { products } from '../../utils/products';
 import './MainContent.css';
 import ProductPrev from '../elements/ProductPrev';
+import FlashDeals from './FlashDeals';
 
 const MainContent = () => {
     const firstSubs = categoriesList
@@ -17,6 +18,7 @@ const MainContent = () => {
     return (
         <main>
             <article className="main-content">
+
                 <section className="small-category-container">
                     <Slider>
                         <div className="small-category">
@@ -40,6 +42,8 @@ const MainContent = () => {
                 </section>
 
                 <Compromise />
+
+                <FlashDeals />
 
                 <section className="categories-slider">
                     <h5 className="max-width main-content-title">Categorias</h5>
