@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
-import { login } from '../API/Login.API';
+import { login, loginWithPlatform } from '../API/Login.API';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import { googleLogout } from '@react-oauth/google';
 
 const UserContext = createContext(null);
 
@@ -14,7 +16,7 @@ const UserProvider = ({ children }) => {
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
     const [waitLogin, setWaitLogin] = useState(false);
-    const [sessionJWTToken, setSessionJWTToken] = useState(null);
+    const [sessionJWT, setSessionJWT] = useState(null);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -24,9 +26,42 @@ const UserProvider = ({ children }) => {
 
             setUserData(user);
             setUserIsLogin(true);
-            setSessionJWTToken(token);
+            setSessionJWT(token);
         }
     }, []);
+
+    const loginGoogle = async credentialResponse => {
+        setWaitLogin(true);
+
+        const { credential } = credentialResponse;
+        const jwt = jwtDecode(credential);
+
+        const { sub, name, email } = jwt;
+
+        try {
+            const data = await loginWithPlatform(sub, 'Google', name, email);
+            setUserData(data.user);
+            setUserIsLogin(true);
+            setSessionJWT(data.token);
+            setLoginError(null);
+
+            Cookies.set(
+                'token',
+                JSON.stringify({ user: data.user, token: data.token }),
+                { expires: 1 },
+            );
+        } catch (error) {
+            console.log(error);
+            setLoginError('Error en el inicio de sesión con Google');
+            setUserIsLogin(false);
+        }
+
+        setWaitLogin(false);
+    };
+
+    const loginErrorPlatform = () => {
+        setLoginError('Error en el inicio de sesión');
+    };
 
     const loginAction = async (email, password) => {
         setWaitLogin(true);
@@ -35,7 +70,8 @@ const UserProvider = ({ children }) => {
             const data = await login(email, password);
             setUserData(data.user);
             setUserIsLogin(true);
-            setSessionJWTToken(data.token);
+            setSessionJWT(data.token);
+            setLoginError(null);
 
             Cookies.set(
                 'token',
@@ -45,18 +81,13 @@ const UserProvider = ({ children }) => {
         } catch (error) {
             console.log(error);
             setLoginError('Credenciales incorrectas');
+            setUserIsLogin(false);
 
             setUserData({
                 id: '',
                 username: '',
                 email: '',
             });
-
-            setUserIsLogin(false);
-
-            setTimeout(() => {
-                setLoginError(null);
-            }, 5000);
         }
 
         setWaitLogin(false);
@@ -65,12 +96,17 @@ const UserProvider = ({ children }) => {
     const logoutAction = () => {
         Cookies.remove('token');
 
+        if (userData?.nombre_plataforma === 'Google') {
+            googleLogout();
+        }
+
         setUserData({
             id: '',
             username: '',
             email: '',
         });
 
+        setSessionJWT(null);
         setUserIsLogin(false);
     };
 
@@ -79,7 +115,9 @@ const UserProvider = ({ children }) => {
             value={{
                 userData,
                 loginAction,
+                loginGoogle,
                 logoutAction,
+                loginErrorPlatform,
                 loginError,
                 userIsLogin,
                 waitLogin,
