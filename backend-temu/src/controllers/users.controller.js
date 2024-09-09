@@ -64,8 +64,8 @@ export const loginUserPlatform = async (req, res) => {
     const { id_usuario_plataforma, nombre_plataforma, username, email } = req.body;
 
     try {
-        // Buscar si el usuario ya existe en la base de datos
-        const [rows] = await pool.query('SELECT * FROM users WHERE id_usuario_plataforma = ?', [id_usuario_plataforma]);
+        // Buscar si el usuario ya existe en la base de datos por correo electrónico
+        const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
 
         let user;
         if (rows.length === 0) {
@@ -81,6 +81,13 @@ export const loginUserPlatform = async (req, res) => {
         } else {
             // Si el usuario ya existe, obtener sus datos
             user = rows[0];
+
+            // Si el usuario existe pero no tiene id_usuario_plataforma, actualizar el registro
+            if (!user.id_usuario_plataforma) {
+                await pool.query('UPDATE users SET id_usuario_plataforma = ?, nombre_plataforma = ? WHERE email = ?', [id_usuario_plataforma, nombre_plataforma, email]);
+                user.id_usuario_plataforma = id_usuario_plataforma;
+                user.nombre_plataforma = nombre_plataforma;
+            }
         }
 
         // Generar el token JWT
