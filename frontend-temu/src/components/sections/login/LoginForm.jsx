@@ -2,7 +2,7 @@ import { FaXTwitter, FaFacebook, FaApple } from 'react-icons/fa6';
 import Select from '../../elements/Select';
 import { supportPrefixPhone } from '../../../utils/data';
 import { GoogleLogin } from '@react-oauth/google';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import FacebookLogin from '@greatsumini/react-facebook-login';
 
@@ -22,8 +22,12 @@ const LoginForm = ({
     waitLogin,
     loginError,
 }) => {
-    const { loginGoogle, loginFacebook, loginErrorPlatform } =
+    const { loginGoogle, loginFacebook, loginErrorPlatform, setLoginError } =
         useContext(UserContext);
+
+    useEffect(() => {
+        setLoginError(null);
+    }, [email, phone, setLoginError]);
 
     return (
         <form onSubmit={handleFormSubmit}>
@@ -131,17 +135,12 @@ const LoginForm = ({
 
                     <FacebookLogin
                         appId={import.meta.env.VITE_FACEBOOK_APP_ID}
-                        onSuccess={response => {
-                            console.log('Login Success!', response);
-                        }}
-                        onFail={error => {
-                            console.log('Login Failed!', error);
-                        }}
-                        render={({ onClick, logout }) => (
+                        onSuccess={loginFacebook}
+                        onFail={loginErrorPlatform}
+                        render={({ onClick }) => (
                             <FaFacebook
                                 size={32}
                                 onClick={onClick}
-                                onLogoutClick={logout}
                                 className="facebook-button"
                             />
                         )}

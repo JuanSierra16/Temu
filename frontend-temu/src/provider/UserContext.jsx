@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { login, loginWithPlatform } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -148,6 +148,7 @@ const UserProvider = ({ children }) => {
                 logoutAction,
                 loginErrorPlatform,
                 loginError,
+                setLoginError,
                 userIsLogin,
                 waitLogin,
             }}
