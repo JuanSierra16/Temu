@@ -4,6 +4,7 @@ import { supportPrefixPhone } from '../../../utils/data';
 import { GoogleLogin } from '@react-oauth/google';
 import { useContext } from 'react';
 import { UserContext } from '../../../provider/UserContext';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const LoginForm = ({
     handleFormSubmit,
@@ -21,7 +22,8 @@ const LoginForm = ({
     waitLogin,
     loginError,
 }) => {
-    const { loginGoogle, loginErrorPlatform } = useContext(UserContext);
+    const { loginGoogle, loginFacebook, loginErrorPlatform } =
+        useContext(UserContext);
 
     return (
         <form onSubmit={handleFormSubmit}>
@@ -127,7 +129,24 @@ const LoginForm = ({
                         shape="pill"
                     />
 
-                    <FaFacebook size={32} />
+                    <FacebookLogin
+                        appId={import.meta.env.VITE_FACEBOOK_APP_ID}
+                        onSuccess={response => {
+                            console.log('Login Success!', response);
+                        }}
+                        onFail={error => {
+                            console.log('Login Failed!', error);
+                        }}
+                        render={({ onClick, logout }) => (
+                            <FaFacebook
+                                size={32}
+                                onClick={onClick}
+                                onLogoutClick={logout}
+                                className="facebook-button"
+                            />
+                        )}
+                    />
+
                     <FaApple size={32} />
                     <FaXTwitter size={32} />
                 </div>
