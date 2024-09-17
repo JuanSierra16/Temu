@@ -1,9 +1,14 @@
 import { FaXTwitter, FaFacebook, FaApple } from 'react-icons/fa6';
+import { IoChevronBackSharp } from "react-icons/io5";
 import Select from '../../elements/Select';
 import { supportPrefixPhone } from '../../../utils/data';
 import { GoogleLogin } from '@react-oauth/google';
 import { useContext } from 'react';
 import { UserContext } from '../../../provider/UserContext';
+
+import { useState } from 'react';
+
+import Modal from '../../elements/Modal';
 
 const LoginForm = ({
     handleFormSubmit,
@@ -22,6 +27,16 @@ const LoginForm = ({
     loginError,
 }) => {
     const { loginGoogle, loginErrorPlatform } = useContext(UserContext);
+    const [showFirstModal, setShowFirstModal] = useState(false);
+    const [showisModalOpen, setShowIsModalOpen] = useState(false)
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
 
     return (
         <form onSubmit={handleFormSubmit}>
@@ -108,8 +123,45 @@ const LoginForm = ({
                     </button>
                 )}
             </>
+            <article
+                className="login-terms" onClick={() => setShowFirstModal(true)}>
+                <a href="#">¿Tienes problemas para iniciar sesión?</a>
+            </article>
 
-            <a href="#">¿Tienes problemas para iniciar sesión?</a>
+            <Modal show={showFirstModal} setShow={setShowFirstModal}>
+                <div className='modal-header'>
+                    <button className='back-buttom' onClick={() => setShowFirstModal(false)}>
+                        <IoChevronBackSharp size={24} />
+                    </button>
+                    <h3>¿Tienes problemas para iniciar sesión?</h3>
+                </div>
+                <div className='modal-body'>
+                    <p>
+                        Si registraste una cuenta con tu dirección de email, pero olvidaste
+                        tu contraseña, puedes restablecerla.
+                    </p>
+                    <button onClick={() => setShowIsModalOpen(true)}>Restablecer Contraseña</button>
+                    <p>
+                        Si olvidaste tu cuenta, puedes intentar encontrar tu cuenta por
+                        email, número de teléfono celular o número de pedido.
+                    </p>
+                    <button className='modal-buttom'>Encontrar cuenta</button>
+                </div>
+            </Modal>
+
+            <Modal show={showisModalOpen} setShow={setShowIsModalOpen}>
+                <h2>Olvide mi contraseña</h2>
+                <p>Ingresa tu dirección de email a continuación y te enviaremos un
+                    código de 6 dígitos para el restablecimiento de tu contraseña.
+                </p>
+                <input type="email" placeholder='Dirección de email' />
+                <button
+                    onClick={() => setShowIsModalOpen(false)}
+                    className='orange-button'>
+                    Enviar
+                </button>
+            </Modal>
+                    
 
             <div className="login-col login-with">
                 <div className="login-row">
