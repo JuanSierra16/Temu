@@ -142,6 +142,10 @@ export const loginWithPhoneNumber = async (req, res) => {
 
         res.status(200).send({
             message: 'Inicio de sesión exitoso',
+            user: {
+                id: user.id,
+                username: user.username,
+            },
             token: token // Devolver el token al frontend
         });
     } catch (error) {
