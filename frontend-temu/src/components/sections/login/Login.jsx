@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaTruckFast, FaLock } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-
+import { useNavigate } from 'react-router-dom';
 import { supportPrefixPhone } from '../../../utils/data';
 import { UserContext } from '../../../provider/UserContext';
 import LoginForm from './LoginForm';
@@ -19,6 +19,7 @@ const Login = ({ clear }) => {
     const [showPhoneCode, setShowPhoneCode] = useState(false);
 
     const { loginAction, waitLogin, loginError } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const { countryCode, prefix } = supportPrefixPhone[0];
@@ -92,6 +93,12 @@ const Login = ({ clear }) => {
         loginAction(email, password);
     };
 
+    const handleTermsRedirect = () => {
+        navigate('/terms-of-use');
+        {/*navigate('/privacy-policy');*/}
+    }
+
+
     return (
         <section className="login-container">
             {!showPhoneCode && (
@@ -147,8 +154,8 @@ const Login = ({ clear }) => {
 
                     <p className="terms">
                         Al continuar, aceptas nuestros{' '}
-                        <a href="#">Términos de uso</a> y{' '}
-                        <a href="#">Política de privacidad.</a>
+                        <a href="#" onClick={handleTermsRedirect}>Términos de uso</a> y{' '}
+                        <a href="#" onClick={handleTermsRedirect}>Política de privacidad</a>
                     </p>
                 </>
             )}
