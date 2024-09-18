@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaTruckFast, FaLock } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-
+import { useNavigate } from 'react-router-dom';
 import { supportPrefixPhone } from '../../../utils/data';
 import { UserContext } from '../../../provider/UserContext';
 import LoginForm from './LoginForm';
 import PhoneCode from './PhoneCode';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = ({ clear, setShowLoginProblem }) => {
@@ -19,6 +20,7 @@ const Login = ({ clear, setShowLoginProblem }) => {
     const [showPhoneCode, setShowPhoneCode] = useState(false);
 
     const { loginAction, waitLogin, loginError } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // por defecto el primer prefijo de la lista
@@ -150,8 +152,8 @@ const Login = ({ clear, setShowLoginProblem }) => {
 
                     <p className="terms">
                         Al continuar, aceptas nuestros{' '}
-                        <a href="#">Términos de uso</a> y{' '}
-                        <a href="#">Política de privacidad.</a>
+                        <Link to="/terms-of-use">Términos de uso</Link> y{' '}
+                        <Link to="/privacy-policy">Política de privacidad</Link>
                     </p>
                 </>
             )}
