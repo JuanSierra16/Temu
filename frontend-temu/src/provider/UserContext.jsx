@@ -24,7 +24,8 @@ const UserProvider = ({ children }) => {
     const [sessionJWT, setSessionJWT] = useState(null);
     const [verifyCode, setVerifyCode] = useState('');
     const [noHasProfile, setNoHasProfile] = useState(false);
-    const [sendCode, setSendCode] = useState(true);
+    const [sendCode, setSendCode] = useState(false);
+    const [equalCode, setEqualCode] = useState(false);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -136,6 +137,12 @@ const UserProvider = ({ children }) => {
             return;
         }
 
+        if (!equalCode && sendCode) {
+            setLoginError('El código no corresponde al enviado.');
+            setWaitLogin(false);
+            return;
+        }
+
         try {
             const data = await login(email, password);
             setUserData(data.user);
@@ -181,6 +188,19 @@ const UserProvider = ({ children }) => {
         window.location.reload();
     };
 
+    const verifyEmailCode = code => {
+        const val = code === verifyCode;
+        setEqualCode(val);
+
+        console.log(val, code, verifyCode);
+
+        if (!val) {
+            setLoginError('Error el código de verificación no coincide');
+        }
+
+        return val;
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -197,6 +217,7 @@ const UserProvider = ({ children }) => {
                 noHasProfile,
                 loginHasProfileAction,
                 sendCode,
+                verifyEmailCode,
             }}
         >
             {children}

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FaTruckFast, FaLock } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { supportPrefixPhone } from '../../../utils/data';
@@ -25,6 +25,7 @@ const Login = ({ clear, setShowLoginProblem }) => {
         loginError,
         loginHasProfileAction,
         sendCode,
+        verifyEmailCode,
     } = useContext(UserContext);
 
     useEffect(() => {
@@ -104,9 +105,18 @@ const Login = ({ clear, setShowLoginProblem }) => {
     };
 
     const [emailCode, setEmailCode] = useState('');
+    const emailCodeRef = useRef('');
 
     useEffect(() => {
-        console.log(emailCode);
+        emailCodeRef.current = emailCode;
+
+        if (emailCodeRef.current && emailCodeRef.current.length === 6) {
+            const equal = verifyEmailCode(emailCodeRef.current);
+
+            if (equal) {
+                loginAction(email, password);
+            }
+        }
     }, [emailCode]);
 
     return (
@@ -127,6 +137,8 @@ const Login = ({ clear, setShowLoginProblem }) => {
                         Si no has recibido el código, comprueba tus carpetas de
                         correo no deseado y papelera
                     </p>
+
+                    <p>{loginError}</p>
                 </div>
             )}
 

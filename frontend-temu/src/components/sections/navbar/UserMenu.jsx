@@ -85,8 +85,11 @@ const UserMenu = () => {
 
     useEffect(() => {
         if (userIsLogin) {
+            setShowModal(false);
             setShowLogin(false);
             setShowLoginProblem(false);
+            setShowLoginProblem(false);
+            setShowResetPassword(false);
         }
     }, [userIsLogin]);
 
