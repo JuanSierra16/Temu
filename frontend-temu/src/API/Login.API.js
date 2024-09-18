@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const API = axios.create({
     baseURL: 'http://localhost:3000',
+    // headers: {
+    //     'Content-Type': 'application/json',
+    //     Accept: 'application/json',
+    // },
 });
 
 export const login = async (email, password) => {
@@ -19,6 +23,22 @@ export const loginWithPlatform = async (
         id_usuario_plataforma,
         nombre_plataforma,
         username,
+        email,
+    });
+
+    return response.data;
+};
+
+export const loginHasProfile = async email => {
+    const response = await API.post('/users/login/has-profile', {
+        email,
+    });
+
+    return response.data;
+};
+
+export const loginSendEmailCode = async email => {
+    const response = await API.post('/users/send-verificaction-code', {
         email,
     });
 

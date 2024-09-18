@@ -1,5 +1,4 @@
 use bwpeie9ps3tadhnabxac;
-
 CREATE TABLE if not exists users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -8,7 +7,8 @@ CREATE TABLE if not exists users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     id_usuario_plataforma VARCHAR(255),
     nombre_plataforma VARCHAR(255),
-    phone_number VARCHAR(20)
+    phone_number VARCHAR(20),
+    is_verified BOOLEAN DEFAULT FALSE
 );
-
-select * from users;
+select *
+from users;

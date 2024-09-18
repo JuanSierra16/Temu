@@ -1,5 +1,10 @@
 import { createContext, useState, useEffect } from 'react';
-import { login, loginWithPlatform } from '../API/Login.API';
+import {
+    login,
+    loginWithPlatform,
+    loginSendEmailCode,
+    loginHasProfile,
+} from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { googleLogout } from '@react-oauth/google';
@@ -17,6 +22,9 @@ const UserProvider = ({ children }) => {
     const [userIsLogin, setUserIsLogin] = useState(false);
     const [waitLogin, setWaitLogin] = useState(false);
     const [sessionJWT, setSessionJWT] = useState(null);
+    const [verifyCode, setVerifyCode] = useState('');
+    const [noHasProfile, setNoHasProfile] = useState(false);
+    const [sendCode, setSendCode] = useState(true);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -91,8 +99,42 @@ const UserProvider = ({ children }) => {
         setLoginError('Error en el inicio de sesión');
     };
 
+    const loginHasProfileAction = async email => {
+        let hasProfile = null;
+
+        try {
+            const data = await loginHasProfile(email);
+            hasProfile = data.exists;
+            setNoHasProfile(!hasProfile);
+        } catch (error) {
+            setWaitLogin(false);
+            setLoginError('Error no se pudo verificar el perfil');
+        }
+    };
+
+    const loginSendEmailCodeAction = async email => {
+        if (noHasProfile) {
+            try {
+                const code = await loginSendEmailCode(email);
+                setVerifyCode(code.code);
+            } catch (error) {
+                setWaitLogin(false);
+                setLoginError('Error no se pudo enviar código de verificación');
+            }
+
+            setWaitLogin(false);
+        }
+    };
+
     const loginAction = async (email, password) => {
         setWaitLogin(true);
+
+        if (noHasProfile && !sendCode) {
+            loginSendEmailCodeAction(email);
+            setSendCode(true);
+            setWaitLogin(false);
+            return;
+        }
 
         try {
             const data = await login(email, password);
@@ -136,6 +178,7 @@ const UserProvider = ({ children }) => {
 
         setSessionJWT(null);
         setUserIsLogin(false);
+        window.location.reload();
     };
 
     return (
@@ -151,6 +194,9 @@ const UserProvider = ({ children }) => {
                 setLoginError,
                 userIsLogin,
                 waitLogin,
+                noHasProfile,
+                loginHasProfileAction,
+                sendCode,
             }}
         >
             {children}
