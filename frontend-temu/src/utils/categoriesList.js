@@ -54,7 +54,6 @@ export const categoriesList = [
             'Accesorios de baño',
             'Corte de cabello',
             'Herramientas de belleza',
-            'Cuidado del cabello',
             'Equipo de salón y masaje',
             'Cuidado de pies, manos y uñas',
             'Polvo de uñas',
@@ -226,7 +225,6 @@ export const categoriesList = [
     {
         name: 'Electrodomésticos',
         subcategories: [
-            'Cuidado del cabello',
             'Electrónicos para el cuidado bucal',
             'Exprimidores y procesadores de alimentos',
             'Calidad del aire',
@@ -300,7 +298,6 @@ export const categoriesList = [
             'Traje de baño Rash Guard para mujer',
             'Sujetadores y bralettes para mujer',
             'Accesorios deportivos para mujer',
-            'Cuidado del cabello',
             'Corsés y Bustiers para Mujer',
             'Sujetador deportivo para mujer',
             'Ropa moldeadora de hombre',

@@ -95,68 +95,73 @@ const BlackBar = () => {
                 <div className="bar-modal">
                     <h3>Especial para ti</h3>
 
-                    <div className="bar-details">
-                        <details>
-                            <summary>Devoluciones: 90 días</summary>
+                    {showSecondModal && (
+                        <div className="bar-details">
+                            <details>
+                                <summary>Devoluciones: 90 días</summary>
 
-                            <ul>
-                                <li>
-                                    El plazo de devolución para la mayoría de
-                                    los artículos es de 90 días. Todos los
-                                    artículos elegibles pueden devolverse en el
-                                    plazo de devolución en su estado original
-                                    para obtener un reembolso completo.
-                                </li>
+                                <ul>
+                                    <li>
+                                        El plazo de devolución para la mayoría
+                                        de los artículos es de 90 días. Todos
+                                        los artículos elegibles pueden
+                                        devolverse en el plazo de devolución en
+                                        su estado original para obtener un
+                                        reembolso completo.
+                                    </li>
 
-                                <li>
-                                    Después de enviar una solicitud de
-                                    devolución, eres responsable de cubrir los
-                                    costos de envío de devolución para devolver
-                                    los artículos tú mismo.
-                                </li>
-                            </ul>
-                        </details>
+                                    <li>
+                                        Después de enviar una solicitud de
+                                        devolución, eres responsable de cubrir
+                                        los costos de envío de devolución para
+                                        devolver los artículos tú mismo.
+                                    </li>
+                                </ul>
+                            </details>
 
-                        <details>
-                            <summary>Ajuste de precios</summary>
+                            <details>
+                                <summary>Ajuste de precios</summary>
 
-                            <ul>
-                                <li>
-                                    Los artículos comprados en Temu cumplen los
-                                    requisitos de nuestra Política de ajuste de
-                                    precios. Temu proporcionará la diferencia de
-                                    precio en la moneda en la que se pagó el
-                                    pedido si el precio de publicación del
-                                    artículo comprado se redujo en un plazo de
-                                    30 días después de la compra en el mismo
-                                    país o región. El envío de tu pedido no se
-                                    verá afectado por la solicitud de un ajuste
-                                    de precios antes de recibir el/los
-                                    producto(s). Puedes solicitar un reembolso
-                                    por ajuste de precios seleccionando el
-                                    pedido correspondiente en &quotTus
-                                    pedidos&quot y haciendo clic en el botón
-                                    &quotAjuste de precios&quot .
-                                </li>
+                                <ul>
+                                    <li>
+                                        Los artículos comprados en Temu cumplen
+                                        los requisitos de nuestra Política de
+                                        ajuste de precios. Temu proporcionará la
+                                        diferencia de precio en la moneda en la
+                                        que se pagó el pedido si el precio de
+                                        publicación del artículo comprado se
+                                        redujo en un plazo de 30 días después de
+                                        la compra en el mismo país o región. El
+                                        envío de tu pedido no se verá afectado
+                                        por la solicitud de un ajuste de precios
+                                        antes de recibir el/los producto(s).
+                                        Puedes solicitar un reembolso por ajuste
+                                        de precios seleccionando el pedido
+                                        correspondiente en &quotTus pedidos&quot
+                                        y haciendo clic en el botón &quotAjuste
+                                        de precios&quot .
+                                    </li>
 
-                                <li>
-                                    Es posible que los artículos que se
-                                    encuentran en liquidación, promociones o que
-                                    ya no estén disponibles, etc. no sean
-                                    elegibles para nuestra política de ajuste de
-                                    precios. Las tarifas, incluidas, entre
-                                    otras, las tarifas de envío, se excluirán de
-                                    cualquier cálculo de ajuste de precios. Temu
-                                    se reserva el derecho a la interpretación
-                                    final de nuestra Política de ajuste de
-                                    precios, el derecho a modificar los términos
-                                    de esta política en cualquier momento y el
-                                    derecho a denegar cualquier ajuste de
-                                    precios a nuestra entera discreción.
-                                </li>
-                            </ul>
-                        </details>
-                    </div>
+                                    <li>
+                                        Es posible que los artículos que se
+                                        encuentran en liquidación, promociones o
+                                        que ya no estén disponibles, etc. no
+                                        sean elegibles para nuestra política de
+                                        ajuste de precios. Las tarifas,
+                                        incluidas, entre otras, las tarifas de
+                                        envío, se excluirán de cualquier cálculo
+                                        de ajuste de precios. Temu se reserva el
+                                        derecho a la interpretación final de
+                                        nuestra Política de ajuste de precios,
+                                        el derecho a modificar los términos de
+                                        esta política en cualquier momento y el
+                                        derecho a denegar cualquier ajuste de
+                                        precios a nuestra entera discreción.
+                                    </li>
+                                </ul>
+                            </details>
+                        </div>
+                    )}
 
                     <button
                         onClick={() => setShowSecondModal(false)}

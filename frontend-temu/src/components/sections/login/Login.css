@@ -92,6 +92,15 @@
     text-align: center;
 }
 
+.facebook-button {
+    color: #3b5998;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
 hr {
     color: var(--gray-color);
     width: 25%;

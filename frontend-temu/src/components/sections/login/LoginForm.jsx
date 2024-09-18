@@ -3,8 +3,9 @@ import { IoChevronBackSharp } from "react-icons/io5";
 import Select from '../../elements/Select';
 import { supportPrefixPhone } from '../../../utils/data';
 import { GoogleLogin } from '@react-oauth/google';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../provider/UserContext';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 
 import { useState } from 'react';
 
@@ -26,9 +27,16 @@ const LoginForm = ({
     waitLogin,
     loginError,
 }) => {
-    const { loginGoogle, loginErrorPlatform } = useContext(UserContext);
+    const { loginGoogle, loginFacebook, loginErrorPlatform, setLoginError } =
+        useContext(UserContext);
+
     const [showFirstModal, setShowFirstModal] = useState(false);
     const [showisModalOpen, setShowIsModalOpen] = useState(false)
+    
+    useEffect(() => {
+        setLoginError(null);
+    }, [email, phone, setLoginError]);
+
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -179,7 +187,19 @@ const LoginForm = ({
                         shape="pill"
                     />
 
-                    <FaFacebook size={32} />
+                    <FacebookLogin
+                        appId={import.meta.env.VITE_FACEBOOK_APP_ID}
+                        onSuccess={loginFacebook}
+                        onFail={loginErrorPlatform}
+                        render={({ onClick }) => (
+                            <FaFacebook
+                                size={32}
+                                onClick={onClick}
+                                className="facebook-button"
+                            />
+                        )}
+                    />
+
                     <FaApple size={32} />
                     <FaXTwitter size={32} />
                 </div>

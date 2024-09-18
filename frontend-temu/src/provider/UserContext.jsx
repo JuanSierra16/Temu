@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { login, loginWithPlatform } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -30,16 +30,20 @@ const UserProvider = ({ children }) => {
         }
     }, []);
 
-    const loginGoogle = async credentialResponse => {
-        setWaitLogin(true);
-
-        const { credential } = credentialResponse;
-        const jwt = jwtDecode(credential);
-
-        const { sub, name, email } = jwt;
-
+    const loginPlatform = async (
+        id_usuario_plataforma,
+        nombre_plataforma,
+        username,
+        email,
+        errorMsg,
+    ) => {
         try {
-            const data = await loginWithPlatform(sub, 'Google', name, email);
+            const data = await loginWithPlatform(
+                id_usuario_plataforma,
+                'Google',
+                username,
+                email,
+            );
             setUserData(data.user);
             setUserIsLogin(true);
             setSessionJWT(data.token);
@@ -52,9 +56,33 @@ const UserProvider = ({ children }) => {
             );
         } catch (error) {
             console.log(error);
-            setLoginError('Error en el inicio de sesión con Google');
+            setLoginError(errorMsg);
             setUserIsLogin(false);
         }
+    };
+
+    const loginGoogle = async credentialResponse => {
+        setWaitLogin(true);
+
+        const { credential } = credentialResponse;
+        const jwt = jwtDecode(credential);
+        const { sub, name, email } = jwt;
+
+        loginPlatform(
+            sub,
+            'Google',
+            name,
+            email,
+            'Error en el inicio de sesión con Google',
+        );
+        setWaitLogin(false);
+    };
+
+    const loginFacebook = async response => {
+        setWaitLogin(true);
+
+        const { userID, email, name } = response;
+        loginPlatform(userID, 'Facebook', name, email);
 
         setWaitLogin(false);
     };
@@ -116,9 +144,11 @@ const UserProvider = ({ children }) => {
                 userData,
                 loginAction,
                 loginGoogle,
+                loginFacebook,
                 logoutAction,
                 loginErrorPlatform,
                 loginError,
+                setLoginError,
                 userIsLogin,
                 waitLogin,
             }}
