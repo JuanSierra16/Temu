@@ -9,6 +9,7 @@ import ProductPrev from '../components/elements/ProductPrev';
 import FlashDeals from '../components/sections/FlashDeals';
 import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
+import Footer from '../components/sections/Footer';
 
 const Home = () => {
     const firstSubs = categoriesList
@@ -86,6 +87,8 @@ const Home = () => {
                     ))}
                 </section>
             </article>
+
+            <Footer />
         </main>
     );
 };
