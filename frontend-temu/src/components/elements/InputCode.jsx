@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import './InputCode.css';
 
-const InputCode = ({ ready, setCode }) => {
+const InputCode = ({ setCode }) => {
     useEffect(() => {
+        console.log('InputCode mounted');
+
         // Elements
         const numberCodeForm = document.querySelector(
             '[data-number-code-form]',
@@ -33,11 +35,7 @@ const InputCode = ({ ready, setCode }) => {
                     numberCodeInputs[nextValueIndex].value = value;
                     let values = '';
 
-                    for (
-                        let i = nextValueIndex + 1;
-                        i < numberCodeInputs.length;
-                        i++
-                    ) {
+                    for (let i = 0; i < nextValueIndex; i++) {
                         values += String(numberCodeInputs[i].value);
                     }
 

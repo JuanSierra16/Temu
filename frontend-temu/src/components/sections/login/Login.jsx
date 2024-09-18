@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaTruckFast, FaLock } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
 import { supportPrefixPhone } from '../../../utils/data';
 import { UserContext } from '../../../provider/UserContext';
 import LoginForm from './LoginForm';
 import PhoneCode from './PhoneCode';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import InputCode from '../../elements/InputCode';
 
 const Login = ({ clear, setShowLoginProblem }) => {
     const [email, setEmail] = useState('');
@@ -19,8 +19,13 @@ const Login = ({ clear, setShowLoginProblem }) => {
     const [countryValue, setCountryValue] = useState('');
     const [showPhoneCode, setShowPhoneCode] = useState(false);
 
-    const { loginAction, waitLogin, loginError } = useContext(UserContext);
-    const navigate = useNavigate();
+    const {
+        loginAction,
+        waitLogin,
+        loginError,
+        loginHasProfileAction,
+        sendCode,
+    } = useContext(UserContext);
 
     useEffect(() => {
         // por defecto el primer prefijo de la lista
@@ -89,6 +94,8 @@ const Login = ({ clear, setShowLoginProblem }) => {
         if (isPhoneNumber) {
             setShowPhoneCode(true);
         }
+
+        loginHasProfileAction(email);
     };
 
     const handleFormSubmit = event => {
@@ -96,9 +103,34 @@ const Login = ({ clear, setShowLoginProblem }) => {
         loginAction(email, password);
     };
 
+    const [emailCode, setEmailCode] = useState('');
+
+    useEffect(() => {
+        console.log(emailCode);
+    }, [emailCode]);
+
     return (
         <section className="login-container">
-            {!showPhoneCode && (
+            {sendCode && (
+                <div className="login-verify">
+                    <h3>Completa el proceso de verificación</h3>
+
+                    <small>
+                        Enviamos un código a{' '}
+                        <span className="login-orange">{email}</span> Ingrésalo
+                        a continuacion
+                    </small>
+
+                    <InputCode setCode={setEmailCode} />
+
+                    <p>
+                        Si no has recibido el código, comprueba tus carpetas de
+                        correo no deseado y papelera
+                    </p>
+                </div>
+            )}
+
+            {!showPhoneCode && !sendCode && (
                 <>
                     <div className="login-title">
                         <h3>Inicias sesión/Registrarse</h3>
