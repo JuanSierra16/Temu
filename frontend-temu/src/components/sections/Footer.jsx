@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="sb__footer__section__padding max-width">
                 <div className="sb__footer-links">
                     <div className="sb__footer-links_div">
-                        <h4> Informcion de la empresa </h4>
+                        <h4> Información de la empresa </h4>
                         <a href="/A cerca de temu">
                             <p>A cerca de</p>
                         </a>

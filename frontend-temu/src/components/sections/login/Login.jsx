@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 import PhoneCode from './PhoneCode';
 import './Login.css';
 
-const Login = ({ clear }) => {
+const Login = ({ clear, setShowLoginProblem }) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [phonePrefix, setPhonePrefix] = useState('');
@@ -21,6 +21,7 @@ const Login = ({ clear }) => {
     const { loginAction, waitLogin, loginError } = useContext(UserContext);
 
     useEffect(() => {
+        // por defecto el primer prefijo de la lista
         const { countryCode, prefix } = supportPrefixPhone[0];
         setCountryValue(`${countryCode} ${prefix}`);
         setPhonePrefix(prefix);
@@ -69,6 +70,7 @@ const Login = ({ clear }) => {
     };
 
     const handleSelectChange = e => {
+        // Obtener el prefijo de la lista
         const { countryCode, prefix } = supportPrefixPhone.find(
             item => item.country == e.target.getAttribute('value'),
         );
@@ -142,6 +144,7 @@ const Login = ({ clear }) => {
                             handleContinue,
                             waitLogin,
                             loginError,
+                            setShowLoginProblem,
                         }}
                     />
 

@@ -1,10 +1,15 @@
 import { FaXTwitter, FaFacebook, FaApple } from 'react-icons/fa6';
+import { IoChevronBackSharp } from 'react-icons/io5';
 import Select from '../../elements/Select';
 import { supportPrefixPhone } from '../../../utils/data';
 import { GoogleLogin } from '@react-oauth/google';
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import FacebookLogin from '@greatsumini/react-facebook-login';
+
+import { useState } from 'react';
+
+import Modal from '../../elements/Modal';
 
 const LoginForm = ({
     handleFormSubmit,
@@ -21,9 +26,13 @@ const LoginForm = ({
     handleContinue,
     waitLogin,
     loginError,
+    setShowLoginProblem,
 }) => {
     const { loginGoogle, loginFacebook, loginErrorPlatform, setLoginError } =
         useContext(UserContext);
+
+    const [showProblemModal, setShowProblemModal] = useState(false);
+    const [showReserPasswordModal, setShowReserPasswordModal] = useState(false);
 
     useEffect(() => {
         setLoginError(null);
@@ -115,7 +124,19 @@ const LoginForm = ({
                 )}
             </>
 
-            <a href="#">¿Tienes problemas para iniciar sesión?</a>
+            <article
+                className="login-terms"
+                onClick={() => setShowProblemModal(true)}
+            >
+                <small
+                    className="login-small-link"
+                    onClick={() => {
+                        setShowLoginProblem(true);
+                    }}
+                >
+                    ¿Tienes problemas para iniciar sesión?
+                </small>
+            </article>
 
             <div className="login-col login-with">
                 <div className="login-row">

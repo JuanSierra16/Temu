@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './InputCode.css';
 
-const InputCode = () => {
+const InputCode = ({ ready, setCode }) => {
     useEffect(() => {
         // Elements
         const numberCodeForm = document.querySelector(
@@ -31,6 +31,17 @@ const InputCode = () => {
                     }
 
                     numberCodeInputs[nextValueIndex].value = value;
+                    let values = '';
+
+                    for (
+                        let i = nextValueIndex + 1;
+                        i < numberCodeInputs.length;
+                        i++
+                    ) {
+                        values += String(numberCodeInputs[i].value);
+                    }
+
+                    setCode(values);
                 });
 
                 currentIndex += inputValues.length - 2;
@@ -40,7 +51,11 @@ const InputCode = () => {
 
             if (nextIndex < numberCodeInputs.length) {
                 numberCodeInputs[nextIndex].focus();
+            } else {
+                setCode(target.value);
             }
+
+            console.log(target.value);
         };
 
         const handleKeyDown = e => {
@@ -83,7 +98,7 @@ const InputCode = () => {
         // Event listeners
         numberCodeForm.addEventListener('input', handleInput);
         numberCodeForm.addEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [setCode]);
 
     return (
         <div className="input-code-container">
