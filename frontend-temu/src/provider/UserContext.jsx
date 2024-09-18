@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useRef } from 'react';
 import {
     login,
     loginWithPlatform,
@@ -26,6 +26,7 @@ const UserProvider = ({ children }) => {
     const [noHasProfile, setNoHasProfile] = useState(false);
     const [sendCode, setSendCode] = useState(false);
     const [equalCode, setEqualCode] = useState(false);
+    const equalCodeRef = useRef(false);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -137,7 +138,7 @@ const UserProvider = ({ children }) => {
             return;
         }
 
-        if (!equalCode && sendCode) {
+        if (!equalCodeRef.current && sendCode) {
             setLoginError('El código no corresponde al enviado.');
             setWaitLogin(false);
             return;
@@ -190,6 +191,7 @@ const UserProvider = ({ children }) => {
 
     const verifyEmailCode = code => {
         const val = code === verifyCode;
+        equalCodeRef.current = val;
         setEqualCode(val);
 
         console.log(val, code, verifyCode);
