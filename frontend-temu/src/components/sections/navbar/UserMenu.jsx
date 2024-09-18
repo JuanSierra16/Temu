@@ -10,10 +10,12 @@ import {
 } from 'react-icons/ai';
 
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import Modal from '../../elements/Modal';
 import Login from '../login/Login';
+import LoginProblem from '../login/LoginProblem';
+import ResetPassword from '../login/ResetPassword';
 
 const UserMenu = () => {
     const submenu = [
@@ -74,20 +76,69 @@ const UserMenu = () => {
         },
     ];
 
+    const [showModal, setShowModal] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const [showLoginProblem, setShowLoginProblem] = useState(false);
+    const [showResetPassword, setShowResetPassword] = useState(false);
+
     const { userData, userIsLogin, logoutAction } = useContext(UserContext);
 
     useEffect(() => {
         if (userIsLogin) {
             setShowLogin(false);
+            setShowLoginProblem(false);
         }
     }, [userIsLogin]);
+
+    useEffect(() => {
+        if (showModal) {
+            setShowLogin(true);
+            setShowLoginProblem(false);
+        }
+    }, [showModal]);
+
+    useEffect(() => {
+        if (showResetPassword) {
+            setShowLogin(false);
+            setShowLoginProblem(false);
+        }
+    }, [showResetPassword]);
+
+    const setBackRef = useRef(null);
+
+    useEffect(() => {
+        if (showLoginProblem) {
+            setBackRef.current = value => {
+                if (value) {
+                    setShowLogin(true);
+                    setShowLoginProblem(false);
+                    setShowResetPassword(false);
+                }
+            };
+
+            setShowLogin(false);
+        }
+    }, [showLoginProblem]);
+
+    useEffect(() => {
+        if (showLogin) {
+            setBackRef.current = null;
+
+            setShowLoginProblem(false);
+            setShowResetPassword(false);
+        }
+    }, [showLogin]);
 
     return (
         <>
             <li>
                 {!userIsLogin && (
-                    <div onClick={() => setShowLogin(true)}>
+                    <div
+                        onClick={() => {
+                            setShowModal(true);
+                            setShowLogin(true);
+                        }}
+                    >
                         <div className="navbar-hover navbar-login">
                             <FaRegUser size={20} />
 
@@ -147,8 +198,25 @@ const UserMenu = () => {
                 )}
             </li>
 
-            <Modal show={showLogin} setShow={setShowLogin}>
-                <Login clear={showLogin} />
+            <Modal
+                show={showModal}
+                setShow={setShowModal}
+                setBack={setBackRef.current}
+            >
+                {showLogin && (
+                    <Login
+                        clear={showLogin}
+                        setShowLoginProblem={setShowLoginProblem}
+                    />
+                )}
+
+                {showLoginProblem && (
+                    <LoginProblem setShowResetPassword={setShowResetPassword} />
+                )}
+
+                {showResetPassword && (
+                    <ResetPassword setShowLogin={setShowLogin} />
+                )}
             </Modal>
         </>
     );

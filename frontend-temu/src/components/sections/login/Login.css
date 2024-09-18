@@ -170,6 +170,47 @@ hr {
     font-size: 14px;
 }
 
+.login-small-link {
+    border-bottom: 1px solid var(--dark-color);
+    cursor: pointer;
+}
+
+.login-problem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    width: 100%;
+    padding: 1em 2em;
+    max-width: 480px;
+}
+
+.login-problem h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.login-problem button {
+    width: 100%;
+}
+
+.login-reset-password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    width: 100%;
+    padding: 1em 2em;
+    max-width: 480px;
+}
+
+.login-reset-password input {
+    width: 100%;
+}
+
 @media screen and (max-width: 500px) {
     .login-container {
         width: 100%;

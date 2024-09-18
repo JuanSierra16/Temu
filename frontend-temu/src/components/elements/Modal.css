@@ -36,8 +36,13 @@
     right: 0;
     top: 0;
     z-index: 1000;
+}
+
+.modal-back {
+    position: unset;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .modal-close-icon {

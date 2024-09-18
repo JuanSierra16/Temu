@@ -154,25 +154,6 @@ export const loginWithPhoneNumber = async (req, res) => {
     }
 };
 
-// Controlador para verificar si un email existe en la base de datos
-export const hasProfile = async (req, res) => {
-    const { email } = req.body;
-
-    try {
-        // Verificar si el email ya existe en la base de datos
-        const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-
-        if (rows.length === 0) {
-            res.status(200).send({ exists: false });
-        } else {
-            res.status(200).send({ exists: true });
-        }
-    } catch (error) {
-        console.error('Error al verificar el email:', error);
-        return res.status(500).json({ message: error.message });
-    }
-};
-
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const username = email.split('@')[0];
@@ -188,10 +169,6 @@ export const loginUser = async (req, res) => {
 
             const [insertResult] = await pool.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, passwordHashed]);
 
-            // Obtener todos los datos del usuario recién creado
-            const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [insertResult.insertId]);
-            const newUser = userRows[0];
-
             // Generar el token JWT
             const token = jwt.sign({ id: insertResult.insertId, username, email }, SECRET_KEY, { expiresIn: '1h' });
 
@@ -201,11 +178,6 @@ export const loginUser = async (req, res) => {
                     id: insertResult.insertId,
                     username: username,
                     email,
-                    id_usuario_plataforma: newUser.id_usuario_plataforma,
-                    nombre_plataforma: newUser.nombre_plataforma,
-                    phone_number: newUser.phone_number,
-                    is_verified: newUser.is_verified,
-                    created_at: newUser.created_at
                 },
                 token: token, // Devolver el token al front-end
             });
@@ -230,11 +202,6 @@ export const loginUser = async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                id_usuario_plataforma: user.id_usuario_plataforma,
-                nombre_plataforma: user.nombre_plataforma,
-                phone_number: user.phone_number,
-                is_verified: user.is_verified,
-                created_at: user.created_at
             },
             token: token, // Devolver el token al front-end
         });
@@ -285,11 +252,6 @@ export const loginUserPlatform = async (req, res) => {
                 nombre_plataforma: user.nombre_plataforma,
                 username: user.username,
                 email: user.email,
-                id_usuario_plataforma: user.id_usuario_plataforma,
-                nombre_plataforma: user.nombre_plataforma,
-                phone_number: user.phone_number,
-                is_verified: user.is_verified,
-                created_at: user.created_at
             },
             token: token, // Devolver el token al front-end
         });

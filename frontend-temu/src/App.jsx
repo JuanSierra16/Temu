@@ -1,28 +1,26 @@
-import MainContent from './components/sections/MainContent';
-import Footer from './components/sections/Footer';
-import NavBar from './components/sections/navbar/NavBar';
-import BlackBar from './components/sections/BlackBar';
-import TermsofUse from './components/sections/TermsofUse';
-import PrivacyPolicy from './components/sections/PrivacyPolicy';
 import { Routes } from 'react-router-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import TermsOfUse from './pages/TermsofUse';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
     return (
-        <Router>
+        <BrowserRouter>
             <Routes>
-                <Route path='/terms-of-use' element={<TermsofUse />} />
-                <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-                <Route path='/' element={
-                    <>
-                        <BlackBar />
-                        <NavBar />
-                        <MainContent />
-                        <Footer />
-                    </>
-                } />
-            </Routes>    
-        </Router>
+                <Route path="/" element={<Home />}>
+                    <Route index element={<Home />} />
+                </Route>
+
+                <Route path="/terms-of-use" element={<TermsOfUse />}>
+                    <Route index element={<TermsOfUse />} />
+                </Route>
+
+                <Route path="/privacy-policy" element={<PrivacyPolicy />}>
+                    <Route index element={<PrivacyPolicy />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 

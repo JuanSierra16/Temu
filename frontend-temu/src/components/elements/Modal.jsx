@@ -1,9 +1,10 @@
 import { IoClose } from 'react-icons/io5';
+import { IoChevronBackSharp } from 'react-icons/io5';
 
 import './Modal.css';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const Modal = ({ show, setShow, children, className }) => {
+const Modal = ({ show, setShow, children, className, setBack }) => {
     const modalRef = useRef(null);
     const closeRef = useRef(null);
 
@@ -15,6 +16,10 @@ const Modal = ({ show, setShow, children, className }) => {
         }
     };
 
+    useEffect(() => {
+        console.log(setBack);
+    }, [setBack]);
+
     return (
         <div className={`modal ${show ? 'open' : ''}`}>
             <div
@@ -22,7 +27,22 @@ const Modal = ({ show, setShow, children, className }) => {
                 onScroll={handleAddScrollClass}
                 ref={modalRef}
             >
-                <div className="modal-close" ref={closeRef}>
+                <div
+                    className={`modal-close ${setBack ? 'modal-back' : ''}`}
+                    ref={closeRef}
+                >
+                    {setBack && (
+                        <IoChevronBackSharp
+                            className="modal-close-icon"
+                            size={24}
+                            onClick={() => {
+                                if (setBack) {
+                                    setBack(true);
+                                }
+                            }}
+                        />
+                    )}
+
                     <IoClose
                         size={32}
                         onClick={() => setShow(false)}

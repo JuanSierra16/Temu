@@ -6,9 +6,10 @@ import { supportPrefixPhone } from '../../../utils/data';
 import { UserContext } from '../../../provider/UserContext';
 import LoginForm from './LoginForm';
 import PhoneCode from './PhoneCode';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
-const Login = ({ clear }) => {
+const Login = ({ clear, setShowLoginProblem }) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [phonePrefix, setPhonePrefix] = useState('');
@@ -22,6 +23,7 @@ const Login = ({ clear }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // por defecto el primer prefijo de la lista
         const { countryCode, prefix } = supportPrefixPhone[0];
         setCountryValue(`${countryCode} ${prefix}`);
         setPhonePrefix(prefix);
@@ -70,6 +72,7 @@ const Login = ({ clear }) => {
     };
 
     const handleSelectChange = e => {
+        // Obtener el prefijo de la lista
         const { countryCode, prefix } = supportPrefixPhone.find(
             item => item.country == e.target.getAttribute('value'),
         );
@@ -92,12 +95,6 @@ const Login = ({ clear }) => {
         event.preventDefault();
         loginAction(email, password);
     };
-
-    const handleTermsRedirect = () => {
-        navigate('/terms-of-use');
-        {/*navigate('/privacy-policy');*/}
-    }
-
 
     return (
         <section className="login-container">
@@ -149,13 +146,14 @@ const Login = ({ clear }) => {
                             handleContinue,
                             waitLogin,
                             loginError,
+                            setShowLoginProblem,
                         }}
                     />
 
                     <p className="terms">
                         Al continuar, aceptas nuestros{' '}
-                        <a href="#" onClick={handleTermsRedirect}>Términos de uso</a> y{' '}
-                        <a href="#" onClick={handleTermsRedirect}>Política de privacidad</a>
+                        <Link to="/terms-of-use">Términos de uso</Link> y{' '}
+                        <Link to="/privacy-policy">Política de privacidad</Link>
                     </p>
                 </>
             )}

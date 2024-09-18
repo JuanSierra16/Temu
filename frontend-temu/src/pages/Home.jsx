@@ -1,14 +1,16 @@
 // src/components/MainContent.jsx
-import Slider from '../elements/Slider';
-import { categoriesList } from '../../utils/categoriesList';
-import Compromise from './Compromise';
+import Slider from '../components/elements/Slider';
+import { categoriesList } from '../utils/categoriesList';
+import Compromise from '../components/sections/Compromise';
 
-import { products } from '../../utils/products';
-import './MainContent.css';
-import ProductPrev from '../elements/ProductPrev';
-import FlashDeals from './FlashDeals';
+import { products } from '../utils/products';
+import './Home.css';
+import ProductPrev from '../components/elements/ProductPrev';
+import FlashDeals from '../components/sections/FlashDeals';
+import BlackBar from '../components/sections/BlackBar';
+import NavBar from '../components/sections/navbar/NavBar';
 
-const MainContent = () => {
+const Home = () => {
     const firstSubs = categoriesList
         .map(category => {
             return { name: category.name, sub: category.subcategories[0] };
@@ -17,8 +19,10 @@ const MainContent = () => {
 
     return (
         <main>
-            <article className="main-content">
+            <BlackBar />
+            <NavBar />
 
+            <article className="main-content">
                 <section className="small-category-container">
                     <Slider>
                         <div className="small-category">
@@ -86,4 +90,4 @@ const MainContent = () => {
     );
 };
 
-export default MainContent;
+export default Home;

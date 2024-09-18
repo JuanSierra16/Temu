@@ -8,8 +8,7 @@ CREATE TABLE if not exists users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     id_usuario_plataforma VARCHAR(255),
     nombre_plataforma VARCHAR(255),
-    phone_number VARCHAR(20),
-    is_verified BOOLEAN DEFAULT FALSE
+    phone_number VARCHAR(20)
 );
 
 select * from users;
