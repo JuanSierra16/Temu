@@ -154,6 +154,25 @@ export const loginWithPhoneNumber = async (req, res) => {
     }
 };
 
+// Controlador para verificar si un email existe en la base de datos
+export const hasProfile = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        // Verificar si el email ya existe en la base de datos
+        const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+
+        if (rows.length === 0) {
+            res.status(200).send({ exists: false });
+        } else {
+            res.status(200).send({ exists: true });
+        }
+    } catch (error) {
+        console.error('Error al verificar el email:', error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const username = email.split('@')[0];
