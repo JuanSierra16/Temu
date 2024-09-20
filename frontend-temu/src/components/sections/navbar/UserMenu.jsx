@@ -80,6 +80,7 @@ const UserMenu = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showLoginProblem, setShowLoginProblem] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
+    const setBackRef = useRef(null);
 
     const { userData, userIsLogin, logoutAction } = useContext(UserContext);
 
@@ -106,8 +107,6 @@ const UserMenu = () => {
             setShowLoginProblem(false);
         }
     }, [showResetPassword]);
-
-    const setBackRef = useRef(null);
 
     useEffect(() => {
         if (showLoginProblem) {
@@ -207,10 +206,7 @@ const UserMenu = () => {
                 setBack={setBackRef.current}
             >
                 {showLogin && (
-                    <Login
-                        clear={showLogin}
-                        setShowLoginProblem={setShowLoginProblem}
-                    />
+                    <Login setShowLoginProblem={setShowLoginProblem} />
                 )}
 
                 {showLoginProblem && (

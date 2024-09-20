@@ -3,7 +3,7 @@ import Footer from '../components/sections/Footer';
 const TermsOfUse = () => {
     return (
         <main>
-            <div>
+            <article>
                 <h2>Temu | Politica de privacidad</h2>
                 <p>
                     <b>Índice</b>
@@ -229,7 +229,7 @@ const TermsOfUse = () => {
                     tiempo. Para saber cómo desactivar determinadas cookies, lea
                     nuestra <u>Política de cookies y tecnologías similares.</u>
                 </p>
-            </div>
+            </article>
 
             <Footer />
         </main>

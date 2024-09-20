@@ -101,7 +101,7 @@
     cursor: pointer;
 }
 
-hr {
+.h-line {
     color: var(--gray-color);
     width: 25%;
 }
@@ -151,7 +151,6 @@ hr {
     color: red;
 }
 
-/* Estilos generales del form */
 .login-input-container {
     margin-bottom: 20px;
 }

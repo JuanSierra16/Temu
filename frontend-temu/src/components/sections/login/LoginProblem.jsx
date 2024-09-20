@@ -10,7 +10,7 @@ const LoginProblem = ({ setShowResetPassword }) => {
                 olvidaste tu contraseña, puedes , puedes restablecerla.
             </p>
 
-            <button onClick={() => setShowResetPassword(true)} className="">
+            <button onClick={() => setShowResetPassword(true)}>
                 Restablecer Contraseña
             </button>
 
@@ -19,7 +19,7 @@ const LoginProblem = ({ setShowResetPassword }) => {
                 email, número de teléfono celular o número de pedido.
             </p>
 
-            <button className="modal-buttom">Encontrar cuenta</button>
+            <button>Encontrar cuenta</button>
         </section>
     );
 };
