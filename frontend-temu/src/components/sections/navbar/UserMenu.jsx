@@ -205,7 +205,7 @@ const UserMenu = () => {
                 setShow={setShowModal}
                 setBack={setBackRef.current}
             >
-                {showLogin && (
+                {showLogin && showModal && (
                     <Login setShowLoginProblem={setShowLoginProblem} />
                 )}
 
