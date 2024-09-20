@@ -11,12 +11,20 @@ import { googleLogout } from '@react-oauth/google';
 
 const UserContext = createContext(null);
 
+const userDataInit = {
+    id: '',
+    username: '',
+    email: '',
+    password: '',
+    created_at: '',
+    id_usuario_plataforma: '',
+    nombre_plataforma: '',
+    phone_number: '',
+    is_verified: '',
+};
+
 const UserProvider = ({ children }) => {
-    const [userData, setUserData] = useState({
-        id: '',
-        username: '',
-        email: '',
-    });
+    const [userData, setUserData] = useState(userDataInit);
 
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
@@ -50,7 +58,7 @@ const UserProvider = ({ children }) => {
         try {
             const data = await loginWithPlatform(
                 id_usuario_plataforma,
-                'Google',
+                nombre_plataforma,
                 username,
                 email,
             );
@@ -68,6 +76,7 @@ const UserProvider = ({ children }) => {
             console.log(error);
             setLoginError(errorMsg);
             setUserIsLogin(false);
+            setUserData(userDataInit);
         }
     };
 
@@ -102,11 +111,9 @@ const UserProvider = ({ children }) => {
     };
 
     const loginHasProfileAction = async email => {
-        let hasProfile = null;
-
         try {
             const data = await loginHasProfile(email);
-            hasProfile = data.exists;
+            const hasProfile = data.exists;
             setNoHasProfile(!hasProfile);
         } catch (error) {
             setWaitLogin(false);
@@ -131,6 +138,7 @@ const UserProvider = ({ children }) => {
     const loginAction = async (email, password) => {
         setWaitLogin(true);
 
+        // comprobar si tiene perfil, si no tiene envia código de verificación
         if (noHasProfile && !sendCode) {
             loginSendEmailCodeAction(email);
             setSendCode(true);
@@ -138,6 +146,7 @@ const UserProvider = ({ children }) => {
             return;
         }
 
+        // comprobar si el codigo enviado es valido
         if (!equalCodeRef.current && sendCode) {
             setLoginError('El código no corresponde al enviado.');
             setWaitLogin(false);
@@ -160,12 +169,7 @@ const UserProvider = ({ children }) => {
             console.log(error);
             setLoginError('Credenciales incorrectas');
             setUserIsLogin(false);
-
-            setUserData({
-                id: '',
-                username: '',
-                email: '',
-            });
+            setUserData(userDataInit);
         }
 
         setWaitLogin(false);
@@ -190,17 +194,15 @@ const UserProvider = ({ children }) => {
     };
 
     const verifyEmailCode = code => {
-        const val = code === verifyCode;
-        equalCodeRef.current = val;
-        setEqualCode(val);
+        const isEqual = code === verifyCode;
+        equalCodeRef.current = isEqual;
+        setEqualCode(isEqual);
 
-        console.log(val, code, verifyCode);
-
-        if (!val) {
+        if (!isEqual) {
             setLoginError('Error el código de verificación no coincide');
         }
 
-        return val;
+        return isEqual;
     };
 
     return (
