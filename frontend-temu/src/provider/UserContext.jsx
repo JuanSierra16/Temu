@@ -44,6 +44,10 @@ const UserProvider = ({ children }) => {
     const [passwordCode, setPasswordCode] = useState('');
     const [equalPasswordCode, setEqualPasswordCode] = useState(false);
 
+    // phone code
+    const [phoneCodeSent, setPhoneCodeSent] = useState(false);
+    const [phoneCode, setPhoneCode] = useState('');
+
     useEffect(() => {
         const cookieValue = Cookies.get('token');
 
@@ -124,12 +128,13 @@ const UserProvider = ({ children }) => {
             const hasProfile = data.exists;
             setNoHasProfile(!hasProfile);
         } catch (error) {
-            setWaitLogin(false);
             setLoginError('La cuenta no existe.');
         }
     };
 
     const loginSendEmailCodeAction = async email => {
+        setWaitLogin(true);
+
         if (noHasProfile) {
             try {
                 const code = await loginSendEmailCode(email);
@@ -138,9 +143,9 @@ const UserProvider = ({ children }) => {
                 setWaitLogin(false);
                 setLoginError('Error no se pudo enviar código de verificación');
             }
-
-            setWaitLogin(false);
         }
+
+        setWaitLogin(false);
     };
 
     const loginAction = async (email, password) => {
@@ -208,6 +213,8 @@ const UserProvider = ({ children }) => {
     };
 
     const sendPasswordCode = async email => {
+        setWaitLogin(true);
+
         try {
             const code = await loginSendEmailCode(email);
             setPasswordCode(code.code);
@@ -217,6 +224,8 @@ const UserProvider = ({ children }) => {
                 'Error no se pudo enviar código de verificación para cambiar la contrasenya',
             );
         }
+
+        setWaitLogin(false);
     };
 
     const isEqualPasswordCode = code => {
@@ -233,6 +242,8 @@ const UserProvider = ({ children }) => {
     };
 
     const resetPassword = async (email, newPassword) => {
+        setWaitLogin(true);
+
         if (!equalPasswordCode && passwordCodeSent) {
             setLoginError('Error el código de verificación no coincide');
             return;
@@ -253,6 +264,8 @@ const UserProvider = ({ children }) => {
             console.error(error);
             setLoginError('Error no se pudo cambiar la contraseña');
         }
+
+        setWaitLogin(false);
     };
 
     return (
