@@ -25,6 +25,7 @@ const LoginForm = ({
     waitLogin,
     loginError,
     setShowLoginProblem,
+    setForgotPassword,
 }) => {
     const { loginGoogle, loginFacebook, loginErrorPlatform, setLoginError } =
         useContext(UserContext);
@@ -124,9 +125,15 @@ const LoginForm = ({
                                 autoFocus
                             />
 
-                            <a href="#" className="login-forgot">
-                                ¿Has olvidado tu contraseña?
-                            </a>
+                            <div className="login-forgot">
+                                <small
+                                    className="login-forgot"
+                                    onClick={() => setForgotPassword(true)}
+                                >
+                                    {' '}
+                                    ¿Has olvidado tu contraseña?
+                                </small>
+                            </div>
 
                             {loginError && (
                                 <p className="login-error">{loginError}</p>

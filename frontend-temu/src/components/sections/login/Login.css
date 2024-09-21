@@ -136,8 +136,11 @@
 
 .login-forgot {
     display: block;
-    width: 100%;
+}
+
+.login-forgot small {
     text-align: end;
+    cursor: pointer;
 }
 
 .login-input-container {

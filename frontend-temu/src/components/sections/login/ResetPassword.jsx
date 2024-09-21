@@ -2,8 +2,8 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import InputCode from '../../elements/InputCode';
 
-const ResetPassword = () => {
-    const [email, setEmail] = useState('');
+const ResetPassword = ({ initialEmail = '' }) => {
+    const [email, setEmail] = useState(initialEmail);
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
     const codeRef = useRef('');
