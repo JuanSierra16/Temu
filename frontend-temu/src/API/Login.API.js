@@ -2,10 +2,6 @@ import axios from 'axios';
 
 const API = axios.create({
     baseURL: 'http://localhost:3000',
-    // headers: {
-    //     'Content-Type': 'application/json',
-    //     Accept: 'application/json',
-    // },
 });
 
 export const login = async (email, password) => {
@@ -40,6 +36,15 @@ export const loginHasProfile = async email => {
 export const loginSendEmailCode = async email => {
     const response = await API.post('/users/send-verificaction-code', {
         email,
+    });
+
+    return response.data;
+};
+
+export const loginResetPassword = async (email, newPassword) => {
+    const response = await API.post('/users/update-password', {
+        email,
+        newPassword,
     });
 
     return response.data;

@@ -29,7 +29,7 @@ const Login = ({ setShowLoginProblem }) => {
         waitLogin,
         loginError,
         loginHasProfileAction,
-        sendCode,
+        emailCodeSent,
         verifyEmailCode,
     } = useContext(UserContext);
 
@@ -109,7 +109,7 @@ const Login = ({ setShowLoginProblem }) => {
 
     return (
         <section className="login-container">
-            {!showPhoneCode && !sendCode && (
+            {!showPhoneCode && !emailCodeSent && (
                 <LoginForm
                     {...{
                         handleFormSubmit,
@@ -131,7 +131,7 @@ const Login = ({ setShowLoginProblem }) => {
                 />
             )}
 
-            {sendCode && (
+            {emailCodeSent && (
                 <LoginVerify email={email} setEmailCode={setEmailCode} />
             )}
 

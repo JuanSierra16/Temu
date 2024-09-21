@@ -115,7 +115,7 @@ const MobileNavBar = () => {
                                         <span>
                                             <FaRegUser size={20} />
                                         </span>
-                                        {userData.username}
+                                        {userData?.username}
                                     </a>
                                 )}
 
