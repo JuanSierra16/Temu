@@ -89,6 +89,7 @@ export const updatePassword = async (req, res) => {
     res.status(200).send({
       message: "Contraseña actualizada exitosamente",
       token: token, // Devolver el token al frontend
+      user: user,
     });
   } catch (error) {
     console.error("Error al actualizar la contraseña:", error);
