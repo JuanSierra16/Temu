@@ -5,6 +5,8 @@ import {
     loginSendEmailCode,
     loginHasProfile,
     loginResetPassword,
+    sendVerificationCodeSMS,
+    loginWithPhoneNumber,
 } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -47,6 +49,7 @@ const UserProvider = ({ children }) => {
     // phone code
     const [phoneCodeSent, setPhoneCodeSent] = useState(false);
     const [phoneCode, setPhoneCode] = useState('');
+    const [equalPhoneCode, setEqualPhoneCode] = useState(false);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -268,6 +271,45 @@ const UserProvider = ({ children }) => {
         setWaitLogin(false);
     };
 
+    const sendSMSCode = async phoneNumber => {
+        setWaitLogin(true);
+
+        try {
+            const code = await sendVerificationCodeSMS(phoneNumber);
+            setPhoneCode(code.code);
+            setPhoneCodeSent(true);
+        } catch (error) {
+            setLoginError('Error no se pudo enviar código de verificación');
+        }
+
+        setWaitLogin(false);
+    };
+
+    const loginWithPhone = async (code, phoneNumber) => {
+        setWaitLogin(true);
+
+        const isEqual = code === phoneCode;
+        setEqualPhoneCode(isEqual);
+
+        if (!isEqual) {
+            setLoginError('Error el código de verificación no coincide');
+        } else {
+            const data = await loginWithPhoneNumber(phoneNumber);
+            setUserData(data.user);
+            setUserIsLogin(true);
+            setSessionJWT(data.token);
+            setLoginError(null);
+
+            Cookies.set(
+                'token',
+                JSON.stringify({ user: data.user, token: data.token }),
+                { expires: 1 },
+            );
+        }
+
+        setWaitLogin(false);
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -290,6 +332,9 @@ const UserProvider = ({ children }) => {
                 resetPassword,
                 isEqualPasswordCode,
                 equalPasswordCode,
+                sendSMSCode,
+                loginWithPhone,
+                phoneCodeSent,
             }}
         >
             {children}
