@@ -80,6 +80,7 @@ const UserMenu = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showLoginProblem, setShowLoginProblem] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
+    const setBackRef = useRef(null);
 
     const { userData, userIsLogin, logoutAction } = useContext(UserContext);
 
@@ -106,8 +107,6 @@ const UserMenu = () => {
             setShowLoginProblem(false);
         }
     }, [showResetPassword]);
-
-    const setBackRef = useRef(null);
 
     useEffect(() => {
         if (showLoginProblem) {
@@ -161,7 +160,7 @@ const UserMenu = () => {
                             <FaRegUser size={20} />
 
                             <div className="navbar-login-text">
-                                <small>Hola {userData.username}</small>
+                                <small>Hola {userData?.username}</small>
                                 <small>
                                     <strong>Pedidos y cuenta</strong>
                                 </small>
@@ -206,11 +205,8 @@ const UserMenu = () => {
                 setShow={setShowModal}
                 setBack={setBackRef.current}
             >
-                {showLogin && (
-                    <Login
-                        clear={showLogin}
-                        setShowLoginProblem={setShowLoginProblem}
-                    />
+                {showLogin && showModal && (
+                    <Login setShowLoginProblem={setShowLoginProblem} />
                 )}
 
                 {showLoginProblem && (
