@@ -3,6 +3,8 @@ import { FaChevronRight } from 'react-icons/fa6';
 import { BsLock } from 'react-icons/bs';
 import { CiCreditCard2 } from 'react-icons/ci';
 import { CiDeliveryTruck } from 'react-icons/ci';
+import { FaBell } from "react-icons/fa";
+
 
 import './Compromise.css';
 
