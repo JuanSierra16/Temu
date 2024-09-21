@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const LoginProblem = ({ setShowResetPassword }) => {
     return (
         <section className="login-problem">
@@ -19,7 +21,11 @@ const LoginProblem = ({ setShowResetPassword }) => {
                 email, número de teléfono celular o número de pedido.
             </p>
 
-            <button>Encontrar cuenta</button>
+            <button>
+                <Link to="/find-account" style={{ color: '#000' }}>
+                    Encontrar cuenta
+                </Link>
+            </button>
         </section>
     );
 };

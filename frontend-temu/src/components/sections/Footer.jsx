@@ -5,10 +5,28 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { FaTiktok } from 'react-icons/fa';
 import { FaYoutube } from 'react-icons/fa';
 import { FaPinterest } from 'react-icons/fa';
+import { useEffect, useRef } from 'react';
 
 const Footer = () => {
+    const footer = useRef(null);
+
+    useEffect(() => {
+        if (footer.current) {
+            const footerPosition = footer.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (footerPosition.bottom < windowHeight) {
+                footer.current.style.position = 'fixed';
+                footer.current.style.bottom = '0';
+            } else {
+                footer.current.style.position = 'unset';
+                footer.current.style.bottom = 'unset';
+            }
+        }
+    }, []);
+
     return (
-        <footer className="Footer">
+        <footer className="Footer" ref={footer}>
             <div className="sb__footer__section__padding max-width">
                 <div className="sb__footer-links">
                     <div className="sb__footer-links_div">

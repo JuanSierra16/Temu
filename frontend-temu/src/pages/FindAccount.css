@@ -1,0 +1,31 @@
+.find-account {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.find-account-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    gap: 1em;
+}
+
+.find-account-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    border: 1px solid var(--gray-color);
+    padding: 1em;
+    min-height: 80px;
+}
+
+.find-account-item:hover {
+    cursor: pointer;
+    background-color: var(--gray-color);
+}
+
+.find-account-item p {
+    font-weight: 500;
+}
