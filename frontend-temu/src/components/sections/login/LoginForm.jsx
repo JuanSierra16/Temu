@@ -203,8 +203,13 @@ const LoginForm = ({
 
             <p className="terms">
                 Al continuar, aceptas nuestros{' '}
-                <Link to="/terms-of-use">Términos de uso</Link> y{' '}
-                <Link to="/privacy-policy">Política de privacidad</Link>
+                <Link to="/terms-of-use" target="_blank">
+                    Términos de uso
+                </Link>{' '}
+                y{' '}
+                <Link to="/privacy-policy" target="_blank">
+                    Política de privacidad
+                </Link>
             </p>
         </>
     );
