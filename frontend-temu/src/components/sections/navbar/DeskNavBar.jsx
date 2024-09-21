@@ -130,6 +130,17 @@ const DeskNavBar = () => {
                                             onChange={() => {}}
                                         />
                                         <small>Espanol-ES</small>
+
+                                    </span>
+
+                                    <span>
+                                    <input
+                                            name="country-radio"
+                                            type="radio"
+                                            checked
+                                            onChange={() => {}}
+                                        />
+                                        <small>English-EN</small>
                                     </span>
 
                                     <hr />
@@ -146,6 +157,10 @@ const DeskNavBar = () => {
                                             Estas comprando en Temu Colombia
                                         </small>
                                     </span>
+
+                                    <button>
+                                        Cambiar país/región
+                                    </button>
                                 </div>
                             </SubMenu>
                         </MenuItem>

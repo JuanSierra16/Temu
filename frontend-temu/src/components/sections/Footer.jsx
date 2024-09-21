@@ -80,24 +80,28 @@ const Footer = () => {
                     <div className="sb__footer-links_div">
                         <h4>Conectar con Temu</h4>
                         <div className="SocialMedia">
-                            <p>
-                                <FaInstagram />
-                            </p>
-                            <p>
-                                <FaFacebook />
-                            </p>
-                            <p>
-                                <FaXTwitter />
-                            </p>
-                            <p>
-                                <FaTiktok />
-                            </p>
-                            <p>
-                                <FaYoutube />
-                            </p>
-                            <p>
-                                <FaPinterest />
-                            </p>
+                            <span>
+                                <p>
+                                    <FaInstagram  size={25}/>
+                                </p>
+                                <p>
+                                    <FaFacebook size={25}/>
+                                </p>
+                                <p>
+                                    <FaXTwitter size={25}/>
+                                </p>
+                            </span>
+                            <span>
+                                <p>
+                                    <FaTiktok size={25}/>
+                                </p>
+                                <p>
+                                    <FaYoutube size={25}/>
+                                </p>
+                                <p>
+                                    <FaPinterest size={25}/>
+                                </p>
+                            </span>
                         </div>
                     </div>
                 </div>
