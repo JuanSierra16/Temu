@@ -15,6 +15,7 @@ import Modal from '../../elements/Modal';
 import Categories from '../../elements/category/Categories';
 import './MobileNavBar.css';
 import Login from '../login/Login';
+import { Link } from 'react-router-dom';
 
 const MobileNavBar = () => {
     const submenuCol = [
@@ -72,7 +73,9 @@ const MobileNavBar = () => {
     return (
         <>
             <nav className="mobile-navbar">
-                <img src="/temu.svg" alt="" className="logo" />
+                <Link to="/">
+                    <img src="/temu.svg" alt="" className="logo" />
+                </Link>
 
                 <div className="mobile-navbar-search">
                     <span>

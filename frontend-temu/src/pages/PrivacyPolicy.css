@@ -1,37 +1,38 @@
-.privacy-container{
+.privacy-container {
     display: flex;
     flex-direction: column;
     gap: 1em;
     text-align: start;
     line-height: 2;
-    width: 100%;
+    width: 90%;
 }
 
-.privacy-container h2{
+.privacy-container h2 {
     text-align: center;
     margin-bottom: 1em;
 }
 
-.privacy-tittle{
+.privacy-tittle {
     text-align: center;
     font-size: 32px;
     margin-top: 50px;
 }
 
-.last-update{
+.last-update {
     margin-bottom: 80px;
     font-size: small;
 }
 
-.colored-underline{
-    text-decoration: color( 255, 60, 0);
+.colored-underline {
     color: rgb(255, 60, 0);
+    text-decoration: color(255, 60, 0);
+    -webkit-text-decoration: color(255, 60, 0);
 }
 
-.third-service-list{
+.third-service-list {
     padding-left: 20px;
 }
 
-.third-info{
+.third-info {
     margin-left: 20px;
 }

@@ -51,7 +51,7 @@ const Home = () => {
                 <FlashDeals />
 
                 <section className="categories-slider">
-                    <h5 className="max-width main-content-title">Categorias</h5>
+                    <h3 className="max-width main-content-title">Categorias</h3>
 
                     <Slider>
                         <div className="category-slider">
