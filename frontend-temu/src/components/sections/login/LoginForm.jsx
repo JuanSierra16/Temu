@@ -138,6 +138,7 @@ const LoginForm = ({
                         <button
                             className="orange-button"
                             onClick={handleContinue}
+                            disabled={waitLogin}
                         >
                             Continuar
                         </button>

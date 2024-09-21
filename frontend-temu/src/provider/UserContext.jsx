@@ -5,6 +5,8 @@ import {
     loginSendEmailCode,
     loginHasProfile,
     loginResetPassword,
+    sendVerificationCodeSMS,
+    loginWithPhoneNumber,
 } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -43,6 +45,11 @@ const UserProvider = ({ children }) => {
     const [passwordCodeSent, setPasswordCodeSent] = useState(false);
     const [passwordCode, setPasswordCode] = useState('');
     const [equalPasswordCode, setEqualPasswordCode] = useState(false);
+
+    // phone code
+    const [phoneCodeSent, setPhoneCodeSent] = useState(false);
+    const [phoneCode, setPhoneCode] = useState('');
+    const [equalPhoneCode, setEqualPhoneCode] = useState(false);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -124,12 +131,13 @@ const UserProvider = ({ children }) => {
             const hasProfile = data.exists;
             setNoHasProfile(!hasProfile);
         } catch (error) {
-            setWaitLogin(false);
             setLoginError('La cuenta no existe.');
         }
     };
 
     const loginSendEmailCodeAction = async email => {
+        setWaitLogin(true);
+
         if (noHasProfile) {
             try {
                 const code = await loginSendEmailCode(email);
@@ -138,9 +146,9 @@ const UserProvider = ({ children }) => {
                 setWaitLogin(false);
                 setLoginError('Error no se pudo enviar código de verificación');
             }
-
-            setWaitLogin(false);
         }
+
+        setWaitLogin(false);
     };
 
     const loginAction = async (email, password) => {
@@ -208,6 +216,8 @@ const UserProvider = ({ children }) => {
     };
 
     const sendPasswordCode = async email => {
+        setWaitLogin(true);
+
         try {
             const code = await loginSendEmailCode(email);
             setPasswordCode(code.code);
@@ -217,6 +227,8 @@ const UserProvider = ({ children }) => {
                 'Error no se pudo enviar código de verificación para cambiar la contrasenya',
             );
         }
+
+        setWaitLogin(false);
     };
 
     const isEqualPasswordCode = code => {
@@ -233,6 +245,8 @@ const UserProvider = ({ children }) => {
     };
 
     const resetPassword = async (email, newPassword) => {
+        setWaitLogin(true);
+
         if (!equalPasswordCode && passwordCodeSent) {
             setLoginError('Error el código de verificación no coincide');
             return;
@@ -253,6 +267,47 @@ const UserProvider = ({ children }) => {
             console.error(error);
             setLoginError('Error no se pudo cambiar la contraseña');
         }
+
+        setWaitLogin(false);
+    };
+
+    const sendSMSCode = async phoneNumber => {
+        setWaitLogin(true);
+
+        try {
+            const code = await sendVerificationCodeSMS(phoneNumber);
+            setPhoneCode(code.code);
+            setPhoneCodeSent(true);
+        } catch (error) {
+            setLoginError('Error no se pudo enviar código de verificación');
+        }
+
+        setWaitLogin(false);
+    };
+
+    const loginWithPhone = async (code, phoneNumber) => {
+        setWaitLogin(true);
+
+        const isEqual = code === phoneCode;
+        setEqualPhoneCode(isEqual);
+
+        if (!isEqual) {
+            setLoginError('Error el código de verificación no coincide');
+        } else {
+            const data = await loginWithPhoneNumber(phoneNumber);
+            setUserData(data.user);
+            setUserIsLogin(true);
+            setSessionJWT(data.token);
+            setLoginError(null);
+
+            Cookies.set(
+                'token',
+                JSON.stringify({ user: data.user, token: data.token }),
+                { expires: 1 },
+            );
+        }
+
+        setWaitLogin(false);
     };
 
     return (
@@ -277,6 +332,9 @@ const UserProvider = ({ children }) => {
                 resetPassword,
                 isEqualPasswordCode,
                 equalPasswordCode,
+                sendSMSCode,
+                loginWithPhone,
+                phoneCodeSent,
             }}
         >
             {children}

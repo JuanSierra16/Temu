@@ -31,6 +31,8 @@ const Login = ({ setShowLoginProblem }) => {
         loginHasProfileAction,
         emailCodeSent,
         verifyEmailCode,
+        sendSMSCode,
+        phoneCodeSent,
     } = useContext(UserContext);
 
     useEffect(() => {
@@ -83,15 +85,22 @@ const Login = ({ setShowLoginProblem }) => {
 
         if (validEmail) {
             loginHasProfileAction(email);
-        } else {
-            setShowPhoneCode(true);
         }
     };
+
+    useEffect(() => {
+        setShowPhoneCode(phoneCodeSent);
+    }, [phoneCodeSent]);
 
     const handleFormSubmit = event => {
         // login o enviar código de verificación al email
         event.preventDefault();
-        loginAction(email, password);
+
+        if (isPhoneNumber) {
+            sendSMSCode(phonePrefix + phone);
+        } else {
+            loginAction(email, password);
+        }
     };
 
     useEffect(() => {

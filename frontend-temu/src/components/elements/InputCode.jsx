@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './InputCode.css';
 
-const InputCode = ({ setCode }) => {
+const InputCode = ({ setCode, disabled = false }) => {
     // useEffect(() => {
     //     // Elements
     //     const numberCodeForm = document.querySelector(
@@ -160,6 +160,7 @@ const InputCode = ({ setCode }) => {
             <input
                 type="text"
                 maxLength={6}
+                disabled={disabled}
                 onChange={e => setCode(e.target.value)}
             />
         </div>

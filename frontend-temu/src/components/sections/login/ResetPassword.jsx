@@ -17,6 +17,7 @@ const ResetPassword = () => {
         noHasProfile,
         equalPasswordCode,
         loginError,
+        waitLogin,
     } = useContext(UserContext);
 
     const handleSendCode = () => {
@@ -64,12 +65,17 @@ const ResetPassword = () => {
                         <input
                             type="email"
                             placeholder="Dirección de email"
+                            disabled={waitLogin}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
                     </label>
 
-                    <button className="orange-button" onClick={handleSendCode}>
+                    <button
+                        className="orange-button"
+                        disabled={waitLogin}
+                        onClick={handleSendCode}
+                    >
                         Enviar
                     </button>
                 </>
@@ -115,6 +121,7 @@ const ResetPassword = () => {
                         Contraseña
                         <input
                             type="password"
+                            disabled={waitLogin}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                             placeholder="Ingresa una nueva contraseña"
@@ -128,6 +135,7 @@ const ResetPassword = () => {
 
                     <button
                         className="orange-button"
+                        disabled={waitLogin}
                         onClick={handleResetPassword}
                     >
                         Restablecer

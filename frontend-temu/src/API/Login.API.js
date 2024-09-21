@@ -49,3 +49,19 @@ export const loginResetPassword = async (email, newPassword) => {
 
     return response.data;
 };
+
+export const sendVerificationCodeSMS = async phoneNumber => {
+    const response = await API.post('/users/send-verification-code-sms', {
+        phoneNumber,
+    });
+
+    return response.data;
+};
+
+export const loginWithPhoneNumber = async phoneNumber => {
+    const response = await API.post('/users/login-with-phone', {
+        phoneNumber,
+    });
+
+    return response.data;
+};
