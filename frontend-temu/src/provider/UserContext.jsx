@@ -224,7 +224,7 @@ const UserProvider = ({ children }) => {
             setPasswordCodeSent(true);
         } catch (error) {
             setLoginError(
-                'Error no se pudo enviar código de verificación para cambiar la contrasenya',
+                'Error no se pudo enviar código de verificación para cambiar la contraseña',
             );
         }
 
