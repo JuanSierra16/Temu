@@ -78,6 +78,11 @@ const ResetPassword = () => {
                     >
                         Enviar
                     </button>
+
+                    <small style={{ color: 'red' }}>
+                        {noHasProfile ? 'No estas registrado' : ''}
+                        {loginError}
+                    </small>
                 </>
             )}
 
