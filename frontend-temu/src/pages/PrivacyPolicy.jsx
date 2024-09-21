@@ -68,6 +68,7 @@ const PrivacyPolicy = () => {
                         son los tipos de información personal que recopilamos:
                     </p>
 
+
                     <p>
                         <b>Información que usted proporciona</b>
                     </p>

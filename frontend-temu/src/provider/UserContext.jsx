@@ -4,6 +4,9 @@ import {
     loginWithPlatform,
     loginSendEmailCode,
     loginHasProfile,
+    loginResetPassword,
+    sendVerificationCodeSMS,
+    loginWithPhoneNumber,
 } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -11,22 +14,42 @@ import { googleLogout } from '@react-oauth/google';
 
 const UserContext = createContext(null);
 
-const UserProvider = ({ children }) => {
-    const [userData, setUserData] = useState({
-        id: '',
-        username: '',
-        email: '',
-    });
+const userDataInit = {
+    id: '',
+    username: '',
+    email: '',
+    password: '',
+    created_at: '',
+    id_usuario_plataforma: '',
+    nombre_plataforma: '',
+    phone_number: '',
+    is_verified: '',
+};
 
+const UserProvider = ({ children }) => {
+    const [userData, setUserData] = useState(userDataInit);
+
+    // login
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
     const [waitLogin, setWaitLogin] = useState(false);
     const [sessionJWT, setSessionJWT] = useState(null);
-    const [verifyCode, setVerifyCode] = useState('');
     const [noHasProfile, setNoHasProfile] = useState(false);
-    const [sendCode, setSendCode] = useState(false);
-    const [equalCode, setEqualCode] = useState(false);
-    const equalCodeRef = useRef(false);
+
+    // email código de verificación
+    const [emailCode, setVerifyCode] = useState('');
+    const [emailCodeSent, setEmailCodeSent] = useState(false);
+    const equalEmailCodeRef = useRef(false);
+
+    // reset password
+    const [passwordCodeSent, setPasswordCodeSent] = useState(false);
+    const [passwordCode, setPasswordCode] = useState('');
+    const [equalPasswordCode, setEqualPasswordCode] = useState(false);
+
+    // phone code
+    const [phoneCodeSent, setPhoneCodeSent] = useState(false);
+    const [phoneCode, setPhoneCode] = useState('');
+    const [equalPhoneCode, setEqualPhoneCode] = useState(false);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -50,7 +73,7 @@ const UserProvider = ({ children }) => {
         try {
             const data = await loginWithPlatform(
                 id_usuario_plataforma,
-                'Google',
+                nombre_plataforma,
                 username,
                 email,
             );
@@ -68,6 +91,7 @@ const UserProvider = ({ children }) => {
             console.log(error);
             setLoginError(errorMsg);
             setUserIsLogin(false);
+            setUserData(userDataInit);
         }
     };
 
@@ -102,19 +126,18 @@ const UserProvider = ({ children }) => {
     };
 
     const loginHasProfileAction = async email => {
-        let hasProfile = null;
-
         try {
             const data = await loginHasProfile(email);
-            hasProfile = data.exists;
+            const hasProfile = data.exists;
             setNoHasProfile(!hasProfile);
         } catch (error) {
-            setWaitLogin(false);
-            setLoginError('Error no se pudo verificar el perfil');
+            setLoginError('La cuenta no existe.');
         }
     };
 
     const loginSendEmailCodeAction = async email => {
+        setWaitLogin(true);
+
         if (noHasProfile) {
             try {
                 const code = await loginSendEmailCode(email);
@@ -123,22 +146,24 @@ const UserProvider = ({ children }) => {
                 setWaitLogin(false);
                 setLoginError('Error no se pudo enviar código de verificación');
             }
-
-            setWaitLogin(false);
         }
+
+        setWaitLogin(false);
     };
 
     const loginAction = async (email, password) => {
         setWaitLogin(true);
 
-        if (noHasProfile && !sendCode) {
+        // comprobar si tiene perfil, si no tiene envia código de verificación
+        if (noHasProfile && !emailCodeSent) {
             loginSendEmailCodeAction(email);
-            setSendCode(true);
+            setEmailCodeSent(true);
             setWaitLogin(false);
             return;
         }
 
-        if (!equalCodeRef.current && sendCode) {
+        // comprobar si el codigo enviado es valido
+        if (!equalEmailCodeRef.current && emailCodeSent) {
             setLoginError('El código no corresponde al enviado.');
             setWaitLogin(false);
             return;
@@ -160,12 +185,7 @@ const UserProvider = ({ children }) => {
             console.log(error);
             setLoginError('Credenciales incorrectas');
             setUserIsLogin(false);
-
-            setUserData({
-                id: '',
-                username: '',
-                email: '',
-            });
+            setUserData(userDataInit);
         }
 
         setWaitLogin(false);
@@ -178,29 +198,116 @@ const UserProvider = ({ children }) => {
             googleLogout();
         }
 
-        setUserData({
-            id: '',
-            username: '',
-            email: '',
-        });
-
+        setUserData(userDataInit);
         setSessionJWT(null);
         setUserIsLogin(false);
         window.location.reload();
     };
 
     const verifyEmailCode = code => {
-        const val = code === verifyCode;
-        equalCodeRef.current = val;
-        setEqualCode(val);
+        const isEqual = code === emailCode;
+        equalEmailCodeRef.current = isEqual;
 
-        console.log(val, code, verifyCode);
-
-        if (!val) {
+        if (!isEqual) {
             setLoginError('Error el código de verificación no coincide');
         }
 
-        return val;
+        return isEqual;
+    };
+
+    const sendPasswordCode = async email => {
+        setWaitLogin(true);
+
+        try {
+            const code = await loginSendEmailCode(email);
+            setPasswordCode(code.code);
+            setPasswordCodeSent(true);
+        } catch (error) {
+            setLoginError(
+                'Error no se pudo enviar código de verificación para cambiar la contrasenya',
+            );
+        }
+
+        setWaitLogin(false);
+    };
+
+    const isEqualPasswordCode = code => {
+        const isEqual = code === passwordCode;
+        setEqualPasswordCode(isEqual);
+
+        if (!isEqual) {
+            setLoginError('Error el código de verificación no coincide');
+        } else {
+            setLoginError(null);
+        }
+
+        return isEqual;
+    };
+
+    const resetPassword = async (email, newPassword) => {
+        setWaitLogin(true);
+
+        if (!equalPasswordCode && passwordCodeSent) {
+            setLoginError('Error el código de verificación no coincide');
+            return;
+        }
+
+        try {
+            const data = await loginResetPassword(email, newPassword);
+            setUserData(data.user);
+            setUserIsLogin(true);
+            setSessionJWT(data.token);
+
+            Cookies.set(
+                'token',
+                JSON.stringify({ user: data.user, token: data.token }),
+                { expires: 1 },
+            );
+        } catch (error) {
+            console.error(error);
+            setLoginError('Error no se pudo cambiar la contraseña');
+        }
+
+        setWaitLogin(false);
+    };
+
+    const sendSMSCode = async phoneNumber => {
+        setWaitLogin(true);
+
+        try {
+            const code = await sendVerificationCodeSMS(phoneNumber);
+            setPhoneCode(code.code);
+            setPhoneCodeSent(true);
+        } catch (error) {
+            setLoginError('Error no se pudo enviar código de verificación');
+        }
+
+        setWaitLogin(false);
+    };
+
+    const loginWithPhone = async (code, phoneNumber) => {
+        setWaitLogin(true);
+
+        const isEqual = code === phoneCode;
+        setEqualPhoneCode(isEqual);
+
+        if (!isEqual) {
+            setLoginError('Error el código de verificación no coincide');
+        } else {
+            const data = await loginWithPhoneNumber(phoneNumber);
+            setUserData(data.user);
+            setUserIsLogin(true);
+            setSessionJWT(data.token);
+            setLoginError(null);
+
+            Cookies.set(
+                'token',
+                JSON.stringify({ user: data.user, token: data.token }),
+                { expires: 1 },
+            );
+        }
+
+        setWaitLogin(false);
     };
 
     return (
@@ -218,8 +325,16 @@ const UserProvider = ({ children }) => {
                 waitLogin,
                 noHasProfile,
                 loginHasProfileAction,
-                sendCode,
+                emailCodeSent,
                 verifyEmailCode,
+                passwordCodeSent,
+                sendPasswordCode,
+                resetPassword,
+                isEqualPasswordCode,
+                equalPasswordCode,
+                sendSMSCode,
+                loginWithPhone,
+                phoneCodeSent,
             }}
         >
             {children}
