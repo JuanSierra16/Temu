@@ -3,6 +3,8 @@
     flex-direction: column;
     gap: 1em;
     text-align: start;
+    line-height: 1.7;
+    width: 100%;
 }
 
 .terms-container h2 {
@@ -10,7 +12,44 @@
     margin-bottom: 1em;
 }
 
-.terms-container p,
+.terms-title{
+    text-align: center;
+    font-size: 32px;
+    margin-top: 50px;
+}
+
+.intro{
+    font-size: 15px;
+    margin: 10px 0;
+    line-height: 1.7;
+}
+
+.lista-servicios{
+    padding-left: 20px;
+}
+
+.sub-lista{
+    padding-left: 30px;
+}
+
+.lista-acceso{
+    padding-left: 20px;
+}
+
+.colored-underline{
+    text-decoration: color( 255, 60, 0);
+    color: rgb(255, 60, 0);
+}
+
+.last-update{
+    font-size: small;
+    text-align: center;
+}
+
+.colored-bold {
+    color: rgb(99, 96, 96); /* Puedes cambiar el color a cualquier valor que desees */
+}
+/* .terms-container p,
 .terms-container b {
     font-size: small;
-}
+}*/
