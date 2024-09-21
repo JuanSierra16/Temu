@@ -98,28 +98,39 @@ const Footer = () => {
                     <div className="sb__footer-links_div">
                         <h4>Conectar con Temu</h4>
                         <div className="SocialMedia">
-                            <span>
+                            
                                 <p>
-                                    <FaInstagram  size={25}/>
+                                    <a href='https://www.instagram.com/temu/' target='_blank'>
+                                        <FaInstagram size={25} />
+                                    </a>
                                 </p>
                                 <p>
-                                    <FaFacebook size={25}/>
+                                    <a href='https://www.facebook.com/shoptemu/' target='_blank'>
+                                        <FaFacebook size={25}/>
+                                    </a>
                                 </p>
                                 <p>
-                                    <FaXTwitter size={25}/>
+                                    <a href='https://x.com/shoptemu' target='_blank'>
+                                        <FaXTwitter size={25} />
+                                    </a>
                                 </p>
-                            </span>
-                            <span>
+                            
                                 <p>
-                                    <FaTiktok size={25}/>
+                                    <a href='https://www.tiktok.com/@temu' target='_blank'>
+                                        <FaTiktok size={25}/>
+                                    </a>
                                 </p>
                                 <p>
-                                    <FaYoutube size={25}/>
+                                    <a href='https://www.youtube.com/@temu' target='_blank'>
+                                        <FaYoutube size={25}/>
+                                    </a>
                                 </p>
                                 <p>
-                                    <FaPinterest size={25}/>
+                                    <a href='https://co.pinterest.com/shoptemu/' target='_blank'>
+                                        <FaPinterest size={25}/>
+                                    </a>
                                 </p>
-                            </span>
+                            
                         </div>
                     </div>
                 </div>
