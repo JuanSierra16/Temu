@@ -350,3 +350,52 @@ export const loginUserPlatform = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+
+// Controlador para encontrar una cuenta por email
+export const findAccountByEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+      // Buscar el usuario en la base de datos por email
+      const [rows] = await pool.query('SELECT id, username, email, id_usuario_plataforma, nombre_plataforma, phone_number, is_verified, created_at FROM users WHERE email = ?', [email]);
+
+      if (rows.length === 0) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      const user = rows[0];
+
+      res.status(200).send({
+          message: 'Usuario encontrado',
+          user: user
+      });
+  } catch (error) {
+      console.error('Error al buscar el usuario por email:', error);
+      return res.status(500).json({ message: error.message });
+  }
+};
+
+// Controlador para encontrar una cuenta por teléfono
+export const findAccountByPhoneNumber = async (req, res) => {
+  const { phoneNumber } = req.body;
+
+  try {
+      // Buscar el usuario en la base de datos por número de teléfono
+      const [rows] = await pool.query('SELECT id, username, email, id_usuario_plataforma, nombre_plataforma, phone_number, is_verified, created_at FROM users WHERE phone_number = ?', [phoneNumber]);
+
+      if (rows.length === 0) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      const user = rows[0];
+
+      res.status(200).send({
+          message: 'Usuario encontrado',
+          user: user
+      });
+  } catch (error) {
+      console.error('Error al buscar el usuario por número de teléfono:', error);
+      return res.status(500).json({ message: error.message });
+  }
+};
