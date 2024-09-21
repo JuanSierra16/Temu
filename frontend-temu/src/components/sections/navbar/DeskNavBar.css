@@ -142,11 +142,15 @@
 
 .login-sub-menu a,
 .help-sub-menu a {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    color: var(--dark-color) !important;
-    gap: 1em !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--dark-color);
+    gap: 1em;
+}
+
+.login-sub-menu a {
+    padding: 0.5em 0.5em !important;
 }
 
 .login-sub-menu a:hover,

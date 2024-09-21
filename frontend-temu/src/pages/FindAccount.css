@@ -3,11 +3,13 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+    width: 90%;
+    min-height: 36vh;
 }
 
 .find-account-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 1em;
 }
 
@@ -28,4 +30,10 @@
 
 .find-account-item p {
     font-weight: 500;
+}
+
+@media screen and (max-width: 850px) {
+    .find-account-grid {
+        grid-template-columns: 1fr;
+    }
 }
