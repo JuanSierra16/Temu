@@ -200,13 +200,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5em;
+    gap: 1em;
     width: 100%;
     padding: 1em 2em;
     max-width: 480px;
 }
 
-.login-reset-password input {
+.login-reset-password p,
+.login-reset-password h2 {
+    text-align: center;
+}
+
+.login-reset-password label,
+.login-reset-password small {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
     width: 100%;
 }
 

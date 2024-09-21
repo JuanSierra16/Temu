@@ -4,6 +4,7 @@ import {
     loginWithPlatform,
     loginSendEmailCode,
     loginHasProfile,
+    loginResetPassword,
 } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -26,15 +27,22 @@ const userDataInit = {
 const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState(userDataInit);
 
+    // login
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
     const [waitLogin, setWaitLogin] = useState(false);
     const [sessionJWT, setSessionJWT] = useState(null);
-    const [verifyCode, setVerifyCode] = useState('');
     const [noHasProfile, setNoHasProfile] = useState(false);
-    const [sendCode, setSendCode] = useState(false);
-    const [equalCode, setEqualCode] = useState(false);
-    const equalCodeRef = useRef(false);
+
+    // email código de verificación
+    const [emailCode, setVerifyCode] = useState('');
+    const [emailCodeSent, setEmailCodeSent] = useState(false);
+    const equalEmailCodeRef = useRef(false);
+
+    // reset password
+    const [passwordCodeSent, setPasswordCodeSent] = useState(false);
+    const [passwordCode, setPasswordCode] = useState('');
+    const [equalPasswordCode, setEqualPasswordCode] = useState(false);
 
     useEffect(() => {
         const cookieValue = Cookies.get('token');
@@ -117,7 +125,7 @@ const UserProvider = ({ children }) => {
             setNoHasProfile(!hasProfile);
         } catch (error) {
             setWaitLogin(false);
-            setLoginError('Error no se pudo verificar el perfil');
+            setLoginError('La cuenta no existe.');
         }
     };
 
@@ -139,15 +147,15 @@ const UserProvider = ({ children }) => {
         setWaitLogin(true);
 
         // comprobar si tiene perfil, si no tiene envia código de verificación
-        if (noHasProfile && !sendCode) {
+        if (noHasProfile && !emailCodeSent) {
             loginSendEmailCodeAction(email);
-            setSendCode(true);
+            setEmailCodeSent(true);
             setWaitLogin(false);
             return;
         }
 
         // comprobar si el codigo enviado es valido
-        if (!equalCodeRef.current && sendCode) {
+        if (!equalEmailCodeRef.current && emailCodeSent) {
             setLoginError('El código no corresponde al enviado.');
             setWaitLogin(false);
             return;
@@ -182,27 +190,69 @@ const UserProvider = ({ children }) => {
             googleLogout();
         }
 
-        setUserData({
-            id: '',
-            username: '',
-            email: '',
-        });
-
+        setUserData(userDataInit);
         setSessionJWT(null);
         setUserIsLogin(false);
         window.location.reload();
     };
 
     const verifyEmailCode = code => {
-        const isEqual = code === verifyCode;
-        equalCodeRef.current = isEqual;
-        setEqualCode(isEqual);
+        const isEqual = code === emailCode;
+        equalEmailCodeRef.current = isEqual;
 
         if (!isEqual) {
             setLoginError('Error el código de verificación no coincide');
         }
 
         return isEqual;
+    };
+
+    const sendPasswordCode = async email => {
+        try {
+            const code = await loginSendEmailCode(email);
+            setPasswordCode(code.code);
+            setPasswordCodeSent(true);
+        } catch (error) {
+            setLoginError(
+                'Error no se pudo enviar código de verificación para cambiar la contrasenya',
+            );
+        }
+    };
+
+    const isEqualPasswordCode = code => {
+        const isEqual = code === passwordCode;
+        setEqualPasswordCode(isEqual);
+
+        if (!isEqual) {
+            setLoginError('Error el código de verificación no coincide');
+        } else {
+            setLoginError(null);
+        }
+
+        return isEqual;
+    };
+
+    const resetPassword = async (email, newPassword) => {
+        if (!equalPasswordCode && passwordCodeSent) {
+            setLoginError('Error el código de verificación no coincide');
+            return;
+        }
+
+        try {
+            const data = await loginResetPassword(email, newPassword);
+            setUserData(data.user);
+            setUserIsLogin(true);
+            setSessionJWT(data.token);
+
+            Cookies.set(
+                'token',
+                JSON.stringify({ user: data.user, token: data.token }),
+                { expires: 1 },
+            );
+        } catch (error) {
+            console.error(error);
+            setLoginError('Error no se pudo cambiar la contraseña');
+        }
     };
 
     return (
@@ -220,8 +270,13 @@ const UserProvider = ({ children }) => {
                 waitLogin,
                 noHasProfile,
                 loginHasProfileAction,
-                sendCode,
+                emailCodeSent,
                 verifyEmailCode,
+                passwordCodeSent,
+                sendPasswordCode,
+                resetPassword,
+                isEqualPasswordCode,
+                equalPasswordCode,
             }}
         >
             {children}
