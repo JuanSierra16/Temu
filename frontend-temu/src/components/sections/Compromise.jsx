@@ -52,6 +52,16 @@ const Compromise = () => {
                         </a>
                     </div>
                 </div>
+
+                
+            </div>
+            <div className='compromise-message'>
+                <a href="" className="compromise-item-message">
+                        <FaBell size={24} className="compromise-icon" />
+                        Ten cuidado con los mensajes sobre problemas de entrega
+                        debido a una dirección incompleta que afirman ser del
+                        Servicio Postal de Colombia (4-72)
+                </a>
             </div>
         </section>
     );
