@@ -5,11 +5,14 @@ import ResetPassword from '../login/ResetPassword';
 
 import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
+import { MdOutlineAssignmentReturn } from 'react-icons/md';
+import { FaTruckFast } from 'react-icons/fa6';
 
 const ModalLogin = ({ showModal, setShowModal }) => {
     const [showLogin, setShowLogin] = useState(false);
     const [showLoginProblem, setShowLoginProblem] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
+    const [confirmCloseModal, setConfirmCloseModal] = useState(false);
     const setBackRef = useRef(null);
 
     const { userIsLogin } = useContext(UserContext);
@@ -61,22 +64,84 @@ const ModalLogin = ({ showModal, setShowModal }) => {
         }
     }, [showLogin]);
 
+    const handleCloseModal = value => {
+        if (!value && showLogin && showModal) {
+            setConfirmCloseModal(true);
+        } else {
+            setShowModal(false);
+        }
+    };
+
     return (
-        <Modal
-            show={showModal}
-            setShow={setShowModal}
-            setBack={setBackRef.current}
-        >
-            {showLogin && showModal && (
-                <Login setShowLoginProblem={setShowLoginProblem} />
-            )}
+        <>
+            <Modal
+                show={showModal}
+                setShow={handleCloseModal}
+                setBack={setBackRef.current}
+            >
+                {showLogin && showModal && (
+                    <Login setShowLoginProblem={setShowLoginProblem} />
+                )}
 
-            {showLoginProblem && (
-                <LoginProblem setShowResetPassword={setShowResetPassword} />
-            )}
+                {showLoginProblem && (
+                    <LoginProblem setShowResetPassword={setShowResetPassword} />
+                )}
 
-            {showResetPassword && <ResetPassword setShowLogin={setShowLogin} />}
-        </Modal>
+                {showResetPassword && (
+                    <ResetPassword setShowLogin={setShowLogin} />
+                )}
+            </Modal>
+
+            <Modal show={confirmCloseModal} setShow={setConfirmCloseModal}>
+                <div className="login-col login-confirm-close">
+                    <p>
+                        <strong>
+                            ¡Disfruta de ofertas especiales después de iniciar
+                            sesión! ¿Estás seguro de que deseas salir?
+                        </strong>
+                    </p>
+
+                    <div className="login-row">
+                        <div className="login-col">
+                            <FaTruckFast size={42} className="icon" />
+                            <p>
+                                <strong>Envío gratis</strong>
+                            </p>
+                            <small>En todos los pedidos</small>
+                        </div>
+
+                        <div className="login-col">
+                            <MdOutlineAssignmentReturn
+                                size={42}
+                                className="icon"
+                            />
+                            <p>
+                                <strong>Devoluciones: 90 días</strong>
+                            </p>
+                            <small>Desde la fecha de compra</small>
+                        </div>
+                    </div>
+
+                    <div className="login-row">
+                        <button
+                            onClick={() => {
+                                setShowModal(false);
+                                setConfirmCloseModal(false);
+                            }}
+                        >
+                            Salir
+                        </button>
+
+                        <button
+                            onClick={() => setConfirmCloseModal(false)}
+                            className="orange-button"
+                        >
+                            Continuar
+                        </button>
+                    </div>
+                </div>
+            </Modal>
+        </>
     );
 };
 

@@ -88,10 +88,7 @@ const ResetPassword = ({ initialEmail = '' }) => {
 
             {passwordCodeSent && !equalPasswordCode && (
                 <>
-                    <h2>
-                        Ingresa el código el código de restablecimiento de
-                        contraseña
-                    </h2>
+                    <h2>Ingresa el código de restablecimiento de contraseña</h2>
 
                     <p>
                         ¡Verifica tu buzón de entrada! Ingresa el código de 6
