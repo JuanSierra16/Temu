@@ -123,17 +123,17 @@ const Footer = () => {
                         <h5>Descarga la app de Temu</h5>
 
                         <div className="footer-icon-text">
-                            <FaTruckFast size={32} />
+                            <FaTruckFast size={24} />
                             <p>Rastrea pedidos en todo momento</p>
                         </div>
 
                         <div className="footer-icon-text">
-                            <GiSandsOfTime size={32} />
+                            <GiSandsOfTime size={24} />
                             <p>Alertas de articulos con poco stock</p>
                         </div>
 
                         <div className="footer-icon-text">
-                            <MdDiscount size={32} />
+                            <MdDiscount size={24} />
                             <p>Alerta de cupones y ofertas</p>
                         </div>
 

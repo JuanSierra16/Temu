@@ -7,8 +7,8 @@
 }
 
 .product-prev img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 200px;
     -o-object-fit: cover;
     object-fit: cover;
     -o-object-position: center;

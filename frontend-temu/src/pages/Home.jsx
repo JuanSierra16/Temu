@@ -1,10 +1,8 @@
-// src/components/MainContent.jsx
+import './Home.css';
 import Slider from '../components/elements/Slider';
 import { categoriesList } from '../utils/categoriesList';
 import Compromise from '../components/sections/Compromise';
-
 import { products } from '../utils/products';
-import './Home.css';
 import ProductPrev from '../components/elements/ProductPrev';
 import FlashDeals from '../components/sections/FlashDeals';
 import BlackBar from '../components/sections/BlackBar';
@@ -23,35 +21,42 @@ const Home = () => {
             <BlackBar />
             <NavBar />
 
-            <article className="main-content">
-                <section className="small-category-container">
-                    <Slider>
-                        <div className="small-category">
-                            {categoriesList.map(category => (
-                                <small key={category.name}>
-                                    {category.name}
-                                </small>
-                            ))}
-                        </div>
-                    </Slider>
-                </section>
-
-                <section className="banner-background">
-                    <div className="max-width banner-container">
-                        <img
-                            src="/themes/Amor y Amistad/banner.png"
-                            alt=""
-                            className="banner"
-                        />
+            <section className="small-category-container">
+                <Slider>
+                    <div className="small-category">
+                        {categoriesList.map(category => (
+                            <small key={category.name}>{category.name}</small>
+                        ))}
                     </div>
+                </Slider>
+            </section>
+
+            <article className="main-content">
+                <section className="main-header">
+                    <div className="banner-background">
+                        <div className="max-width banner-container">
+                            <img
+                                src="/themes/Amor y Amistad/banner.png"
+                                alt=""
+                                className="banner"
+                            />
+                        </div>
+                    </div>
+
+                    <Compromise />
+                    <FlashDeals />
                 </section>
-
-                <Compromise />
-
-                <FlashDeals />
 
                 <section className="categories-slider">
-                    <h3 className="max-width main-content-title">Categorias</h3>
+                    <div className="max-width">
+                        <div className="img-title">
+                            <img
+                                src="/themes/Amor y Amistad/title.png"
+                                alt=""
+                            />
+                            <h2 className="max-width">Categorias</h2>
+                        </div>
+                    </div>
 
                     <Slider>
                         <div className="category-slider">
@@ -72,19 +77,26 @@ const Home = () => {
                     </Slider>
                 </section>
 
-                <div className="max-width">
-                    <div className="img-title">
-                        <img src="/themes/Amor y Amistad/title.png" alt="" />
-                        <h2>Explora Tus Intereses</h2>
+                <section className="categories-slider">
+                    <div className="max-width">
+                        <div className="img-title">
+                            <img
+                                src="/themes/Amor y Amistad/title.png"
+                                alt=""
+                            />
+                            <h2>PROVEEDORES RECOMENDADOS</h2>
+                        </div>
                     </div>
-                </div>
 
-                <section className="max-width categories-products">
-                    {products.map(product => (
-                        <span key={product.title}>
-                            <ProductPrev product={product} />
-                        </span>
-                    ))}
+                    <Slider>
+                        <div className="product-slider">
+                            {products.map(product => (
+                                <span key={product.title}>
+                                    <ProductPrev product={product} />
+                                </span>
+                            ))}
+                        </div>
+                    </Slider>
                 </section>
             </article>
 

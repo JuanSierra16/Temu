@@ -1,8 +1,18 @@
 .flash-deals-section {
     width: 100%;
+}
+
+.flash-deals-container {
+    margin: auto;
     display: flex;
     flex-direction: column;
     gap: 1em;
+    width: 95%;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .flash-deals-header {
@@ -19,6 +29,10 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+}
+
+.flash-deals-link {
+    display: none;
 }
 
 .flash-deal-item {
@@ -82,5 +96,17 @@
     .product-image {
         width: 100%;
         height: 200px;
+    }
+
+    .flash-deals-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .flash-deals-container {
+        width: 100%;
     }
 }
