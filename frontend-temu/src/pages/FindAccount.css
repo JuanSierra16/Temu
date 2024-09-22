@@ -1,10 +1,10 @@
 .find-account {
-    margin-top: 1em;
+    padding: 2em 0;
     display: flex;
     flex-direction: column;
     gap: 1em;
     width: 90%;
-    min-height: 36vh;
+    min-height: 40vh;
 }
 
 .find-account-grid {
