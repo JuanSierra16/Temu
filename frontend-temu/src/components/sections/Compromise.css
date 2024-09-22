@@ -62,6 +62,15 @@
     display: none;
 }
 
+.compromise-item-message{
+    color: green;
+}
+
+.compromise-message{
+    margin-top: 5px;
+    border: 1px solid green;
+}
+
 @-webkit-keyframes compromise-links {
     0% {
         transform: translateY(0%);
