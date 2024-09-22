@@ -1,5 +1,7 @@
-import './FlashDeals.css';
+import { FaAngleRight } from 'react-icons/fa';
 import Slider from '../elements/Slider';
+
+import './FlashDeals.css';
 
 const FlashDeals = () => {
     const products = [
@@ -78,38 +80,36 @@ const FlashDeals = () => {
     ];
 
     return (
-        <section className="flash-deals-section">
+        <section className="flash-deals-section max-width">
             <div className="flash-deals-header">
-                <h2 className="flash-deals-title">⚡ Ofertas relámpago ⚡</h2>
+                <h2>⚡ Ofertas relámpago ⚡</h2>
+                <p>Por tiempo limitado</p>
+                <FaAngleRight />
             </div>
 
-            <div className="flash-deals-container">
-                <Slider>
-                    <div className="flash-deals-banner">
-                        {products.map(product => (
-                            <div key={product.id} className="flash-deal-item">
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="product-image"
-                                />
-                                <p className="product-name">{product.name}</p>
-                                <p className="product-price">
-                                    <span className="current-price">
-                                        ${product.price}
-                                    </span>
-                                    <span className="old-price">
-                                        ${product.oldPrice}
-                                    </span>
-                                    <span className="discount">
-                                        -{product.discount}
-                                    </span>
-                                </p>
-                            </div>
-                        ))}
+            <Slider>
+                {products.map(product => (
+                    <div key={product.id} className="flash-deal-item">
+                        <img
+                            src={product.image}
+                            alt={product.name}
+                            className="product-image"
+                        />
+                        <p className="product-name">{product.name}</p>
+                        <p className="product-price">
+                            <span className="current-price">
+                                ${product.price}
+                            </span>
+                            <span className="old-price">
+                                ${product.oldPrice}
+                            </span>
+                            <span className="discount">
+                                -{product.discount}
+                            </span>
+                        </p>
                     </div>
-                </Slider>
-            </div>
+                ))}
+            </Slider>
         </section>
     );
 };

@@ -1,4 +1,4 @@
-import './Footer.css';
+import { FaApple } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebook } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -6,6 +6,8 @@ import { FaTiktok } from 'react-icons/fa';
 import { FaYoutube } from 'react-icons/fa';
 import { FaPinterest } from 'react-icons/fa';
 import { useEffect, useRef } from 'react';
+
+import './Footer.css';
 
 const Footer = () => {
     const footer = useRef(null);
@@ -25,144 +27,177 @@ const Footer = () => {
         }
     }, []);
 
+    const companyInfo = [
+        { name: 'Acerca de Temu', path: '#' },
+        { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
+        { name: 'Afililado e influencer: gana comisiones', path: '#' },
+        { name: 'Contáctanos', path: '#' },
+        { name: 'Carreras profesionales', path: '#' },
+        { name: 'Prensa', path: '#' },
+        { name: 'Programa de plantación de árboles Temu', path: '#' },
+    ];
+
+    const client = [
+        { name: 'Política de devolución y reembolso', path: '#' },
+        { name: 'Política de propiedad intelectual', path: '#' },
+        { name: 'Política de envíos', path: '#' },
+        { name: 'Reportar actividad sospechosa', path: '#' },
+    ];
+
+    const help = [
+        { name: 'Centro de ayuda y preguntas frecuentes', path: '#' },
+        { name: 'Centro de seguridad', path: '#' },
+        { name: 'Protección de compras de Temu', path: '#' },
+        { name: 'Asóciate a Temu', path: '#' },
+    ];
+
+    const belowFooter = [
+        { name: 'Términos de uso.', path: '#' },
+        { name: 'Política de privacidad.', path: '#' },
+        { name: 'Tus preferencias de privacidad.', path: '#' },
+        { name: 'Gestión de anuncios.', path: '#' },
+    ];
+
     return (
-        <footer className="Footer" ref={footer}>
-            <div className="sb__footer__section__padding max-width">
-                <div className="sb__footer-links">
-                    <div className="sb__footer-links_div">
-                        <h4> Información de la empresa </h4>
-                        <a href="/A cerca de temu">
-                            <p>A cerca de</p>
-                        </a>
-                        <a href="/Afiliado e influecer gana comisiones">
-                            <p>Afiliado e influecer gana comisiones</p>
-                        </a>
-                        <a href="/Contactanos">
-                            <p>Contactanos</p>
-                        </a>
-                        <a href="/Carreras profesionales">
-                            <p>Carreras profesionales</p>
-                        </a>
-                        <a href="/Prensa">
-                            <p>Prensa</p>
-                        </a>
-                        <a href="/Programa de plantación de arboles">
-                            <p>Programa de plantación de arboles</p>
-                        </a>
-                        <a href="/Temu">
-                            <p>Temu</p>
-                        </a>
+        <footer className="footer" ref={footer}>
+            <div className="footer-container max-width">
+                <div className="footer-links">
+                    <div className="footer-links-container">
+                        <h4>Información de la empresa</h4>
+
+                        {companyInfo.map(company => (
+                            <a key={company.name} href={company.path}>
+                                <p>{company.name}</p>
+                            </a>
+                        ))}
                     </div>
-                    <div className="sb__footer-links_div">
+
+                    <div className="footer-links-container">
                         <h4>Atención al cliente</h4>
-                        <a href="/Politica de devolución y reembolso">
-                            <p>Politica de devolución y reembolso</p>
-                        </a>
-                        <a href="/Politica de propiedad intelectual">
-                            <p>Politica de propiedad intelectual</p>
-                        </a>
-                        <a href="/Politica de envios">
-                            <p>Politica de envios</p>
-                        </a>
-                        <a href="/Reportar actividad sospechosa">
-                            <p>Reportar actividad sospechosa</p>
-                        </a>
+
+                        {client.map(company => (
+                            <a key={company.name} href={company.path}>
+                                <p>{company.name}</p>
+                            </a>
+                        ))}
                     </div>
-                    <div className="sb__footer-links_div">
+
+                    <div className="footer-links-container">
                         <h4>Ayuda</h4>
-                        <a href="/Centro de ayuda y preguntas frecuentes">
-                            <p>Centro de ayuda y preguntas frecuentes</p>
-                        </a>
-                        <a href="/Centro de seguridad">
-                            <p>Centro de seguridad</p>
-                        </a>
-                        <a href="/Protección de compras de Temu">
-                            <p>Protección de compras de Temu</p>
-                        </a>
-                        <a href="/Asociate a Temu">
-                            <p>Asociate a Temu</p>
-                        </a>
+
+                        {help.map(company => (
+                            <a key={company.name} href={company.path}>
+                                <p>{company.name}</p>
+                            </a>
+                        ))}
                     </div>
-                    <div className="sb__footer-links_div">
+
+                    <div className="footer-links-container">
                         <h4>Descarga la app de Temu</h4>
-                        <a href="/Rastrea pedidos en todo momento">
-                            <p>Rastrea pedidos en todo momento</p>
-                        </a>
-                        <a href="/Alertas de articulos con poco stock">
-                            <p>Alertas de articulos con poco stock</p>
-                        </a>
-                        <a href="/Alerta de cupones y ofertas">
-                            <p>Alerta de cupones y ofertas</p>
-                        </a>
+
+                        <p>Rastrea pedidos en todo momento</p>
+                        <p>Alertas de articulos con poco stock</p>
+                        <p>Alerta de cupones y ofertas</p>
+
+                        <button className="footer-app-button">
+                            <a
+                                href="https://apps.apple.com/co/app/temu-compra-como-millonario/id1641486558"
+                                target="_blank"
+                            >
+                                <FaApple size={24} />
+
+                                <span>
+                                    <p>
+                                        <small>Descargar en</small>
+                                    </p>
+                                    <p>
+                                        <strong>App Store</strong>
+                                    </p>
+                                </span>
+                            </a>
+                        </button>
+
+                        <button className="footer-app-button">
+                            <a
+                                href="https://play.google.com/store/apps/details?id=com.einnovation.temu&hl=es&gl=co&referrer=adg_reftag%3Dafb7bf7be9b68b87e7d299f64eac28c8%26ads_channel%3Dgoogle%26ads_sub_channel%3Dsearch%26ads_account%3D1204871858%26ads_set%3D21104778154%26ads_id%3D161509618962%26ads_creative_id%3D693748223408%26ns_source%3Dg%26ns_keyword%3Dtemu%26ns_match_type%3De%26gclid%3DEAIaIQobChMI6cqLo-iuiAMVLaxaBR0HEgfMEAAYASAAEgIcOPD_BwE%26wbraid%3DCj8KCQjwreW2BhCRARIuAEiZJEBLvg2vD8bWGmalxjcoiziu-jAEapZJ_jzf63owbalug-SJtXILT8cKWRoCzKo%26gbraid%3D0AAAAAo4mICGep8aI9r4nY51cNbOusoTVK%26vst_type%3Dadg"
+                                target="_blank"
+                            >
+                                <img
+                                    src="/google-play-icon.png"
+                                    alt=""
+                                    style={{ width: 24, height: 24 }}
+                                />
+
+                                <span>
+                                    <p>
+                                        <small>Descargar en</small>
+                                    </p>
+                                    <p>
+                                        <strong>Google Play</strong>
+                                    </p>
+                                </span>
+                            </a>
+                        </button>
                     </div>
-                    <div className="sb__footer-links_div">
+
+                    <div className="footer-links-container">
                         <h4>Conectar con Temu</h4>
-                        <div className="SocialMedia">
-                            
-                                <p>
-                                    <a href='https://www.instagram.com/temu/' target='_blank'>
-                                        <FaInstagram size={25} />
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href='https://www.facebook.com/shoptemu/' target='_blank'>
-                                        <FaFacebook size={25}/>
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href='https://x.com/shoptemu' target='_blank'>
-                                        <FaXTwitter size={25} />
-                                    </a>
-                                </p>
-                            
-                                <p>
-                                    <a href='https://www.tiktok.com/@temu' target='_blank'>
-                                        <FaTiktok size={25}/>
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href='https://www.youtube.com/@temu' target='_blank'>
-                                        <FaYoutube size={25}/>
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href='https://co.pinterest.com/shoptemu/' target='_blank'>
-                                        <FaPinterest size={25}/>
-                                    </a>
-                                </p>
-                            
+
+                        <div className="footer-links-social">
+                            <a
+                                href="https://www.instagram.com/temu/"
+                                target="_blank"
+                            >
+                                <FaInstagram size={24} />
+                            </a>
+
+                            <a
+                                href="https://www.facebook.com/shoptemu/"
+                                target="_blank"
+                            >
+                                <FaFacebook size={24} />
+                            </a>
+
+                            <a href="https://x.com/shoptemu" target="_blank">
+                                <FaXTwitter size={24} />
+                            </a>
+                        </div>
+
+                        <div className="footer-links-social">
+                            <a href="https://x.com/shoptemu" target="_blank">
+                                <FaTiktok size={24} />
+                            </a>
+
+                            <a
+                                href="https://www.youtube.com/@temu"
+                                target="_blank"
+                            >
+                                <FaYoutube size={24} />
+                            </a>
+
+                            <a
+                                href="https://co.pinterest.com/shoptemu/"
+                                target="_blank"
+                            >
+                                <FaPinterest size={24} />
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <hr></hr>
+                <hr />
 
-                <div className="sb__footer-below">
-                    <div className="sb__footer-copyright">
-                        <p>© 2024 WhaleCo Inc.</p>
-                    </div>
-                    <div className="sb__footer-below-links">
-                        <a href="/Terminos de uso">
-                            <div>
-                                <p>Terminos de uso</p>
-                            </div>
+                <div className="footer-below">
+                    <p>© 2024 WhaleCo Inc.</p>
+
+                    {belowFooter.map(belowFooterLink => (
+                        <a
+                            key={belowFooterLink.name}
+                            href={belowFooterLink.path}
+                        >
+                            {belowFooterLink.name}
                         </a>
-                        <a href="/Politica de privacidad">
-                            <div>
-                                <p>Politica de privacidad</p>
-                            </div>
-                        </a>
-                        <a href="/Tus preferencia de seguridad">
-                            <div>
-                                <p>Tus preferencia de seguridad</p>
-                            </div>
-                        </a>
-                        <a href="/Gestión de anuncios">
-                            <div>
-                                <p>Gestión de anuncios</p>
-                            </div>
-                        </a>
-                    </div>
+                    ))}
                 </div>
             </div>
         </footer>
