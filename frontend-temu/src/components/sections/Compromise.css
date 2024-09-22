@@ -1,5 +1,10 @@
 .compromise {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
 }
 
 .compromise-container {
@@ -51,6 +56,7 @@
 .compromise-item {
     display: flex;
     align-items: center;
+    gap: 0.25em;
 }
 
 .compromise-icon {
@@ -62,13 +68,22 @@
     display: none;
 }
 
-.compromise-item-message{
-    color: green;
+.compromise-item-message {
+    color: var(--compromise-color);
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
 }
 
-.compromise-message{
-    margin-top: 5px;
-    border: 1px solid green;
+.compromise-message {
+    width: 100%;
+    padding: 0.5em 0;
+    border: 1px solid var(--compromise-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 @-webkit-keyframes compromise-links {
