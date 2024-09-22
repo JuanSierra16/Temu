@@ -20,7 +20,8 @@ const Footer = () => {
             '../../assets/certificate-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
             {
                 eager: true,
-                as: 'url',
+                query: '?url',
+                import: 'default',
             },
         ),
     );
@@ -30,7 +31,8 @@ const Footer = () => {
             '../../assets/payment-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
             {
                 eager: true,
-                as: 'url',
+                query: '?url',
+                import: 'default',
             },
         ),
     );
