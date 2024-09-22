@@ -67,7 +67,7 @@
 }
 
 .compromise-message{
-    margin-top: 5px;
+    margin-top: none;
     border: 1px solid green;
 }
 
