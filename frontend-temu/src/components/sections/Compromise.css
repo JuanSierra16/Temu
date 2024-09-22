@@ -76,7 +76,8 @@
 }
 
 .compromise-message {
-    width: 100%;
+    display: none;
+    width: 95%;
     padding: 0.5em 0;
     border: 1px solid var(--compromise-color);
     border-radius: 5px;
@@ -194,7 +195,6 @@
     .compromise-container {
         padding: 0.5em 1em;
         font-size: medium;
-        width: 100%;
     }
 
     .compromise-links {
@@ -222,5 +222,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .compromise-item-message {
+        display: block;
+    }
+
+    .compromise-message {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .compromise-container {
+        width: 100%;
+    }
+
+    .compromise-message {
+        width: 100%;
     }
 }

@@ -1,7 +1,16 @@
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 3em;
+    width: 100%;
+}
+
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
     width: 100%;
 }
 
@@ -19,7 +28,28 @@
 }
 
 .categories-slider {
-    padding: 0.25em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.img-title {
+    display: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-title img {
+    width: 300px;
+    height: auto;
+}
+
+.img-title > * {
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 .subcategory-slider {
@@ -30,17 +60,18 @@
     padding: 0.5em;
     text-align: center;
     font-size: smaller;
-    max-height: 100px;
+    max-height: 200px;
     overflow: hidden;
 }
 
 .subcategory-slider img {
-    height: 50px;
+    height: 80px;
     width: auto;
 }
 
 .banner-background {
     background-color: var(--special-banner-color);
+    width: 100%;
 }
 
 .banner-container {
@@ -52,28 +83,20 @@
     height: auto;
 }
 
-.categories-products {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(100px, 1fr));
-    overflow: hidden;
+.product-slider {
+    display: flex;
+    align-items: center;
     gap: 1em;
-    padding: 0.5em;
 }
 
-.img-title {
-    display: none;
+.small-category-container {
+    display: block;
+    padding: 0.5em 0;
 }
 
 @media screen and (min-width: 500px) {
     .small-category-container {
         display: none;
-    }
-
-    .categories-products {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        place-content: center;
-        place-items: center;
     }
 }
 
@@ -84,30 +107,6 @@
 
     .main-content {
         gap: 2em;
-    }
-
-    .categories-products {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .img-title {
-        display: unset;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .img-title img {
-        width: 300px;
-        height: auto;
-    }
-
-    .img-title > * {
-        font-size: 1.5em;
-        text-align: center;
-        font-weight: 800;
-        text-transform: uppercase;
     }
 }
 
@@ -124,5 +123,13 @@
 
     .main-content-title {
         display: none;
+    }
+
+    .img-title > * {
+        font-size: 1.5em;
+    }
+
+    .main-header {
+        gap: 2em;
     }
 }

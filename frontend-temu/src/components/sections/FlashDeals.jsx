@@ -81,35 +81,39 @@ const FlashDeals = () => {
 
     return (
         <section className="flash-deals-section max-width">
-            <div className="flash-deals-header">
-                <h2>⚡ Ofertas relámpago ⚡</h2>
-                <p>Por tiempo limitado</p>
-                <FaAngleRight />
-            </div>
-
-            <Slider>
-                {products.map(product => (
-                    <div key={product.id} className="flash-deal-item">
-                        <img
-                            src={product.image}
-                            alt={product.name}
-                            className="product-image"
-                        />
-                        <p className="product-name">{product.name}</p>
-                        <p className="product-price">
-                            <span className="current-price">
-                                ${product.price}
-                            </span>
-                            <span className="old-price">
-                                ${product.oldPrice}
-                            </span>
-                            <span className="discount">
-                                -{product.discount}
-                            </span>
-                        </p>
+            <div className="flash-deals-container">
+                <div className="flash-deals-header">
+                    <h2>⚡ Ofertas relámpago ⚡</h2>
+                    <div className="flash-deals-link">
+                        <p>Por tiempo limitado</p>
+                        <FaAngleRight />
                     </div>
-                ))}
-            </Slider>
+                </div>
+
+                <Slider>
+                    {products.map(product => (
+                        <div key={product.id} className="flash-deal-item">
+                            <img
+                                src={product.image}
+                                alt={product.name}
+                                className="product-image"
+                            />
+                            <p className="product-name">{product.name}</p>
+                            <p className="product-price">
+                                <span className="current-price">
+                                    ${product.price}
+                                </span>
+                                <span className="old-price">
+                                    ${product.oldPrice}
+                                </span>
+                                <span className="discount">
+                                    -{product.discount}
+                                </span>
+                            </p>
+                        </div>
+                    ))}
+                </Slider>
+            </div>
         </section>
     );
 };

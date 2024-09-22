@@ -3,9 +3,9 @@
     text-decoration: none;
     color: var(--light-color);
     width: 100%;
-    margin-top: 2em;
     padding: 1em;
     font-size: small;
+    margin-top: 5em;
 }
 
 .footer-container {
