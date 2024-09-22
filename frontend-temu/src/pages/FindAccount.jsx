@@ -1,21 +1,18 @@
 import './FindAccount.css';
 import { FaUserCircle, FaChevronRight } from 'react-icons/fa';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../provider/UserContext';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import Modal from '../components/elements/Modal';
-import Select from '../components/elements/Select';
-import { supportPrefixPhone } from '../utils/prefixPhone';
+import InputPhone from '../components/elements/InputPhone';
 
 const FindAccount = () => {
-    const [phonePrefix, setPhonePrefix] = useState('');
-    const [countryValue, setCountryValue] = useState('');
-
     const [findByEmailModal, setFindByEmailModal] = useState(false);
     const [findByPhoneModal, setFindByPhoneModal] = useState(false);
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [phoneValue, setPhoneValue] = useState('');
     const [success, setSuccess] = useState(false);
     const [findData, setFindData] = useState({
         username: null,
@@ -38,30 +35,13 @@ const FindAccount = () => {
     };
 
     const findAccountPhone = () => {
-        findAccountWithPhoneNumber(`${phonePrefix}${phone}`).then(data => {
+        findAccountWithPhoneNumber(phoneValue).then(data => {
             if (data.username) {
                 setFindData(data);
                 setFindByPhoneModal(false);
                 setSuccess(true);
             }
         });
-    };
-
-    useEffect(() => {
-        // por defecto el primer prefijo de la lista
-        const { countryCode, prefix } = supportPrefixPhone[0];
-        setCountryValue(`${countryCode} ${prefix}`);
-        setPhonePrefix(prefix);
-    }, []);
-
-    const handleSelectChange = e => {
-        // Obtener el prefijo de número de teléfono seleccionado de la lista
-        const { countryCode, prefix } = supportPrefixPhone.find(
-            item => item.country == e.target.getAttribute('value'),
-        );
-
-        setCountryValue(`${countryCode} ${prefix}`);
-        setPhonePrefix(prefix);
     };
 
     return (
@@ -191,27 +171,13 @@ const FindAccount = () => {
                     </p>
 
                     <label htmlFor="phone">Número de teléfono</label>
-
-                    <div className="phone-input">
-                        <Select value={countryValue}>
-                            {supportPrefixPhone.map(({ country, prefix }) => (
-                                <p
-                                    className="phone-select"
-                                    key={country}
-                                    value={country}
-                                    onClick={handleSelectChange}
-                                >
-                                    {country} {prefix}
-                                </p>
-                            ))}
-                        </Select>
-                        <input
-                            type="tel"
-                            name="phone"
-                            value={phone}
-                            onChange={e => setPhone(e.target.value)}
-                        />
-                    </div>
+                    <InputPhone
+                        onChangePhone={e => setPhone(e.target.value)}
+                        phone={phone}
+                        setPhoneValue={setPhoneValue}
+                        required
+                        autoFocus
+                    />
 
                     <button
                         className="orange-button"

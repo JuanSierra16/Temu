@@ -1,0 +1,9 @@
+.phone-input-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 100%;
+}
+
+.phone-select {
+    display: block;
+}

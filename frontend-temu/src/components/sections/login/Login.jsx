@@ -16,11 +16,10 @@ buscar cuenta */
 const Login = ({ setShowLoginProblem }) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [phonePrefix, setPhonePrefix] = useState('');
+    const [phoneValue, setPhoneValue] = useState('');
     const [isPhoneNumber, setIsPhoneNumber] = useState(false);
     const [putPassword, setPutPassword] = useState(false);
     const [password, setPassword] = useState('');
-    const [countryValue, setCountryValue] = useState('');
     const [showPhoneCode, setShowPhoneCode] = useState(false);
     const [emailCode, setEmailCode] = useState('');
     const [forgotPassword, setForgotPassword] = useState(false);
@@ -36,13 +35,6 @@ const Login = ({ setShowLoginProblem }) => {
         sendSMSCode,
         phoneCodeSent,
     } = useContext(UserContext);
-
-    useEffect(() => {
-        // por defecto el primer prefijo de la lista
-        const { countryCode, prefix } = supportPrefixPhone[0];
-        setCountryValue(`${countryCode} ${prefix}`);
-        setPhonePrefix(prefix);
-    }, []);
 
     const handleEmail = event => {
         const newInputValue = event.target.value;
@@ -69,16 +61,6 @@ const Login = ({ setShowLoginProblem }) => {
         }
     };
 
-    const handleSelectChange = e => {
-        // Obtener el prefijo de número de teléfono seleccionado de la lista
-        const { countryCode, prefix } = supportPrefixPhone.find(
-            item => item.country == e.target.getAttribute('value'),
-        );
-
-        setCountryValue(`${countryCode} ${prefix}`);
-        setPhonePrefix(prefix);
-    };
-
     const handleContinue = () => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const validEmail = !isPhoneNumber && emailPattern.test(email);
@@ -99,14 +81,14 @@ const Login = ({ setShowLoginProblem }) => {
         event.preventDefault();
 
         if (isPhoneNumber) {
-            sendSMSCode(phonePrefix + phone);
+            sendSMSCode(phoneValue);
         } else {
             loginAction(email, password);
         }
     };
 
     useEffect(() => {
-        // comprobara código de verificación y realizar el registro de usuario
+        // comprobar el código de verificación y realizar el registro de usuario
         emailCodeRef.current = emailCode;
 
         if (emailCodeRef.current && emailCodeRef.current.length === 6) {
@@ -127,10 +109,10 @@ const Login = ({ setShowLoginProblem }) => {
                         isPhoneNumber,
                         email,
                         phone,
+                        phoneValue,
+                        setPhoneValue,
                         handleEmail,
                         handlePhone,
-                        handleSelectChange,
-                        countryValue,
                         putPassword,
                         password,
                         setPassword,
@@ -147,10 +129,7 @@ const Login = ({ setShowLoginProblem }) => {
                 <LoginVerify email={email} setEmailCode={setEmailCode} />
             )}
 
-            {showPhoneCode && (
-                <PhoneCode phonePrefix={phonePrefix} phone={phone} />
-            )}
-
+            {showPhoneCode && <PhoneCode phone={phoneValue} />}
             {forgotPassword && <ResetPassword initialEmail={email} />}
         </section>
     );
