@@ -38,18 +38,20 @@ const Footer = () => {
     );
 
     useEffect(() => {
-        if (footer.current) {
-            const footerPosition = footer.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+        window.onload = () => {
+            if (footer.current) {
+                const footerPosition = footer.current.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
 
-            if (footerPosition.bottom < windowHeight) {
-                footer.current.style.position = 'fixed';
-                footer.current.style.bottom = '0';
-            } else {
-                footer.current.style.position = 'unset';
-                footer.current.style.bottom = 'unset';
+                if (footerPosition.bottom < windowHeight) {
+                    footer.current.style.position = 'fixed';
+                    footer.current.style.bottom = '0';
+                } else {
+                    footer.current.style.position = 'unset';
+                    footer.current.style.bottom = 'unset';
+                }
             }
-        }
+        };
     }, []);
 
     const companyInfo = [
