@@ -5,12 +5,32 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { FaTiktok } from 'react-icons/fa';
 import { FaYoutube } from 'react-icons/fa';
 import { FaPinterest } from 'react-icons/fa';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import './Footer.css';
 
 const Footer = () => {
     const footer = useRef(null);
+
+    const certificateCards = Object.values(
+        import.meta.glob(
+            '../../assets/certificate-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
+            {
+                eager: true,
+                as: 'url',
+            },
+        ),
+    );
+
+    const paymentCards = Object.values(
+        import.meta.glob(
+            '../../assets/payment-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
+            {
+                eager: true,
+                as: 'url',
+            },
+        ),
+    );
 
     useEffect(() => {
         if (footer.current) {
@@ -63,7 +83,7 @@ const Footer = () => {
             <div className="footer-container max-width">
                 <div className="footer-links">
                     <div className="footer-links-container">
-                        <h4>Información de la empresa</h4>
+                        <h5>Información de la empresa</h5>
 
                         {companyInfo.map(company => (
                             <a key={company.name} href={company.path}>
@@ -73,7 +93,7 @@ const Footer = () => {
                     </div>
 
                     <div className="footer-links-container">
-                        <h4>Atención al cliente</h4>
+                        <h5>Atención al cliente</h5>
 
                         {client.map(company => (
                             <a key={company.name} href={company.path}>
@@ -83,7 +103,7 @@ const Footer = () => {
                     </div>
 
                     <div className="footer-links-container">
-                        <h4>Ayuda</h4>
+                        <h5>Ayuda</h5>
 
                         {help.map(company => (
                             <a key={company.name} href={company.path}>
@@ -93,7 +113,7 @@ const Footer = () => {
                     </div>
 
                     <div className="footer-links-container">
-                        <h4>Descarga la app de Temu</h4>
+                        <h5>Descarga la app de Temu</h5>
 
                         <p>Rastrea pedidos en todo momento</p>
                         <p>Alertas de articulos con poco stock</p>
@@ -141,7 +161,7 @@ const Footer = () => {
                     </div>
 
                     <div className="footer-links-container">
-                        <h4>Conectar con Temu</h4>
+                        <h5>Conectar con Temu</h5>
 
                         <div className="footer-links-social">
                             <a
@@ -181,6 +201,36 @@ const Footer = () => {
                             >
                                 <FaPinterest size={24} />
                             </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="footer-cards">
+                    <div>
+                        <h6>Certificación de seguridad</h6>
+
+                        <div className="footer-certificate">
+                            {certificateCards.map(galleryItem => (
+                                <img
+                                    key={galleryItem}
+                                    src={galleryItem}
+                                    alt=""
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h6>Aceptamos</h6>
+
+                        <div className="footer-certificate">
+                            {paymentCards.map(galleryItem => (
+                                <img
+                                    key={galleryItem}
+                                    src={galleryItem}
+                                    alt=""
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>

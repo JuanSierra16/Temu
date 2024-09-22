@@ -13,9 +13,21 @@
     gap: 1em;
 }
 
+.footer h5 {
+    font-size: 1.05em;
+}
+
+.footer h6 {
+    font-size: 1em;
+}
+
 .footer-container a {
     text-decoration: none;
     color: var(--light-color);
+}
+
+.footer-container a:hover {
+    color: var(--gray-color);
 }
 
 .footer-links {
@@ -56,6 +68,7 @@
 
 .footer-below {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
@@ -64,8 +77,33 @@
     text-decoration: underline;
 }
 
+.footer-cards {
+    margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.footer-certificate {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    margin-top: 1em;
+}
+
+.footer-certificate img {
+    height: 32px;
+    width: auto;
+}
+
 @media screen and (min-width: 1200px) {
     .footer-links {
         gap: 1em;
+    }
+
+    .footer {
+        margin-top: 5em;
     }
 }
