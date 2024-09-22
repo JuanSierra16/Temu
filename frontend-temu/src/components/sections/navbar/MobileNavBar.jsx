@@ -13,9 +13,10 @@ import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import Modal from '../../elements/Modal';
 
 import Categories from '../../elements/category/Categories';
-import './MobileNavBar.css';
-import Login from '../login/Login';
 import { Link } from 'react-router-dom';
+import ModalLogin from './ModalLogin';
+
+import './MobileNavBar.css';
 
 const MobileNavBar = () => {
     const submenuCol = [
@@ -156,9 +157,10 @@ const MobileNavBar = () => {
                 </ul>
             </nav>
 
-            <Modal show={showLogin && !userIsLogin} setShow={setShowLogin}>
-                <Login />
-            </Modal>
+            <ModalLogin
+                showModal={showLogin && !userIsLogin}
+                setShowModal={setShowLogin}
+            />
         </>
     );
 };

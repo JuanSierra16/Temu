@@ -4,6 +4,7 @@
     flex-direction: column;
     gap: 1em;
     width: 90%;
+    min-height: 40vh;
 }
 
 .find-account-grid {
