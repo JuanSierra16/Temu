@@ -32,6 +32,38 @@
     font-weight: 500;
 }
 
+.find-account-modal h5 {
+    font-size: 1em;
+}
+
+.find-account-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 2em 1em;
+    max-width: 500px;
+    text-align: center;
+}
+
+.find-account-modal label {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.find-account-user {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.phone-input {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    text-align: start;
+}
+
 @media screen and (max-width: 850px) {
     .find-account-grid {
         grid-template-columns: 1fr;
