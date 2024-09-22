@@ -13,7 +13,7 @@ const LoginForm = ({
     isPhoneNumber,
     email,
     phone,
-    setPhoneValue,
+    setPhonePrefix,
     handleEmail,
     handlePhone,
     putPassword,
@@ -71,7 +71,7 @@ const LoginForm = ({
                         <InputPhone
                             phone={phone}
                             onChangePhone={handlePhone}
-                            setPhoneValue={setPhoneValue}
+                            setPrefix={setPhonePrefix}
                             disabled={waitLogin}
                             required
                             autoFocus

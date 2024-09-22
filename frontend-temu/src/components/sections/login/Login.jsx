@@ -16,7 +16,7 @@ buscar cuenta */
 const Login = ({ setShowLoginProblem }) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [phoneValue, setPhoneValue] = useState('');
+    const [phonePrefix, setPhonePrefix] = useState('');
     const [isPhoneNumber, setIsPhoneNumber] = useState(false);
     const [putPassword, setPutPassword] = useState(false);
     const [password, setPassword] = useState('');
@@ -81,7 +81,7 @@ const Login = ({ setShowLoginProblem }) => {
         event.preventDefault();
 
         if (isPhoneNumber) {
-            sendSMSCode(phoneValue);
+            sendSMSCode(`+${phonePrefix}${phone}`);
         } else {
             loginAction(email, password);
         }
@@ -109,8 +109,7 @@ const Login = ({ setShowLoginProblem }) => {
                         isPhoneNumber,
                         email,
                         phone,
-                        phoneValue,
-                        setPhoneValue,
+                        setPhonePrefix,
                         handleEmail,
                         handlePhone,
                         putPassword,
@@ -129,7 +128,7 @@ const Login = ({ setShowLoginProblem }) => {
                 <LoginVerify email={email} setEmailCode={setEmailCode} />
             )}
 
-            {showPhoneCode && <PhoneCode phone={phoneValue} />}
+            {showPhoneCode && <PhoneCode phone={`${phonePrefix}${phone}`} />}
             {forgotPassword && <ResetPassword initialEmail={email} />}
         </section>
     );

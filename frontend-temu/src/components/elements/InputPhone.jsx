@@ -6,20 +6,19 @@ import { useEffect, useState } from 'react';
 const InputPhone = ({
     phone,
     onChangePhone,
-    setPhoneValue,
+    setPrefix,
     disabled = false,
     required = false,
     autoFocus = false,
 }) => {
-    const [phonePrefix, setPhonePrefix] = useState('');
     const [countryValue, setCountryValue] = useState('');
 
     useEffect(() => {
         // por defecto el primer prefijo de la lista
         const { countryCode, prefix } = supportPrefixPhone[0];
         setCountryValue(`${countryCode} ${prefix}`);
-        setPhonePrefix(prefix);
-    }, []);
+        setPrefix(prefix);
+    }, [setPrefix]);
 
     const handleSelectChange = e => {
         // Obtener el prefijo de número de teléfono seleccionado de la lista
@@ -28,8 +27,7 @@ const InputPhone = ({
         );
 
         setCountryValue(`${countryCode} ${prefix}`);
-        setPhonePrefix(prefix);
-        setPhoneValue(`${prefix}${phone}`);
+        setPrefix(prefix);
     };
 
     return (

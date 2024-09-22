@@ -12,7 +12,7 @@ const FindAccount = () => {
     const [findByPhoneModal, setFindByPhoneModal] = useState(false);
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [phoneValue, setPhoneValue] = useState('');
+    const [prefix, setPrefix] = useState('');
     const [success, setSuccess] = useState(false);
     const [findData, setFindData] = useState({
         username: null,
@@ -35,7 +35,7 @@ const FindAccount = () => {
     };
 
     const findAccountPhone = () => {
-        findAccountWithPhoneNumber(phoneValue).then(data => {
+        findAccountWithPhoneNumber(`${prefix}${phone}`).then(data => {
             if (data.username) {
                 setFindData(data);
                 setFindByPhoneModal(false);
@@ -174,7 +174,7 @@ const FindAccount = () => {
                     <InputPhone
                         onChangePhone={e => setPhone(e.target.value)}
                         phone={phone}
-                        setPhoneValue={setPhoneValue}
+                        setPrefix={setPrefix}
                         required
                         autoFocus
                     />
