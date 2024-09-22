@@ -47,11 +47,6 @@
     display: none;
 }
 
-.phone-input {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-}
-
 .login-green {
     color: var(--compromise-color);
 }

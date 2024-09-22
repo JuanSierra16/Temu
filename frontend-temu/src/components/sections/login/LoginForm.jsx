@@ -1,6 +1,4 @@
 import { FaXTwitter, FaFacebook, FaApple } from 'react-icons/fa6';
-import Select from '../../elements/Select';
-import { supportPrefixPhone } from '../../../utils/prefixPhone';
 import { GoogleLogin } from '@react-oauth/google';
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../provider/UserContext';
@@ -8,16 +6,16 @@ import FacebookLogin from '@greatsumini/react-facebook-login';
 import { FaTruckFast, FaLock } from 'react-icons/fa6';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import InputPhone from '../../elements/InputPhone';
 
 const LoginForm = ({
     handleFormSubmit,
     isPhoneNumber,
     email,
     phone,
+    setPhoneValue,
     handleEmail,
     handlePhone,
-    handleSelectChange,
-    countryValue,
     putPassword,
     password,
     setPassword,
@@ -70,31 +68,14 @@ const LoginForm = ({
                     </label>
 
                     {isPhoneNumber && (
-                        <div className={`phone-input`}>
-                            <Select value={countryValue}>
-                                {supportPrefixPhone.map(
-                                    ({ country, prefix }) => (
-                                        <p
-                                            className="phone-select"
-                                            key={country}
-                                            value={country}
-                                            onClick={handleSelectChange}
-                                        >
-                                            {country} {prefix}
-                                        </p>
-                                    ),
-                                )}
-                            </Select>
-
-                            <input
-                                type="tel"
-                                value={phone}
-                                onChange={handlePhone}
-                                disabled={waitLogin}
-                                required
-                                autoFocus
-                            />
-                        </div>
+                        <InputPhone
+                            phone={phone}
+                            onChangePhone={handlePhone}
+                            setPhoneValue={setPhoneValue}
+                            disabled={waitLogin}
+                            required
+                            autoFocus
+                        />
                     )}
 
                     {!isPhoneNumber && (

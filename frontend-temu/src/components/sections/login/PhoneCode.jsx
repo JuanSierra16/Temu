@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import InputCode from '../../elements/InputCode';
 import { UserContext } from '../../../provider/UserContext';
 
-const PhoneCode = ({ phonePrefix, phone }) => {
+const PhoneCode = ({ phone }) => {
     const [code, setCode] = useState('');
     const codeRef = useRef('');
 
@@ -12,7 +12,7 @@ const PhoneCode = ({ phonePrefix, phone }) => {
         codeRef.current = code;
 
         if (codeRef.current.length === 6) {
-            loginWithPhone(codeRef.current, phonePrefix + phone);
+            loginWithPhone(codeRef.current, phone);
         }
     }, [code]);
 
@@ -21,10 +21,7 @@ const PhoneCode = ({ phonePrefix, phone }) => {
             <h3>Ingresa el código de verificación</h3>
             <small>
                 Enviamos un código de verificación a{' '}
-                <span className="login-orange">
-                    {phonePrefix} {}
-                    {phone}
-                </span>
+                <span className="login-orange">{phone}</span>
             </small>
 
             <div className="phone-code">
