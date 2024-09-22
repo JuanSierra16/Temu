@@ -5,8 +5,11 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { FaTiktok } from 'react-icons/fa';
 import { FaYoutube } from 'react-icons/fa';
 import { FaPinterest } from 'react-icons/fa';
-import { useEffect, useRef, useState } from 'react';
+import { FaTruckFast } from 'react-icons/fa6';
+import { GiSandsOfTime } from 'react-icons/gi';
+import { MdDiscount } from 'react-icons/md';
 
+import { useEffect, useRef } from 'react';
 import './Footer.css';
 
 const Footer = () => {
@@ -115,9 +118,20 @@ const Footer = () => {
                     <div className="footer-links-container">
                         <h5>Descarga la app de Temu</h5>
 
-                        <p>Rastrea pedidos en todo momento</p>
-                        <p>Alertas de articulos con poco stock</p>
-                        <p>Alerta de cupones y ofertas</p>
+                        <div className="footer-icon-text">
+                            <FaTruckFast size={32} />
+                            <p>Rastrea pedidos en todo momento</p>
+                        </div>
+
+                        <div className="footer-icon-text">
+                            <GiSandsOfTime size={32} />
+                            <p>Alertas de articulos con poco stock</p>
+                        </div>
+
+                        <div className="footer-icon-text">
+                            <MdDiscount size={32} />
+                            <p>Alerta de cupones y ofertas</p>
+                        </div>
 
                         <button className="footer-app-button">
                             <a
