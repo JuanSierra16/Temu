@@ -7,6 +7,8 @@ import {
     loginResetPassword,
     sendVerificationCodeSMS,
     loginWithPhoneNumber,
+    findAccountByEmail,
+    findAccountByPhoneNumber,
 } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -310,6 +312,62 @@ const UserProvider = ({ children }) => {
         setWaitLogin(false);
     };
 
+    const findAccountWithEmail = async email => {
+        setWaitLogin(true);
+        let res = null;
+        const data = {
+            username: null,
+            email: null,
+            message: null,
+        };
+
+        try {
+            res = await findAccountByEmail(email);
+
+            if (res.status === 404) {
+                data.message = 'Cuenta no encontrada';
+            } else if (res.status === 200) {
+                data.username = res.data.user.username;
+                data.email = res.data.user.email;
+                data.message = 'Cuenta encontrada';
+            }
+        } catch (error) {
+            setLoginError('Error no se pudo encontrar la cuenta');
+        }
+
+        setWaitLogin(false);
+        return data;
+    };
+
+    const findAccountWithPhoneNumber = async phoneNumber => {
+        setWaitLogin(true);
+        let res = null;
+        const data = {
+            username: null,
+            email: null,
+            phoneNumber: null,
+            message: null,
+        };
+
+        try {
+            res = await findAccountByPhoneNumber(phoneNumber);
+
+            if (res.status === 404) {
+                data.message = 'Cuenta no encontrada';
+            } else if (res.status === 200) {
+                data.username = res.data.user.username;
+                data.email = res.data.user.email;
+                data.phoneNumber = res.data.user.phone_number;
+                data.message = 'Cuenta encontrada';
+            }
+        } catch (error) {
+            setLoginError('Error no se pudo encontrar la cuenta');
+        }
+
+        setWaitLogin(false);
+        return data;
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -335,6 +393,8 @@ const UserProvider = ({ children }) => {
                 sendSMSCode,
                 loginWithPhone,
                 phoneCodeSent,
+                findAccountWithEmail,
+                findAccountWithPhoneNumber,
             }}
         >
             {children}

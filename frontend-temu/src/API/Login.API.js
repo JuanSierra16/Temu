@@ -65,3 +65,19 @@ export const loginWithPhoneNumber = async phoneNumber => {
 
     return response.data;
 };
+
+export const findAccountByEmail = async email => {
+    const response = await API.post('/users/find-by-email', {
+        email,
+    });
+
+    return response;
+};
+
+export const findAccountByPhoneNumber = async phoneNumber => {
+    const response = await API.post('/users/find-by-phone', {
+        phoneNumber,
+    });
+
+    return response;
+};
