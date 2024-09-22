@@ -9,6 +9,7 @@
     display: none;
     position: absolute;
     background-color: var(--light-color);
+    color: var(--dark-color);
     left: 50%;
     transform: translateX(-50%);
     border: 1px solid var(--gray-color);

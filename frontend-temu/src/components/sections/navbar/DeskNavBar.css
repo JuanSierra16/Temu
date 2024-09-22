@@ -136,17 +136,17 @@
 
 .login-sub-menu,
 .help-sub-menu {
-    color: var(--dark-color);
+    color: var(--dark-color) !important;
     width: 250px;
 }
 
 .login-sub-menu a,
 .help-sub-menu a {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    color: var(--dark-color);
-    gap: 1em;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    color: var(--dark-color) !important;
+    gap: 1em !important;
 }
 
 .login-sub-menu a {

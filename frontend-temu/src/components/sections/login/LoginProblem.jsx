@@ -9,7 +9,7 @@ const LoginProblem = ({ setShowResetPassword }) => {
 
             <p>
                 Si registraste una cuenta con tu dirección de email, pero
-                olvidaste tu contraseña, puedes , puedes restablecerla.
+                olvidaste tu contraseña puedes restablecerla.
             </p>
 
             <button onClick={() => setShowResetPassword(true)}>
