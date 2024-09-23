@@ -327,6 +327,8 @@ const UserProvider = ({ children }) => {
         const data = {
             username: null,
             email: null,
+            nombre_plataforma: null,
+            phone_number: null,
             message: null,
         };
 
@@ -338,6 +340,8 @@ const UserProvider = ({ children }) => {
             } else if (res.status === 200) {
                 data.username = res.data.user.username;
                 data.email = res.data.user.email;
+                data.nombre_plataforma = res.data.user.nombre_plataforma;
+                data.phone_number = res.data.user.phone_number;
                 data.message = 'Cuenta encontrada';
             }
         } catch (error) {
@@ -355,7 +359,8 @@ const UserProvider = ({ children }) => {
         const data = {
             username: null,
             email: null,
-            phoneNumber: null,
+            nombre_plataforma: null,
+            phone_number: null,
             message: null,
         };
 
@@ -367,7 +372,8 @@ const UserProvider = ({ children }) => {
             } else if (res.status === 200) {
                 data.username = res.data.user.username;
                 data.email = res.data.user.email;
-                data.phoneNumber = res.data.user.phone_number;
+                data.phone_number = res.data.user.phone_number;
+                data.nombre_plataforma = res.data.user.nombre_plataforma;
                 data.message = 'Cuenta encontrada';
             }
         } catch (error) {

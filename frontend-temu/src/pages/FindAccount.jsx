@@ -1,5 +1,5 @@
 import './FindAccount.css';
-import { FaUserCircle, FaChevronRight } from 'react-icons/fa';
+import { FaAngleLeft, FaUserCircle, FaChevronRight } from 'react-icons/fa';
 import { useContext, useState } from 'react';
 import { UserContext } from '../provider/UserContext';
 import NavBar from '../components/sections/navbar/NavBar';
@@ -14,9 +14,11 @@ const FindAccount = () => {
     const [phone, setPhone] = useState('');
     const [prefix, setPrefix] = useState('');
     const [success, setSuccess] = useState(false);
+    const [showFindData, setShowFindData] = useState(false);
     const [findData, setFindData] = useState({
         username: null,
         email: null,
+        nombre_plataforma: null,
         phone_number: null,
         message: null,
     });
@@ -102,12 +104,26 @@ const FindAccount = () => {
 
                 {success && (
                     <>
+                        <div
+                            onClick={() => {
+                                setSuccess(false);
+                                setFindData({});
+                            }}
+                            className="find-account-back"
+                        >
+                            <FaAngleLeft />
+                            <span>Volver</span>
+                        </div>
+
                         <h2>
                             Hemos encontrado una cuenta que coincide con lo que
                             has introducido.
                         </h2>
 
-                        <div className="find-account-item">
+                        <div
+                            className="find-account-item"
+                            onClick={() => setShowFindData(true)}
+                        >
                             <div className="find-account-user">
                                 <FaUserCircle size={48} />
 
@@ -188,6 +204,41 @@ const FindAccount = () => {
 
                     {findData.message && <small>{findData.message}</small>}
                     {loginError && <small>{loginError}</small>}
+                </div>
+            </Modal>
+
+            <Modal show={showFindData} setShow={setShowFindData}>
+                <div className="find-account-modal">
+                    <h5>{findData.username}</h5>
+
+                    {findData.email && (
+                        <p>
+                            Recupera esta cuenta generando una nueva contraseña
+                            con ayuda de un código de verificación que se
+                            enviará por correo electrónico a {findData.email}.
+                        </p>
+                    )}
+
+                    {findData.phone_number && (
+                        <p>
+                            Recupera esta cuenta generando una clave de un uso
+                            que se enviará por SMS al {findData.phone_number}.
+                        </p>
+                    )}
+
+                    {findData.nombre_plataforma && (
+                        <p>
+                            Recupera esta cuenta iniciando sesión con las
+                            credenciales de {findData.nombre_plataforma}.
+                        </p>
+                    )}
+
+                    <button
+                        className="orange-button"
+                        onClick={() => setShowFindData(false)}
+                    >
+                        Cerrar
+                    </button>
                 </div>
             </Modal>
 
