@@ -72,6 +72,8 @@ const UserProvider = ({ children }) => {
         email,
         errorMsg,
     ) => {
+        setLoginError(null);
+
         try {
             const data = await loginWithPlatform(
                 id_usuario_plataforma,
@@ -82,7 +84,6 @@ const UserProvider = ({ children }) => {
             setUserData(data.user);
             setUserIsLogin(true);
             setSessionJWT(data.token);
-            setLoginError(null);
 
             Cookies.set(
                 'token',
@@ -128,6 +129,8 @@ const UserProvider = ({ children }) => {
     };
 
     const loginHasProfileAction = async email => {
+        setLoginError(null);
+
         try {
             const data = await loginHasProfile(email);
             const hasProfile = data.exists;
@@ -139,6 +142,7 @@ const UserProvider = ({ children }) => {
 
     const loginSendEmailCodeAction = async email => {
         setWaitLogin(true);
+        setLoginError(null);
 
         if (noHasProfile) {
             try {
@@ -155,6 +159,7 @@ const UserProvider = ({ children }) => {
 
     const loginAction = async (email, password) => {
         setWaitLogin(true);
+        setLoginError(null);
 
         // comprobar si tiene perfil, si no tiene envia código de verificación
         if (noHasProfile && !emailCodeSent) {
@@ -209,6 +214,7 @@ const UserProvider = ({ children }) => {
     const verifyEmailCode = code => {
         const isEqual = code === emailCode;
         equalEmailCodeRef.current = isEqual;
+        setLoginError(null);
 
         if (!isEqual) {
             setLoginError('Error el código de verificación no coincide');
@@ -219,6 +225,7 @@ const UserProvider = ({ children }) => {
 
     const sendPasswordCode = async email => {
         setWaitLogin(true);
+        setLoginError(null);
 
         try {
             const code = await loginSendEmailCode(email);
@@ -236,11 +243,10 @@ const UserProvider = ({ children }) => {
     const isEqualPasswordCode = code => {
         const isEqual = code === passwordCode;
         setEqualPasswordCode(isEqual);
+        setLoginError(null);
 
         if (!isEqual) {
             setLoginError('Error el código de verificación no coincide');
-        } else {
-            setLoginError(null);
         }
 
         return isEqual;
@@ -248,6 +254,7 @@ const UserProvider = ({ children }) => {
 
     const resetPassword = async (email, newPassword) => {
         setWaitLogin(true);
+        setLoginError(null);
 
         if (!equalPasswordCode && passwordCodeSent) {
             setLoginError('Error el código de verificación no coincide');
@@ -275,6 +282,7 @@ const UserProvider = ({ children }) => {
 
     const sendSMSCode = async phoneNumber => {
         setWaitLogin(true);
+        setLoginError(null);
 
         try {
             const code = await sendVerificationCodeSMS(phoneNumber);
@@ -289,6 +297,7 @@ const UserProvider = ({ children }) => {
 
     const loginWithPhone = async (code, phoneNumber) => {
         setWaitLogin(true);
+        setLoginError(null);
 
         const isEqual = code === phoneCode;
         setEqualPhoneCode(isEqual);
@@ -300,7 +309,6 @@ const UserProvider = ({ children }) => {
             setUserData(data.user);
             setUserIsLogin(true);
             setSessionJWT(data.token);
-            setLoginError(null);
 
             Cookies.set(
                 'token',
@@ -314,6 +322,7 @@ const UserProvider = ({ children }) => {
 
     const findAccountWithEmail = async email => {
         setWaitLogin(true);
+        setLoginError(null);
         let res = null;
         const data = {
             username: null,
@@ -341,6 +350,7 @@ const UserProvider = ({ children }) => {
 
     const findAccountWithPhoneNumber = async phoneNumber => {
         setWaitLogin(true);
+        setLoginError(null);
         let res = null;
         const data = {
             username: null,
