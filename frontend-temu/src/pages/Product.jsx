@@ -55,11 +55,17 @@ const Product = () => {
                             <div className="product-user">
                                 {userInfo.icon}
 
-                                <div className="product-user-info">
+                                <div>
                                     <h4>{userInfo.username}</h4>
-                                    <p>Seguidores {userInfo.followers} |</p>
-                                    <p>#Ventas {userInfo.sales} |</p>
-                                    <p>Calificación {userInfo.qualification}</p>
+
+                                    <div className="product-user-info">
+                                        <p>Seguidores {userInfo.followers} |</p>
+                                        <p>#Ventas {userInfo.sales} |</p>
+                                        <p>
+                                            Calificación{' '}
+                                            {userInfo.qualification}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 

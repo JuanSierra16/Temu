@@ -112,6 +112,12 @@ summary {
     margin-bottom: 10px;
 }
 
+@media screen and (max-width: 1380px) {
+    .max-width {
+        padding: 0 0.5em;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .orange-button {
         font-size: small;
