@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import TermsOfUse from './pages/TermsofUse';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import FindAccount from './pages/FindAccount';
+import Product from './pages/Product';
 
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
 
                 <Route path="/find-account" element={<FindAccount />}>
                     <Route index element={<FindAccount />} />
+                </Route>
+
+                <Route path="/product" element={<Product />}>
+                    <Route index element={<Product />} />
                 </Route>
             </Routes>
         </BrowserRouter>
