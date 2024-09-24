@@ -8,7 +8,7 @@
 }
 
 .compromise-container {
-    width: 95%;
+    width: 100%;
     margin: auto;
     padding: 0.25em;
     display: flex;
@@ -77,7 +77,6 @@
 
 .compromise-message {
     display: none;
-    width: 95%;
     padding: 0.5em 0;
     border: 1px solid var(--compromise-color);
     border-radius: 5px;
@@ -230,15 +229,5 @@
 
     .compromise-message {
         display: block;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .compromise-container {
-        width: 100%;
-    }
-
-    .compromise-message {
-        width: 100%;
     }
 }
