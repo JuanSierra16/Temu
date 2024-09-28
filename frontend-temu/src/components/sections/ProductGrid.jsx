@@ -4,7 +4,7 @@ import { FaAngleDown } from 'react-icons/fa';
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 
-const ProductGrid = memo(({ productsList, handleLoadMore }) => {
+const ProductGrid = memo(({ productsList = [], handleLoadMore }) => {
     return (
         <>
             <section className="max-width product-grid">

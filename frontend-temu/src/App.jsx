@@ -7,6 +7,7 @@ import FindAccount from './pages/FindAccount';
 import Product from './pages/Product';
 import About from './pages/About';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
+import MasVendidos from './pages/MasVendidos';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/find-account" element={<FindAccount />} />
                 <Route path="/product/:productId" element={<Product />} />
+                <Route path="/MasVendidos" element={<MasVendidos />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </BrowserRouter>
