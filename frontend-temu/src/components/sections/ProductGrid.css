@@ -7,6 +7,20 @@
     padding: 0.5em;
 }
 
+.product-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.product-button button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    max-width: 200px;
+}
+
 @media screen and (min-width: 500px) {
     .product-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
