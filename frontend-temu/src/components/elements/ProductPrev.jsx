@@ -1,7 +1,6 @@
 import './ProductPrev.css';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const ProductPrev = ({ product }) => {
     // test usar como link el titulo del producto
@@ -42,15 +41,6 @@ const ProductPrev = ({ product }) => {
             </div>
         </Link>
     );
-};
-
-ProductPrev.propTypes = {
-    product: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
-        offer: PropTypes.string,
-    }),
 };
 
 export default ProductPrev;
