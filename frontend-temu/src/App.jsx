@@ -5,10 +5,14 @@ import TermsOfUse from './pages/TermsofUse';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import FindAccount from './pages/FindAccount';
 import Product from './pages/Product';
+import About from './pages/About';
+import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 
 function App() {
     return (
         <BrowserRouter>
+            <ScrollToTopRouter />
+
             <Routes>
                 <Route path="/" element={<Home />}>
                     <Route index element={<Home />} />
@@ -28,6 +32,10 @@ function App() {
 
                 <Route path="/product" element={<Product />}>
                     <Route index element={<Product />} />
+                </Route>
+
+                <Route path="/about" element={<About />}>
+                    <Route index element={<About />} />
                 </Route>
             </Routes>
         </BrowserRouter>

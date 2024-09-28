@@ -10,6 +10,7 @@ import { GiSandsOfTime } from 'react-icons/gi';
 import { MdDiscount } from 'react-icons/md';
 
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
@@ -55,7 +56,7 @@ const Footer = () => {
     }, []);
 
     const companyInfo = [
-        { name: 'Acerca de Temu', path: '#' },
+        { name: 'Acerca de Temu', path: 'about' },
         { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
         { name: 'Afililado e influencer: gana comisiones', path: '#' },
         { name: 'Contáctanos', path: '#' },
@@ -93,9 +94,9 @@ const Footer = () => {
                         <h5>Información de la empresa</h5>
 
                         {companyInfo.map(company => (
-                            <a key={company.name} href={company.path}>
+                            <Link key={company.name} to={company.path}>
                                 <p>{company.name}</p>
-                            </a>
+                            </Link>
                         ))}
                     </div>
 

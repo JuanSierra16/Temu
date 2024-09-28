@@ -76,6 +76,7 @@
 }
 
 .compromise-message {
+    width: 100%;
     display: none;
     padding: 0.5em 0;
     border: 1px solid var(--compromise-color);
