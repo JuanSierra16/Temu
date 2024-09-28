@@ -14,29 +14,12 @@ function App() {
             <ScrollToTopRouter />
 
             <Routes>
-                <Route path="/" element={<Home />}>
-                    <Route index element={<Home />} />
-                </Route>
-
-                <Route path="/terms-of-use" element={<TermsOfUse />}>
-                    <Route index element={<TermsOfUse />} />
-                </Route>
-
-                <Route path="/privacy-policy" element={<PrivacyPolicy />}>
-                    <Route index element={<PrivacyPolicy />} />
-                </Route>
-
-                <Route path="/find-account" element={<FindAccount />}>
-                    <Route index element={<FindAccount />} />
-                </Route>
-
-                <Route path="/product" element={<Product />}>
-                    <Route index element={<Product />} />
-                </Route>
-
-                <Route path="/about" element={<About />}>
-                    <Route index element={<About />} />
-                </Route>
+                <Route path="/" element={<Home />} />
+                <Route path="/terms-of-use" element={<TermsOfUse />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/find-account" element={<FindAccount />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/about" element={<About />} />
             </Routes>
         </BrowserRouter>
     );

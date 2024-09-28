@@ -56,7 +56,7 @@ const Footer = () => {
     }, []);
 
     const companyInfo = [
-        { name: 'Acerca de Temu', path: 'about' },
+        { name: 'Acerca de Temu', path: '/about' },
         { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
         { name: 'Afililado e influencer: gana comisiones', path: '#' },
         { name: 'Contáctanos', path: '#' },
