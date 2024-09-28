@@ -8,6 +8,9 @@ import FlashDeals from '../components/sections/FlashDeals';
 import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
+import ProductGrid from '../components/sections/ProductGrid';
+import { useCallback, useEffect, useState } from 'react';
+import { getProducts } from '../API/Products.API';
 
 const Home = () => {
     const firstSubs = categoriesList
@@ -15,6 +18,17 @@ const Home = () => {
             return { name: category.name, sub: category.subcategories[0] };
         })
         .reverse();
+
+    const [productsList, setProductsList] = useState([]);
+
+    const handleLoadMore = useCallback(async () => {
+        const newProducts = await getProducts();
+        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
+    }, []);
+
+    useEffect(() => {
+        handleLoadMore();
+    }, [handleLoadMore]);
 
     return (
         <main>
@@ -98,6 +112,11 @@ const Home = () => {
                         </div>
                     </Slider>
                 </section>
+
+                <ProductGrid
+                    productsList={productsList}
+                    handleLoadMore={handleLoadMore}
+                />
             </article>
 
             <Footer />

@@ -2,13 +2,15 @@ import './Product.css';
 import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
-import { FaUser, FaCheck, FaAngleDown } from 'react-icons/fa';
+import { FaUser, FaCheck } from 'react-icons/fa';
 import { FaShippingFast } from 'react-icons/fa';
 import { products } from '../utils/products';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { PiPlantDuotone } from 'react-icons/pi';
 import { AiOutlineSafety } from 'react-icons/ai';
-import ProductPrev from '../components/elements/ProductPrev';
+import { useCallback, useEffect, useState } from 'react';
+import { getProducts } from '../API/Products.API';
+import ProductGrid from '../components/sections/ProductGrid';
 
 const Product = () => {
     // test
@@ -20,6 +22,17 @@ const Product = () => {
         sales: Math.floor(Math.random() * 1000),
         qualification: Math.floor(Math.random() * 5),
     };
+
+    const [productsList, setProductsList] = useState([]);
+
+    const handleLoadMore = useCallback(async () => {
+        const newProducts = await getProducts();
+        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
+    }, []);
+
+    useEffect(() => {
+        handleLoadMore();
+    }, [handleLoadMore]);
 
     return (
         <main>
@@ -182,17 +195,10 @@ const Product = () => {
                     </div>
                 </section>
 
-                <section className="max-width product-grid">
-                    {products.map(product => (
-                        <ProductPrev key={product.title} product={product} />
-                    ))}
-                </section>
-
-                <div className="product-button">
-                    <button className="orange-button">
-                        Ver más <FaAngleDown />
-                    </button>
-                </div>
+                <ProductGrid
+                    productsList={productsList}
+                    handleLoadMore={handleLoadMore}
+                />
             </article>
 
             <Footer />

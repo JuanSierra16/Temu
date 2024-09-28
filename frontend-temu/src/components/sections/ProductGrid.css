@@ -1,0 +1,23 @@
+.product-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    overflow: hidden;
+    gap: 1em;
+    padding: 0.5em;
+}
+
+@media screen and (min-width: 500px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        place-content: center;
+        place-items: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5em;
+    }
+}
