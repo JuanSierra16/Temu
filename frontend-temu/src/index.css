@@ -78,6 +78,10 @@ button {
     -o-transform: scale(1.025);
 }
 
+.orange-text {
+    color: var(--temu-color);
+}
+
 .vertical-line {
     width: 1px;
     background: linear-gradient(
