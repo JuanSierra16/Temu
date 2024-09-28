@@ -15,7 +15,7 @@ const DeskNavBar = () => {
         {
             name: 'Más vendidos',
             icon: <AiFillLike size={18} />,
-            path: '#',
+            path: '/MasVendidos',
         },
         {
             name: '5 estrellas',
