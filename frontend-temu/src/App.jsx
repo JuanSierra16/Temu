@@ -18,7 +18,7 @@ function App() {
                 <Route path="/terms-of-use" element={<TermsOfUse />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/find-account" element={<FindAccount />} />
-                <Route path="/product" element={<Product />} />
+                <Route path="/product/:productId" element={<Product />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </BrowserRouter>

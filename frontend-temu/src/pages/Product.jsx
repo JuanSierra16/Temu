@@ -11,10 +11,10 @@ import { AiOutlineSafety } from 'react-icons/ai';
 import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
 import ProductGrid from '../components/sections/ProductGrid';
+import { useParams } from 'react-router-dom';
 
 const Product = () => {
     // test
-    const productInfo = products[0];
     const userInfo = {
         icon: <FaUser size={64} />,
         username: 'Nombre de empresas/persona',
@@ -23,6 +23,9 @@ const Product = () => {
         qualification: Math.floor(Math.random() * 5),
     };
 
+    // test, productId = products buscar por titulo
+    const { productId } = useParams();
+    const [productInfo, setProductInfo] = useState({});
     const [productsList, setProductsList] = useState([]);
 
     const handleLoadMore = useCallback(async () => {
@@ -31,8 +34,10 @@ const Product = () => {
     }, []);
 
     useEffect(() => {
+        const URIDecode = decodeURIComponent(productId);
         handleLoadMore();
-    }, [handleLoadMore]);
+        setProductInfo(products.find(product => product.title === URIDecode));
+    }, [handleLoadMore, productId]);
 
     return (
         <main>
@@ -46,7 +51,7 @@ const Product = () => {
                             <div className="product-small-images">
                                 {/* Test */}
                                 {Array(4)
-                                    .fill(productInfo.img)
+                                    .fill(productInfo?.img)
                                     .map((img, index) => (
                                         <img
                                             key={index}
@@ -58,7 +63,7 @@ const Product = () => {
 
                             <div className="product-big-image">
                                 <img
-                                    src={`/products/${productInfo.img}`}
+                                    src={`/products/${productInfo?.img}`}
                                     alt=""
                                 />
                             </div>
@@ -107,9 +112,9 @@ const Product = () => {
                         </div>
 
                         <div className="product-price-info">
-                            <h3>Precio de descuento {productInfo.price}</h3>
-                            <p>Descuento {productInfo.price}</p>
-                            <p>Precio sin descuento {productInfo.price}</p>
+                            <h3>Precio de descuento {productInfo?.price}</h3>
+                            <p>Descuento {productInfo?.price}</p>
+                            <p>Precio sin descuento {productInfo?.price}</p>
                         </div>
 
                         <div className="product-offer">
@@ -124,7 +129,7 @@ const Product = () => {
                         <div className="product-info">
                             <p>
                                 Cantidad (Disponible):{' '}
-                                {productInfo.quantity ?? 10}
+                                {productInfo?.quantity ?? 10}
                             </p>
 
                             <div className="product-quantity">
