@@ -197,6 +197,16 @@
     gap: 0.5em;
 }
 
+@media screen and (max-width: 1350px) {
+    .navbar ul {
+        gap: 0.2em;
+    }
+    .navbar ul li a,
+    .navbar-hover {
+        gap: 0em;
+    }
+}
+
 @media screen and (max-width: 850px) {
     .navbar-search {
         width: 250px;
