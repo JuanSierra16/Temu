@@ -30,7 +30,7 @@ const DeskNavBar = () => {
         {
             name: 'Recién llegados',
             icon: null,
-            path: '#',
+            path: '/new-commers',
         },
     ];
 
