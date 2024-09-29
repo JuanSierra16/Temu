@@ -7,7 +7,9 @@ import FindAccount from './pages/FindAccount';
 import Product from './pages/Product';
 import About from './pages/About';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
-import MasVendidos from './pages/MasVendidos';
+import BestSellers from './pages/BestSellers';
+import PurchaseSafe from './pages/help/PurchaseSafe';
+import SafetyCenter from './pages/help/SafetyCenter';
 import FiveStars from './pages/FiveStars';
 import NewCommers from './pages/NewCommers';
 
@@ -24,9 +26,7 @@ function App() {
                 <Route path="/product/:productId" element={<Product />} />
                 <Route path="/MasVendidos" element={<MasVendidos />} />
                 <Route path="/FiveStars" element={<FiveStars />} />
-                <Route path="/NewCommers" element={<NewCommers />} />
                 <Route path="/about" element={<About />} />
-
             </Routes>
         </BrowserRouter>
     );
