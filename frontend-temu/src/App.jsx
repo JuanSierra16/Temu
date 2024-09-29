@@ -8,6 +8,8 @@ import Product from './pages/Product';
 import About from './pages/About';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import MasVendidos from './pages/MasVendidos';
+import FiveStars from './pages/FiveStars';
+
 
 function App() {
     return (
@@ -21,7 +23,9 @@ function App() {
                 <Route path="/find-account" element={<FindAccount />} />
                 <Route path="/product/:productId" element={<Product />} />
                 <Route path="/MasVendidos" element={<MasVendidos />} />
+                <Route path="/FiveStars" element={<FiveStars />} />
                 <Route path="/about" element={<About />} />
+
             </Routes>
         </BrowserRouter>
     );
