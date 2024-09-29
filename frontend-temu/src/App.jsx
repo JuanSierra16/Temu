@@ -24,8 +24,12 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/find-account" element={<FindAccount />} />
                 <Route path="/product/:productId" element={<Product />} />
-                <Route path="/MasVendidos" element={<MasVendidos />} />
-                <Route path="/FiveStars" element={<FiveStars />} />
+                <Route path="/best-sellers" element={<BestSellers />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/purchase-safe" element={<PurchaseSafe />} />
+                <Route path="/safety-center" element={<SafetyCenter />} />
+                <Route path="/five-stars" element={<FiveStars />} />
+                <Route path="/new-commers" element={<NewCommers />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </BrowserRouter>
