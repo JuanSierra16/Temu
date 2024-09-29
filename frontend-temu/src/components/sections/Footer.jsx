@@ -80,8 +80,8 @@ const Footer = () => {
     ];
 
     const belowFooter = [
-        { name: 'Términos de uso.', path: '#' },
-        { name: 'Política de privacidad.', path: '#' },
+        { name: 'Términos de uso.', path: '/terms-of-use' },
+        { name: 'Política de privacidad.', path: '/privacy-policy' },
         { name: 'Tus preferencias de privacidad.', path: '#' },
         { name: 'Gestión de anuncios.', path: '#' },
     ];
@@ -260,12 +260,13 @@ const Footer = () => {
                     <p>© 2024 WhaleCo Inc.</p>
 
                     {belowFooter.map(belowFooterLink => (
-                        <a
+                        <Link
                             key={belowFooterLink.name}
-                            href={belowFooterLink.path}
+                            to={belowFooterLink.path}
+                            target='_blank'
                         >
                             {belowFooterLink.name}
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </div>
