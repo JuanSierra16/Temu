@@ -1,0 +1,111 @@
+.safety-center-header {
+    color: #fff;
+    background: linear-gradient(90deg, #115f0b 0%, #23a713 100%);
+    padding: 2em 0;
+}
+
+.safety-center-header h1 {
+    font-size: 2em;
+}
+
+.safety-center h2 {
+    font-size: 1.3em;
+}
+
+.safety-center-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.safety-center-header-container img {
+    width: 20%;
+    height: auto;
+    display: none;
+}
+
+.safety-center-offset {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 100%;
+    background-color: var(--light-color);
+    padding: 2em 0.5em !important;
+}
+
+.safety-center-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.safety-center-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2em;
+}
+
+.safety-center-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1em;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+
+.safety-center-item:hover {
+    background-color: var(--gray-color);
+}
+
+.safety-center-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.safety-center-icon span {
+    color: var(--compromise-color);
+}
+
+.safety-center-certificate {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    margin-top: 1em;
+}
+
+.safety-center-certificate img {
+    height: 62px;
+    width: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .safety-center-header h1 {
+        font-size: 2.5em;
+    }
+
+    .safety-center-header-container {
+        padding: 0 5em;
+    }
+
+    .safety-center-header-container img {
+        display: block;
+    }
+
+    .safety-center-header-container p {
+        width: 80%;
+    }
+
+    .safety-center-offset {
+        gap: 4em;
+    }
+}

@@ -46,7 +46,7 @@ const Home = () => {
             </section>
 
             <article className="main-content">
-                <section className="main-header">
+                <header className="main-header">
                     <div className="banner-background">
                         <div className="max-width banner-container">
                             <img
@@ -59,7 +59,7 @@ const Home = () => {
 
                     <Compromise />
                     <FlashDeals />
-                </section>
+                </header>
 
                 <section className="categories-slider">
                     <div className="max-width">

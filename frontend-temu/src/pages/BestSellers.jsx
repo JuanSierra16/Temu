@@ -2,18 +2,16 @@ import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
-import './MasVendidos.css';
+import './BestSellers.css';
 
-const MasVendidos = () => {
-
+const BestSellers = () => {
     const [productsList, setProductsList] = useState([]);
     const [filter, setFilter] = useState('general'); // Estado para manejar el filtro
     const [selected, setSelected] = useState('general'); // Estado para manejar el botón seleccionado
     const [selectedCategory, setSelectedCategory] = useState('Recomendado');
     const [open, setOpen] = useState(false); // Estado para manejar la apertura y cierre del dropdown
-
 
     const handleLoadMore = useCallback(async () => {
         const newProducts = await getProducts(filter); // Aplicar el filtro si es necesario
@@ -25,14 +23,14 @@ const MasVendidos = () => {
         handleLoadMore();
     }, [handleLoadMore]);
 
-    const handleButtonClick = (filterType) => {
+    const handleButtonClick = filterType => {
         setSelected(filterType);
         setFilter(filterType); // Cambiar el filtro según el botón seleccionado
     };
 
     const toggleDropdown = () => setOpen(!open);
 
-    const handleCategorySelect = (category) => {
+    const handleCategorySelect = category => {
         setSelectedCategory(category);
         setOpen(false);
     };
@@ -42,25 +40,24 @@ const MasVendidos = () => {
             <BlackBar />
             <NavBar />
 
-            <div className='header-container'>
-
+            <div className="header-container max-width">
                 <h3>Más vendidos</h3>
 
                 {/* Aquí están los botones */}
                 <header className="button-group">
-                    <button 
+                    <button
                         className={`button ${selected === 'general' ? 'active' : ''}`}
                         onClick={() => handleButtonClick('general')}
                     >
                         En general
                     </button>
-                    <button 
+                    <button
                         className={`button ${selected === 'ultimos-30' ? 'active' : ''}`}
                         onClick={() => handleButtonClick('ultimos-30')}
                     >
                         En los últimos 30 días
                     </button>
-                    <button 
+                    <button
                         className={`button ${selected === 'ultimos-7' ? 'active' : ''}`}
                         onClick={() => handleButtonClick('ultimos-7')}
                     >
@@ -68,24 +65,46 @@ const MasVendidos = () => {
                     </button>
 
                     <div className="dropdown">
-                        <button className="dropdown-button" onClick={toggleDropdown}>
-                            Filtrar por categoría: {selectedCategory} 
+                        <button
+                            className="dropdown-button"
+                            onClick={toggleDropdown}
+                        >
+                            Filtrar por categoría: {selectedCategory}
                             <span>{open ? '▲' : '▼'}</span>
                         </button>
                         {open && (
                             <ul className="dropdown-menu">
-                                {['Recomendado', 'Belleza y salud', 'Ropa de mujer', 'Hogar y cocina', 'Ropa de hombre', 'Calzado de mujer', 'Ropa interior y pijamas de hombre', 'Deporte y aire libre', 'Oficina y escuela', 'Juguetes', 'Moda infantil', 'Tecnología'].map((category) => (
-                                    <li 
-                                        key={category} 
-                                        className={category === selectedCategory ? 'active' : ''}
-                                        onClick={() => handleCategorySelect(category)}
+                                {[
+                                    'Recomendado',
+                                    'Belleza y salud',
+                                    'Ropa de mujer',
+                                    'Hogar y cocina',
+                                    'Ropa de hombre',
+                                    'Calzado de mujer',
+                                    'Ropa interior y pijamas de hombre',
+                                    'Deporte y aire libre',
+                                    'Oficina y escuela',
+                                    'Juguetes',
+                                    'Moda infantil',
+                                    'Tecnología',
+                                ].map(category => (
+                                    <li
+                                        key={category}
+                                        className={
+                                            category === selectedCategory
+                                                ? 'active'
+                                                : ''
+                                        }
+                                        onClick={() =>
+                                            handleCategorySelect(category)
+                                        }
                                     >
                                         {category}
                                     </li>
                                 ))}
                             </ul>
                         )}
-                        </div>
+                    </div>
                 </header>
                 {/* Fin de los botones */}
             </div>
@@ -102,4 +121,4 @@ const MasVendidos = () => {
     );
 };
 
-export default MasVendidos;
+export default BestSellers;
