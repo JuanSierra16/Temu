@@ -1,15 +1,15 @@
+import './DeskNavBar.css';
 import { LuMessageCircle } from 'react-icons/lu';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
-
-import './DeskNavBar.css';
+import { Link } from 'react-router-dom';
 
 const HelpMenu = () => {
     const help = [
         { name: 'Centro de ayuda', path: '#' },
         { name: 'Centro de seguridad', path: '#' },
         { name: 'Chatea con temu', path: '#' },
-        { name: 'Protección de compras de Temu', path: '#' },
-        { name: 'Política de privacidad y cookies', path: '#' },
+        { name: 'Protección de compras de Temu', path: '/purchase-safe' },
+        { name: 'Política de privacidad y cookies', path: '/privacy-policy' },
     ];
 
     return (
@@ -24,9 +24,13 @@ const HelpMenu = () => {
                     <SubMenu>
                         <div className="help-sub-menu">
                             {help.map(item => (
-                                <a href={item.path} key={item.name}>
+                                <Link
+                                    to={item.path}
+                                    target="_blank"
+                                    key={item.name}
+                                >
                                     {item.name}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </SubMenu>

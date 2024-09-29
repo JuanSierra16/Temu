@@ -8,6 +8,7 @@ import Product from './pages/Product';
 import About from './pages/About';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import MasVendidos from './pages/MasVendidos';
+import PurchaseSafe from './pages/help/PurchaseSafe';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/product/:productId" element={<Product />} />
                 <Route path="/MasVendidos" element={<MasVendidos />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/purchase-safe" element={<PurchaseSafe />} />
             </Routes>
         </BrowserRouter>
     );
