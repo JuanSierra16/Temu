@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 const HelpMenu = () => {
     const help = [
         { name: 'Centro de ayuda', path: '#' },
-        { name: 'Centro de seguridad', path: '#' },
-        { name: 'Chatea con temu', path: '#' },
+        { name: 'Centro de seguridad', path: '/safety-center' },
+        { name: 'Chatea con temu' },
         { name: 'Protección de compras de Temu', path: '/purchase-safe' },
         { name: 'Política de privacidad y cookies', path: '/privacy-policy' },
     ];
@@ -24,13 +24,21 @@ const HelpMenu = () => {
                     <SubMenu>
                         <div className="help-sub-menu">
                             {help.map(item => (
-                                <Link
-                                    to={item.path}
-                                    target="_blank"
-                                    key={item.name}
-                                >
-                                    {item.name}
-                                </Link>
+                                <>
+                                    {item.path && (
+                                        <Link
+                                            to={item.path}
+                                            target="_blank"
+                                            key={item.name}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    )}
+
+                                    {!item.path && (
+                                        <a key={item.name}>{item.name}</a>
+                                    )}
+                                </>
                             ))}
                         </div>
                     </SubMenu>
