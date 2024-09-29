@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const HelpMenu = () => {
     const help = [
-        { name: 'Centro de ayuda', path: '#' },
+        { name: 'Centro de ayuda', path: '/support-questions' },
         { name: 'Centro de seguridad', path: '/safety-center' },
         { name: 'Chatea con temu' },
         { name: 'Protección de compras de Temu', path: '/purchase-safe' },
