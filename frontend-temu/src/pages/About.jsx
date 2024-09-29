@@ -17,7 +17,7 @@ const About = () => {
 
             <article className="max-width about-container">
                 <section className="about-subtitle">
-                    <div>
+                    <header>
                         <h1 className="orange-text">¿Qué es Temu?</h1>
 
                         <div className="about-header">
@@ -38,7 +38,7 @@ const About = () => {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </header>
 
                     <div className="about-subtitle-text">
                         <h2 className="orange-text">¿Qué significa Temu?</h2>

@@ -15,7 +15,7 @@ const PurchaseSafe = () => {
 
             <article className="purchase-safe">
                 <section className="purchase-safe-green-color">
-                    <div className="max-width purchase-safe-header">
+                    <header className="max-width purchase-safe-header">
                         <div className="purchase-safe-icon">
                             <IoShieldOutline
                                 size={80}
@@ -41,7 +41,7 @@ const PurchaseSafe = () => {
                                 emitir tu reembolso.
                             </p>
                         </div>
-                    </div>
+                    </header>
                 </section>
 
                 <section className="max-width purchase-safe-flex">

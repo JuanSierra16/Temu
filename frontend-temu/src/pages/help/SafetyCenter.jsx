@@ -74,7 +74,7 @@ const SafetyCenter = () => {
 
             <article className="safety-center">
                 <section className="safety-center-header">
-                    <div className="safety-center-header-container max-width">
+                    <header className="safety-center-header-container max-width">
                         <div>
                             <h1>Centro de seguridad</h1>
 
@@ -87,7 +87,7 @@ const SafetyCenter = () => {
                         </div>
 
                         <img src={safetyCenterImg} alt="" />
-                    </div>
+                    </header>
                 </section>
 
                 <section className="safety-center-offset max-width">
