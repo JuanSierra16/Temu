@@ -9,6 +9,7 @@ import About from './pages/About';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import MasVendidos from './pages/MasVendidos';
 import FiveStars from './pages/FiveStars';
+import NewCommers from './pages/NewCommers';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/product/:productId" element={<Product />} />
                 <Route path="/MasVendidos" element={<MasVendidos />} />
                 <Route path="/FiveStars" element={<FiveStars />} />
+                <Route path="/NewCommers" element={<NewCommers />} />
                 <Route path="/about" element={<About />} />
 
             </Routes>
