@@ -7,7 +7,7 @@ import FindAccount from './pages/FindAccount';
 import Product from './pages/Product';
 import About from './pages/About';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
-import MasVendidos from './pages/MasVendidos';
+import BestSellers from './pages/BestSellers';
 import PurchaseSafe from './pages/help/PurchaseSafe';
 import SafetyCenter from './pages/help/SafetyCenter';
 
@@ -22,7 +22,7 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/find-account" element={<FindAccount />} />
                 <Route path="/product/:productId" element={<Product />} />
-                <Route path="/MasVendidos" element={<MasVendidos />} />
+                <Route path="/best-sellers" element={<BestSellers />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/purchase-safe" element={<PurchaseSafe />} />
                 <Route path="/safety-center" element={<SafetyCenter />} />
