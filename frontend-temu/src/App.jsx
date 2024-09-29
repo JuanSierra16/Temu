@@ -12,6 +12,7 @@ import PurchaseSafe from './pages/help/PurchaseSafe';
 import SafetyCenter from './pages/help/SafetyCenter';
 import FiveStars from './pages/FiveStars';
 import NewCommers from './pages/NewCommers';
+import SupportQuestions from './pages/help/SupportQuestions';
 
 function App() {
     return (
@@ -31,6 +32,10 @@ function App() {
                 <Route path="/five-stars" element={<FiveStars />} />
                 <Route path="/new-commers" element={<NewCommers />} />
                 <Route path="/about" element={<About />} />
+                <Route
+                    path="/support-questions"
+                    element={<SupportQuestions />}
+                />
             </Routes>
         </BrowserRouter>
     );
