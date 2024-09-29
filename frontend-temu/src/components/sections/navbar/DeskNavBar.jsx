@@ -20,7 +20,7 @@ const DeskNavBar = () => {
         {
             name: '5 estrellas',
             icon: <FaStar size={18} />,
-            path: '#',
+            path: '/five-stars',
         },
         {
             name: 'Amor y Amistad',
