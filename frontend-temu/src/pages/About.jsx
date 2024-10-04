@@ -6,8 +6,8 @@ import Footer from '../components/sections/Footer';
 import circle from '../assets/about/circle.png';
 import empowerment from '../assets/about/empowerment.png';
 import inclusion from '../assets/about/inclusion.png';
-import Integrity from '../assets/about/integrity.png';
-import Responsibility from '../assets/about/responsibility.png';
+import integrity from '../assets/about/integrity.png';
+import responsibility from '../assets/about/responsibility.png';
 
 const About = () => {
     return (
@@ -143,7 +143,7 @@ const About = () => {
                         </div>
 
                         <div className="about-icon">
-                            <img src={Integrity} alt="" />
+                            <img src={integrity} alt="" />
 
                             <div>
                                 <h3 className="orange-text">Integridad</h3>
@@ -152,7 +152,7 @@ const About = () => {
                         </div>
 
                         <div className="about-icon">
-                            <img src={Responsibility} alt="" />
+                            <img src={responsibility} alt="" />
 
                             <div>
                                 <h3 className="orange-text">
