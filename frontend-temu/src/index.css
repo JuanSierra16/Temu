@@ -123,7 +123,7 @@ summary {
 }
 
 @media screen and (max-width: 768px) {
-    .orange-button {
+    button {
         font-size: small;
     }
 

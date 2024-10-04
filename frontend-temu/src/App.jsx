@@ -13,6 +13,7 @@ import SafetyCenter from './pages/help/SafetyCenter';
 import FiveStars from './pages/FiveStars';
 import NewCommers from './pages/NewCommers';
 import SupportQuestions from './pages/help/SupportQuestions';
+import Car from './pages/Car';
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                     path="/support-questions"
                     element={<SupportQuestions />}
                 />
+                <Route path="/car" element={<Car />} />
             </Routes>
         </BrowserRouter>
     );
