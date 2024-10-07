@@ -80,7 +80,9 @@ const DeskNavBar = () => {
                     <HelpMenu />
 
                     <li className="navbar-hover">
-                        <MdOutlineLocalGroceryStore size={20} />
+                        <Link to="/cart">
+                            <MdOutlineLocalGroceryStore size={20} />
+                        </Link>
                     </li>
                 </ul>
             </div>

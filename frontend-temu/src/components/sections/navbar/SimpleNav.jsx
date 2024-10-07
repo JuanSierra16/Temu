@@ -17,7 +17,7 @@ const SimpleNav = () => {
                     </Link>
 
                     <span className="simple-navbar-item simple-navbar-icon">
-                        <FaLock size={32} />
+                        <FaLock size={24} />
                         <p>Todos los datos se cifrarán</p>
                     </span>
                 </div>
