@@ -2,7 +2,6 @@ import { pool } from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-import twilio from "twilio";
 import { Vonage } from "@vonage/server-sdk";
 
 const SECRET_KEY = "erdggfdjhe23";
