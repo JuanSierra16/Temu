@@ -5,9 +5,6 @@ import nodemailer from "nodemailer";
 import { Vonage } from "@vonage/server-sdk";
 
 const SECRET_KEY = "erdggfdjhe23";
-const accountSid = "AC7e3df1b87dbcfece000f3aed860a2fcf"; // Tu Account SID de Twilio
-const authToken = "8151b9c72d665f804644b19f34840d75"; // Tu Auth Token de Twilio
-const client = twilio(accountSid, authToken);
 
 const vonage = new Vonage({
   apiKey: "f66bb460", // Tu API Key de Vonage
