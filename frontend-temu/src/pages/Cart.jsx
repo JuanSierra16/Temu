@@ -1,10 +1,10 @@
-import './Car.css';
+import './Cart.css';
 import SimpleNav from '../components/sections/navbar/SimpleNav';
 import Footer from '../components/sections/Footer';
 import { LiaShippingFastSolid } from 'react-icons/lia';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { CarContext } from '../provider/CarContext';
+import { CartContext } from '../provider/CartContext';
 import { UserContext } from '../provider/UserContext';
 import { Navigate } from 'react-router-dom';
 import ProductGrid from '../components/sections/ProductGrid';
@@ -12,8 +12,8 @@ import { getProducts } from '../API/Products.API';
 import { IoIosLock } from 'react-icons/io';
 import { AiOutlineSafety } from 'react-icons/ai';
 
-const Car = () => {
-    const { car, carTotalCost } = useContext(CarContext);
+const Cart = () => {
+    const { cart, cartTotalCost } = useContext(CartContext);
     const { userIsLogin } = useContext(UserContext);
 
     const [productsList, setProductsList] = useState([]);
@@ -60,7 +60,7 @@ const Car = () => {
                         <p>Envío gratis en cada pedido</p>
                     </header>
 
-                    {car.length === 0 && (
+                    {cart.length === 0 && (
                         <div className="car-empty">
                             <FiShoppingCart size={48} />
 
@@ -89,11 +89,11 @@ const Car = () => {
 
                     <div className="car-cost">
                         <p>Total (0 artículos)</p>
-                        <p>$ {carTotalCost}</p>
+                        <p>$ {cartTotalCost}</p>
                     </div>
 
                     <button className="orange-button">
-                        Hacer pedido {car.length}
+                        Hacer pedido {cart.length}
                     </button>
 
                     <small>
@@ -154,4 +154,4 @@ const Car = () => {
     );
 };
 
-export default Car;
+export default Cart;
