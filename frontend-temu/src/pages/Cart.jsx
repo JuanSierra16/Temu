@@ -12,6 +12,7 @@ import { getProducts } from '../API/Products.API';
 import { IoIosLock } from 'react-icons/io';
 import { AiOutlineSafety } from 'react-icons/ai';
 import { MdDeleteOutline } from 'react-icons/md';
+import ModalLogin from '../components/sections/navbar/ModalLogin';
 
 const Cart = () => {
     const { cart, cartTotalCost, removeCart } = useContext(CartContext);
@@ -19,6 +20,7 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const [productsList, setProductsList] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     const handleLoadMore = useCallback(async () => {
         const newProducts = await getProducts();
@@ -143,13 +145,18 @@ const Cart = () => {
 
                     {!userIsLogin && (
                         <div className="car-buttons">
-                            <button className="orange-button">
+                            <button
+                                className="orange-button"
+                                onClick={() => setShowModal(true)}
+                            >
                                 Iniciar sesión/Registrarse
                             </button>
 
-                            <button onClick={() => navigate('/')}>
-                                Comienza a comprar
-                            </button>
+                            {cart.length === 0 && (
+                                <button onClick={() => navigate('/')}>
+                                    Comienza a comprar
+                                </button>
+                            )}
                         </div>
                     )}
                 </section>
@@ -220,6 +227,8 @@ const Cart = () => {
             </article>
 
             <Footer />
+
+            <ModalLogin showModal={showModal} setShowModal={setShowModal} />
         </main>
     );
 };
