@@ -70,6 +70,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5em;
+}
+
+.car-product-title p {
+    max-width: 90%;
 }
 
 .car-product-delete-icon {
@@ -145,5 +150,9 @@
         display: grid;
         grid-template-columns: 1fr 5fr;
         gap: 0.5em;
+    }
+
+    .car-product-title p {
+        max-width: 93%;
     }
 }
