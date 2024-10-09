@@ -1,45 +1,57 @@
+import { useContext } from 'react';
 import './ProductPrev.css';
 import { MdAddShoppingCart } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../provider/CartContext';
 
 const ProductPrev = ({ product }) => {
     // test usar como link el titulo del producto
+    const { addCart } = useContext(CartContext);
+    const navigate = useNavigate();
+
+    const goToProduct = () => {
+        navigate(`/product/${encodeURIComponent(product.title)}`);
+    };
 
     return (
-        <Link
-            to={`/product/${encodeURIComponent(product.title)}`}
+        <div
+            // to={`/product/${encodeURIComponent(product.title)}`}
             className="product-prev-link"
         >
             <div className="product-prev">
-                <img src={`/products/${product.img}`} alt="" />
+                <img
+                    src={`/products/${product.img}`}
+                    alt=""
+                    onClick={goToProduct}
+                />
 
-                <small>{product.title}</small>
+                <small onClick={goToProduct}>{product.title}</small>
 
                 <div className="product-prev-container">
-                    <div>
+                    <div onClick={goToProduct}>
                         {product.offer && (
                             <>
                                 <p className="product-prev-price">
-                                    {product.offer}
+                                    ${product.offer}
                                 </p>
                                 <small className="product-prev-offer">
-                                    {product.price}
+                                    ${product.price}
                                 </small>
                             </>
                         )}
                         {!product.offer && (
                             <p className="product-prev-price">
-                                {product.price}
+                                ${product.price}
                             </p>
                         )}
                     </div>
 
                     <span className="product-prev-cart">
-                        <MdAddShoppingCart />
+                        <MdAddShoppingCart onClick={() => addCart(product)} />
                     </span>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

@@ -7,14 +7,19 @@ const CartProvider = ({ children }) => {
     const [cartTotalCost, setCarTotalCost] = useState(0);
 
     const addCart = product => {
-        setCart([...cart, product]);
-        setCarTotalCost(cartTotalCost + product.price);
+        const price = String(product.price).replace('.', '').replace('$', '');
+
+        if (!cart.find(item => item.title === product.title)) {
+            setCart([...cart, product]);
+            setCarTotalCost(parseFloat(cartTotalCost) + parseFloat(price));
+        }
     };
 
     const removeCart = product => {
-        setCart(cart.filter(item => item.id !== product.id));
+        const price = String(product.price).replace('.', '').replace('$', '');
+
         setCart(cart.filter(item => item.title !== product.title));
-        setCarTotalCost(cartTotalCost - product.price);
+        setCarTotalCost(cartTotalCost - parseFloat(price));
     };
 
     return (

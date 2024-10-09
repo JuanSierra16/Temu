@@ -40,8 +40,6 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    position: -webkit-sticky;
-    position: sticky;
     top: 0;
 }
 
@@ -56,10 +54,96 @@
     width: auto;
 }
 
+.car-products {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.car-product {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5em;
+}
+
+.car-product-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.car-product-delete-icon {
+    cursor: pointer;
+    color: #777575;
+}
+
+.car-product img {
+    width: 128px;
+    height: 128px;
+    margin: auto;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}
+
+.car-product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+
+.car-product-price {
+    display: flex;
+    gap: 1em;
+}
+
+.car-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+@media screen and (min-width: 768px) {
+    .car-article {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+    }
+
+    .car-product img {
+        width: 100%;
+        height: 128px;
+    }
+
+    .car-product {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 0.5em;
+    }
+
+    .car-left,
+    .car-right {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     .car-article {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1em;
+    }
+
+    .car-product {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        gap: 0.5em;
     }
 }
