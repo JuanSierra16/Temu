@@ -6,15 +6,17 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { CartContext } from '../provider/CartContext';
 import { UserContext } from '../provider/UserContext';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ProductGrid from '../components/sections/ProductGrid';
 import { getProducts } from '../API/Products.API';
 import { IoIosLock } from 'react-icons/io';
 import { AiOutlineSafety } from 'react-icons/ai';
+import { MdDeleteOutline } from 'react-icons/md';
 
 const Cart = () => {
-    const { cart, cartTotalCost } = useContext(CartContext);
+    const { cart, cartTotalCost, removeCart } = useContext(CartContext);
     const { userIsLogin } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const [productsList, setProductsList] = useState([]);
 
@@ -71,13 +73,81 @@ const Cart = () => {
                         </div>
                     )}
 
+                    {cart.length > 0 && (
+                        <div className="car-products">
+                            {cart.map(product => (
+                                <div
+                                    key={product.title}
+                                    className="car-product"
+                                >
+                                    <img
+                                        src={`/products/${product.img}`}
+                                        alt=""
+                                    />
+
+                                    <div className="car-product-info">
+                                        <div className="car-product-title">
+                                            <p>{product.title}</p>
+                                            <MdDeleteOutline
+                                                size={48}
+                                                className="car-product-delete-icon"
+                                                onClick={() =>
+                                                    removeCart(product)
+                                                }
+                                            />
+                                        </div>
+
+                                        {product.offer && (
+                                            <p className="orange-text">
+                                                Oferta especial{' '}
+                                                {Math.round(
+                                                    (product.offer /
+                                                        product.price) *
+                                                        100,
+                                                )}
+                                                % | por tiempo limitado
+                                            </p>
+                                        )}
+
+                                        <div className="car-product-price">
+                                            {product.offer && (
+                                                <span className="orange-text">
+                                                    ${product.offer}
+                                                </span>
+                                            )}
+
+                                            {product.offer && (
+                                                <>
+                                                    <del>${product.price}</del>
+
+                                                    <span className="orange-text">
+                                                        {Math.round(
+                                                            (product.offer /
+                                                                product.price) *
+                                                                100,
+                                                        )}
+                                                        %
+                                                    </span>
+                                                </>
+                                            )}
+
+                                            {!product.offer && (
+                                                <span>${product.price}</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                     {!userIsLogin && (
                         <div className="car-buttons">
                             <button className="orange-button">
                                 Iniciar sesión/Registrarse
                             </button>
 
-                            <button onClick={() => Navigate('/')}>
+                            <button onClick={() => navigate('/')}>
                                 Comienza a comprar
                             </button>
                         </div>
@@ -88,7 +158,7 @@ const Cart = () => {
                     <h2>Resumen del pedido</h2>
 
                     <div className="car-cost">
-                        <p>Total (0 artículos)</p>
+                        <p>Total ({cart.length} artículos)</p>
                         <p>$ {cartTotalCost}</p>
                     </div>
 
@@ -97,8 +167,8 @@ const Cart = () => {
                     </button>
 
                     <small>
-                        ! La disponibilidad y el precio de los artículos no
-                        están garantizados hasta que se finalice el pago.
+                        La disponibilidad y el precio de los artículos no están
+                        garantizados hasta que se finalice el pago.
                     </small>
 
                     <div className="car-icons">
@@ -141,7 +211,7 @@ const Cart = () => {
             </article>
 
             <article className="max-width">
-                <p>Artículos que tal vez quieras agregar</p>
+                <h2>Artículos que tal vez quieras agregar</h2>
 
                 <ProductGrid
                     productsList={productsList}
