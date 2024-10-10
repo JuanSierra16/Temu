@@ -50,26 +50,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--gray-color);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
-    padding: 0;
 }
 
 .safety-center-summary {
-    padding: 0.5em;
-    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
-    margin-bottom: 0;
     height: 60px;
 }
 

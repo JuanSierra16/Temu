@@ -218,7 +218,9 @@ const Cart = () => {
             </article>
 
             <article className="max-width">
-                <h2>Artículos que tal vez quieras agregar</h2>
+                <h2 style={{ marginTop: '4rem' }}>
+                    Artículos que tal vez quieras agregar
+                </h2>
 
                 <ProductGrid
                     productsList={productsList}

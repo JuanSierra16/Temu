@@ -100,7 +100,6 @@ button {
 }
 
 details {
-    padding: 0.5em 1em;
     border: 1px solid var(--gray-color);
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -112,8 +111,12 @@ details {
 
 summary {
     font-weight: 500;
-    margin-bottom: 10px;
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
+    margin-bottom: 0;
 }
 
 @media screen and (max-width: 1380px) {
