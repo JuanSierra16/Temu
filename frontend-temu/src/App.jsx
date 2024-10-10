@@ -25,6 +25,7 @@ import SupportQuestions from './pages/help/SupportQuestions';
 
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import ReturnPolicy from './pages/customer-service/ReturnPolicy';
+import PropertyPolicy from './pages/customer-service/PropertyPolicy';
 
 function App() {
     return (
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
                 <Route path="/return-policy" element={<ReturnPolicy />} />
+                <Route path="/property-policy" element={<PropertyPolicy />} />
             </Routes>
         </BrowserRouter>
     );

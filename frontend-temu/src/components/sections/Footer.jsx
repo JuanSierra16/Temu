@@ -70,7 +70,7 @@ const Footer = () => {
 
     const client = [
         { name: 'Política de devolución y reembolso', path: '/return-policy' },
-        { name: 'Política de propiedad intelectual', path: '#' },
+        { name: 'Política de propiedad intelectual', path: '/property-policy' },
         { name: 'Política de envíos', path: '#' },
         { name: 'Reportar actividad sospechosa', path: '#' },
     ];
