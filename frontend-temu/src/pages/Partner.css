@@ -1,0 +1,40 @@
+.partner {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 2em 0;
+}
+
+.partner a {
+    text-decoration: underline;
+}
+
+.partner section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    max-width: 1000px;
+}
+
+.partner-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+    width: 100%;
+}
+
+.partner-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+    width: 100%;
+    padding: 1em;
+    background-color: #e6e6e63b;
+}
+
+.partner-item-content {
+    display: flex;
+    flex-direction: column;
+}

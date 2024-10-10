@@ -19,6 +19,7 @@ import ContactUs from './pages/ContactUs';
 import JoinUs from './pages/JoinUs';
 import Press from './pages/Press';
 import TreeLanding from './pages/TreeLanding';
+import Partner from './pages/Partner';
 
 function App() {
     return (
@@ -48,6 +49,7 @@ function App() {
                 <Route path="/join-us" element={<JoinUs />} />
                 <Route path="/press" element={<Press />} />
                 <Route path="/tree-landing" element={<TreeLanding />} />
+                <Route path="/partner-with-temu" element={<Partner />} />
             </Routes>
         </BrowserRouter>
     );

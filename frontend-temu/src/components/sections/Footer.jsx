@@ -76,10 +76,13 @@ const Footer = () => {
     ];
 
     const help = [
-        { name: 'Centro de ayuda y preguntas frecuentes', path: '#' },
-        { name: 'Centro de seguridad', path: '#' },
-        { name: 'Protección de compras de Temu', path: '#' },
-        { name: 'Asóciate a Temu', path: '#' },
+        {
+            name: 'Centro de ayuda y preguntas frecuentes',
+            path: '/support-questions',
+        },
+        { name: 'Centro de seguridad', path: '/safety-center' },
+        { name: 'Protección de compras de Temu', path: '/purchase-safe' },
+        { name: 'Asóciate a Temu', path: '/partner-with-temu' },
     ];
 
     const belowFooter = [
