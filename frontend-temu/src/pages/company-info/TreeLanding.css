@@ -1,0 +1,62 @@
+.tree-landing section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.tree-landing h2,
+.tree-landing h3 {
+    text-align: center;
+    color: #3ca033;
+}
+
+.tree-landing a {
+    color: #3ca033;
+    text-decoration: underline;
+}
+
+.tree-landing-icon {
+    color: #3ca033;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em 0;
+    font-size: 1.5em;
+}
+
+.tree-landing-flex {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    align-items: center;
+}
+
+.tree-landing-flex > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.tree-landing-certificate {
+    width: 100%;
+}
+
+.tree-landing-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+.tree-landing-images img {
+    width: 100%;
+    height: 300px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}

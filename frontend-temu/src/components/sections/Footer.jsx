@@ -62,7 +62,10 @@ const Footer = () => {
         { name: 'Contáctanos', path: '/contact-us' },
         { name: 'Carreras profesionales', path: '/join-us' },
         { name: 'Prensa', path: '/press' },
-        { name: 'Programa de plantación de árboles Temu', path: '#' },
+        {
+            name: 'Programa de plantación de árboles Temu',
+            path: '/tree-landing',
+        },
     ];
 
     const client = [
@@ -73,10 +76,13 @@ const Footer = () => {
     ];
 
     const help = [
-        { name: 'Centro de ayuda y preguntas frecuentes', path: '#' },
-        { name: 'Centro de seguridad', path: '#' },
-        { name: 'Protección de compras de Temu', path: '#' },
-        { name: 'Asóciate a Temu', path: '#' },
+        {
+            name: 'Centro de ayuda y preguntas frecuentes',
+            path: '/support-questions',
+        },
+        { name: 'Centro de seguridad', path: '/safety-center' },
+        { name: 'Protección de compras de Temu', path: '/purchase-safe' },
+        { name: 'Asóciate a Temu', path: '/partner-with-temu' },
     ];
 
     const belowFooter = [
@@ -114,9 +120,13 @@ const Footer = () => {
                         <h5>Ayuda</h5>
 
                         {help.map(company => (
-                            <a key={company.name} href={company.path}>
+                            <Link
+                                key={company.name}
+                                to={company.path}
+                                target="_blank"
+                            >
                                 <p>{company.name}</p>
-                            </a>
+                            </Link>
                         ))}
                     </div>
 

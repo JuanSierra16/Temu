@@ -1,13 +1,13 @@
 import './About.css';
-import BlackBar from '../components/sections/BlackBar';
-import NavBar from '../components/sections/navbar/NavBar';
-import Footer from '../components/sections/Footer';
+import BlackBar from '../../components/sections/BlackBar';
+import NavBar from '../../components/sections/navbar/NavBar';
+import Footer from '../../components/sections/Footer';
 
-import circle from '../assets/about/circle.png';
-import empowerment from '../assets/about/empowerment.png';
-import inclusion from '../assets/about/inclusion.png';
-import integrity from '../assets/about/integrity.png';
-import responsibility from '../assets/about/responsibility.png';
+import circle from '../../assets/about/circle.png';
+import empowerment from '../../assets/about/empowerment.png';
+import inclusion from '../../assets/about/inclusion.png';
+import integrity from '../../assets/about/integrity.png';
+import responsibility from '../../assets/about/responsibility.png';
 
 const About = () => {
     return (

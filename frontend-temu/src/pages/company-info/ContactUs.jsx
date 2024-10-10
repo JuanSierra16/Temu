@@ -1,6 +1,6 @@
-import BlackBar from '../components/sections/BlackBar';
-import Footer from '../components/sections/Footer';
-import NavBar from '../components/sections/navbar/NavBar';
+import BlackBar from '../../components/sections/BlackBar';
+import Footer from '../../components/sections/Footer';
+import NavBar from '../../components/sections/navbar/NavBar';
 import './ContactUs.css';
 
 const ContactUs = () => {
