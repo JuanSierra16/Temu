@@ -60,7 +60,7 @@ const Footer = () => {
         { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
         { name: 'Afililado e influencer: gana comisiones', path: '/affiliate' },
         { name: 'Contáctanos', path: '/contact-us' },
-        { name: 'Carreras profesionales', path: '#' },
+        { name: 'Carreras profesionales', path: '/join-us' },
         { name: 'Prensa', path: '#' },
         { name: 'Programa de plantación de árboles Temu', path: '#' },
     ];
