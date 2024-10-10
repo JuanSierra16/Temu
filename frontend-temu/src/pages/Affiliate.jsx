@@ -9,6 +9,14 @@ import { LuHeartHandshake } from 'react-icons/lu';
 import affiliateImg from '../assets/affiliate.webp';
 
 const Affiliate = () => {
+    const profilesImgs = Object.values(
+        import.meta.glob('../assets/profiles/*.{png,jpg,jpeg,webp,PNG,JPEG}', {
+            eager: true,
+            query: '?url',
+            import: 'default',
+        }),
+    );
+
     return (
         <>
             <BlackBar />
@@ -37,8 +45,8 @@ const Affiliate = () => {
                     <img src={affiliateImg} alt="" />
                 </header>
 
-                <article className="max-width">
-                    <section className="affiliate-items">
+                <article>
+                    <section className="affiliate-items max-width">
                         <div className="affiliate-item">
                             <div className="affiliate-icon">
                                 <GrMoney size={32} />
@@ -75,6 +83,44 @@ const Affiliate = () => {
                                 descargadas
                             </p>
                         </div>
+                    </section>
+
+                    <section className="affiliate-profiles max-width">
+                        <h2>300,000+ personas se han unido</h2>
+
+                        <div className="affiliate-profiles-container">
+                            {profilesImgs.map(img => (
+                                <img key={img} src={img} alt="" />
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="max-width affiliate-description">
+                        <h2>
+                            Actividades con grandes recompensas para todos los
+                            afiliados
+                        </h2>
+
+                        <div className="affiliate-description-container">
+                            <p>
+                                ¡Únete a emocionantes desafíos y aumenta
+                                fácilmente tus ingresos!
+                            </p>
+
+                            <p>
+                                Los Afiliados pueden participar en actividades
+                                con generosas recompensas y ganar comisiones
+                                adicionales.
+                            </p>
+                            <p>
+                                Los referidos de Afiliados pueden disfrutar de
+                                productos accesibles y de alta calidad
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="affiliate-convert">
+                        <h2>Convertite en un Afiliado de Temu</h2>
                     </section>
                 </article>
             </main>
