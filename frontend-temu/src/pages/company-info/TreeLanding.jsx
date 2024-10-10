@@ -1,15 +1,15 @@
 import './TreeLanding.css';
-import BlackBar from '../components/sections/BlackBar';
-import Footer from '../components/sections/Footer';
-import Navbar from '../components/sections/navbar/NavBar';
+import BlackBar from '../../components/sections/BlackBar';
+import Footer from '../../components/sections/Footer';
+import Navbar from '../../components/sections/navbar/NavBar';
 import { GiFruitTree } from 'react-icons/gi';
 
-import certificate from '../assets/certificate-temu.webp';
+import certificate from '../../assets/certificate-temu.webp';
 
 const TreeLanding = () => {
     const images = Object.values(
         import.meta.glob(
-            '../assets/tree-landing/*.{png,jpg,jpeg,webp,PNG,JPEG}',
+            '../../assets/tree-landing/*.{png,jpg,jpeg,webp,PNG,JPEG}',
             {
                 eager: true,
                 query: '?url',

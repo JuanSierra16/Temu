@@ -1,8 +1,8 @@
 import './Partner.css';
 
-import BlackBar from '../components/sections/BlackBar';
-import Footer from '../components/sections/Footer';
-import NavBar from '../components/sections/navbar/NavBar';
+import BlackBar from '../../components/sections/BlackBar';
+import Footer from '../../components/sections/Footer';
+import NavBar from '../../components/sections/navbar/NavBar';
 import { BsShop } from 'react-icons/bs';
 import { TbWorldUp } from 'react-icons/tb';
 

@@ -1,20 +1,23 @@
 import './Affiliate.css';
-import BlackBar from '../components/sections/BlackBar';
-import Footer from '../components/sections/Footer';
-import NavBar from '../components/sections/navbar/NavBar';
+import BlackBar from '../../components/sections/BlackBar';
+import Footer from '../../components/sections/Footer';
+import NavBar from '../../components/sections/navbar/NavBar';
 import { GrMoney } from 'react-icons/gr';
 import { LuBadgePercent } from 'react-icons/lu';
 import { LuHeartHandshake } from 'react-icons/lu';
 
-import affiliateImg from '../assets/affiliate.webp';
+import affiliateImg from '../../assets/affiliate.webp';
 
 const Affiliate = () => {
     const profilesImgs = Object.values(
-        import.meta.glob('../assets/profiles/*.{png,jpg,jpeg,webp,PNG,JPEG}', {
-            eager: true,
-            query: '?url',
-            import: 'default',
-        }),
+        import.meta.glob(
+            '../../assets/profiles/*.{png,jpg,jpeg,webp,PNG,JPEG}',
+            {
+                eager: true,
+                query: '?url',
+                import: 'default',
+            },
+        ),
     );
 
     return (

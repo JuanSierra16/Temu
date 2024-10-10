@@ -1,11 +1,11 @@
-import BlackBar from '../components/sections/BlackBar';
-import Footer from '../components/sections/Footer';
-import NavBar from '../components/sections/navbar/NavBar';
+import BlackBar from '../../components/sections/BlackBar';
+import Footer from '../../components/sections/Footer';
+import NavBar from '../../components/sections/navbar/NavBar';
 import './Press.css';
 
 const Press = () => {
     const iamges = Object.values(
-        import.meta.glob('../assets/press/*.{png,jpg,jpeg,webp,PNG,JPEG}', {
+        import.meta.glob('../../assets/press/*.{png,jpg,jpeg,webp,PNG,JPEG}', {
             eager: true,
             query: '?url',
             import: 'default',
