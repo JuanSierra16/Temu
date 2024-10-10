@@ -120,9 +120,13 @@ const Footer = () => {
                         <h5>Ayuda</h5>
 
                         {help.map(company => (
-                            <a key={company.name} href={company.path}>
+                            <Link
+                                key={company.name}
+                                to={company.path}
+                                target="_blank"
+                            >
                                 <p>{company.name}</p>
-                            </a>
+                            </Link>
                         ))}
                     </div>
 
