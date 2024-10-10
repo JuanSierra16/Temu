@@ -54,8 +54,8 @@ const PropertyPolicy = () => {
                 <p>
                     (3) Es un requisito que el remitente del aviso se registre
                     en nuestro portal de informes de infracción de propiedad
-                    intelectual en línea ("portal de propiedad intelectual").
-                    Debe incluir la siguiente información en su reporte:
+                    intelectual en línea ({`"portal de propiedad intelectual"`}
+                    ). Debe incluir la siguiente información en su reporte:
                 </p>
 
                 <ul>

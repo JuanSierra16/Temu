@@ -26,6 +26,7 @@ import SupportQuestions from './pages/help/SupportQuestions';
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import ReturnPolicy from './pages/customer-service/ReturnPolicy';
 import PropertyPolicy from './pages/customer-service/PropertyPolicy';
+import ShippingInformation from './pages/customer-service/ShippingInformation';
 
 function App() {
     return (
@@ -60,6 +61,10 @@ function App() {
 
                 <Route path="/return-policy" element={<ReturnPolicy />} />
                 <Route path="/property-policy" element={<PropertyPolicy />} />
+                <Route
+                    path="/shipping-information"
+                    element={<ShippingInformation />}
+                />
             </Routes>
         </BrowserRouter>
     );
