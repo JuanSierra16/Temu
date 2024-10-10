@@ -11,6 +11,7 @@ import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
 import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
+import CartPanel from '../components/sections/CartPanel';
 
 const Home = () => {
     const firstSubs = categoriesList
@@ -31,96 +32,101 @@ const Home = () => {
     }, [handleLoadMore]);
 
     return (
-        <main>
+        <>
             <BlackBar />
             <NavBar />
 
-            <section className="small-category-container">
-                <Slider>
-                    <div className="small-category">
-                        {categoriesList.map(category => (
-                            <small key={category.name}>{category.name}</small>
-                        ))}
-                    </div>
-                </Slider>
-            </section>
-
-            <article className="main-content">
-                <header className="main-header">
-                    <div className="banner-background">
-                        <div className="max-width banner-container">
-                            <img
-                                src="/themes/Amor y Amistad/banner.png"
-                                alt=""
-                                className="banner"
-                            />
-                        </div>
-                    </div>
-
-                    <Compromise />
-                    <FlashDeals />
-                </header>
-
-                <section className="categories-slider">
-                    <div className="max-width">
-                        <div className="img-title">
-                            <img
-                                src="/themes/Amor y Amistad/title.png"
-                                alt=""
-                            />
-                            <h2 className="max-width">Categorias</h2>
-                        </div>
-                    </div>
-
+            <main>
+                <section className="small-category-container">
                     <Slider>
-                        <div className="category-slider">
-                            {firstSubs.map(sub => (
-                                <div
-                                    key={sub.name}
-                                    className="subcategory-slider"
-                                >
-                                    <img
-                                        src={`/categorias/${sub.name}/${sub.sub}.webp`}
-                                        alt=""
-                                    />
-
-                                    <small>{sub.name}</small>
-                                </div>
+                        <div className="small-category">
+                            {categoriesList.map(category => (
+                                <small key={category.name}>
+                                    {category.name}
+                                </small>
                             ))}
                         </div>
                     </Slider>
                 </section>
 
-                <section className="categories-slider">
-                    <div className="max-width">
-                        <div className="img-title">
-                            <img
-                                src="/themes/Amor y Amistad/title.png"
-                                alt=""
-                            />
-                            <h2>PROVEEDORES RECOMENDADOS</h2>
+                <article className="main-content">
+                    <header className="main-header">
+                        <div className="banner-background">
+                            <div className="max-width banner-container">
+                                <img
+                                    src="/themes/Amor y Amistad/banner.png"
+                                    alt=""
+                                    className="banner"
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <Slider>
-                        <div className="product-slider">
-                            {products.map(product => (
-                                <span key={product.title}>
-                                    <ProductPrev product={product} />
-                                </span>
-                            ))}
+                        <Compromise />
+                        <FlashDeals />
+                    </header>
+
+                    <section className="categories-slider">
+                        <div className="max-width">
+                            <div className="img-title">
+                                <img
+                                    src="/themes/Amor y Amistad/title.png"
+                                    alt=""
+                                />
+                                <h2 className="max-width">Categorias</h2>
+                            </div>
                         </div>
-                    </Slider>
-                </section>
 
-                <ProductGrid
-                    productsList={productsList}
-                    handleLoadMore={handleLoadMore}
-                />
-            </article>
+                        <Slider>
+                            <div className="category-slider">
+                                {firstSubs.map(sub => (
+                                    <div
+                                        key={sub.name}
+                                        className="subcategory-slider"
+                                    >
+                                        <img
+                                            src={`/categorias/${sub.name}/${sub.sub}.webp`}
+                                            alt=""
+                                        />
 
+                                        <small>{sub.name}</small>
+                                    </div>
+                                ))}
+                            </div>
+                        </Slider>
+                    </section>
+
+                    <section className="categories-slider">
+                        <div className="max-width">
+                            <div className="img-title">
+                                <img
+                                    src="/themes/Amor y Amistad/title.png"
+                                    alt=""
+                                />
+                                <h2>PROVEEDORES RECOMENDADOS</h2>
+                            </div>
+                        </div>
+
+                        <Slider>
+                            <div className="product-slider">
+                                {products.map(product => (
+                                    <span key={product.title}>
+                                        <ProductPrev product={product} />
+                                    </span>
+                                ))}
+                            </div>
+                        </Slider>
+                    </section>
+
+                    <ProductGrid
+                        productsList={productsList}
+                        handleLoadMore={handleLoadMore}
+                    />
+                </article>
+            </main>
+
+            <CartPanel />
             <Footer />
-        </main>
+        </>
     );
 };
 
