@@ -5,6 +5,7 @@ import ProductGrid from '../components/sections/ProductGrid';
 import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
 import './BestSellers.css';
+import CartPanel from '../components/sections/CartPanel';
 
 const BestSellers = () => {
     const [productsList, setProductsList] = useState([]);
@@ -116,6 +117,7 @@ const BestSellers = () => {
                 />
             </article>
 
+            <CartPanel />
             <Footer />
         </main>
     );

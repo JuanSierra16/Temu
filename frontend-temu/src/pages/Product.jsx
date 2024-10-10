@@ -8,10 +8,12 @@ import { products } from '../utils/products';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { PiPlantDuotone } from 'react-icons/pi';
 import { AiOutlineSafety } from 'react-icons/ai';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
 import ProductGrid from '../components/sections/ProductGrid';
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../provider/CartContext';
+import CartPanel from '../components/sections/CartPanel';
 
 const Product = () => {
     // test
@@ -27,6 +29,8 @@ const Product = () => {
     const { productId } = useParams();
     const [productInfo, setProductInfo] = useState({});
     const [productsList, setProductsList] = useState([]);
+
+    const { addCart } = useContext(CartContext);
 
     const handleLoadMore = useCallback(async () => {
         const newProducts = await getProducts();
@@ -148,10 +152,13 @@ const Product = () => {
                                 </select>
                             </div>
 
-                            <div className="product-cart">
+                            <button
+                                className="product-cart orange-button"
+                                onClick={() => addCart(productInfo)}
+                            >
                                 <p>Agregar al carrito</p>
                                 <p>52% de descuento</p>
-                            </div>
+                            </button>
                         </div>
 
                         <div className="product-conditions">
@@ -206,6 +213,7 @@ const Product = () => {
                 />
             </article>
 
+            <CartPanel />
             <Footer />
         </main>
     );

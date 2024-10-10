@@ -67,12 +67,20 @@
     min-width: 550px;
 }
 
+.bar-details details {
+    padding: 0.5em;
+}
+
 .bar-details details[open] {
     background: linear-gradient(to bottom, #e9f2e7, var(--light-color));
 }
 
 .bar-details details[open] summary {
     color: var(--compromise-color);
+}
+
+.bar-details details summary::-webkit-details-marker {
+    display: block;
 }
 
 .bar-modal-icons {

@@ -1,0 +1,97 @@
+.affiliate header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1em;
+    padding: 2em;
+    background-color: #faf8ef;
+}
+
+.affiliate header img {
+    display: none;
+    width: 30%;
+    max-width: 600px;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}
+
+.affiliate-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+    padding: 2em 0;
+}
+
+.affiliate-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 1em;
+    border: 1px solid var(--gray-color);
+}
+
+.affiliate-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.affiliate-profiles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+    padding: 2em 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.affiliate-profiles-container img {
+    margin: auto;
+}
+
+.affiliate-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    padding: 4em 0;
+}
+
+.affiliate-description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.affiliate-convert {
+    background-color: #c7a371;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    height: 300px;
+    color: #fff;
+    font-size: 1.5em;
+}
+
+@media screen and (min-width: 768px) {
+    .affiliate header img {
+        display: block;
+    }
+
+    .affiliate-title {
+        width: 50%;
+    }
+}

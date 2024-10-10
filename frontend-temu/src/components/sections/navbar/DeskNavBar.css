@@ -1,6 +1,14 @@
 .navbar {
     background-color: var(--special-color);
     width: 100%;
+    position: -webkit-sticky;
+}
+
+.navbar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar-container {

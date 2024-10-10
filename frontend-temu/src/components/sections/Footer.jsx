@@ -58,10 +58,10 @@ const Footer = () => {
     const companyInfo = [
         { name: 'Acerca de Temu', path: '/about' },
         { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
-        { name: 'Afililado e influencer: gana comisiones', path: '#' },
-        { name: 'Contáctanos', path: '#' },
-        { name: 'Carreras profesionales', path: '#' },
-        { name: 'Prensa', path: '#' },
+        { name: 'Afililado e influencer: gana comisiones', path: '/affiliate' },
+        { name: 'Contáctanos', path: '/contact-us' },
+        { name: 'Carreras profesionales', path: '/join-us' },
+        { name: 'Prensa', path: '/press' },
         { name: 'Programa de plantación de árboles Temu', path: '#' },
     ];
 
@@ -263,7 +263,7 @@ const Footer = () => {
                         <Link
                             key={belowFooterLink.name}
                             to={belowFooterLink.path}
-                            target='_blank'
+                            target="_blank"
                         >
                             {belowFooterLink.name}
                         </Link>

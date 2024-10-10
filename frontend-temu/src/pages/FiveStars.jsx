@@ -4,6 +4,7 @@ import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
 import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
+import CartPanel from '../components/sections/CartPanel';
 
 const FiveStars = () => {
     const [productsList, setProductsList] = useState([]);
@@ -102,6 +103,7 @@ const FiveStars = () => {
                 />
             </article>
 
+            <CartPanel />
             <Footer />
         </main>
     );
