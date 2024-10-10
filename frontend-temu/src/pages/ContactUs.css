@@ -1,0 +1,82 @@
+.contact-us header {
+    background-image: url('/temu-back.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-us-title {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 5em;
+}
+
+.contact-us-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 1em;
+    padding: 1em;
+}
+
+.contact-us-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border: 1px solid var(--gray-color);
+    padding: 1em;
+
+    box-shadow: 1px 3px 99px -27px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 3px 99px -27px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 1px 3px 99px -27px rgba(0, 0, 0, 0.2);
+}
+
+.contact-us-social {
+    padding: 2em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.contact-us-social-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-us-social-items a {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.contact-us-social-items a img {
+    max-height: 50px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}
+
+@media screen and (min-width: 1200px) {
+    .contact-us-title {
+        background-color: transparent;
+        color: var(--dark-color);
+        justify-content: flex-start;
+        align-items: self-start;
+        padding: 10em;
+    }
+}

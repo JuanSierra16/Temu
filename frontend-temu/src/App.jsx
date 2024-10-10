@@ -15,6 +15,7 @@ import NewCommers from './pages/NewCommers';
 import SupportQuestions from './pages/help/SupportQuestions';
 import Cart from './pages/Cart';
 import Affiliate from './pages/Affiliate';
+import ContactUs from './pages/ContactUs';
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
                 />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/affiliate" element={<Affiliate />} />
+                <Route path="/contact-us" element={<ContactUs />} />
             </Routes>
         </BrowserRouter>
     );
