@@ -61,7 +61,7 @@ const Footer = () => {
         { name: 'Afililado e influencer: gana comisiones', path: '/affiliate' },
         { name: 'Contáctanos', path: '/contact-us' },
         { name: 'Carreras profesionales', path: '/join-us' },
-        { name: 'Prensa', path: '#' },
+        { name: 'Prensa', path: '/press' },
         { name: 'Programa de plantación de árboles Temu', path: '#' },
     ];
 

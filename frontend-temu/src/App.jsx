@@ -17,6 +17,7 @@ import Cart from './pages/Cart';
 import Affiliate from './pages/Affiliate';
 import ContactUs from './pages/ContactUs';
 import JoinUs from './pages/JoinUs';
+import Press from './pages/Press';
 
 function App() {
     return (
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/affiliate" element={<Affiliate />} />
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/join-us" element={<JoinUs />} />
+                <Route path="/press" element={<Press />} />
             </Routes>
         </BrowserRouter>
     );
