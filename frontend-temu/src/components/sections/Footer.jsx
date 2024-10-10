@@ -62,7 +62,10 @@ const Footer = () => {
         { name: 'Contáctanos', path: '/contact-us' },
         { name: 'Carreras profesionales', path: '/join-us' },
         { name: 'Prensa', path: '/press' },
-        { name: 'Programa de plantación de árboles Temu', path: '#' },
+        {
+            name: 'Programa de plantación de árboles Temu',
+            path: '/tree-landing',
+        },
     ];
 
     const client = [

@@ -18,6 +18,7 @@ import Affiliate from './pages/Affiliate';
 import ContactUs from './pages/ContactUs';
 import JoinUs from './pages/JoinUs';
 import Press from './pages/Press';
+import TreeLanding from './pages/TreeLanding';
 
 function App() {
     return (
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/join-us" element={<JoinUs />} />
                 <Route path="/press" element={<Press />} />
+                <Route path="/tree-landing" element={<TreeLanding />} />
             </Routes>
         </BrowserRouter>
     );
