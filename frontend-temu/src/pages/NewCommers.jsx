@@ -4,14 +4,12 @@ import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
 import React, { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
-
+import CartPanel from '../components/sections/CartPanel';
 
 const NewCommers = () => {
-
     const [productsList, setProductsList] = useState([]);
     const [filter, setFilter] = useState('general'); // Estado para manejar el filtro
     const [selected, setSelected] = useState('general'); // Estado para manejar el botón seleccionado
-
 
     const handleLoadMore = useCallback(async () => {
         const newProducts = await getProducts(filter); // Aplicar el filtro si es necesario
@@ -23,7 +21,7 @@ const NewCommers = () => {
         handleLoadMore();
     }, [handleLoadMore]);
 
-    const handleButtonClick = (filterType) => {
+    const handleButtonClick = filterType => {
         setSelected(filterType);
         setFilter(filterType); // Cambiar el filtro según el botón seleccionado
     };
@@ -40,6 +38,7 @@ const NewCommers = () => {
                 />
             </article>
 
+            <CartPanel />
             <Footer />
         </main>
     );

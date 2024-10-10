@@ -9,6 +9,7 @@ import Categories from '../../elements/category/Categories';
 import './DeskNavBar.css';
 import { Link } from 'react-router-dom';
 import HelpMenu from './helpMenu';
+import { useEffect, useRef } from 'react';
 
 const DeskNavBar = () => {
     const navigation = [
@@ -34,8 +35,31 @@ const DeskNavBar = () => {
         },
     ];
 
+    const navbarRef = useRef(null);
+    const lastScrollTop = useRef(0);
+
+    const handleScroll = () => {
+        let scrollTop = window.scrollY;
+
+        if (scrollTop < lastScrollTop.current) {
+            navbarRef.current.classList.add('navbar-sticky');
+        } else {
+            navbarRef.current.classList.remove('navbar-sticky');
+        }
+
+        lastScrollTop.current = scrollTop;
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <nav className="navbar">
+        <nav className="navbar" ref={navbarRef}>
             <div className="navbar-container max-width">
                 <Link to="/">
                     <img src="/TemuLogo.png" alt="logo" className="logo" />
