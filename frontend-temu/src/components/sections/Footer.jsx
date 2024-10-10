@@ -58,7 +58,7 @@ const Footer = () => {
     const companyInfo = [
         { name: 'Acerca de Temu', path: '/about' },
         { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
-        { name: 'Afililado e influencer: gana comisiones', path: '#' },
+        { name: 'Afililado e influencer: gana comisiones', path: '/affiliate' },
         { name: 'Contáctanos', path: '#' },
         { name: 'Carreras profesionales', path: '#' },
         { name: 'Prensa', path: '#' },
@@ -263,7 +263,7 @@ const Footer = () => {
                         <Link
                             key={belowFooterLink.name}
                             to={belowFooterLink.path}
-                            target='_blank'
+                            target="_blank"
                         >
                             {belowFooterLink.name}
                         </Link>
