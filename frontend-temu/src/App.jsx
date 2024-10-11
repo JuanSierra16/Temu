@@ -32,6 +32,7 @@ import CookiesPolicy from './pages/customer-service/CookiesPolicy';
 
 import YourOrders from './pages/user/YourOrders';
 import YourReviews from './pages/user/YourReviews';
+import Profile from './pages/user/Profile';
 
 function App() {
     return (
@@ -79,6 +80,7 @@ function App() {
 
                 <Route path="/your-orders" element={<YourOrders />} />
                 <Route path="/your-reviews" element={<YourReviews />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </BrowserRouter>
     );

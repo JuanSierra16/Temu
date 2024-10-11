@@ -42,7 +42,7 @@ const MobileNavBar = () => {
         {
             name: 'Tu perfil',
             icon: <FaRegUser size={16} />,
-            path: '#',
+            path: '/profile',
         },
         {
             name: 'Proveedores seguidos',

@@ -119,6 +119,10 @@ summary {
     margin-bottom: 0;
 }
 
+select {
+    padding: 0.5em;
+}
+
 @media screen and (max-width: 1380px) {
     .max-width {
         padding: 0 0.5em;
