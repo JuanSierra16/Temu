@@ -1,4 +1,4 @@
-import './YourOrders.css';
+import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
 import { useState } from 'react';
 import { BsBagX } from 'react-icons/bs';
@@ -17,7 +17,7 @@ const YourOrders = () => {
 
     return (
         <DashBoard>
-            <section className="your-orders">
+            <section className="your-orders user-dashboard-container">
                 <div className="your-orders-types">
                     {orderTypes.map(type => (
                         <p
@@ -36,7 +36,7 @@ const YourOrders = () => {
                     ))}
 
                     {orders.length === 0 && (
-                        <div className="your-orders-empty">
+                        <div className="dashboard-empty">
                             <BsBagX size={128} />
                             <p>No tienes pedidos</p>
                         </div>

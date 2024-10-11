@@ -10,20 +10,19 @@ import { MdOutlinePlace } from 'react-icons/md';
 import { AiOutlinePropertySafety, AiOutlineSafety } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../provider/UserContext';
-import { useContext, useEffect, useRef, useState } from 'react';
-import ModalLogin from '../components/sections/navbar/ModalLogin';
+import { useContext, useEffect } from 'react';
 
 const DashBoard = ({ children }) => {
     const submenu = [
         {
             name: 'Tus pedidos',
             icon: <CgNotes size={16} />,
-            path: '#',
+            path: '/your-orders',
         },
         {
             name: 'Tus reseñas',
             icon: <TbMessageStar size={16} />,
-            path: '#',
+            path: '/your-reviews',
         },
         {
             name: 'Tu perfil',

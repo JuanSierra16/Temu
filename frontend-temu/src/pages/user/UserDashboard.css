@@ -1,4 +1,4 @@
-.your-orders {
+.user-dashboard-container {
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -22,7 +22,7 @@
     border-bottom: 2px solid var(--dark-color);
 }
 
-.your-orders-empty {
+.dashboard-empty {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -24,7 +24,7 @@ const UserMenu = () => {
         {
             name: 'Tus reseñas',
             icon: <TbMessageStar size={16} />,
-            path: '#',
+            path: '/your-reviews',
         },
         {
             name: 'Tu perfil',

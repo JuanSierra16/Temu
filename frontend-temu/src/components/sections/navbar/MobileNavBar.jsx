@@ -20,7 +20,11 @@ import './MobileNavBar.css';
 
 const MobileNavBar = () => {
     const submenuCol = [
-        { name: 'Tus pedidos', icon: <CgNotes size={24} />, path: '#' },
+        {
+            name: 'Tus pedidos',
+            icon: <CgNotes size={24} />,
+            path: '/your-orders',
+        },
         { name: 'Cupones y ofertas', icon: <LuTicket size={24} />, path: '#' },
         {
             name: 'Saldo de crédito',
@@ -33,7 +37,7 @@ const MobileNavBar = () => {
         {
             name: 'Tus reseñas',
             icon: <TbMessageStar size={16} />,
-            path: '#',
+            path: '/your-reviews',
         },
         {
             name: 'Tu perfil',
@@ -125,19 +129,19 @@ const MobileNavBar = () => {
 
                                 <div className="sub-menu-list">
                                     {submenuCol.map(item => (
-                                        <a href={item.path} key={item.name}>
+                                        <Link to={item.path} key={item.name}>
                                             <span>{item.icon}</span>
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
 
                                 <div className="sub-menu-list-row">
                                     {submenu.map(item => (
-                                        <a href={item.path} key={item.name}>
+                                        <Link to={item.path} key={item.name}>
                                             {item.icon}
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     ))}
 
                                     {userIsLogin && (
