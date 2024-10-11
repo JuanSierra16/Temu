@@ -92,3 +92,34 @@
     max-width: 400px;
     margin: 0 auto;
 }
+
+.account-security-icon {
+    color: var(--compromise-color);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.account-security-item {
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+    gap: 0.5em;
+    border-bottom: 1px solid var(--gray-color);
+    width: 100%;
+
+    & div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & span {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    & button {
+        max-width: 100px;
+        margin: 0 auto;
+    }
+}

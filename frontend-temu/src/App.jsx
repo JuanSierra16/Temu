@@ -39,6 +39,7 @@ import Suppliers from './pages/user/Suppliers';
 import History from './pages/user/History';
 import Directions from './pages/user/Directions';
 import PaymentMethods from './pages/user/PaymantMetods';
+import AccountSecurity from './pages/user/AccountSecurity';
 
 function App() {
     return (
@@ -93,6 +94,7 @@ function App() {
                 <Route path="/history-navigation" element={<History />} />
                 <Route path="/your-addresses" element={<Directions />} />
                 <Route path="/payment-methods" element={<PaymentMethods />} />
+                <Route path="/account-security" element={<AccountSecurity />} />
             </Routes>
         </BrowserRouter>
     );

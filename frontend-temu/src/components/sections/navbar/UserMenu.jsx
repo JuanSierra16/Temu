@@ -59,7 +59,7 @@ const UserMenu = () => {
         {
             name: 'Seguridad de la cuenta',
             icon: <AiOutlineSafety size={16} />,
-            path: '#',
+            path: '/account-security',
         },
         {
             name: 'Permisos',
