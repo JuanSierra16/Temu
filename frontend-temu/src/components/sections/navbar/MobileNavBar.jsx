@@ -68,11 +68,6 @@ const MobileNavBar = () => {
             icon: <FaHeadset size={16} />,
             path: '#',
         },
-        {
-            name: 'Configuración',
-            icon: <RiSettingsLine size={16} />,
-            path: '#',
-        },
     ];
 
     const { userData, userIsLogin, logoutAction } = useContext(UserContext);

@@ -103,7 +103,7 @@ const Footer = () => {
                         <h5>Información de la empresa</h5>
 
                         {companyInfo.map(company => (
-                            <>
+                            <span key={company.name}>
                                 {company.path && (
                                     <Link key={company.name} to={company.path}>
                                         <p>{company.name}</p>
@@ -112,7 +112,7 @@ const Footer = () => {
                                 {!company.path && (
                                     <p key={company.name}>{company.name}</p>
                                 )}
-                            </>
+                            </span>
                         ))}
                     </div>
 

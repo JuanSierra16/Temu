@@ -24,21 +24,15 @@ const HelpMenu = () => {
                     <SubMenu>
                         <div className="help-sub-menu">
                             {help.map(item => (
-                                <>
+                                <span key={item.name}>
                                     {item.path && (
-                                        <Link
-                                            to={item.path}
-                                            target="_blank"
-                                            key={item.name}
-                                        >
+                                        <Link to={item.path} target="_blank">
                                             {item.name}
                                         </Link>
                                     )}
 
-                                    {!item.path && (
-                                        <a key={item.name}>{item.name}</a>
-                                    )}
-                                </>
+                                    {!item.path && <a>{item.name}</a>}
+                                </span>
                             ))}
                         </div>
                     </SubMenu>

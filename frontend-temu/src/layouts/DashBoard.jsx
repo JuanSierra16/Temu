@@ -73,7 +73,7 @@ const DashBoard = ({ children }) => {
         {
             name: 'Notificaciones',
             icon: <TbMessage2Pin size={16} />,
-            path: '#',
+            path: '/notifications',
         },
     ];
 

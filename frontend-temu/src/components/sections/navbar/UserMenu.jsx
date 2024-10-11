@@ -69,7 +69,7 @@ const UserMenu = () => {
         {
             name: 'Notificaciones',
             icon: <TbMessage2Pin size={16} />,
-            path: '#',
+            path: '/notifications',
         },
     ];
 

@@ -41,6 +41,7 @@ import Directions from './pages/user/Directions';
 import PaymentMethods from './pages/user/PaymantMetods';
 import AccountSecurity from './pages/user/AccountSecurity';
 import Permissions from './pages/user/Permissions';
+import Notifications from './pages/user/Notifications';
 
 function App() {
     return (
@@ -97,6 +98,7 @@ function App() {
                 <Route path="/payment-methods" element={<PaymentMethods />} />
                 <Route path="/account-security" element={<AccountSecurity />} />
                 <Route path="/permissions" element={<Permissions />} />
+                <Route path="/notifications" element={<Notifications />} />
             </Routes>
         </BrowserRouter>
     );
