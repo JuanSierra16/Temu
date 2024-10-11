@@ -3,16 +3,12 @@ import { CgNotes, CgBox } from 'react-icons/cg';
 import { MdOutlinePlace } from 'react-icons/md';
 import { FaRegUser, FaRegClock } from 'react-icons/fa';
 import { TbMessageStar, TbMessage2Pin, TbLogout2 } from 'react-icons/tb';
-import {
-    AiOutlineSafety,
-    AiOutlinePropertySafety,
-    AiOutlineUserSwitch,
-} from 'react-icons/ai';
-
+import { AiOutlineSafety, AiOutlinePropertySafety } from 'react-icons/ai';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import ModalLogin from './ModalLogin';
+import { Link } from 'react-router-dom';
 
 const UserMenu = () => {
     const submenu = [
@@ -121,23 +117,18 @@ const UserMenu = () => {
                                 <hr />
 
                                 {submenu.map((item, index) => (
-                                    <a key={index} href={item.path}>
+                                    <Link key={index} to={item.path}>
                                         {item.icon}
                                         <span>{item.name}</span>
-                                    </a>
+                                    </Link>
                                 ))}
 
                                 <hr />
 
-                                <a href="#">
-                                    <AiOutlineUserSwitch size={16} />
-                                    <span>Cambiar cuenta</span>
-                                </a>
-
-                                <a href="#" onClick={logoutAction}>
+                                <Link href="#" onClick={logoutAction}>
                                     <TbLogout2 size={16} />
                                     <span>Cerrar sesión</span>
-                                </a>
+                                </Link>
                             </div>
                         </SubMenu>
                     </MenuItem>

@@ -72,7 +72,7 @@ const Footer = () => {
         { name: 'Política de devolución y reembolso', path: '/return-policy' },
         { name: 'Política de propiedad intelectual', path: '/property-policy' },
         { name: 'Política de envíos', path: '/shipping-information' },
-        { name: 'Reportar actividad sospechosa', path: '#' },
+        { name: 'Reportar actividad sospechosa', path: '/report-case' },
     ];
 
     const help = [

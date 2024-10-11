@@ -1,0 +1,65 @@
+.report-case {
+    margin-top: 2em;
+}
+
+.report-case,
+.report-case section {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.report-case-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+.report-case-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3em;
+    border: 1px solid var(--gray-color);
+    padding: 1em;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--gray-color);
+    }
+}
+
+.report-case-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 2em 1em;
+
+    & h3 {
+        text-align: center;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    & label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+
+    & textarea {
+        padding: 1em;
+        resize: none;
+        min-height: 200px;
+    }
+}
+
+.report-case-checkbox {
+    display: flex;
+    flex-direction: row !important;
+    gap: 0.5em;
+}

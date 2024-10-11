@@ -22,6 +22,7 @@ import PrivacyPolicy from './pages/help/PrivacyPolicy';
 import PurchaseSafe from './pages/help/PurchaseSafe';
 import SafetyCenter from './pages/help/SafetyCenter';
 import SupportQuestions from './pages/help/SupportQuestions';
+import ReportCase from './pages/help/ReportCase';
 
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import ReturnPolicy from './pages/customer-service/ReturnPolicy';
@@ -73,6 +74,7 @@ function App() {
                 <Route path="/purchase-safe" element={<PurchaseSafe />} />
                 <Route path="/partner-with-temu" element={<Partner />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/report-case" element={<ReportCase />} />
 
                 <Route path="/return-policy" element={<ReturnPolicy />} />
                 <Route path="/property-policy" element={<PropertyPolicy />} />
