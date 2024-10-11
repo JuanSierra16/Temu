@@ -8,7 +8,8 @@ import {
   loginWithPhoneNumber,
   hasProfile,
   findAccountByEmail,
-  findAccountByPhoneNumber
+  findAccountByPhoneNumber,
+  updateUserDetails
 } from "../controllers/users.controller.js";
 
 const router = Router();
@@ -25,5 +26,7 @@ router.post("/users/login/has-profile", hasProfile);
 router.post('/users/find-by-email', findAccountByEmail);
 // Ruta para encontrar una cuenta por teléfono
 router.post('/users/find-by-phone', findAccountByPhoneNumber);
+// Ruta para actualizar los detalles del usuario
+router.put('/users/:id/details', updateUserDetails);
 
 export default router;

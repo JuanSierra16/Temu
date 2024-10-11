@@ -75,6 +75,20 @@ CREATE TABLE reseñas (
     CONSTRAINT fk_producto_id_reseña FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 
+CREATE TABLE medidas_usuario (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    medida_pecho DECIMAL(10, 2),
+    medida_cintura DECIMAL(10, 2), 
+    medida_cadera DECIMAL(10, 2), 
+    estatura DECIMAL(10, 2), 
+    peso DECIMAL(10, 2), 
+    unidad_medida VARCHAR(10), -- Ahora permite cualquier valor, como 'in', 'lbs', 'cm', 'kgs'
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_medidas_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id)
+);
+
+select * from users;
 select * from categorias;
 select * from productos;
 select * from proveedores;
