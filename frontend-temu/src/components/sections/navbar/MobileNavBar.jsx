@@ -25,11 +25,15 @@ const MobileNavBar = () => {
             icon: <CgNotes size={24} />,
             path: '/your-orders',
         },
-        { name: 'Cupones y ofertas', icon: <LuTicket size={24} />, path: '#' },
+        {
+            name: 'Cupones y ofertas',
+            icon: <LuTicket size={24} />,
+            path: '/coupons',
+        },
         {
             name: 'Saldo de crédito',
             icon: <LuCreditCard size={24} />,
-            path: '#',
+            path: '/credit-balance',
         },
     ];
 
@@ -47,26 +51,21 @@ const MobileNavBar = () => {
         {
             name: 'Proveedores seguidos',
             icon: <CgBox size={16} />,
-            path: '#',
+            path: '/followed-suppliers',
         },
         {
             name: 'Historial de navegación',
             icon: <FaRegClock size={16} />,
-            path: '#',
+            path: '/history-navigation',
         },
         {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
-            path: '#',
+            path: '/your-addresses',
         },
         {
             name: 'Atención al cliente',
             icon: <FaHeadset size={16} />,
-            path: '#',
-        },
-        {
-            name: 'Configuración',
-            icon: <RiSettingsLine size={16} />,
             path: '#',
         },
     ];

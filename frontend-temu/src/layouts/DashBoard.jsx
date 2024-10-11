@@ -11,6 +11,7 @@ import { AiOutlinePropertySafety, AiOutlineSafety } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../provider/UserContext';
 import { useContext, useEffect } from 'react';
+import { CiCreditCard1 } from 'react-icons/ci';
 
 const DashBoard = ({ children }) => {
     const submenu = [
@@ -32,42 +33,47 @@ const DashBoard = ({ children }) => {
         {
             name: 'Cupones y ofertas',
             icon: <LuTicket size={16} />,
-            path: '#',
+            path: '/coupons',
         },
         {
             name: 'Saldo de crédito',
             icon: <LuCreditCard size={16} />,
-            path: '#',
+            path: '/credit-balance',
         },
         {
             name: 'Proveedores seguidos',
             icon: <CgBox size={16} />,
-            path: '#',
+            path: '/followed-suppliers',
         },
         {
             name: 'Historial de navegación',
             icon: <FaRegClock size={16} />,
-            path: '#',
+            path: '/history-navigation',
         },
         {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
-            path: '#',
+            path: '/your-addresses',
+        },
+        {
+            name: 'Métodos de pago',
+            icon: <CiCreditCard1 size={16} />,
+            path: '/payment-methods',
         },
         {
             name: 'Seguridad de la cuenta',
             icon: <AiOutlineSafety size={16} />,
-            path: '#',
+            path: '/account-security',
         },
         {
             name: 'Permisos',
             icon: <AiOutlinePropertySafety size={16} />,
-            path: '#',
+            path: '/permissions',
         },
         {
             name: 'Notificaciones',
             icon: <TbMessage2Pin size={16} />,
-            path: '#',
+            path: '/notifications',
         },
     ];
 

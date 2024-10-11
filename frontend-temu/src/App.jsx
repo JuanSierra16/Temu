@@ -22,6 +22,7 @@ import PrivacyPolicy from './pages/help/PrivacyPolicy';
 import PurchaseSafe from './pages/help/PurchaseSafe';
 import SafetyCenter from './pages/help/SafetyCenter';
 import SupportQuestions from './pages/help/SupportQuestions';
+import ReportCase from './pages/help/ReportCase';
 
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import ReturnPolicy from './pages/customer-service/ReturnPolicy';
@@ -33,6 +34,15 @@ import CookiesPolicy from './pages/customer-service/CookiesPolicy';
 import YourOrders from './pages/user/YourOrders';
 import YourReviews from './pages/user/YourReviews';
 import Profile from './pages/user/Profile';
+import Coupons from './pages/user/Coupons';
+import Credit from './pages/user/Credit';
+import Suppliers from './pages/user/Suppliers';
+import History from './pages/user/History';
+import Directions from './pages/user/Directions';
+import PaymentMethods from './pages/user/PaymantMetods';
+import AccountSecurity from './pages/user/AccountSecurity';
+import Permissions from './pages/user/Permissions';
+import Notifications from './pages/user/Notifications';
 
 function App() {
     return (
@@ -64,6 +74,7 @@ function App() {
                 <Route path="/purchase-safe" element={<PurchaseSafe />} />
                 <Route path="/partner-with-temu" element={<Partner />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/report-case" element={<ReportCase />} />
 
                 <Route path="/return-policy" element={<ReturnPolicy />} />
                 <Route path="/property-policy" element={<PropertyPolicy />} />
@@ -81,6 +92,15 @@ function App() {
                 <Route path="/your-orders" element={<YourOrders />} />
                 <Route path="/your-reviews" element={<YourReviews />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/coupons" element={<Coupons />} />
+                <Route path="/credit-balance" element={<Credit />} />
+                <Route path="/followed-suppliers" element={<Suppliers />} />
+                <Route path="/history-navigation" element={<History />} />
+                <Route path="/your-addresses" element={<Directions />} />
+                <Route path="/payment-methods" element={<PaymentMethods />} />
+                <Route path="/account-security" element={<AccountSecurity />} />
+                <Route path="/permissions" element={<Permissions />} />
+                <Route path="/notifications" element={<Notifications />} />
             </Routes>
         </BrowserRouter>
     );

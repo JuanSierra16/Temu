@@ -65,3 +65,94 @@
         gap: 0.5em;
     }
 }
+
+.input-coupon {
+    display: flex;
+    gap: 0.5em;
+}
+
+.history-container button {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.direction-container button {
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.account-security-icon {
+    color: var(--compromise-color);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.account-security-item {
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+    gap: 0.5em;
+    border-bottom: 1px solid var(--gray-color);
+    width: 100%;
+
+    & div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & span {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    & button {
+        max-width: 100px;
+        margin: 0 auto;
+    }
+}
+
+.permissions-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1em;
+    font-size: small;
+}
+
+.permissions-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border: 1px solid var(--gray-color);
+    padding: 1em;
+}
+
+.permissions-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-color);
+    padding-bottom: 0.5em;
+
+    & span {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    & .circle-off {
+        color: red;
+    }
+}
