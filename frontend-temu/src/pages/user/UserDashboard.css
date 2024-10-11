@@ -30,3 +30,38 @@
     gap: 1em;
     min-height: 50vh;
 }
+
+.profile-icon {
+    display: flex;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+    }
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & button {
+        max-width: 200px;
+        margin: 0 auto;
+    }
+}
+
+.profile-form > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+}
