@@ -39,7 +39,7 @@ const UserMenu = () => {
         {
             name: 'Saldo de crédito',
             icon: <LuCreditCard size={16} />,
-            path: '#',
+            path: '/credit-balance',
         },
         {
             name: 'Proveedores seguidos',

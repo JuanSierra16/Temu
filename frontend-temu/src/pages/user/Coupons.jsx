@@ -1,6 +1,7 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
 import { useState } from 'react';
+import { IoTicketOutline } from 'react-icons/io5';
 
 const Coupons = () => {
     const orderTypes = ['Disponible', 'Usado', 'Vencido'];
@@ -41,7 +42,7 @@ const Coupons = () => {
 
                     {coupons.length === 0 && (
                         <div className="dashboard-empty">
-                            {/* <BsBagX size={128} /> */}
+                            <IoTicketOutline size={128} />
                             <p>No tienes cupones disponibles</p>
                         </div>
                     )}

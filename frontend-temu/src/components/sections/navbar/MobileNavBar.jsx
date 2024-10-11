@@ -33,7 +33,7 @@ const MobileNavBar = () => {
         {
             name: 'Saldo de crédito',
             icon: <LuCreditCard size={24} />,
-            path: '#',
+            path: '/credit-balance',
         },
     ];
 
