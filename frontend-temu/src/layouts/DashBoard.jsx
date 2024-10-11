@@ -32,7 +32,7 @@ const DashBoard = ({ children }) => {
         {
             name: 'Cupones y ofertas',
             icon: <LuTicket size={16} />,
-            path: '#',
+            path: '/coupons',
         },
         {
             name: 'Saldo de crédito',

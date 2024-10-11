@@ -25,7 +25,11 @@ const MobileNavBar = () => {
             icon: <CgNotes size={24} />,
             path: '/your-orders',
         },
-        { name: 'Cupones y ofertas', icon: <LuTicket size={24} />, path: '#' },
+        {
+            name: 'Cupones y ofertas',
+            icon: <LuTicket size={24} />,
+            path: '/coupons',
+        },
         {
             name: 'Saldo de crédito',
             icon: <LuCreditCard size={24} />,

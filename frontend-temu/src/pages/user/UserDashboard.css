@@ -65,3 +65,8 @@
         gap: 0.5em;
     }
 }
+
+.input-coupon {
+    display: flex;
+    gap: 0.5em;
+}
