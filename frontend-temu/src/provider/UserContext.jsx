@@ -34,7 +34,7 @@ const UserProvider = ({ children }) => {
     // login
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
-    const [waitLogin, setWaitLogin] = useState(false);
+    const [waitLogin, setWaitLogin] = useState(true);
     const [sessionJWT, setSessionJWT] = useState(null);
     const [noHasProfile, setNoHasProfile] = useState(false);
 
@@ -54,6 +54,7 @@ const UserProvider = ({ children }) => {
     const [equalPhoneCode, setEqualPhoneCode] = useState(false);
 
     useEffect(() => {
+        setWaitLogin(true);
         const cookieValue = Cookies.get('token');
 
         if (cookieValue) {
@@ -63,6 +64,8 @@ const UserProvider = ({ children }) => {
             setUserIsLogin(true);
             setSessionJWT(token);
         }
+
+        setWaitLogin(false);
     }, []);
 
     const loginPlatform = async (

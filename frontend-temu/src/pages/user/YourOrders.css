@@ -1,0 +1,32 @@
+.your-orders {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.your-orders-types {
+    display: flex;
+    gap: 1em;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.your-orders-type {
+    cursor: pointer;
+}
+
+.your-orders-type-active {
+    border-bottom: 2px solid var(--dark-color);
+}
+
+.your-orders-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    min-height: 50vh;
+}

@@ -19,7 +19,7 @@ const UserMenu = () => {
         {
             name: 'Tus pedidos',
             icon: <CgNotes size={16} />,
-            path: '#',
+            path: '/your-orders',
         },
         {
             name: 'Tus reseñas',
