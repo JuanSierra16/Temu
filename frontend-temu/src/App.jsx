@@ -35,6 +35,7 @@ import YourReviews from './pages/user/YourReviews';
 import Profile from './pages/user/Profile';
 import Coupons from './pages/user/Coupons';
 import Credit from './pages/user/Credit';
+import Suppliers from './pages/user/Suppliers';
 
 function App() {
     return (
@@ -85,6 +86,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/coupons" element={<Coupons />} />
                 <Route path="/credit-balance" element={<Credit />} />
+                <Route path="/followed-suppliers" element={<Suppliers />} />
             </Routes>
         </BrowserRouter>
     );

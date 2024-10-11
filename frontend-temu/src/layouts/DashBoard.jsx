@@ -42,7 +42,7 @@ const DashBoard = ({ children }) => {
         {
             name: 'Proveedores seguidos',
             icon: <CgBox size={16} />,
-            path: '#',
+            path: '/followed-suppliers',
         },
         {
             name: 'Historial de navegación',
