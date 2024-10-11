@@ -30,6 +30,9 @@ import ShippingInformation from './pages/customer-service/ShippingInformation';
 import PrivacyPreferences from './pages/customer-service/PrivacyPreferences';
 import CookiesPolicy from './pages/customer-service/CookiesPolicy';
 
+import YourOrders from './pages/user/YourOrders';
+import YourReviews from './pages/user/YourReviews';
+
 function App() {
     return (
         <BrowserRouter>
@@ -73,6 +76,9 @@ function App() {
                     element={<PrivacyPreferences />}
                 />
                 <Route path="/cookies-policy" element={<CookiesPolicy />} />
+
+                <Route path="/your-orders" element={<YourOrders />} />
+                <Route path="/your-reviews" element={<YourReviews />} />
             </Routes>
         </BrowserRouter>
     );

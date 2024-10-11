@@ -1,0 +1,43 @@
+.dashboard {
+    min-height: 100vh;
+}
+
+.dashboard-nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    width: 100%;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.dashboard-nav ul {
+    list-style: none;
+}
+
+.dashboard-nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em 1em;
+}
+
+.dashboard-nav ul li a:hover {
+    background-color: var(--gray-color);
+}
+
+@media screen and (min-width: 768px) {
+    .dashboard {
+        padding-top: 3em;
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        gap: 1em;
+    }
+
+    .dashboard-nav {
+        display: flex;
+    }
+}

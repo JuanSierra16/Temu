@@ -19,12 +19,12 @@ const UserMenu = () => {
         {
             name: 'Tus pedidos',
             icon: <CgNotes size={16} />,
-            path: '#',
+            path: '/your-orders',
         },
         {
             name: 'Tus reseñas',
             icon: <TbMessageStar size={16} />,
-            path: '#',
+            path: '/your-reviews',
         },
         {
             name: 'Tu perfil',
