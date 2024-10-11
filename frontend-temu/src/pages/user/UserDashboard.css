@@ -123,3 +123,36 @@
         margin: 0 auto;
     }
 }
+
+.permissions-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1em;
+    font-size: small;
+}
+
+.permissions-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border: 1px solid var(--gray-color);
+    padding: 1em;
+}
+
+.permissions-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-color);
+    padding-bottom: 0.5em;
+
+    & span {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    & .circle-off {
+        color: red;
+    }
+}

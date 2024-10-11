@@ -40,6 +40,7 @@ import History from './pages/user/History';
 import Directions from './pages/user/Directions';
 import PaymentMethods from './pages/user/PaymantMetods';
 import AccountSecurity from './pages/user/AccountSecurity';
+import Permissions from './pages/user/Permissions';
 
 function App() {
     return (
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/your-addresses" element={<Directions />} />
                 <Route path="/payment-methods" element={<PaymentMethods />} />
                 <Route path="/account-security" element={<AccountSecurity />} />
+                <Route path="/permissions" element={<Permissions />} />
             </Routes>
         </BrowserRouter>
     );

@@ -64,7 +64,7 @@ const UserMenu = () => {
         {
             name: 'Permisos',
             icon: <AiOutlinePropertySafety size={16} />,
-            path: '#',
+            path: '/permissions',
         },
         {
             name: 'Notificaciones',
