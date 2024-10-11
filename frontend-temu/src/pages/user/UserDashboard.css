@@ -75,3 +75,11 @@
     max-width: 200px;
     margin: 0 auto;
 }
+
+.direction-container button {
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}

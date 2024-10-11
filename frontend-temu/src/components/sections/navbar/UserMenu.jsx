@@ -54,7 +54,7 @@ const UserMenu = () => {
         {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
-            path: '#',
+            path: '/your-addresses',
         },
         {
             name: 'Seguridad de la cuenta',

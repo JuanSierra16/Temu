@@ -61,7 +61,7 @@ const MobileNavBar = () => {
         {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
-            path: '#',
+            path: '/your-addresses',
         },
         {
             name: 'Atención al cliente',
