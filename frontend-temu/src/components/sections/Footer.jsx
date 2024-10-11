@@ -57,7 +57,7 @@ const Footer = () => {
 
     const companyInfo = [
         { name: 'Acerca de Temu', path: '/about' },
-        { name: 'Temu - ¡Entre todos, Bajamos Precios', path: '#' },
+        { name: 'Temu - ¡Entre todos, Bajamos Precios', path: null },
         { name: 'Afililado e influencer: gana comisiones', path: '/affiliate' },
         { name: 'Contáctanos', path: '/contact-us' },
         { name: 'Carreras profesionales', path: '/join-us' },
@@ -69,9 +69,9 @@ const Footer = () => {
     ];
 
     const client = [
-        { name: 'Política de devolución y reembolso', path: '#' },
-        { name: 'Política de propiedad intelectual', path: '#' },
-        { name: 'Política de envíos', path: '#' },
+        { name: 'Política de devolución y reembolso', path: '/return-policy' },
+        { name: 'Política de propiedad intelectual', path: '/property-policy' },
+        { name: 'Política de envíos', path: '/shipping-information' },
         { name: 'Reportar actividad sospechosa', path: '#' },
     ];
 
@@ -88,8 +88,11 @@ const Footer = () => {
     const belowFooter = [
         { name: 'Términos de uso.', path: '/terms-of-use' },
         { name: 'Política de privacidad.', path: '/privacy-policy' },
-        { name: 'Tus preferencias de privacidad.', path: '#' },
-        { name: 'Gestión de anuncios.', path: '#' },
+        {
+            name: 'Tus preferencias de privacidad.',
+            path: '/privacy-preferences',
+        },
+        { name: 'Gestión de anuncios.', path: '/cookies-policy' },
     ];
 
     return (
@@ -100,9 +103,16 @@ const Footer = () => {
                         <h5>Información de la empresa</h5>
 
                         {companyInfo.map(company => (
-                            <Link key={company.name} to={company.path}>
-                                <p>{company.name}</p>
-                            </Link>
+                            <>
+                                {company.path && (
+                                    <Link key={company.name} to={company.path}>
+                                        <p>{company.name}</p>
+                                    </Link>
+                                )}
+                                {!company.path && (
+                                    <p key={company.name}>{company.name}</p>
+                                )}
+                            </>
                         ))}
                     </div>
 
@@ -110,9 +120,13 @@ const Footer = () => {
                         <h5>Atención al cliente</h5>
 
                         {client.map(company => (
-                            <a key={company.name} href={company.path}>
+                            <Link
+                                key={company.name}
+                                to={company.path}
+                                target="_blank"
+                            >
                                 <p>{company.name}</p>
-                            </a>
+                            </Link>
                         ))}
                     </div>
 

@@ -24,6 +24,11 @@ import SafetyCenter from './pages/help/SafetyCenter';
 import SupportQuestions from './pages/help/SupportQuestions';
 
 import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
+import ReturnPolicy from './pages/customer-service/ReturnPolicy';
+import PropertyPolicy from './pages/customer-service/PropertyPolicy';
+import ShippingInformation from './pages/customer-service/ShippingInformation';
+import PrivacyPreferences from './pages/customer-service/PrivacyPreferences';
+import CookiesPolicy from './pages/customer-service/CookiesPolicy';
 
 function App() {
     return (
@@ -55,6 +60,19 @@ function App() {
                 <Route path="/purchase-safe" element={<PurchaseSafe />} />
                 <Route path="/partner-with-temu" element={<Partner />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+                <Route path="/return-policy" element={<ReturnPolicy />} />
+                <Route path="/property-policy" element={<PropertyPolicy />} />
+                <Route
+                    path="/shipping-information"
+                    element={<ShippingInformation />}
+                />
+
+                <Route
+                    path="/privacy-preferences"
+                    element={<PrivacyPreferences />}
+                />
+                <Route path="/cookies-policy" element={<CookiesPolicy />} />
             </Routes>
         </BrowserRouter>
     );
