@@ -47,7 +47,7 @@ const DashBoard = ({ children }) => {
         {
             name: 'Historial de navegación',
             icon: <FaRegClock size={16} />,
-            path: '#',
+            path: '/history-navigation',
         },
         {
             name: 'Direcciones',
