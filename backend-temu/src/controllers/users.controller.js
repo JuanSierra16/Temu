@@ -220,6 +220,13 @@ export const loginUser = async (req, res) => {
       ]);
       const newUser = userRows[0];
 
+      // Obtener las medidas del usuario recién creado
+      const [medidasRows] = await pool.query(
+        "SELECT * FROM medidas_usuario WHERE usuario_id = ?",
+        [insertResult.insertId]
+      );
+      const medidas = medidasRows[0] || {};
+
       // Generar el token JWT
       const token = jwt.sign(
         { id: insertResult.insertId, username, email },
@@ -238,6 +245,7 @@ export const loginUser = async (req, res) => {
           phone_number: newUser.phone_number,
           is_verified: newUser.is_verified,
           created_at: newUser.created_at,
+          medias: medidas,
         },
         token: token, // Devolver el token al front-end
       });
@@ -251,6 +259,13 @@ export const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Contraseña incorrecta" });
     }
+
+    // Obtener las medidas del usuario
+    const [medidasRows] = await pool.query(
+      "SELECT * FROM medidas_usuario WHERE usuario_id = ?",
+      [user.id]
+    );
+    const medidas = medidasRows[0] || {};
 
     // Generar el token JWT
     const token = jwt.sign(
@@ -271,6 +286,7 @@ export const loginUser = async (req, res) => {
         phone_number: user.phone_number,
         is_verified: user.is_verified,
         created_at: user.created_at,
+        medidas: medidas,
       },
       token: token, // Devolver el token al front-end
     });
@@ -318,6 +334,13 @@ export const loginUserPlatform = async (req, res) => {
       }
     }
 
+    // Obtener las medidas del usuario
+    const [medidasRows] = await pool.query(
+      "SELECT * FROM medidas_usuario WHERE usuario_id = ?",
+      [user.id]
+    );
+    const medidas = medidasRows[0] || {};
+
     // Generar el token JWT
     const token = jwt.sign(
       { id: user.id, username: user.username, email: user.email },
@@ -339,6 +362,7 @@ export const loginUserPlatform = async (req, res) => {
         phone_number: user.phone_number,
         is_verified: user.is_verified,
         created_at: user.created_at,
+        medidas: medidas,
       },
       token: token, // Devolver el token al front-end
     });
@@ -353,22 +377,22 @@ export const findAccountByEmail = async (req, res) => {
   const { email } = req.body;
 
   try {
-      // Buscar el usuario en la base de datos por email
-      const [rows] = await pool.query('SELECT id, username, email, id_usuario_plataforma, nombre_plataforma, phone_number, is_verified, created_at FROM users WHERE email = ?', [email]);
+    // Buscar el usuario en la base de datos por email
+    const [rows] = await pool.query('SELECT id, username, email, id_usuario_plataforma, nombre_plataforma, phone_number, is_verified, created_at FROM users WHERE email = ?', [email]);
 
-      if (rows.length === 0) {
-          return res.status(404).json({ message: 'Usuario no encontrado' });
-      }
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
 
-      const user = rows[0];
+    const user = rows[0];
 
-      res.status(200).send({
-          message: 'Usuario encontrado',
-          user: user
-      });
+    res.status(200).send({
+      message: 'Usuario encontrado',
+      user: user
+    });
   } catch (error) {
-      console.error('Error al buscar el usuario por email:', error);
-      return res.status(500).json({ message: error.message });
+    console.error('Error al buscar el usuario por email:', error);
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -377,21 +401,67 @@ export const findAccountByPhoneNumber = async (req, res) => {
   const { phoneNumber } = req.body;
 
   try {
-      // Buscar el usuario en la base de datos por número de teléfono
-      const [rows] = await pool.query('SELECT id, username, email, id_usuario_plataforma, nombre_plataforma, phone_number, is_verified, created_at FROM users WHERE phone_number = ?', [phoneNumber]);
+    // Buscar el usuario en la base de datos por número de teléfono
+    const [rows] = await pool.query('SELECT id, username, email, id_usuario_plataforma, nombre_plataforma, phone_number, is_verified, created_at FROM users WHERE phone_number = ?', [phoneNumber]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    const user = rows[0];
+
+    res.status(200).send({
+      message: 'Usuario encontrado',
+      user: user
+    });
+  } catch (error) {
+    console.error('Error al buscar el usuario por número de teléfono:', error);
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+// Controlador para actualizar las medidas del usuario o su nombre
+export const updateUserDetails = async (req, res) => {
+  const { id } = req.params;
+  const { username, medida_pecho, medida_cintura, medida_cadera, estatura, peso, unidad_medida } = req.body;
+
+  try {
+    // Iniciar una transacción
+    await pool.query('START TRANSACTION');
+
+    // Actualizar el nombre de usuario si se proporciona
+    if (username) {
+      await pool.query('UPDATE users SET username = ? WHERE id = ?', [username, id]);
+    }
+
+    // Actualizar las medidas del usuario si se proporcionan
+    if (medida_pecho || medida_cintura || medida_cadera || estatura || peso || unidad_medida) {
+      const [rows] = await pool.query('SELECT * FROM medidas_usuario WHERE usuario_id = ?', [id]);
 
       if (rows.length === 0) {
-          return res.status(404).json({ message: 'Usuario no encontrado' });
+        // Insertar nuevas medidas si no existen
+        await pool.query(`
+                  INSERT INTO medidas_usuario (usuario_id, medida_pecho, medida_cintura, medida_cadera, estatura, peso, unidad_medida)
+                  VALUES (?, ?, ?, ?, ?, ?, ?)
+              `, [id, medida_pecho, medida_cintura, medida_cadera, estatura, peso, unidad_medida]);
+      } else {
+        // Actualizar las medidas existentes
+        await pool.query(`
+                  UPDATE medidas_usuario
+                  SET medida_pecho = ?, medida_cintura = ?, medida_cadera = ?, estatura = ?, peso = ?, unidad_medida = ?
+                  WHERE usuario_id = ?
+              `, [medida_pecho, medida_cintura, medida_cadera, estatura, peso, unidad_medida, id]);
       }
+    }
 
-      const user = rows[0];
+    // Confirmar la transacción
+    await pool.query('COMMIT');
 
-      res.status(200).send({
-          message: 'Usuario encontrado',
-          user: user
-      });
+    res.status(200).send({ message: 'Detalles del usuario actualizados exitosamente' });
   } catch (error) {
-      console.error('Error al buscar el usuario por número de teléfono:', error);
-      return res.status(500).json({ message: error.message });
+    // Revertir la transacción en caso de error
+    await pool.query('ROLLBACK');
+    console.error('Error al actualizar los detalles del usuario:', error);
+    return res.status(500).json({ message: error.message });
   }
 };
