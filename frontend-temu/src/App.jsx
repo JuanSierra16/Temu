@@ -27,6 +27,8 @@ import ScrollToTopRouter from './components/elements/ScrollToTopRouter';
 import ReturnPolicy from './pages/customer-service/ReturnPolicy';
 import PropertyPolicy from './pages/customer-service/PropertyPolicy';
 import ShippingInformation from './pages/customer-service/ShippingInformation';
+import PrivacyPreferences from './pages/customer-service/PrivacyPreferences';
+import CookiesPolicy from './pages/customer-service/CookiesPolicy';
 
 function App() {
     return (
@@ -65,6 +67,12 @@ function App() {
                     path="/shipping-information"
                     element={<ShippingInformation />}
                 />
+
+                <Route
+                    path="/privacy-preferences"
+                    element={<PrivacyPreferences />}
+                />
+                <Route path="/cookies-policy" element={<CookiesPolicy />} />
             </Routes>
         </BrowserRouter>
     );

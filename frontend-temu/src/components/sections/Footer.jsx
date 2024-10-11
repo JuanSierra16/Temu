@@ -88,8 +88,11 @@ const Footer = () => {
     const belowFooter = [
         { name: 'Términos de uso.', path: '/terms-of-use' },
         { name: 'Política de privacidad.', path: '/privacy-policy' },
-        { name: 'Tus preferencias de privacidad.', path: '#' },
-        { name: 'Gestión de anuncios.', path: '#' },
+        {
+            name: 'Tus preferencias de privacidad.',
+            path: '/privacy-preferences',
+        },
+        { name: 'Gestión de anuncios.', path: '/cookies-policy' },
     ];
 
     return (
