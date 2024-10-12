@@ -16,7 +16,7 @@ const ProductPrev = ({ product }) => {
         <div className="product-prev-link">
             <div className="product-prev">
                 <img
-                    src={`/images/${product.img === undefined ? product.imagenes[0] : product.img}`}
+                    src={`/images/${product.imagenes[0]}`}
                     alt=""
                     onClick={goToProduct}
                 />
