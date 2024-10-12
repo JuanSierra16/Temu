@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
 
 const ProductsContext = createContext(null);
@@ -49,6 +49,79 @@ const ProductsProvider = ({ children }) => {
         setProducts(randomProducts);
     };
 
+    const filterProducts = useCallback(
+        category => {
+            if (category) {
+                const filteredProducts = allProducts.filter(
+                    product =>
+                        product?.toLowerCase() === category.toLowerCase(),
+                );
+
+                setProducts(filteredProducts);
+            } else {
+                loadProducts();
+            }
+        },
+        [allProducts],
+    );
+
+    const bestProductsSellers = useCallback(
+        category => {
+            let filteredProducts = allProducts.filter(
+                product => Number(product.ranking) >= 4,
+            );
+
+            if (category) {
+                filteredProducts = filteredProducts.filter(
+                    product =>
+                        product?.toLowerCase() === category.toLowerCase(),
+                );
+            }
+
+            setProducts(filteredProducts);
+        },
+        [allProducts],
+    );
+
+    const fiveStarProducts = useCallback(
+        category => {
+            let filteredProducts = allProducts.filter(
+                product => Number(product.estrellas) >= 4.5,
+            );
+
+            if (category) {
+                filteredProducts = filteredProducts.filter(
+                    product =>
+                        product?.toLowerCase() === category.toLowerCase(),
+                );
+            }
+
+            setProducts(filteredProducts);
+        },
+        [allProducts],
+    );
+
+    const findByCategoryOrName = useCallback(
+        name => {
+            // buscar por descripción si al menos una palabra coincide con la descripción
+            // o buscar por categoría si todas las palabras coinciden con la categoría
+
+            const filteredProducts = allProducts.filter(
+                product =>
+                    product.descripcion
+                        .toLowerCase()
+                        .split(' ')
+                        .includes(name.toLowerCase()) ||
+                    product.categoria_nombre
+                        ?.toLowerCase()
+                        .includes(name.toLowerCase()),
+            );
+
+            setProducts(filteredProducts);
+        },
+        [allProducts],
+    );
+
     return (
         <ProductsContext.Provider
             value={{
@@ -56,6 +129,10 @@ const ProductsProvider = ({ children }) => {
                 offerProducts,
                 loadProducts,
                 loadMoreProducts,
+                filterProducts,
+                bestProductsSellers,
+                fiveStarProducts,
+                findByCategoryOrName,
             }}
         >
             {children}

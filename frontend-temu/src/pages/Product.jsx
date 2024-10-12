@@ -93,7 +93,7 @@ const Product = () => {
                             <p>{productInfo.descripcion}</p>
 
                             <div>
-                                <p>{productInfo.username}</p>
+                                <p>{productInfo.proveedor_nombre}</p>
                                 <p>#Ventas {productInfo.productos_vendidos}</p>
                             </div>
                         </div>

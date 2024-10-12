@@ -8,6 +8,7 @@ import BestSellers from './pages/BestSellers';
 import FiveStars from './pages/FiveStars';
 import NewCommers from './pages/NewCommers';
 import Cart from './pages/Cart';
+import SearchProduct from './pages/SearchProduct';
 
 import About from './pages/company-info/About';
 import Affiliate from './pages/company-info/Affiliate';
@@ -53,6 +54,10 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/find-account" element={<FindAccount />} />
                 <Route path="/product/:productId" element={<Product />} />
+                <Route
+                    path="/search-product/:nameCategory"
+                    element={<SearchProduct />}
+                />
                 <Route path="/best-sellers" element={<BestSellers />} />
                 <Route path="/five-stars" element={<FiveStars />} />
                 <Route path="/new-commers" element={<NewCommers />} />

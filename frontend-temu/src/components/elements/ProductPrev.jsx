@@ -1,5 +1,5 @@
-import { useContext, useEffect } from 'react';
 import './ProductPrev.css';
+import { useContext } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../provider/CartContext';

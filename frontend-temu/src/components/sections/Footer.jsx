@@ -42,17 +42,23 @@ const Footer = () => {
     const { products } = useContext(ProductsContext);
 
     useEffect(() => {
-        if (footer.current) {
-            const footerPosition = footer.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            if (footerPosition.bottom < windowHeight) {
-                footer.current.style.position = 'fixed';
-                footer.current.style.bottom = '0';
-            } else {
-                footer.current.style.position = 'unset';
-                footer.current.style.bottom = 'unset';
+        const check = () => {
+            if (footer.current) {
+                const footerPosition = footer.current.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (footerPosition.bottom < windowHeight) {
+                    footer.current.style.position = 'fixed';
+                    footer.current.style.bottom = '0';
+                } else {
+                    footer.current.style.position = 'unset';
+                    footer.current.style.bottom = 'unset';
+                }
             }
-        }
+        };
+
+        return (window.onload = () => {
+            check();
+        });
     }, [products]);
 
     const companyInfo = [
