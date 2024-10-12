@@ -2,8 +2,7 @@ import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { getProducts } from '../API/Products.API';
+import { useContext, useEffect, useState } from 'react';
 import './BestSellers.css';
 import CartPanel from '../components/sections/CartPanel';
 import { ProductsContext } from '../provider/ProductsContext';
@@ -14,8 +13,11 @@ const BestSellers = () => {
     const [selectedCategory, setSelectedCategory] = useState('Recomendado');
     const [open, setOpen] = useState(false); // Estado para manejar la apertura y cierre del dropdown
 
-    useEffect(() => {}, []);
     const { bestProductsSellers } = useContext(ProductsContext);
+
+    useEffect(() => {
+        bestProductsSellers(null);
+    }, [bestProductsSellers]);
 
     const handleButtonClick = filterType => {
         setSelected(filterType);
