@@ -31,11 +31,11 @@ const CartPanel = () => {
                 {cart.map(product => (
                     <Link
                         className="cart-panel-product"
-                        key={product.title}
-                        to={`/product/${encodeURIComponent(product.title)}`}
+                        key={product.id}
+                        to={`/product/${encodeURIComponent(product.id)}`}
                     >
-                        <img src={`/products/${product.img}`} alt="" />
-                        <p className="orange-text">${product.price}</p>
+                        <img src={`/images/${product.imagenes[0]}`} alt="" />
+                        <p className="orange-text">${product.precio}</p>
                     </Link>
                 ))}
             </div>

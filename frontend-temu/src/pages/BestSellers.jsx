@@ -2,27 +2,20 @@ import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
 import './BestSellers.css';
 import CartPanel from '../components/sections/CartPanel';
+import { ProductsContext } from '../provider/ProductsContext';
 
 const BestSellers = () => {
-    const [productsList, setProductsList] = useState([]);
     const [filter, setFilter] = useState('general'); // Estado para manejar el filtro
     const [selected, setSelected] = useState('general'); // Estado para manejar el botón seleccionado
     const [selectedCategory, setSelectedCategory] = useState('Recomendado');
     const [open, setOpen] = useState(false); // Estado para manejar la apertura y cierre del dropdown
 
-    const handleLoadMore = useCallback(async () => {
-        const newProducts = await getProducts(filter); // Aplicar el filtro si es necesario
-        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
-    }, [filter]); // Añadimos `filter` como dependencia
-
-    useEffect(() => {
-        // Cargar productos al cargar el componente
-        handleLoadMore();
-    }, [handleLoadMore]);
+    useEffect(() => {}, []);
+    const { bestProductsSellers } = useContext(ProductsContext);
 
     const handleButtonClick = filterType => {
         setSelected(filterType);
@@ -34,6 +27,14 @@ const BestSellers = () => {
     const handleCategorySelect = category => {
         setSelectedCategory(category);
         setOpen(false);
+
+        if (category === 'Recomendado') {
+            setFilter('general');
+            bestProductsSellers(null);
+        } else {
+            setFilter(category);
+            bestProductsSellers(category);
+        }
     };
 
     return (
@@ -53,14 +54,14 @@ const BestSellers = () => {
                         En general
                     </button>
                     <button
-                        className={`button ${selected === 'ultimos-30' ? 'active' : ''}`}
-                        onClick={() => handleButtonClick('ultimos-30')}
+                        className={`button ${selected === 'últimos-30' ? 'active' : ''}`}
+                        onClick={() => handleButtonClick('últimos-30')}
                     >
                         En los últimos 30 días
                     </button>
                     <button
-                        className={`button ${selected === 'ultimos-7' ? 'active' : ''}`}
-                        onClick={() => handleButtonClick('ultimos-7')}
+                        className={`button ${selected === 'últimos-7' ? 'active' : ''}`}
+                        onClick={() => handleButtonClick('últimos-7')}
                     >
                         En los últimos 7 días
                     </button>
@@ -111,10 +112,7 @@ const BestSellers = () => {
             </div>
 
             <article className="max-width">
-                <ProductGrid
-                    productsList={productsList}
-                    handleLoadMore={handleLoadMore}
-                />
+                <ProductGrid />
             </article>
 
             <CartPanel />

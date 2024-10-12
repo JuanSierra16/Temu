@@ -7,9 +7,9 @@ import UserMenu from './UserMenu';
 import Categories from '../../elements/category/Categories';
 
 import './DeskNavBar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HelpMenu from './helpMenu';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const DeskNavBar = () => {
     const navigation = [
@@ -58,6 +58,17 @@ const DeskNavBar = () => {
         };
     }, []);
 
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+        if (search) {
+            navigate(`/search-product/${encodeURIComponent(search)}`);
+        }
+
+        setSearch('');
+    };
+
     return (
         <nav className="navbar" ref={navbarRef}>
             <div className="navbar-container max-width">
@@ -92,9 +103,14 @@ const DeskNavBar = () => {
                 </ul>
 
                 <div className="navbar-search">
-                    <input type="text" placeholder="Buscar" />
+                    <input
+                        type="text"
+                        placeholder="Buscar"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                    />
 
-                    <button>
+                    <button onClick={handleSearch}>
                         <FaSearch size={18} />
                     </button>
                 </div>

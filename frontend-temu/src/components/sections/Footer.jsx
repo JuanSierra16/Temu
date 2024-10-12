@@ -9,9 +9,10 @@ import { FaTruckFast } from 'react-icons/fa6';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { MdDiscount } from 'react-icons/md';
 
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
+import { ProductsContext } from '../../provider/ProductsContext';
 
 const Footer = () => {
     const footer = useRef(null);
@@ -38,12 +39,13 @@ const Footer = () => {
         ),
     );
 
+    const { products } = useContext(ProductsContext);
+
     useEffect(() => {
-        window.onload = () => {
+        const check = () => {
             if (footer.current) {
                 const footerPosition = footer.current.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
-
                 if (footerPosition.bottom < windowHeight) {
                     footer.current.style.position = 'fixed';
                     footer.current.style.bottom = '0';
@@ -53,7 +55,11 @@ const Footer = () => {
                 }
             }
         };
-    }, []);
+
+        return (window.onload = () => {
+            check();
+        });
+    }, [products]);
 
     const companyInfo = [
         { name: 'Acerca de Temu', path: '/about' },

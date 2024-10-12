@@ -4,44 +4,38 @@ import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import { FaUser, FaCheck } from 'react-icons/fa';
 import { FaShippingFast } from 'react-icons/fa';
-import { products } from '../utils/products';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { PiPlantDuotone } from 'react-icons/pi';
 import { AiOutlineSafety } from 'react-icons/ai';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { getProducts } from '../API/Products.API';
+import { useContext, useEffect, useState } from 'react';
 import ProductGrid from '../components/sections/ProductGrid';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../provider/CartContext';
 import CartPanel from '../components/sections/CartPanel';
+import { getProductById } from '../API/Products.API';
+import { ProductsContext } from '../provider/ProductsContext';
 
 const Product = () => {
-    // test
-    const userInfo = {
-        icon: <FaUser size={64} />,
-        username: 'Nombre de empresas/persona',
-        followers: Math.floor(Math.random() * 1000),
-        sales: Math.floor(Math.random() * 1000),
-        qualification: Math.floor(Math.random() * 5),
-    };
-
-    // test, productId = products buscar por titulo
     const { productId } = useParams();
-    const [productInfo, setProductInfo] = useState({});
-    const [productsList, setProductsList] = useState([]);
-
+    const [productInfo, setProductInfo] = useState({
+        id: 0,
+        descripcion: '',
+        imagenes: [],
+    });
+    const [bigImage, setBigImage] = useState('');
     const { addCart } = useContext(CartContext);
-
-    const handleLoadMore = useCallback(async () => {
-        const newProducts = await getProducts();
-        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
-    }, []);
+    const { loadProducts } = useContext(ProductsContext);
 
     useEffect(() => {
         const URIDecode = decodeURIComponent(productId);
-        handleLoadMore();
-        setProductInfo(products.find(product => product.title === URIDecode));
-    }, [handleLoadMore, productId]);
+
+        getProductById(URIDecode).then(data => {
+            setProductInfo(data);
+            setBigImage(data.imagenes[0]);
+        });
+
+        loadProducts();
+    }, [productId]);
 
     return (
         <main>
@@ -53,39 +47,35 @@ const Product = () => {
                     <div className="product-left-container">
                         <div className="product-images">
                             <div className="product-small-images">
-                                {/* Test */}
-                                {Array(4)
-                                    .fill(productInfo?.img)
-                                    .map((img, index) => (
-                                        <img
-                                            key={index}
-                                            src={`/products/${img}`}
-                                            alt=""
-                                        />
-                                    ))}
+                                {productInfo.imagenes.map((img, index) => (
+                                    <img
+                                        key={index}
+                                        src={`/images/${img}`}
+                                        onClick={() => setBigImage(img)}
+                                    />
+                                ))}
                             </div>
 
                             <div className="product-big-image">
-                                <img
-                                    src={`/products/${productInfo?.img}`}
-                                    alt=""
-                                />
+                                <img src={`/images/${bigImage}`} alt="" />
                             </div>
                         </div>
 
                         <div className="product-user-info-container">
                             <div className="product-user">
-                                {userInfo.icon}
+                                <FaUser size={64} />
 
                                 <div>
-                                    <h4>{userInfo.username}</h4>
+                                    <h4>{productInfo.proveedor_nombre}</h4>
 
                                     <div className="product-user-info">
-                                        <p>Seguidores {userInfo.followers} |</p>
-                                        <p>#Ventas {userInfo.sales} |</p>
                                         <p>
-                                            Calificación{' '}
-                                            {userInfo.qualification}
+                                            Seguidores{' '}
+                                            {productInfo.numero_seguidores} |
+                                        </p>
+                                        <p>#Ventas {productInfo.ventas} |</p>
+                                        <p>
+                                            Calificación {productInfo.estrellas}
                                         </p>
                                     </div>
                                 </div>
@@ -100,25 +90,23 @@ const Product = () => {
 
                     <div className="product-right-container">
                         <div className="product-description">
-                            <p>
-                                Descripción producto Descripción producto
-                                Descripción producto Descripción producto
-                                Descripción producto Descripción producto
-                                Descripción producto Descripción producto
-                                Descripción producto Descripción producto
-                                Descripción producto Descripción producto
-                            </p>
+                            <p>{productInfo.descripcion}</p>
 
                             <div>
-                                <p>{userInfo.username}</p>
-                                <p>#Ventas {userInfo.sales}</p>
+                                <p>{productInfo.proveedor_nombre}</p>
+                                <p>#Ventas {productInfo.productos_vendidos}</p>
                             </div>
                         </div>
 
                         <div className="product-price-info">
-                            <h3>Precio de descuento {productInfo?.price}</h3>
-                            <p>Descuento {productInfo?.price}</p>
-                            <p>Precio sin descuento {productInfo?.price}</p>
+                            <h3>
+                                Precio de descuento{' '}
+                                {productInfo.precio_con_descuento}
+                            </h3>
+                            <p className="orange-text">
+                                Descuento {productInfo.porcentaje_descuento}
+                            </p>
+                            <p>Precio sin descuento {productInfo.precio}</p>
                         </div>
 
                         <div className="product-offer">
@@ -131,24 +119,22 @@ const Product = () => {
                         </div>
 
                         <div className="product-info">
-                            <p>
-                                Cantidad (Disponible):{' '}
-                                {productInfo?.quantity ?? 10}
-                            </p>
+                            <p>Cantidad (Disponible): {productInfo.stock}</p>
 
                             <div className="product-quantity">
                                 <p>Cant</p>
 
                                 <select name="quantity" id="">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
+                                    {[...Array(productInfo.stock).keys()].map(
+                                        (item, index) => (
+                                            <option
+                                                key={index}
+                                                value={index + 1}
+                                            >
+                                                {index + 1}
+                                            </option>
+                                        ),
+                                    )}
                                 </select>
                             </div>
 
@@ -156,8 +142,7 @@ const Product = () => {
                                 className="product-cart orange-button"
                                 onClick={() => addCart(productInfo)}
                             >
-                                <p>Agregar al carrito</p>
-                                <p>52% de descuento</p>
+                                Agregar al carrito
                             </button>
                         </div>
 
@@ -169,7 +154,12 @@ const Product = () => {
                                 </div>
 
                                 <div className="product-conditions-item-list">
-                                    <small>Entrega: Fecha de llegada?</small>
+                                    <small>
+                                        Entrega:{' '}
+                                        <span className="orange-text">
+                                            {productInfo.fecha_entrega}
+                                        </span>
+                                    </small>
                                     <small>
                                         Obtén un crédito de $4.000 por entrega
                                         tardía ?
@@ -191,26 +181,34 @@ const Product = () => {
 
                             <div className="product-conditions-item">
                                 <PiPlantDuotone size={24} />
-                                <p>
+
+                                <Link
+                                    to="/tree-landing"
+                                    className="orange-text"
+                                    target="_blank"
+                                >
                                     Programa de plantación de árboles Temu (14M
                                     + de árboles) {'>'}
-                                </p>
+                                </Link>
                             </div>
 
                             <hr />
 
                             <div className="product-conditions-item">
                                 <AiOutlineSafety size={32} />
-                                <p>Seguridad en las compras {'>'}</p>
+                                <Link
+                                    to="/purchase-safe"
+                                    className="orange-text"
+                                    target="_blank"
+                                >
+                                    Seguridad en las compras {'>'}
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <ProductGrid
-                    productsList={productsList}
-                    handleLoadMore={handleLoadMore}
-                />
+                <ProductGrid />
             </article>
 
             <CartPanel />

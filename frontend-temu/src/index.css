@@ -121,6 +121,14 @@ summary {
 
 select {
     padding: 0.5em;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    outline: none;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1380px) {
@@ -137,4 +145,6 @@ select {
     h2 {
         font-size: 1em;
     }
+}
+
 }

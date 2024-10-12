@@ -79,17 +79,18 @@ const Cart = () => {
                         <div className="car-products">
                             {cart.map(product => (
                                 <div
-                                    key={product.title}
+                                    key={product.descripcion}
                                     className="car-product"
                                 >
                                     <img
-                                        src={`/products/${product.img}`}
+                                        src={`/images/${product.imagenes[0]}`}
                                         alt=""
                                     />
 
                                     <div className="car-product-info">
                                         <div className="car-product-title">
-                                            <p>{product.title}</p>
+                                            <p>{product.descripcion}</p>
+
                                             <MdDeleteOutline
                                                 size={48}
                                                 className="car-product-delete-icon"
@@ -99,33 +100,32 @@ const Cart = () => {
                                             />
                                         </div>
 
-                                        {product.offer && (
+                                        {product.precio_con_descuento && (
                                             <p className="orange-text">
                                                 Oferta especial{' '}
-                                                {Math.round(
-                                                    (product.offer /
-                                                        product.price) *
-                                                        100,
-                                                )}
-                                                % | por tiempo limitado
+                                                {product.precio_con_descuento}%
+                                                | por tiempo limitado
                                             </p>
                                         )}
 
                                         <div className="car-product-price">
-                                            {product.offer && (
+                                            {product.precio_con_descuento && (
                                                 <span className="orange-text">
-                                                    ${product.offer}
+                                                    $
+                                                    {
+                                                        product.precio_con_descuento
+                                                    }
                                                 </span>
                                             )}
 
-                                            {product.offer && (
+                                            {product.precio_con_descuento && (
                                                 <>
-                                                    <del>${product.price}</del>
+                                                    <del>${product.precio}</del>
 
                                                     <span className="orange-text">
                                                         {Math.round(
-                                                            (product.offer /
-                                                                product.price) *
+                                                            (product.precio_con_descuento /
+                                                                product.precio) *
                                                                 100,
                                                         )}
                                                         %
@@ -133,8 +133,8 @@ const Cart = () => {
                                                 </>
                                             )}
 
-                                            {!product.offer && (
-                                                <span>${product.price}</span>
+                                            {!product.precio_con_descuento && (
+                                                <span>${product.precio}</span>
                                             )}
                                         </div>
                                     </div>
