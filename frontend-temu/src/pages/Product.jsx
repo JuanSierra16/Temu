@@ -23,8 +23,13 @@ const Product = () => {
         imagenes: [],
     });
     const [bigImage, setBigImage] = useState('');
+    const [notFoundImages, setNotFoundImages] = useState([]);
     const { addCart } = useContext(CartContext);
     const { loadProducts } = useContext(ProductsContext);
+
+    const handleImageError = img => {
+        setNotFoundImages(prev => [...prev, img]);
+    };
 
     useEffect(() => {
         const URIDecode = decodeURIComponent(productId);
@@ -47,13 +52,19 @@ const Product = () => {
                     <div className="product-left-container">
                         <div className="product-images">
                             <div className="product-small-images">
-                                {productInfo.imagenes.map((img, index) => (
-                                    <img
-                                        key={index}
-                                        src={`/images/${img}`}
-                                        onClick={() => setBigImage(img)}
-                                    />
-                                ))}
+                                {productInfo.imagenes.map(
+                                    (img, index) =>
+                                        !notFoundImages.includes(img) && (
+                                            <img
+                                                key={index}
+                                                src={`/images/${img}`}
+                                                onClick={() => setBigImage(img)}
+                                                onError={() =>
+                                                    handleImageError(img)
+                                                }
+                                            />
+                                        ),
+                                )}
                             </div>
 
                             <div className="product-big-image">
