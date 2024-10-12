@@ -2,7 +2,7 @@ import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CartPanel from '../components/sections/CartPanel';
 import { ProductsContext } from '../provider/ProductsContext';
 
@@ -21,6 +21,11 @@ const FiveStars = () => {
             fiveStarProducts(filterType);
         }
     };
+
+    useEffect(() => {
+        // Cargar productos al cargar el componente
+        fiveStarProducts(null);
+    }, [fiveStarProducts]);
 
     return (
         <main>

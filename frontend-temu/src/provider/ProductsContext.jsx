@@ -24,6 +24,8 @@ const ProductsProvider = ({ children }) => {
                     product => parseFloat(product.precio_con_descuento) < 50,
                 ),
             );
+
+            // console.log(data);
         };
 
         if (products.length === 0) {
@@ -54,7 +56,10 @@ const ProductsProvider = ({ children }) => {
             if (category) {
                 const filteredProducts = allProducts.filter(
                     product =>
-                        product?.toLowerCase() === category.toLowerCase(),
+                        product?.categoria_padre_nombre.toLowerCase() ===
+                            category.toLowerCase() ||
+                        product?.categoria_nombre.toLowerCase() ===
+                            category.toLowerCase(),
                 );
 
                 setProducts(filteredProducts);
@@ -68,13 +73,16 @@ const ProductsProvider = ({ children }) => {
     const bestProductsSellers = useCallback(
         category => {
             let filteredProducts = allProducts.filter(
-                product => Number(product.ranking) >= 4,
+                product => Number(product.ranking) >= 4.5,
             );
 
             if (category) {
                 filteredProducts = filteredProducts.filter(
                     product =>
-                        product?.toLowerCase() === category.toLowerCase(),
+                        product?.categoria_padre_nombre.toLowerCase() ===
+                            category.toLowerCase() ||
+                        product?.categoria_nombre.toLowerCase() ===
+                            category.toLowerCase(),
                 );
             }
 
@@ -86,13 +94,16 @@ const ProductsProvider = ({ children }) => {
     const fiveStarProducts = useCallback(
         category => {
             let filteredProducts = allProducts.filter(
-                product => Number(product.estrellas) >= 4.5,
+                product => Number(product.estrellas) >= 4.8,
             );
 
             if (category) {
                 filteredProducts = filteredProducts.filter(
                     product =>
-                        product?.toLowerCase() === category.toLowerCase(),
+                        product?.categoria_padre_nombre.toLowerCase() ===
+                            category.toLowerCase() ||
+                        product?.categoria_nombre.toLowerCase() ===
+                            category.toLowerCase(),
                 );
             }
 
