@@ -98,7 +98,7 @@ const DashBoard = ({ children }) => {
                             {submenu.map(item => (
                                 <li key={item.name}>
                                     <Link to={item.path}>
-                                        {item.icon}
+                                        <span>{item.icon}</span>
                                         <span>{item.name}</span>
                                     </Link>
                                 </li>

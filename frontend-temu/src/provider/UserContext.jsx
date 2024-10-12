@@ -9,6 +9,7 @@ import {
     loginWithPhoneNumber,
     findAccountByEmail,
     findAccountByPhoneNumber,
+    updateUserDetails,
 } from '../API/Login.API';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -18,14 +19,14 @@ const UserContext = createContext(null);
 
 const userDataInit = {
     id: '',
-    username: '',
-    email: '',
-    password: '',
-    created_at: '',
     id_usuario_plataforma: '',
     nombre_plataforma: '',
+    username: '',
+    email: '',
     phone_number: '',
-    is_verified: '',
+    is_verified: false,
+    created_at: '',
+    medidas: {},
 };
 
 const UserProvider = ({ children }) => {
@@ -68,6 +69,12 @@ const UserProvider = ({ children }) => {
         setWaitLogin(false);
     }, []);
 
+    const saveCookies = (user, token) => {
+        Cookies.set('token', JSON.stringify({ user: user, token: token }), {
+            expires: 1,
+        });
+    };
+
     const loginPlatform = async (
         id_usuario_plataforma,
         nombre_plataforma,
@@ -87,14 +94,8 @@ const UserProvider = ({ children }) => {
             setUserData(data.user);
             setUserIsLogin(true);
             setSessionJWT(data.token);
-
-            Cookies.set(
-                'token',
-                JSON.stringify({ user: data.user, token: data.token }),
-                { expires: 1 },
-            );
+            saveCookies(data.user, data.token);
         } catch (error) {
-            console.log(error);
             setLoginError(errorMsg);
             setUserIsLogin(false);
             setUserData(userDataInit);
@@ -185,14 +186,8 @@ const UserProvider = ({ children }) => {
             setUserIsLogin(true);
             setSessionJWT(data.token);
             setLoginError(null);
-
-            Cookies.set(
-                'token',
-                JSON.stringify({ user: data.user, token: data.token }),
-                { expires: 1 },
-            );
+            saveCookies(data.user, data.token);
         } catch (error) {
-            console.log(error);
             setLoginError('Credenciales incorrectas');
             setUserIsLogin(false);
             setUserData(userDataInit);
@@ -202,6 +197,7 @@ const UserProvider = ({ children }) => {
     };
 
     const logoutAction = () => {
+        Cookies.remove('user');
         Cookies.remove('token');
 
         if (userData?.nombre_plataforma === 'Google') {
@@ -269,14 +265,8 @@ const UserProvider = ({ children }) => {
             setUserData(data.user);
             setUserIsLogin(true);
             setSessionJWT(data.token);
-
-            Cookies.set(
-                'token',
-                JSON.stringify({ user: data.user, token: data.token }),
-                { expires: 1 },
-            );
+            saveCookies(data.user, data.token);
         } catch (error) {
-            console.error(error);
             setLoginError('Error no se pudo cambiar la contraseña');
         }
 
@@ -312,12 +302,7 @@ const UserProvider = ({ children }) => {
             setUserData(data.user);
             setUserIsLogin(true);
             setSessionJWT(data.token);
-
-            Cookies.set(
-                'token',
-                JSON.stringify({ user: data.user, token: data.token }),
-                { expires: 1 },
-            );
+            saveCookies(data.user, data.token);
         }
 
         setWaitLogin(false);
@@ -387,6 +372,45 @@ const UserProvider = ({ children }) => {
         return data;
     };
 
+    const updateSizeMeasurements = async (
+        username,
+        medida_pecho,
+        medida_cintura,
+        medida_cadera,
+        estatura,
+        peso,
+        unidad_medida,
+    ) => {
+        setLoginError(null);
+
+        const success = await updateUserDetails(
+            userData.id,
+            username,
+            medida_pecho,
+            medida_cintura,
+            medida_cadera,
+            estatura,
+            peso,
+            unidad_medida,
+        );
+
+        if (!success) {
+            setLoginError('Error no se pudo actualizar los datos');
+        } else {
+            setLoginError(null);
+            const newUserData = { ...userData };
+            newUserData.username = username;
+            newUserData.medidas.medida_pecho = medida_pecho;
+            newUserData.medidas.medida_cintura = medida_cintura;
+            newUserData.medidas.medida_cadera = medida_cadera;
+            newUserData.medidas.estatura = estatura;
+            newUserData.medidas.peso = peso;
+            newUserData.medidas.unidad_medida = unidad_medida;
+            setUserData(newUserData);
+            saveCookies(newUserData, sessionJWT);
+        }
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -414,6 +438,7 @@ const UserProvider = ({ children }) => {
                 phoneCodeSent,
                 findAccountWithEmail,
                 findAccountWithPhoneNumber,
+                updateSizeMeasurements,
             }}
         >
             {children}
