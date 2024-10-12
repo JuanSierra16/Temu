@@ -81,3 +81,26 @@ export const findAccountByPhoneNumber = async phoneNumber => {
 
     return response;
 };
+
+export const updateUserDetails = async (
+    id,
+    username,
+    medida_pecho,
+    medida_cintura,
+    medida_cadera,
+    estatura,
+    peso,
+    unidad_medida,
+) => {
+    const response = await API.put(`/users/${id}/details`, {
+        username,
+        medida_pecho,
+        medida_cintura,
+        medida_cadera,
+        estatura,
+        peso,
+        unidad_medida,
+    });
+
+    return response.status === 200;
+};

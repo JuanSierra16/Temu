@@ -1,5 +1,5 @@
 .dashboard {
-    padding-bottom: 2em;
+    margin-top: 2em !important;
 }
 
 .dashboard-nav {
@@ -12,6 +12,7 @@
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+    font-size: small;
 }
 
 .dashboard-nav ul {
@@ -31,7 +32,6 @@
 
 @media screen and (min-width: 768px) {
     .dashboard {
-        padding-top: 3em;
         display: grid;
         grid-template-columns: 1fr 5fr;
         gap: 1em;
@@ -39,5 +39,6 @@
 
     .dashboard-nav {
         display: flex;
+        font-size: medium;
     }
 }

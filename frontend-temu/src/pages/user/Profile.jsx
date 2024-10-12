@@ -1,13 +1,61 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../provider/UserContext';
 import { FaUser } from 'react-icons/fa';
 
 const Profile = () => {
-    const { userData } = useContext(UserContext);
+    const { userData, updateSizeMeasurements, loginError } =
+        useContext(UserContext);
     const sizes = ['IN,LBS', 'CM,KG'];
-    const [selected, setSelected] = useState('IN,LBS');
+    const [saving, setSaving] = useState(false);
+    const [formData, setFormData] = useState({
+        username: '',
+        medida_pecho: 0,
+        medida_cintura: 0,
+        medida_cadera: 0,
+        estatura: 0,
+        peso: 0,
+        unidad_medida: '',
+    });
+
+    const handleFormChange = e => {
+        const { name, value, type } = e.target;
+
+        setFormData({
+            ...formData,
+            [name]: type === 'number' ? value.replace(/^0.00|^0/g, '') : value,
+        });
+    };
+
+    const saveChanges = async e => {
+        setSaving(true);
+        e.preventDefault();
+
+        await updateSizeMeasurements(
+            formData.username,
+            formData.medida_pecho,
+            formData.medida_cintura,
+            formData.medida_cadera,
+            formData.estatura,
+            formData.peso,
+            formData.unidad_medida,
+        );
+
+        setSaving(false);
+    };
+
+    useEffect(() => {
+        setFormData({
+            username: userData.username,
+            medida_pecho: userData.medidas.medida_pecho,
+            medida_cintura: userData.medidas.medida_cintura,
+            medida_cadera: userData.medidas.medida_cadera,
+            estatura: userData.medidas.estatura,
+            peso: userData.medidas.peso,
+            unidad_medida: userData.medidas.unidad_medida,
+        });
+    }, [userData]);
 
     return (
         <DashBoard>
@@ -15,20 +63,37 @@ const Profile = () => {
                 <div className="profile-icon">
                     <FaUser size={64} />
                     <div>
-                        <p>{userData.name}</p>
+                        <p>{userData.username}</p>
                         <p>{userData.email}</p>
                     </div>
                 </div>
 
-                <form action="" className="profile-form">
-                    <label htmlFor="name">Nombres</label>
-                    <input type="text" defaultValue={userData.name} required />
+                <form
+                    onSubmit={e => {
+                        if (!saving) {
+                            saveChanges(e);
+                        }
+                    }}
+                    className="profile-form"
+                    id="profile-form"
+                >
+                    <label htmlFor="username">Nombres</label>
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        value={formData.username}
+                        onChange={handleFormChange}
+                        required
+                    />
 
                     <h4>Medidas</h4>
 
                     <select
-                        value={selected}
-                        onChange={e => setSelected(e.target.value)}
+                        id="unidad-medida"
+                        name="unidad-medida"
+                        value={formData.unidad_medida}
+                        onChange={handleFormChange}
                     >
                         {sizes.map(size => (
                             <option key={size} value={size}>
@@ -39,73 +104,96 @@ const Profile = () => {
 
                     <div>
                         <div>
-                            <label htmlFor="medida-pecho">
+                            <label htmlFor="medida_pecho">
                                 Medida de pecho
                             </label>
                             <input
-                                name="medida-pecho"
+                                id="medida_pecho"
+                                name="medida_pecho"
                                 type="number"
                                 min="0"
-                                max="100"
-                                step="0.1"
-                                placeholder="0.0"
+                                max="1000"
+                                step="0.01"
+                                placeholder="0.00"
+                                value={formData.medida_pecho || 0}
+                                onChange={handleFormChange}
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="medida-cintura">
+                            <label htmlFor="medida_cintura">
                                 Medida de cintura
                             </label>
                             <input
-                                name="medida-cintura"
+                                id="medida_cintura"
+                                name="medida_cintura"
                                 type="number"
                                 min="0"
-                                max="100"
-                                step="0.1"
-                                placeholder="0.0"
+                                max="1000"
+                                step="0.01"
+                                placeholder="0.00"
+                                value={formData.medida_cintura || 0}
+                                onChange={handleFormChange}
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="medida-cadera">
+                            <label htmlFor="medida_cadera">
                                 Medida de cadera
                             </label>
                             <input
-                                name="medida-cadera"
+                                id="medida_cadera"
+                                name="medida_cadera"
                                 type="number"
                                 min="0"
-                                max="100"
-                                step="0.1"
-                                placeholder="0.0"
+                                max="1000"
+                                step="0.01"
+                                placeholder="0.00"
+                                value={formData.medida_cadera || 0}
+                                onChange={handleFormChange}
                             />
                         </div>
 
                         <div>
                             <label htmlFor="estatura">Estatura</label>
                             <input
+                                id="estatura"
                                 name="estatura"
                                 type="number"
                                 min="0"
-                                max="100"
-                                step="0.1"
-                                placeholder="0.0"
+                                max="1000"
+                                step="0.01"
+                                placeholder="0.01"
+                                value={formData.estatura || 0}
+                                onChange={handleFormChange}
                             />
                         </div>
 
                         <div>
                             <label htmlFor="peso">Peso</label>
                             <input
+                                id="peso"
                                 name="peso"
                                 type="number"
                                 min="0"
-                                max="100"
-                                step="0.1"
-                                placeholder="0.0"
+                                max="500"
+                                step="0.01"
+                                placeholder="0.00"
+                                value={formData.peso || 0}
+                                onChange={handleFormChange}
                             />
                         </div>
                     </div>
 
-                    <button className="orange-button">Guardar</button>
+                    <button
+                        className="orange-button"
+                        type="submit"
+                        disabled={saving}
+                    >
+                        Guardar
+                    </button>
+
+                    {loginError && <p>{loginError}</p>}
                 </form>
             </section>
         </DashBoard>
