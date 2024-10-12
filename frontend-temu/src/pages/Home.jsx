@@ -2,15 +2,11 @@ import './Home.css';
 import Slider from '../components/elements/Slider';
 import { categoriesList } from '../utils/categoriesList';
 import Compromise from '../components/sections/Compromise';
-import { products } from '../utils/products';
-import ProductPrev from '../components/elements/ProductPrev';
 import FlashDeals from '../components/sections/FlashDeals';
 import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
-import { useCallback, useEffect, useState } from 'react';
-import { getProducts } from '../API/Products.API';
 import CartPanel from '../components/sections/CartPanel';
 
 const Home = () => {
@@ -19,17 +15,6 @@ const Home = () => {
             return { name: category.name, sub: category.subcategories[0] };
         })
         .reverse();
-
-    const [productsList, setProductsList] = useState([]);
-
-    const handleLoadMore = useCallback(async () => {
-        const newProducts = await getProducts();
-        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
-    }, []);
-
-    useEffect(() => {
-        handleLoadMore();
-    }, [handleLoadMore]);
 
     return (
         <>
@@ -62,8 +47,9 @@ const Home = () => {
                         </div>
 
                         <Compromise />
-                        <FlashDeals />
                     </header>
+
+                    <FlashDeals />
 
                     <section className="categories-slider">
                         <div className="max-width">
@@ -105,22 +91,9 @@ const Home = () => {
                                 <h2>PROVEEDORES RECOMENDADOS</h2>
                             </div>
                         </div>
-
-                        <Slider>
-                            <div className="product-slider">
-                                {products.map(product => (
-                                    <span key={product.title}>
-                                        <ProductPrev product={product} />
-                                    </span>
-                                ))}
-                            </div>
-                        </Slider>
                     </section>
 
-                    <ProductGrid
-                        productsList={productsList}
-                        handleLoadMore={handleLoadMore}
-                    />
+                    <ProductGrid />
                 </article>
             </main>
 

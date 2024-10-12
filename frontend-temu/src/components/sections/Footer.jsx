@@ -9,9 +9,10 @@ import { FaTruckFast } from 'react-icons/fa6';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { MdDiscount } from 'react-icons/md';
 
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
+import { ProductsContext } from '../../provider/ProductsContext';
 
 const Footer = () => {
     const footer = useRef(null);
@@ -38,22 +39,21 @@ const Footer = () => {
         ),
     );
 
-    useEffect(() => {
-        window.onload = () => {
-            if (footer.current) {
-                const footerPosition = footer.current.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
+    const { products } = useContext(ProductsContext);
 
-                if (footerPosition.bottom < windowHeight) {
-                    footer.current.style.position = 'fixed';
-                    footer.current.style.bottom = '0';
-                } else {
-                    footer.current.style.position = 'unset';
-                    footer.current.style.bottom = 'unset';
-                }
+    useEffect(() => {
+        if (footer.current) {
+            const footerPosition = footer.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (footerPosition.bottom < windowHeight) {
+                footer.current.style.position = 'fixed';
+                footer.current.style.bottom = '0';
+            } else {
+                footer.current.style.position = 'unset';
+                footer.current.style.bottom = 'unset';
             }
-        };
-    }, []);
+        }
+    }, [products]);
 
     const companyInfo = [
         { name: 'Acerca de Temu', path: '/about' },

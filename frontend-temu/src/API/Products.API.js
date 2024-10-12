@@ -1,12 +1,15 @@
-import { products } from '../utils/products';
+import axios from 'axios';
 
-let currentIndex = 0;
+const API = axios.create({
+    baseURL: 'http://localhost:3000',
+});
 
 export const getProducts = async () => {
-    // test utils/products.js
-    // Obtener de a 5 productos
-    const data = products.slice(currentIndex, currentIndex + 5);
-    currentIndex += 5;
+    const response = await API.get('/products');
+    return response.data;
+};
 
-    return data;
+export const getProductById = async id => {
+    const response = await API.get(`/products/${id}`);
+    return response.data;
 };

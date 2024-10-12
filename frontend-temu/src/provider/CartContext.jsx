@@ -11,9 +11,20 @@ const CartProvider = ({ children }) => {
     const userIdRef = useRef(null);
 
     useEffect(() => {
-        setCart(JSON.parse(localStorage.getItem('cart') || '[]'));
-        setCarTotalCost(JSON.parse(localStorage.getItem('cartTotalCost') || 0));
+        const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        setCart(loadCart);
         userIdRef.current = JSON.parse(localStorage.getItem('userId') || null);
+
+        const cost = loadCart.reduce(
+            (acc, item) =>
+                acc + item.precio_con_descuento
+                    ? item.precio_con_descuento
+                    : item.precio,
+            0,
+        );
+
+        setCarTotalCost(Number(cost).toFixed(3));
     }, []);
 
     useEffect(() => {
@@ -24,7 +35,6 @@ const CartProvider = ({ children }) => {
                 setCart([]);
                 setCarTotalCost(0);
                 localStorage.removeItem('cart');
-                localStorage.removeItem('cartTotalCost');
                 localStorage.removeItem('userId');
             }
         }
@@ -33,14 +43,13 @@ const CartProvider = ({ children }) => {
             setCart([]);
             setCarTotalCost(0);
             localStorage.removeItem('cart');
-            localStorage.removeItem('cartTotalCost');
             localStorage.removeItem('userId');
         }
     }, [userData]);
 
     const saveLocalStorage = (newCart, newCost) => {
         localStorage.setItem('cart', JSON.stringify(newCart));
-        localStorage.setItem('cartTotalCost', JSON.stringify(newCost));
+        setCarTotalCost(newCost);
         /*
             guardar el id del usuario, si cambia a nulo (cierra sesión) se debe limpiar el carrito del localStorage
 
@@ -48,30 +57,33 @@ const CartProvider = ({ children }) => {
             realizo login (desactivar el StrictMode)
         */
         localStorage.setItem('userId', userData.id);
-        console.log(userData.id);
     };
 
     const addCart = product => {
-        const price = String(product.price).replace('.', '').replace('$', '');
+        const price = product.precio_con_descuento
+            ? product.precio_con_descuento
+            : product.precio;
 
-        if (!cart.find(item => item.title === product.title)) {
+        if (!cart.find(item => item.id === product.id)) {
             const newCart = [...cart, product];
-            const newCost = parseFloat(cartTotalCost) + parseFloat(price);
+            const newCost = Number(cartTotalCost) + Number(price);
 
             setCart(newCart);
             setCarTotalCost(newCost);
-            saveLocalStorage(newCart, newCost);
+            saveLocalStorage(newCart, Number(newCost).toFixed(3));
         }
     };
 
     const removeCart = product => {
-        const price = String(product.price).replace('.', '').replace('$', '');
-        const newCart = cart.filter(item => item.title !== product.title);
+        const price = product.precio_con_descuento
+            ? product.precio_con_descuento
+            : product.precio;
+        const newCart = cart.filter(item => item.id !== product.id);
         const newCost = parseFloat(cartTotalCost) - parseFloat(price);
 
         setCart(newCart);
         setCarTotalCost(newCost);
-        saveLocalStorage(newCart, newCost);
+        saveLocalStorage(newCart, Number(newCost).toFixed(3));
     };
 
     return (
