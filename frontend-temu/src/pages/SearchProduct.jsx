@@ -7,13 +7,13 @@ import { useParams } from 'react-router-dom';
 import { ProductsContext } from '../provider/ProductsContext';
 
 const SearchProduct = () => {
-    const { nameCategory } = useParams();
+    const { categoryOrName } = useParams();
     const { findByCategoryOrName } = useContext(ProductsContext);
 
     useEffect(() => {
-        const URIDecode = decodeURIComponent(nameCategory);
+        const URIDecode = decodeURIComponent(categoryOrName);
         findByCategoryOrName(URIDecode);
-    }, [nameCategory, findByCategoryOrName]);
+    }, [categoryOrName, findByCategoryOrName]);
 
     return (
         <>

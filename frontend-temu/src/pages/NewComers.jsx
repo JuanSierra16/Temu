@@ -2,11 +2,11 @@ import BlackBar from '../components/sections/BlackBar';
 import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getProducts } from '../API/Products.API';
 import CartPanel from '../components/sections/CartPanel';
 
-const NewCommers = () => {
+const NewComers = () => {
     const [productsList, setProductsList] = useState([]);
     const [filter, setFilter] = useState('general'); // Estado para manejar el filtro
     const [selected, setSelected] = useState('general'); // Estado para manejar el botón seleccionado
@@ -44,4 +44,4 @@ const NewCommers = () => {
     );
 };
 
-export default NewCommers;
+export default NewComers;
