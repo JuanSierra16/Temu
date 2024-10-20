@@ -24,8 +24,6 @@ const ProductsProvider = ({ children }) => {
                     product => parseFloat(product.precio_con_descuento) < 50,
                 ),
             );
-
-            // console.log(data);
         };
 
         if (products.length === 0) {
