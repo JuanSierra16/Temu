@@ -59,6 +59,9 @@ function App() {
                     element={<SearchProduct />}
                 />
                 <Route path="/best-sellers" element={<BestSellers />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/purchase-safe" element={<PurchaseSafe />} />
+                <Route path="/safety-center" element={<SafetyCenter />} />
                 <Route path="/five-stars" element={<FiveStars />} />
                 <Route path="/new-comers" element={<NewComers />} />
                 <Route path="/cart" element={<Cart />} />
