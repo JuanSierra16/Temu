@@ -83,7 +83,7 @@ CREATE TABLE medidas_usuario (
     medida_cadera DECIMAL(10, 2), 
     estatura DECIMAL(10, 2), 
     peso DECIMAL(10, 2), 
-    unidad_medida VARCHAR(10), -- Ahora permite cualquier valor, como 'in', 'lbs', 'cm', 'kgs'
+    unidad_medida VARCHAR(10),
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_medidas_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id)
 );
