@@ -25,8 +25,13 @@ const LoginForm = ({
     setShowLoginProblem,
     setForgotPassword,
 }) => {
-    const { loginGoogle, loginFacebook, loginErrorPlatform, setLoginError } =
-        useContext(UserContext);
+    const {
+        loginGoogle,
+        loginFacebook,
+        loginErrorPlatform,
+        setLoginError,
+        noHasProfile,
+    } = useContext(UserContext);
 
     useEffect(() => {
         setLoginError(null);
@@ -35,7 +40,7 @@ const LoginForm = ({
     return (
         <>
             <div className="login-title">
-                <h3>Inicias sesión/Registrarse</h3>
+                <h3>Iniciar sesión/Registrarse</h3>
 
                 <div className="login-row login-green">
                     <FaLock />
@@ -73,6 +78,7 @@ const LoginForm = ({
                             onChangePhone={handlePhone}
                             setPrefix={setPhonePrefix}
                             disabled={waitLogin}
+                            name="emailPhone"
                             required
                             autoFocus
                         />
@@ -82,6 +88,7 @@ const LoginForm = ({
                         <input
                             name="emailPhone"
                             type="email"
+                            role="input-email"
                             value={email}
                             disabled={waitLogin}
                             required
@@ -99,6 +106,7 @@ const LoginForm = ({
                             <input
                                 name="password"
                                 type="password"
+                                role="input-password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 disabled={waitLogin}
@@ -138,7 +146,7 @@ const LoginForm = ({
                             className="orange-button"
                             disabled={waitLogin}
                         >
-                            Iniciar sesion
+                            {noHasProfile ? 'Registrarse' : 'Iniciar sesión'}
                         </button>
                     )}
                 </>

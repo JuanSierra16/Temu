@@ -4,10 +4,9 @@ import { LuCreditCard, LuTicket } from 'react-icons/lu';
 import { FiShoppingCart } from 'react-icons/fi';
 import { CgBox, CgNotes } from 'react-icons/cg';
 import { MdOutlinePlace } from 'react-icons/md';
-import { RiSettingsLine } from 'react-icons/ri';
 import { CiSearch } from 'react-icons/ci';
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../provider/UserContext';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import Modal from '../../elements/Modal';
@@ -74,6 +73,12 @@ const MobileNavBar = () => {
     const [showCategories, setShowCategories] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
+    useEffect(() => {
+        if (userIsLogin) {
+            setShowLogin(false);
+        }
+    }, [userIsLogin]);
+
     return (
         <>
             <nav className="mobile-navbar">
@@ -118,12 +123,15 @@ const MobileNavBar = () => {
                                 )}
 
                                 {userIsLogin && (
-                                    <a href="#" className="sub-menu-user">
+                                    <Link
+                                        to="/profile"
+                                        className="sub-menu-user"
+                                    >
                                         <span>
                                             <FaRegUser size={20} />
                                         </span>
-                                        {userData?.username}
-                                    </a>
+                                        {userData.username}
+                                    </Link>
                                 )}
 
                                 <div className="sub-menu-list">
@@ -160,10 +168,7 @@ const MobileNavBar = () => {
                 </ul>
             </nav>
 
-            <ModalLogin
-                showModal={showLogin && !userIsLogin}
-                setShowModal={setShowLogin}
-            />
+            <ModalLogin showModal={showLogin} setShowModal={setShowLogin} />
         </>
     );
 };

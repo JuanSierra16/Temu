@@ -85,7 +85,7 @@ const UserMenu = () => {
                             <FaRegUser size={20} />
 
                             <div className="navbar-login-text">
-                                <small>Iniciar sesión/Registra</small>
+                                <small>Iniciar sesión/Registrarse</small>
                                 <small>
                                     <strong>Pedidos y cuenta</strong>
                                 </small>
@@ -100,7 +100,9 @@ const UserMenu = () => {
                             <FaRegUser size={20} />
 
                             <div className="navbar-login-text">
-                                <small>Hola {userData?.username}</small>
+                                <small role="username">
+                                    Hola {userData?.username}
+                                </small>
                                 <small>
                                     <strong>Pedidos y cuenta</strong>
                                 </small>

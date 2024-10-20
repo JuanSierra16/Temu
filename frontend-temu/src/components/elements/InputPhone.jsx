@@ -10,6 +10,7 @@ const InputPhone = ({
     disabled = false,
     required = false,
     autoFocus = false,
+    name = 'phone',
 }) => {
     const [countryValue, setCountryValue] = useState('');
 
@@ -47,7 +48,7 @@ const InputPhone = ({
             <input
                 className="phone-input"
                 type="tel"
-                name="phone"
+                name={name}
                 required={required}
                 autoFocus={autoFocus}
                 disabled={disabled}
