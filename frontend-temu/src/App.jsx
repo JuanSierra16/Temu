@@ -6,7 +6,7 @@ import FindAccount from './pages/FindAccount';
 import Product from './pages/Product';
 import BestSellers from './pages/BestSellers';
 import FiveStars from './pages/FiveStars';
-import NewCommers from './pages/NewCommers';
+import NewComers from './pages/NewComers';
 import Cart from './pages/Cart';
 import SearchProduct from './pages/SearchProduct';
 
@@ -55,12 +55,15 @@ function App() {
                 <Route path="/find-account" element={<FindAccount />} />
                 <Route path="/product/:productId" element={<Product />} />
                 <Route
-                    path="/search-product/:nameCategory"
+                    path="/search-product/:categoryOrName"
                     element={<SearchProduct />}
                 />
                 <Route path="/best-sellers" element={<BestSellers />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/purchase-safe" element={<PurchaseSafe />} />
+                <Route path="/safety-center" element={<SafetyCenter />} />
                 <Route path="/five-stars" element={<FiveStars />} />
-                <Route path="/new-commers" element={<NewCommers />} />
+                <Route path="/new-comers" element={<NewComers />} />
                 <Route path="/cart" element={<Cart />} />
 
                 <Route path="/about" element={<About />} />
