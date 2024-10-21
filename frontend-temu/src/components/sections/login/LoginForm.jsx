@@ -125,7 +125,7 @@ const LoginForm = ({
                             </div>
 
                             {loginError && (
-                                <p className="login-error">{loginError}</p>
+                                <p className="login-error" role='login-error'>{loginError}</p>
                             )}
                         </div>
                     )}
@@ -135,6 +135,7 @@ const LoginForm = ({
                             className="orange-button"
                             onClick={handleContinue}
                             disabled={waitLogin}
+                            role="button-continue"
                         >
                             Continuar
                         </button>
@@ -145,6 +146,7 @@ const LoginForm = ({
                             type="submit"
                             className="orange-button"
                             disabled={waitLogin}
+                            role="button-login"
                         >
                             {noHasProfile ? 'Registrarse' : 'Iniciar sesión'}
                         </button>

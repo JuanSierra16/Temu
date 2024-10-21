@@ -16,7 +16,7 @@ const Profile = () => {
         medida_cadera: 0,
         estatura: 0,
         peso: 0,
-        unidad_medida: '',
+        unidad_medida: sizes[0],
     });
 
     const handleFormChange = e => {
@@ -91,7 +91,7 @@ const Profile = () => {
 
                     <select
                         id="unidad-medida"
-                        name="unidad-medida"
+                        name="unidad_medida"
                         value={formData.unidad_medida}
                         onChange={handleFormChange}
                     >
