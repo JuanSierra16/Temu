@@ -58,3 +58,38 @@ export const getProductoById = async (req, res) => {
         res.status(500).send('Error al obtener el producto');
     }
 };
+
+// Controlador para marcar un producto como favorito
+export const marcarFavorito = async (req, res) => {
+    const { usuario_id, producto_id } = req.body;
+
+    try {
+        // Insertar el producto como favorito
+        await pool.query('INSERT INTO favoritos (usuario_id, producto_id) VALUES (?, ?)', [usuario_id, producto_id]);
+
+        res.status(200).send({ message: 'Producto marcado como favorito' });
+    } catch (error) {
+        console.error('Error al marcar el producto como favorito:', error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Controlador para devolver los productos favoritos de un usuario
+export const obtenerFavoritos = async (req, res) => {
+    const { usuario_id } = req.params;
+
+    try {
+        // Obtener los productos favoritos del usuario
+        const [rows] = await pool.query(`
+            SELECT p.*
+            FROM productos p
+            JOIN favoritos f ON p.id = f.producto_id
+            WHERE f.usuario_id = ?
+        `, [usuario_id]);
+
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error al obtener los productos favoritos:', error);
+        res.status(500).json({ message: error.message });
+    }
+};
