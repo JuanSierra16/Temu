@@ -8,6 +8,7 @@ import NavBar from '../components/sections/navbar/NavBar';
 import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
 import CartPanel from '../components/sections/CartPanel';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const firstSubs = categoriesList
@@ -65,9 +66,12 @@ const Home = () => {
                         <Slider>
                             <div className="category-slider">
                                 {firstSubs.map(sub => (
-                                    <div
+                                    <Link
                                         key={sub.name}
                                         className="subcategory-slider"
+                                        to={`/search-product/${encodeURIComponent(
+                                            sub.name,
+                                        )}`}
                                     >
                                         <img
                                             src={`/categorias/${sub.name}/${sub.sub}.webp`}
@@ -75,7 +79,7 @@ const Home = () => {
                                         />
 
                                         <small>{sub.name}</small>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         </Slider>

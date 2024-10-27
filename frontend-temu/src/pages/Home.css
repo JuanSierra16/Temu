@@ -62,6 +62,7 @@
     font-size: smaller;
     max-height: 200px;
     overflow: hidden;
+    color: var(--dark-color);
 }
 
 .subcategory-slider img {

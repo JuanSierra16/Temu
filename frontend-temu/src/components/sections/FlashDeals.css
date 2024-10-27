@@ -37,7 +37,6 @@
 .flash-deal-item {
     margin: 2em 1em;
     min-width: 200px;
-    min-height: 300px;
     text-align: center;
     background-color: var(--light-color);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -107,5 +106,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .flash-deal-item {
+        min-height: 300px;
     }
 }
