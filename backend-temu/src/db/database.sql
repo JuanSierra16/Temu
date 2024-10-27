@@ -1,14 +1,15 @@
 use bwpeie9ps3tadhnabxac;
 CREATE TABLE if not exists users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE,
     password VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     id_usuario_plataforma VARCHAR(255),
     nombre_plataforma VARCHAR(255),
     phone_number VARCHAR(20),
-    is_verified BOOLEAN DEFAULT FALSE
+    is_verified BOOLEAN DEFAULT FALSE,
+    region VARCHAR(100)
 );
 
 CREATE TABLE categorias (
@@ -41,6 +42,8 @@ CREATE TABLE productos (
     ventas VARCHAR(50), -- Cambiado a VARCHAR para almacenar el número de productos vendidos como cadena de texto
     estrellas DECIMAL(3, 1), -- Cambiado a DECIMAL para almacenar el número de estrellas como número de punto flotante
     fecha_entrega TEXT,
+	fecha_de_actualización TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Campo agregado para fecha de actualización
+    temporadas JSON, -- Campo agregado para lista de temporadas
     CONSTRAINT fk_proveedor_id FOREIGN KEY (proveedor_id) REFERENCES proveedores(id),
     CONSTRAINT fk_categoria_id FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
@@ -88,7 +91,18 @@ CREATE TABLE medidas_usuario (
     CONSTRAINT fk_medidas_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id)
 );
 
+CREATE TABLE IF NOT EXISTS favoritos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id INT,
+    producto_id BIGINT,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_favoritos_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id),
+    CONSTRAINT fk_favoritos_producto_id FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
 select * from users;
 select * from categorias;
 select * from productos;
 select * from proveedores;
+select * from medidas_usuario;
+delete from medidas_usuario;
