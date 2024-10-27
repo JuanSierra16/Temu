@@ -127,7 +127,11 @@ const UserMenu = () => {
 
                                 <hr />
 
-                                <Link href="#" onClick={logoutAction}>
+                                <Link
+                                    href="#"
+                                    onClick={logoutAction}
+                                    role="logout"
+                                >
                                     <TbLogout2 size={16} />
                                     <span>Cerrar sesión</span>
                                 </Link>
