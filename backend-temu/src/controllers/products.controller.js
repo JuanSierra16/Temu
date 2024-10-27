@@ -21,7 +21,7 @@ export const getProductos = async (req, res) => {
         res.status(200).json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error al obtener los productos');
+        res.status(500).json({ message: 'Error al obtener los productos' });
     }
 }
 
@@ -55,7 +55,7 @@ export const getProductoById = async (req, res) => {
         res.status(200).json(rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error al obtener el producto');
+        res.status(500).json({ message: 'Error al obtener el producto' });
     }
 };
 
@@ -64,6 +64,18 @@ export const marcarFavorito = async (req, res) => {
     const { usuario_id, producto_id } = req.body;
 
     try {
+        // Verificar si el usuario existe
+        const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [usuario_id]);
+        if (userRows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Verificar si el producto existe
+        const [productRows] = await pool.query('SELECT * FROM productos WHERE id = ?', [producto_id]);
+        if (productRows.length === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
         // Insertar el producto como favorito
         await pool.query('INSERT INTO favoritos (usuario_id, producto_id) VALUES (?, ?)', [usuario_id, producto_id]);
 
@@ -79,6 +91,12 @@ export const obtenerFavoritos = async (req, res) => {
     const { usuario_id } = req.params;
 
     try {
+        // Verificar si el usuario existe
+        const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [usuario_id]);
+        if (userRows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
         // Obtener los productos favoritos del usuario
         const [rows] = await pool.query(`
             SELECT p.*
@@ -86,6 +104,10 @@ export const obtenerFavoritos = async (req, res) => {
             JOIN favoritos f ON p.id = f.producto_id
             WHERE f.usuario_id = ?
         `, [usuario_id]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No se encontraron productos favoritos para este usuario' });
+        }
 
         res.status(200).json(rows);
     } catch (error) {
