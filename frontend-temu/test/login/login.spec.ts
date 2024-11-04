@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 test('test', async ({ page }) => {
     await page.route('http://localhost:3000/users/login', async route => {
