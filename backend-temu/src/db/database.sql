@@ -100,6 +100,22 @@ CREATE TABLE IF NOT EXISTS favoritos (
     CONSTRAINT fk_favoritos_producto_id FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 
+CREATE TABLE IF NOT EXISTS direcciones_envio (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    pais VARCHAR(100),
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    telefono VARCHAR(20),
+    departamento VARCHAR(100),
+    municipio VARCHAR(100),
+    codigo_postal VARCHAR(20),
+    numero_direccion VARCHAR(255),
+    informacion_adicional TEXT,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES users(id)
+);
+
 select * from users;
 select * from categorias;
 select * from productos;
