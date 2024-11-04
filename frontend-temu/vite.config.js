@@ -7,7 +7,8 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'happy-dom',
-        setupFiles: './src/setupTests.js',
+        setupFiles: './test/setupTests.js',
         css: true,
+        include: ['**/*.test.?(c|m)[jt]s?(x)'],
     },
 });

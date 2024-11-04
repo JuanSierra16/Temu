@@ -2,9 +2,9 @@ import { describe, expect, beforeEach, test } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
-import TestComponent from './TestComponent';
+import TestComponent from '../TestComponent.jsx';
 import Cookies from 'js-cookie';
-import UserMenu from '../components/sections/navbar/UserMenu';
+import UserMenu from '../../components/sections/navbar/UserMenu.jsx';
 
 // api real
 describe('Login', () => {

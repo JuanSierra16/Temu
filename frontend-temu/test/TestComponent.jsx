@@ -1,7 +1,7 @@
-import { UserProvider } from '../provider/UserContext';
+import { UserProvider } from '../src/provider/UserContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { ProductsProvider } from '../provider/ProductsContext';
-import { CartProvider } from '../provider/CartContext';
+import { ProductsProvider } from '../src/provider/ProductsContext';
+import { CartProvider } from '../src/provider/CartContext';
 import { MemoryRouter } from 'react-router-dom';
 
 const TestComponent = ({ children }) => {
