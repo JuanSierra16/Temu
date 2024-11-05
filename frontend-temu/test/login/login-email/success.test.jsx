@@ -7,10 +7,10 @@ import {
     screen,
     waitFor,
 } from '@testing-library/react';
-import { TestUserProvider } from '../TestComponent.jsx';
-import Login from '../../src/components/sections/login/Login.jsx';
+import { TestUserProvider } from '../../TestComponent.jsx';
+import Login from '../../../src/components/sections/login/Login.jsx';
 import { useContext } from 'react';
-import { UserContext } from '../../src/provider/UserContext.jsx';
+import { UserContext } from '../../../src/provider/UserContext.jsx';
 
 describe('Login credenciales correctas', () => {
     const userTest = {

@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
-import { TestUserProvider } from './TestComponent.jsx';
+import { TestUserProvider } from '../../TestComponent.jsx';
 import { useContext } from 'react';
-import { UserContext } from '../src/provider/UserContext.jsx';
+import { UserContext } from '../../../src/provider/UserContext.jsx';
 
 describe('Cambio de contraseña', () => {
     const userTest = {
