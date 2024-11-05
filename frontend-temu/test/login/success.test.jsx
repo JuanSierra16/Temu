@@ -7,12 +7,12 @@ import {
     screen,
     waitFor,
 } from '@testing-library/react';
-import TestComponent from '../TestComponent.jsx';
+import { TestUserProvider } from '../TestComponent.jsx';
 import Login from '../../src/components/sections/login/Login.jsx';
 import { useContext } from 'react';
 import { UserContext } from '../../src/provider/UserContext.jsx';
 
-describe('Login Success', () => {
+describe('Login credenciales correctas', () => {
     const userTest = {
         username: 'test',
         email: 'test@mail.com',
@@ -70,9 +70,9 @@ describe('Login Success', () => {
         };
     });
 
-    test('Unit user hook test Inicio de sesión con email y contraseña', async () => {
+    test('Context Inicio de sesión con email y contraseña', async () => {
         const { result } = renderHook(() => useContext(UserContext), {
-            wrapper: TestComponent,
+            wrapper: TestUserProvider,
         });
 
         await act(async () => {
@@ -100,7 +100,7 @@ describe('Login Success', () => {
 
     test('Formulario de inicio de sesión', async () => {
         render(<Login />, {
-            wrapper: TestComponent,
+            wrapper: TestUserProvider, // Envolver component en el context y provider
         });
 
         const inputEmail = screen.getByRole('input-email');

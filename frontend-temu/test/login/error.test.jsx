@@ -7,12 +7,12 @@ import {
     screen,
     waitFor,
 } from '@testing-library/react';
-import TestComponent from '../TestComponent.jsx';
+import { TestUserProvider } from '../TestComponent.jsx';
 import { useContext } from 'react';
 import { UserContext } from '../../src/provider/UserContext.jsx';
 import Login from '../../src/components/sections/login/Login.jsx';
 
-describe('Login Error', () => {
+describe('Login Credenciales incorrectas', () => {
     const userTest = {
         username: 'test',
         email: 'test@mail.com',
@@ -56,7 +56,7 @@ describe('Login Error', () => {
 
     test('Hook mensaje de error', async () => {
         const { result } = renderHook(() => useContext(UserContext), {
-            wrapper: TestComponent,
+            wrapper: TestUserProvider, // Agregar el context y provider
         });
 
         await act(async () => {
@@ -76,9 +76,9 @@ describe('Login Error', () => {
         expect(result.current.loginError).toBeTypeOf('string');
     });
 
-    test('Integrate Formulario de inicio de sesión, error', async () => {
+    test('Formulario de inicio de sesión, error', async () => {
         render(<Login />, {
-            wrapper: TestComponent,
+            wrapper: TestUserProvider, // Envolver component en el context y provider
         });
 
         const inputEmail = screen.getByRole('input-email');

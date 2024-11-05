@@ -4,9 +4,29 @@ import { ProductsProvider } from '../src/provider/ProductsContext';
 import { CartProvider } from '../src/provider/CartContext';
 import { MemoryRouter } from 'react-router-dom';
 
-const TestComponent = ({ children }) => {
+export const TestUserProvider = ({ children }) => {
     return (
-        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <GoogleOAuthProvider>
+            <UserProvider>
+                <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
+            </UserProvider>
+        </GoogleOAuthProvider>
+    );
+};
+
+export const TestProductsProvider = ({ children }) => {
+    return (
+        <ProductsProvider>
+            <CartProvider>
+                <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
+            </CartProvider>
+        </ProductsProvider>
+    );
+};
+
+export const TestComponent = ({ children }) => {
+    return (
+        <GoogleOAuthProvider>
             <UserProvider>
                 <ProductsProvider>
                     <CartProvider>
@@ -19,5 +39,3 @@ const TestComponent = ({ children }) => {
         </GoogleOAuthProvider>
     );
 };
-
-export default TestComponent;

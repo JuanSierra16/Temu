@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-test('test', async ({ page }) => {
+test('test', async ({ page }, testInfo) => {
     await page.route('http://localhost:3000/users/login', async route => {
         console.log('Mock axios login request');
         await route.fulfill({
@@ -36,6 +36,12 @@ test('test', async ({ page }) => {
     );
 
     await page.goto('http://localhost:5173/');
+
+    await testInfo.attach('login-page', {
+        body: await page.screenshot(),
+        contentType: 'image/png',
+    });
+
     await page.getByText('Iniciar sesión/Registrarse', { exact: true }).click();
     await page.locator('input[name="emailPhone"]').click();
     await page.locator('input[name="emailPhone"]').fill('mail@mail.com');
@@ -44,4 +50,9 @@ test('test', async ({ page }) => {
     await page.locator('input[name="password"]').fill('mail123');
     await page.getByRole('button', { name: 'Iniciar sesión' }).click();
     await page.getByText('Hola test', { exact: true }).click();
+
+    await testInfo.attach('Login Success', {
+        body: await page.screenshot(),
+        contentType: 'image/png',
+    });
 });

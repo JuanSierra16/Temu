@@ -10,5 +10,10 @@ export default defineConfig({
         setupFiles: './test/setupTests.js',
         css: true,
         include: ['**/*.test.?(c|m)[jt]s?(x)'],
+        coverage: {
+            provider: 'istanbul',
+            reporter: ['text', 'json', 'html'],
+            reportsDirectory: './test/coverage',
+        },
     },
 });
