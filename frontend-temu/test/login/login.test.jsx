@@ -2,12 +2,12 @@ import { describe, expect, beforeEach, test } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
-import TestComponent from './TestComponent';
+import { TestUserProvider } from '../TestComponent.jsx';
 import Cookies from 'js-cookie';
-import UserMenu from '../components/sections/navbar/UserMenu';
+import UserMenu from '../../src/components/sections/navbar/UserMenu.jsx';
 
 // api real
-describe('Login', () => {
+describe('Login integración API real', () => {
     const userTest = {
         email: 'test@mail.com',
         password: 'test123',
@@ -22,7 +22,7 @@ describe('Login', () => {
 
     test('Login with email and password', async () => {
         render(<UserMenu />, {
-            wrapper: TestComponent,
+            wrapper: TestUserProvider,
         });
 
         const loginModal = screen.getByText('Iniciar sesión/Registrarse');
