@@ -21,7 +21,7 @@ export const getProductos = async (req, res) => {
         res.status(200).json(rows);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error al obtener los productos');
+        res.status(500).json({ message: 'Error al obtener los productos' });
     }
 }
 
@@ -55,6 +55,71 @@ export const getProductoById = async (req, res) => {
         res.status(200).json(rows[0]);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error al obtener el producto');
+        res.status(500).json({ message: 'Error al obtener el producto' });
+    }
+};
+
+// Controlador para marcar un producto como favorito
+export const marcarFavorito = async (req, res) => {
+    const { usuario_id, producto_id } = req.body;
+
+    try {
+        // Verificar si el usuario existe
+        const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [usuario_id]);
+        if (userRows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Verificar si el producto existe
+        const [productRows] = await pool.query('SELECT * FROM productos WHERE id = ?', [producto_id]);
+        if (productRows.length === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        // Verificar si el producto ya está marcado como favorito
+        const [favoriteRows] = await pool.query('SELECT * FROM favoritos WHERE usuario_id = ? AND producto_id = ?', [usuario_id, producto_id]);
+        if (favoriteRows.length > 0) {
+            // Actualizar la fecha si ya está marcado como favorito
+            await pool.query('UPDATE favoritos SET fecha_agregado = CURRENT_TIMESTAMP WHERE usuario_id = ? AND producto_id = ?', [usuario_id, producto_id]);
+            return res.status(200).send({ message: 'Fecha de favorito actualizada' });
+        }
+
+        // Insertar el producto como favorito
+        await pool.query('INSERT INTO favoritos (usuario_id, producto_id) VALUES (?, ?)', [usuario_id, producto_id]);
+
+        res.status(200).send({ message: 'Producto marcado como favorito' });
+    } catch (error) {
+        console.error('Error al marcar el producto como favorito:', error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Controlador para devolver los productos favoritos de un usuario
+export const obtenerFavoritos = async (req, res) => {
+    const { usuario_id } = req.params;
+
+    try {
+        // Verificar si el usuario existe
+        const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [usuario_id]);
+        if (userRows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Obtener los productos favoritos del usuario
+        const [rows] = await pool.query(`
+            SELECT p.*
+            FROM productos p
+            JOIN favoritos f ON p.id = f.producto_id
+            WHERE f.usuario_id = ?
+        `, [usuario_id]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No se encontraron productos favoritos para este usuario' });
+        }
+
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error al obtener los productos favoritos:', error);
+        res.status(500).json({ message: error.message });
     }
 };
