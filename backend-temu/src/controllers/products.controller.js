@@ -76,6 +76,14 @@ export const marcarFavorito = async (req, res) => {
             return res.status(404).json({ message: 'Producto no encontrado' });
         }
 
+        // Verificar si el producto ya está marcado como favorito
+        const [favoriteRows] = await pool.query('SELECT * FROM favoritos WHERE usuario_id = ? AND producto_id = ?', [usuario_id, producto_id]);
+        if (favoriteRows.length > 0) {
+            // Actualizar la fecha si ya está marcado como favorito
+            await pool.query('UPDATE favoritos SET fecha_agregado = CURRENT_TIMESTAMP WHERE usuario_id = ? AND producto_id = ?', [usuario_id, producto_id]);
+            return res.status(200).send({ message: 'Fecha de favorito actualizada' });
+        }
+
         // Insertar el producto como favorito
         await pool.query('INSERT INTO favoritos (usuario_id, producto_id) VALUES (?, ?)', [usuario_id, producto_id]);
 

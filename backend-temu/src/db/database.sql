@@ -121,4 +121,6 @@ select * from categorias;
 select * from productos;
 select * from proveedores;
 select * from medidas_usuario;
+select * from favoritos;
 delete from medidas_usuario;
+select * from direcciones_envio;
