@@ -103,7 +103,7 @@ describe('Controladores de Productos', () => {
                 .send({ usuario_id: 1, producto_id: 1 });
 
             expect(response.status).toBe(200);
-            expect(response.body.message).toBe('Producto marcado como favorito');
+            expect(response.body.message).toBe('Fecha de favorito actualizada');
         });
 
         it('debería manejar errores al marcar un producto como favorito', async () => {
