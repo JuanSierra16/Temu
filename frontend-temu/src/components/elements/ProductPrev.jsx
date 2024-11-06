@@ -17,7 +17,7 @@ const ProductPrev = ({ product }) => {
             <div className="product-prev">
                 <img
                     src={`/images/${product.imagenes[0]}`}
-                    alt=""
+                    alt={product.descripcion}
                     onClick={goToProduct}
                 />
 

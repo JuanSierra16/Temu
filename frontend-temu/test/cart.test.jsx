@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 import { act, render, screen, renderHook } from '@testing-library/react';
 import { useContext } from 'react';
-import { CartContext } from '../../src/provider/CartContext.jsx';
-import { TestComponent } from '../TestComponent.jsx';
-import Cart from '../../src/pages/Cart.jsx';
+import { CartContext } from '../src/provider/CartContext.jsx';
+import { TestComponent } from './TestComponent.jsx';
+import Cart from '../src/pages/Cart.jsx';
 
 describe('Cart', () => {
     const products = [
