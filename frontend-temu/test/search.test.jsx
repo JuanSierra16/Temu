@@ -1,11 +1,15 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { act, renderHook } from '@testing-library/react';
+import {
+    act,
+    render,
+    renderHook,
+    screen,
+    waitFor,
+} from '@testing-library/react';
 import { useContext } from 'react';
 import { ProductsContext } from '../src/provider/ProductsContext.jsx';
-import { TestComponent } from './TestComponent.jsx';
-import axios from 'axios';
-
-// vi.mock('axios');
+import { TestComponent, TestProductsProvider } from './TestComponent.jsx';
+import DeskNavBar from '../src/components/sections/navbar/DeskNavBar.jsx';
 
 describe('Búsqueda avanzada', () => {
     beforeEach(() => {
@@ -55,33 +59,41 @@ describe('Búsqueda avanzada', () => {
         };
     });
 
-    test('Buscar producto por nombre', async () => {
-        // axios.get.mockResolvedValue({
-        //     data: [
-        //         {
-        //             id: 1,
-        //             descripcion: 'Protector de colchón ',
-        //             precio_con_descuento: 85.481,
-        //             precio: 122.229,
-        //             imagenes: ['1pc Protector de colchón imper.webp'],
-        //         },
-        //         {
-        //             descripcion: '2 set Gorro De Satén',
-        //             precio_con_descuento: 4.757,
-        //             precio: 28.629,
-        //             imagenes: ['2 Unids_set Gorro De Satén De .webp'],
-        //         },
-        //     ],
-        // });
+    test('Navbar buscador', async () => {
+        render(<DeskNavBar />, {
+            wrapper: TestComponent,
+        });
 
-        const { result } = renderHook(() =>
-            useContext(ProductsContext, {
-                wrapper: ProductsContext.Provider,
-            }),
-        );
+        await waitFor(async () => {
+            const input = screen.getByPlaceholderText('Buscar');
+            expect(input).toBeInTheDocument();
+        });
+    });
+
+    test('Buscar producto por nombre', async () => {
+        render(<DeskNavBar />, {
+            wrapper: TestComponent,
+        });
+
+        const { result } = renderHook(() => useContext(ProductsContext), {
+            wrapper: TestComponent,
+        });
+
+        await waitFor(async () => {
+            const input = screen.getByPlaceholderText('Buscar');
+            expect(input).toBeInTheDocument();
+        });
 
         await act(async () => {
             expect(result.current.products.length).toBe(2);
+        });
+
+        await act(async () => {
+            await result.current.findByCategoryOrName('colchón');
+        });
+
+        await act(async () => {
+            expect(result.current.products.length).toBe(1);
         });
     });
 });

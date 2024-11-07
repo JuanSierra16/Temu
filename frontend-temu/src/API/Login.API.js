@@ -4,6 +4,8 @@ const API = axios.create({
     baseURL: 'http://localhost:3000',
 });
 
+const baseURL = 'http://localhost:3000';
+
 export const login = async (email, password) => {
     const response = await API.post('/users/login', { email, password });
     return response.data;
@@ -92,7 +94,7 @@ export const updateUserDetails = async (
     peso,
     unidad_medida,
 ) => {
-    const response = await API.put(`/users/${id}/details`, {
+    const response = await axios.put(`${baseURL}/users/${id}/details`, {
         username,
         medida_pecho,
         medida_cintura,
