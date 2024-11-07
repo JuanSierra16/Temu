@@ -5,8 +5,12 @@ const API = axios.create({
 });
 
 export const getProducts = async () => {
-    const response = await API.get('/products');
-    return response.data;
+    try {
+        const response = await API.get('/products');
+        return response.data;
+    } catch (error) {
+        return [];
+    }
 };
 
 export const getProductById = async id => {

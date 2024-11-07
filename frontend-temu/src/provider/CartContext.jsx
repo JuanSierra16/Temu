@@ -75,15 +75,24 @@ const CartProvider = ({ children }) => {
     };
 
     const removeCart = product => {
-        const price = product.precio_con_descuento
-            ? product.precio_con_descuento
-            : product.precio;
         const newCart = cart.filter(item => item.id !== product.id);
-        const newCost = parseFloat(cartTotalCost) - parseFloat(price);
 
-        setCart(newCart);
-        setCarTotalCost(newCost);
-        saveLocalStorage(newCart, Number(newCost).toFixed(3));
+        // si se encuentra el producto en el carrito
+        if (newCart.length != cart.length) {
+            const price = product.precio_con_descuento
+                ? product.precio_con_descuento
+                : product.precio;
+
+            let newCost = Number(cartTotalCost) - Number(price);
+
+            if (newCost < 0 && newCart.length === 0) {
+                newCost = 0;
+            }
+
+            setCart(newCart);
+            setCarTotalCost(newCost);
+            saveLocalStorage(newCart, Number(newCost).toFixed(3));
+        }
     };
 
     return (

@@ -30,9 +30,15 @@ export const TestProductsProvider = ({ children, products }) => {
 
 export const TestCartProvider = ({ children, cart }) => {
     return (
-        <CartProvider value={{ cart }}>
-            <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
-        </CartProvider>
+        <UserProvider value={{ userData: {} }}>
+            <ProductsProvider value={{ products: [] }}>
+                <CartProvider value={{ cart }}>
+                    <MemoryRouter initialEntries={['/']}>
+                        {children}
+                    </MemoryRouter>
+                </CartProvider>
+            </ProductsProvider>
+        </UserProvider>
     );
 };
 

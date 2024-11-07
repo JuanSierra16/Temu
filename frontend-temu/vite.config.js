@@ -6,12 +6,12 @@ export default defineConfig({
     plugins: [react()],
     test: {
         globals: true,
-        environment: 'happy-dom',
+        environment: 'jsdom',
         setupFiles: './test/setupTests.js',
         css: true,
         include: ['**/*.test.?(c|m)[jt]s?(x)'],
         coverage: {
-            provider: 'istanbul',
+            provider: 'v8',
             reporter: ['text', 'json', 'html'],
             reportsDirectory: './test/coverage',
         },
