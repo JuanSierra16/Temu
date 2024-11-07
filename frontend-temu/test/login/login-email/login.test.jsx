@@ -2,9 +2,9 @@ import { describe, expect, beforeEach, test } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
-import { TestUserProvider } from '../TestComponent.jsx';
+import { TestUserProvider } from '../../TestComponent.jsx';
 import Cookies from 'js-cookie';
-import UserMenu from '../../src/components/sections/navbar/UserMenu.jsx';
+import UserMenu from '../../../src/components/sections/navbar/UserMenu.jsx';
 
 // api real
 describe('Login integración API real', () => {
