@@ -102,9 +102,8 @@ const Cart = () => {
 
                                         {product.precio_con_descuento && (
                                             <p className="orange-text">
-                                                Oferta especial{' '}
-                                                {product.precio_con_descuento}%
-                                                | por tiempo limitado
+                                                Oferta especial | por tiempo
+                                                limitado
                                             </p>
                                         )}
 
