@@ -4,7 +4,7 @@ import Footer from '../components/sections/Footer';
 import Navbar from '../components/sections/navbar/NavBar';
 import { CgBox, CgNotes } from 'react-icons/cg';
 import { TbMessage2Pin, TbMessageStar } from 'react-icons/tb';
-import { FaRegClock, FaRegUser } from 'react-icons/fa';
+import { FaRegClock, FaRegUser, FaRegHeart } from 'react-icons/fa';
 import { LuCreditCard, LuTicket } from 'react-icons/lu';
 import { MdOutlinePlace } from 'react-icons/md';
 import { AiOutlinePropertySafety, AiOutlineSafety } from 'react-icons/ai';
@@ -19,6 +19,11 @@ const DashBoard = ({ children }) => {
             name: 'Tus pedidos',
             icon: <CgNotes size={16} />,
             path: '/your-orders',
+        },
+        {
+            name: 'Tus favoritos',
+            icon: <FaRegHeart size={16} />,
+            path: '/your-favorite',
         },
         {
             name: 'Tus reseñas',
@@ -92,7 +97,7 @@ const DashBoard = ({ children }) => {
             <Navbar />
 
             <main className="dashboard max-width">
-                <article>
+                <article className="dashboard-nav-container">
                     <section className="dashboard-nav">
                         <ul>
                             {submenu.map(item => (
