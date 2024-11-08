@@ -53,6 +53,8 @@ describe('Cart', () => {
         await act(async () => {
             await result.current.setQuantity(products[0], 2);
         });
+
+        expect(result.current.cart[0].cart_quantity).toBe(2);
     });
 
     test('Eliminar del carrito', async () => {

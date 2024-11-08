@@ -15,21 +15,12 @@ import { MdDeleteOutline } from 'react-icons/md';
 import ModalLogin from '../components/sections/navbar/ModalLogin';
 
 const Cart = () => {
-    const { cart, cartTotalCost, removeCart } = useContext(CartContext);
+    const { cart, cartTotalCost, removeCart, setQuantity } =
+        useContext(CartContext);
     const { userIsLogin } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const [productsList, setProductsList] = useState([]);
     const [showModal, setShowModal] = useState(false);
-
-    const handleLoadMore = useCallback(async () => {
-        const newProducts = await getProducts();
-        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
-    }, []);
-
-    useEffect(() => {
-        handleLoadMore();
-    }, [handleLoadMore]);
 
     const certificateCards = Object.values(
         import.meta.glob(
@@ -135,6 +126,29 @@ const Cart = () => {
                                             {!product.precio_con_descuento && (
                                                 <span>${product.precio}</span>
                                             )}
+
+                                            <select
+                                                name="product-quantity"
+                                                value={product.cart_quantity}
+                                                onChange={e =>
+                                                    setQuantity(
+                                                        product,
+                                                        e.target.value,
+                                                    )
+                                                }
+                                            >
+                                                {Array.from(
+                                                    { length: product.stock },
+                                                    (_, i) => (
+                                                        <option
+                                                            key={i}
+                                                            value={i + 1}
+                                                        >
+                                                            {i + 1}
+                                                        </option>
+                                                    ),
+                                                )}
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -221,10 +235,7 @@ const Cart = () => {
                     Artículos que tal vez quieras agregar
                 </h2>
 
-                <ProductGrid
-                    productsList={productsList}
-                    handleLoadMore={handleLoadMore}
-                />
+                <ProductGrid />
             </article>
 
             <Footer />

@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { UserContext } from './UserContext';
 
 const CartContext = createContext(null);
@@ -95,6 +102,19 @@ const CartProvider = ({ children }) => {
         }
     };
 
+    const setQuantity = (product, quantity) => {
+        const newCart = cart.map(item => {
+            if (item.id === product.id) {
+                return { ...item, cart_quantity: quantity };
+            }
+
+            return item;
+        });
+
+        setCart(newCart);
+        saveLocalStorage(newCart, Number(cartTotalCost).toFixed(3));
+    };
+
     return (
         <CartContext.Provider
             value={{
@@ -102,6 +122,7 @@ const CartProvider = ({ children }) => {
                 addCart,
                 removeCart,
                 cartTotalCost,
+                setQuantity,
             }}
         >
             {children}
