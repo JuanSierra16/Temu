@@ -35,9 +35,9 @@ const Favorite = () => {
                         <p>{item.descripcion}</p>
 
                         <Slider>
-                            {item.imagenes.map(image => (
+                            {item.imagenes.map((image, index) => (
                                 <img
-                                    key={image}
+                                    key={image + index}
                                     src={`/images/${image}`}
                                     alt={item.descripcion}
                                 />
