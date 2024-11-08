@@ -1,8 +1,8 @@
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { createShippingAddress, getShippingAddresses, updateShippingAddress, deleteShippingAddress } from './../../controllers/shippingAddresses.controller.js'; // Ajusta la ruta según tu estructura de proyecto
-import { pool } from '../../db.js'; // Ajusta la ruta según tu estructura de proyecto
+import { createShippingAddress, getShippingAddresses, updateShippingAddress, deleteShippingAddress } from './../../controllers/shippingAddresses.controller.js';
+import { pool } from '../../db.js';
 
 const app = express();
 app.use(bodyParser.json());
