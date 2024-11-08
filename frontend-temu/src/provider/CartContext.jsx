@@ -19,22 +19,17 @@ const CartProvider = ({ children }) => {
 
     useEffect(() => {
         const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
-
+        const cost = loadCart.reduce((acc, item) => acc + item.subtotal, 0);
         setCart(loadCart);
-        userIdRef.current = JSON.parse(localStorage.getItem('userId') || null);
-
-        const cost = loadCart.reduce(
-            (acc, item) =>
-                acc + item.precio_con_descuento
-                    ? item.precio_con_descuento
-                    : item.precio,
-            0,
-        );
-
         setCarTotalCost(Number(cost).toFixed(3));
+
+        userIdRef.current = JSON.parse(localStorage.getItem('userId') || null);
     }, []);
 
     useEffect(() => {
+        // mantener el carro de compra cuando el usuario inicia sesión
+        // limpiar el carrito cuando el usuario cierra sesión
+
         if (userData.id) {
             localStorage.setItem('userId', userData.id);
 
@@ -54,9 +49,11 @@ const CartProvider = ({ children }) => {
         }
     }, [userData]);
 
-    const saveLocalStorage = (newCart, newCost) => {
-        localStorage.setItem('cart', JSON.stringify(newCart));
+    useEffect(() => {
+        let newCost = cart.reduce((acc, item) => acc + item.subtotal, 0);
+        newCost = Number(newCost).toFixed(3);
         setCarTotalCost(newCost);
+
         /*
             guardar el id del usuario, si cambia a nulo (cierra sesión) se debe limpiar el carrito del localStorage
 
@@ -64,20 +61,23 @@ const CartProvider = ({ children }) => {
             realizo login (desactivar el StrictMode)
         */
         localStorage.setItem('userId', userData.id);
-    };
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart, userData]);
 
     const addCart = product => {
-        const price = product.precio_con_descuento
-            ? product.precio_con_descuento
-            : product.precio;
+        const price = product.precio_con_descuento ?? product.precio;
 
         if (!cart.find(item => item.id === product.id)) {
-            const newCart = [...cart, product];
-            const newCost = Number(cartTotalCost) + Number(price);
+            // seleccionar por defecto los primeros atributos del producto
+            // agregar subtotal y cantidad
+            const newProduct = {
+                ...product,
+                cart_quantity: 1,
+                subtotal: price,
+            };
 
+            const newCart = [...cart, newProduct];
             setCart(newCart);
-            setCarTotalCost(newCost);
-            saveLocalStorage(newCart, Number(newCost).toFixed(3));
         }
     };
 
@@ -86,33 +86,27 @@ const CartProvider = ({ children }) => {
 
         // si se encuentra el producto en el carrito
         if (newCart.length != cart.length) {
-            const price = product.precio_con_descuento
-                ? product.precio_con_descuento
-                : product.precio;
-
-            let newCost = Number(cartTotalCost) - Number(price);
-
-            if (newCost < 0 && newCart.length === 0) {
-                newCost = 0;
-            }
-
             setCart(newCart);
-            setCarTotalCost(newCost);
-            saveLocalStorage(newCart, Number(newCost).toFixed(3));
         }
     };
 
     const setQuantity = (product, quantity) => {
+        // agregar cantidad del producto
         const newCart = cart.map(item => {
             if (item.id === product.id) {
-                return { ...item, cart_quantity: quantity };
+                const price = item.precio_con_descuento ?? item.precio;
+
+                return {
+                    ...item,
+                    cart_quantity: quantity,
+                    subtotal: price * quantity,
+                };
             }
 
             return item;
         });
 
         setCart(newCart);
-        saveLocalStorage(newCart, Number(cartTotalCost).toFixed(3));
     };
 
     return (

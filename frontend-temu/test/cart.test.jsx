@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 import { act, render, screen, renderHook } from '@testing-library/react';
 import { useContext } from 'react';
 import { CartContext } from '../src/provider/CartContext.jsx';
@@ -6,6 +6,10 @@ import { TestCartProvider, TestComponent } from './TestComponent.jsx';
 import Cart from '../src/pages/Cart.jsx';
 
 describe('Cart', () => {
+    beforeEach(() => {
+        localStorage.clear();
+    });
+
     const products = [
         {
             id: 1,
@@ -55,6 +59,9 @@ describe('Cart', () => {
         });
 
         expect(result.current.cart[0].cart_quantity).toBe(2);
+        expect(result.current.cartTotalCost).toBeCloseTo(
+            products[0].precio_con_descuento * 2,
+        );
     });
 
     test('Eliminar del carrito', async () => {
