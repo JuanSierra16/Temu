@@ -58,7 +58,7 @@ describe('Cart', () => {
             await result.current.setQuantity(products[0], 2);
         });
 
-        expect(result.current.cart[0].cart_quantity).toBe(2);
+        expect(result.current.cart[0].cantidad).toBe(2);
         expect(result.current.cartTotalCost).toBeCloseTo(
             products[0].precio_con_descuento * 2,
         );
