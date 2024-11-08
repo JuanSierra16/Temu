@@ -88,6 +88,13 @@ const CartProvider = ({ children }) => {
     const setProductAttribute = (product, attribute, value) => {
         const newCart = cart.map(item => {
             if (item.id === product.id) {
+                if (
+                    !item.atributos_seleccionados ||
+                    !item.atributos_seleccionados[attribute]
+                ) {
+                    return item;
+                }
+
                 return {
                     ...item,
                     atributos_seleccionados: {
