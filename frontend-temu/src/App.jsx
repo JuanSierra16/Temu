@@ -44,6 +44,7 @@ import PaymentMethods from './pages/user/PaymantMetods';
 import AccountSecurity from './pages/user/AccountSecurity';
 import Permissions from './pages/user/Permissions';
 import Notifications from './pages/user/Notifications';
+import Favorite from './pages/user/Favorite';
 
 function App() {
     return (
@@ -98,6 +99,7 @@ function App() {
                 <Route path="/cookies-policy" element={<CookiesPolicy />} />
 
                 <Route path="/your-orders" element={<YourOrders />} />
+                <Route path="/your-favorite" element={<Favorite />} />
                 <Route path="/your-reviews" element={<YourReviews />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/coupons" element={<Coupons />} />
