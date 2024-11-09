@@ -1,10 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
-import { getFavoriteProducts } from '../../API/Products.API';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import {
+    deleteFavoriteProduct,
+    getFavoriteProducts,
+} from '../../API/Products.API';
 import { UserContext } from '../../provider/UserContext';
 import DashBoard from '../../layouts/DashBoard';
 import { CiViewList } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import Slider from '../../components/elements/Slider';
+import { MdDeleteOutline } from 'react-icons/md';
 
 const Favorite = () => {
     const [favorite, setFavorite] = useState([]);
@@ -25,6 +29,20 @@ const Favorite = () => {
         getFavorite();
     }, [userData]);
 
+    const handleRemove = useCallback(
+        async favoriteId => {
+            setError(null);
+            const res = await deleteFavoriteProduct(userData.id, favoriteId);
+
+            if (res) {
+                setFavorite(favorite.filter(item => item.id !== favoriteId));
+            } else {
+                setError('No se pudo eliminar el producto de tus favoritos');
+            }
+        },
+        [userData, favorite],
+    );
+
     return (
         <DashBoard>
             <section className="user-dashboard-container history-container">
@@ -32,7 +50,14 @@ const Favorite = () => {
 
                 {favorite.map(item => (
                     <div key={item.id} className="favorite-item">
-                        <p>{item.descripcion}</p>
+                        <span>
+                            <p>{item.descripcion}</p>
+
+                            <MdDeleteOutline
+                                size={48}
+                                onClick={() => handleRemove(item.id)}
+                            />
+                        </span>
 
                         <Slider>
                             {item.imagenes.map((image, index) => (

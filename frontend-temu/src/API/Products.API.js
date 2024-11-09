@@ -37,3 +37,15 @@ export const getFavoriteProducts = async userId => {
     const response = await axios.get(`${baseURL}/products/favoritos/${userId}`);
     return response.data;
 };
+
+export const deleteFavoriteProduct = async (userId, productId) => {
+    try {
+        const response = await axios.delete(
+            `${baseURL}/favoritos/${userId}/${productId}`,
+        );
+
+        return response.status === 200;
+    } catch (error) {
+        return false;
+    }
+};
