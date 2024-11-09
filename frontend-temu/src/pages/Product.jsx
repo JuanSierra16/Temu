@@ -12,10 +12,12 @@ import ProductGrid from '../components/sections/ProductGrid';
 import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../provider/CartContext';
 import CartPanel from '../components/sections/CartPanel';
-import { getProductById } from '../API/Products.API';
-import { ProductsContext } from '../provider/ProductsContext';
+import { addFavoriteProduct, getProductById } from '../API/Products.API';
+import { FaHeart } from 'react-icons/fa6';
+import { UserContext } from '../provider/UserContext';
 
 const Product = () => {
+    const { userIsLogin, userData } = useContext(UserContext);
     const { productId } = useParams();
     const [productInfo, setProductInfo] = useState({
         id: 0,
@@ -23,9 +25,9 @@ const Product = () => {
         imagenes: [],
     });
     const [bigImage, setBigImage] = useState('');
+    const [successFavorite, setSuccessFavorite] = useState(false);
     const [notFoundImages, setNotFoundImages] = useState([]);
-    const { addCart } = useContext(CartContext);
-    const { loadProducts } = useContext(ProductsContext);
+    const { addCart, cart } = useContext(CartContext);
 
     const handleImageError = img => {
         setNotFoundImages(prev => [...prev, img]);
@@ -38,9 +40,15 @@ const Product = () => {
             setProductInfo(data);
             setBigImage(data.imagenes[0]);
         });
-
-        loadProducts();
     }, [productId]);
+
+    const handleFavoriteProduct = () => {
+        const success = addFavoriteProduct(userData.id, productInfo.id);
+
+        if (success) {
+            setSuccessFavorite(true);
+        }
+    };
 
     return (
         <main>
@@ -48,8 +56,8 @@ const Product = () => {
             <NavBar />
 
             <article className="product-page-container">
-                <section className="max-width product-panels">
-                    <div className="product-left-container">
+                <div className="max-width product-panels">
+                    <section className="product-left-container">
                         <div className="product-images">
                             <div className="product-small-images">
                                 {productInfo.imagenes.map(
@@ -69,6 +77,13 @@ const Product = () => {
 
                             <div className="product-big-image">
                                 <img src={`/images/${bigImage}`} alt="" />
+
+                                {userIsLogin && !successFavorite && (
+                                    <button onClick={handleFavoriteProduct}>
+                                        <FaHeart size={32} color="#FF0000" />
+                                        <p>Agregarlo a tu lista de favoritos</p>
+                                    </button>
+                                )}
                             </div>
                         </div>
 
@@ -97,9 +112,9 @@ const Product = () => {
                                 <button>Ver todos (#)</button>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div className="product-right-container">
+                    <section className="product-right-container">
                         <div className="product-description">
                             <p>{productInfo.descripcion}</p>
 
@@ -129,33 +144,37 @@ const Product = () => {
                             <p>Oferta exclusiva</p>
                         </div>
 
-                        <div className="product-info">
-                            <p>Cantidad (Disponible): {productInfo.stock}</p>
+                        {!cart.find(item => item.id === productInfo.id) && (
+                            <div className="product-info">
+                                <p>
+                                    Cantidad (Disponible): {productInfo.stock}
+                                </p>
 
-                            <div className="product-quantity">
-                                <p>Cant</p>
+                                <div className="product-quantity">
+                                    <p>Cant</p>
 
-                                <select name="quantity" id="">
-                                    {[...Array(productInfo.stock).keys()].map(
-                                        (item, index) => (
+                                    <select name="quantity" id="">
+                                        {[
+                                            ...Array(productInfo.stock).keys(),
+                                        ].map((item, index) => (
                                             <option
                                                 key={index}
                                                 value={index + 1}
                                             >
                                                 {index + 1}
                                             </option>
-                                        ),
-                                    )}
-                                </select>
-                            </div>
+                                        ))}
+                                    </select>
+                                </div>
 
-                            <button
-                                className="product-cart orange-button"
-                                onClick={() => addCart(productInfo)}
-                            >
-                                Agregar al carrito
-                            </button>
-                        </div>
+                                <button
+                                    className="product-cart orange-button"
+                                    onClick={() => addCart(productInfo)}
+                                >
+                                    Agregar al carrito
+                                </button>
+                            </div>
+                        )}
 
                         <div className="product-conditions">
                             <div>
@@ -216,8 +235,8 @@ const Product = () => {
                                 </Link>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
 
                 <ProductGrid />
             </article>
