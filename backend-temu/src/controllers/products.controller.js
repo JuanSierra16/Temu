@@ -123,3 +123,30 @@ export const obtenerFavoritos = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// Controlador para eliminar un producto favorito de un usuario
+export const eliminarFavorito = async (req, res) => {
+    const { usuario_id, producto_id } = req.params;
+
+    try {
+        // Verificar si el usuario existe
+        const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [usuario_id]);
+        if (userRows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Verificar si el producto existe
+        const [productRows] = await pool.query('SELECT * FROM productos WHERE id = ?', [producto_id]);
+        if (productRows.length === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        // Eliminar el producto favorito del usuario
+        await pool.query('DELETE FROM favoritos WHERE usuario_id = ? AND producto_id = ?', [usuario_id, producto_id]);
+
+        res.status(200).json({ message: 'Producto eliminado de favoritos' });
+    } catch (error) {
+        console.error('Error al eliminar el producto de favoritos:', error);
+        res.status(500).json({ message: error.message });
+    }
+};
