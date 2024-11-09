@@ -48,7 +48,18 @@
         -o-object-fit: cover;
         object-fit: cover;
     }
+
+    & span {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5em;
+
+        & p {
+            max-width: 95%;
+        }
+    }
 }
+
 
 .address-list {
     display: flex;
