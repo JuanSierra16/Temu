@@ -24,11 +24,15 @@ export const getAddresses = async userId => {
     }
 };
 
-export const deleteAddress = async addressId => {
+export const deleteAddress = async (userId, addressId) => {
     try {
-        const res = await axios.delete(
-            `${baseUlr}/shipping-addresses/${addressId}`,
-        );
+        const res = await axios.delete(`${baseUlr}/shipping-addresses`, {
+            data: {
+                id: addressId,
+                usuario_id: userId,
+            },
+        });
+
         return res.status === 200;
     } catch (error) {
         return false;

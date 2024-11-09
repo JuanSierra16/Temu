@@ -35,6 +35,14 @@ const Address = () => {
         informacion_adicional: '',
     });
 
+    useEffect(() => {
+        if (userData) {
+            getAddresses(userData.id).then(res => {
+                setAddress(res);
+            });
+        }
+    }, [userData]);
+
     const handleAddressForm = useCallback(
         ({ target }) => {
             setAddressForm({
@@ -105,7 +113,7 @@ const Address = () => {
 
     const handleOnDelete = useCallback(
         async addressItem => {
-            const res = await deleteAddress(addressItem.id);
+            const res = await deleteAddress(userData.id, addressItem.id);
 
             if (!res) {
                 setError('Error al remover la dirección');
@@ -113,7 +121,7 @@ const Address = () => {
                 setAddress(address.filter(item => item.id !== addressItem.id));
             }
         },
-        [address],
+        [address, userData.id],
     );
 
     const handleOnEdit = useCallback(async addressItem => {
