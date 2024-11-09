@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { TestUserProvider } from './TestComponent.jsx';
 import axios from 'axios';
 import Address from '../src/pages/user/Address.jsx';
@@ -65,6 +65,42 @@ describe('Direcciones de entrega', () => {
         res = await deleteAddress(1, address.id);
         expect(axios.delete).toHaveBeenCalledTimes(1);
         expect(res).toEqual(true);
+    });
+
+    test('Vista de direcciones get API', async () => {
+        axios.get.mockResolvedValue({
+            data: [address],
+        });
+
+        render(<Address />, {
+            wrapper: TestUserProvider,
+        });
+
+        await waitFor(async () => {
+            expect(screen.getByText('Colombia')).toBeInTheDocument();
+        });
+    });
+
+    test('Vista de direcciones Error API', async () => {
+        axios.get.mockResolvedValue({
+            data: [address],
+        });
+
+        axios.delete.mockResolvedValue({
+            status: 404,
+        });
+
+        render(<Address />, {
+            wrapper: TestUserProvider,
+        });
+
+        await waitFor(async () => {
+            fireEvent.click(screen.getByRole('button', { name: /Eliminar*/i }));
+        });
+
+        expect(
+            screen.getByText('Error al remover la dirección'),
+        ).toBeInTheDocument();
     });
 
     test('Vista de direcciones y formulario', async () => {
