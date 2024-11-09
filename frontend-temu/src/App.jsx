@@ -39,7 +39,7 @@ import Coupons from './pages/user/Coupons';
 import Credit from './pages/user/Credit';
 import Suppliers from './pages/user/Suppliers';
 import History from './pages/user/History';
-import Directions from './pages/user/Directions';
+import Address from './pages/user/Address';
 import PaymentMethods from './pages/user/PaymantMetods';
 import AccountSecurity from './pages/user/AccountSecurity';
 import Permissions from './pages/user/Permissions';
@@ -106,7 +106,7 @@ function App() {
                 <Route path="/credit-balance" element={<Credit />} />
                 <Route path="/followed-suppliers" element={<Suppliers />} />
                 <Route path="/history-navigation" element={<History />} />
-                <Route path="/your-addresses" element={<Directions />} />
+                <Route path="/your-addresses" element={<Address />} />
                 <Route path="/payment-methods" element={<PaymentMethods />} />
                 <Route path="/account-security" element={<AccountSecurity />} />
                 <Route path="/permissions" element={<Permissions />} />
