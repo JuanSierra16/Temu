@@ -28,18 +28,13 @@ export const handleStripeWebhook = async (req, res) => {
             try {
                 console.log('Evento de sesión de checkout completado recibido:', session);
 
-                //Guardar la información de la sesión en la base de datos
+                //Guardar la información de la pedido en la base de datos
 
                 //Enviar un correo al usuario
 
-                // Ejemplo: Reducir el stock
-                /* const { items } = session.metadata;
-                for (const item of JSON.parse(items)) {
-                    await pool.query('UPDATE productos SET stock = stock - ? WHERE id = ?', [item.quantity, item.product_id]);
-                } */
+                //Reducir el stock de los productos
 
-                // Ejemplo: Enviar un correo electrónico al usuario
-                // await sendEmailToUser(session.customer_email, 'Gracias por tu compra', 'Tu pedido ha sido recibido y está en proceso.');
+                //Enviar número de factura única
 
                 console.log('Operaciones adicionales completadas');
             } catch (error) {
