@@ -324,7 +324,7 @@ const Address = () => {
                             />
                         </label>
                         <label>
-                            <p>Información Adicional</p>
+                            <p>Información Adicional / Opciones de entrega</p>
                             <input
                                 required
                                 type="text"
@@ -332,6 +332,7 @@ const Address = () => {
                                 name="informacion_adicional"
                                 value={addressForm.informacion_adicional}
                                 onChange={handleAddressForm}
+                                placeholder="Ejemplo dejar en la puerta"
                             />
                         </label>
 
