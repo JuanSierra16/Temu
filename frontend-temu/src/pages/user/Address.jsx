@@ -237,8 +237,11 @@ const Address = () => {
                                 value={addressForm.pais}
                             >
                                 {countries.map(country => (
-                                    <option key={country} value={country}>
-                                        {country}
+                                    <option
+                                        key={country.nombre}
+                                        value={country.nombre}
+                                    >
+                                        {country.nombre}
                                     </option>
                                 ))}
                             </select>
