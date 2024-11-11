@@ -10,7 +10,7 @@
     color: black;
 }
 
-textarea {
+.review-form textarea {
     resize: vertical;
     width: 100%;
     min-height: 100px;
@@ -20,7 +20,7 @@ textarea {
     border-radius: 5px;
 }
 
-button {
+.review-form button {
     padding: 10px;
     background-color: #007bff;
     color: white;
@@ -30,6 +30,6 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+.review-form button:hover {
     background-color: #0056b3;
 }
