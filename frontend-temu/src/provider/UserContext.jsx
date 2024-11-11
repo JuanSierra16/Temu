@@ -64,6 +64,7 @@ const UserProvider = ({ children }) => {
             setUserData(user);
             setUserIsLogin(true);
             setSessionJWT(token);
+            console.log('Usuario autenticado:', user);
         }
 
         setWaitLogin(false);
