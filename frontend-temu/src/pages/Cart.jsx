@@ -3,33 +3,22 @@ import SimpleNav from '../components/sections/navbar/SimpleNav';
 import Footer from '../components/sections/Footer';
 import { LiaShippingFastSolid } from 'react-icons/lia';
 import { FiShoppingCart } from 'react-icons/fi';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '../provider/CartContext';
 import { UserContext } from '../provider/UserContext';
 import { useNavigate } from 'react-router-dom';
 import ProductGrid from '../components/sections/ProductGrid';
-import { getProducts } from '../API/Products.API';
 import { IoIosLock } from 'react-icons/io';
 import { AiOutlineSafety } from 'react-icons/ai';
-import { MdDeleteOutline } from 'react-icons/md';
 import ModalLogin from '../components/sections/navbar/ModalLogin';
+import CartProduct from '../components/elements/CartProduct';
 
 const Cart = () => {
-    const { cart, cartTotalCost, removeCart } = useContext(CartContext);
+    const { cart, cartTotalCost } = useContext(CartContext);
     const { userIsLogin } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const [productsList, setProductsList] = useState([]);
     const [showModal, setShowModal] = useState(false);
-
-    const handleLoadMore = useCallback(async () => {
-        const newProducts = await getProducts();
-        setProductsList(prevProducts => [...prevProducts, ...newProducts]);
-    }, []);
-
-    useEffect(() => {
-        handleLoadMore();
-    }, [handleLoadMore]);
 
     const certificateCards = Object.values(
         import.meta.glob(
@@ -78,67 +67,10 @@ const Cart = () => {
                     {cart.length > 0 && (
                         <div className="car-products">
                             {cart.map(product => (
-                                <div
-                                    key={product.descripcion}
-                                    className="car-product"
-                                >
-                                    <img
-                                        src={`/images/${product.imagenes[0]}`}
-                                        alt=""
-                                    />
-
-                                    <div className="car-product-info">
-                                        <div className="car-product-title">
-                                            <p>{product.descripcion}</p>
-
-                                            <MdDeleteOutline
-                                                size={48}
-                                                className="car-product-delete-icon"
-                                                onClick={() =>
-                                                    removeCart(product)
-                                                }
-                                            />
-                                        </div>
-
-                                        {product.precio_con_descuento && (
-                                            <p className="orange-text">
-                                                Oferta especial{' '}
-                                                {product.precio_con_descuento}%
-                                                | por tiempo limitado
-                                            </p>
-                                        )}
-
-                                        <div className="car-product-price">
-                                            {product.precio_con_descuento && (
-                                                <span className="orange-text">
-                                                    $
-                                                    {
-                                                        product.precio_con_descuento
-                                                    }
-                                                </span>
-                                            )}
-
-                                            {product.precio_con_descuento && (
-                                                <>
-                                                    <del>${product.precio}</del>
-
-                                                    <span className="orange-text">
-                                                        {Math.round(
-                                                            (product.precio_con_descuento /
-                                                                product.precio) *
-                                                                100,
-                                                        )}
-                                                        %
-                                                    </span>
-                                                </>
-                                            )}
-
-                                            {!product.precio_con_descuento && (
-                                                <span>${product.precio}</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
+                                <CartProduct
+                                    key={product.id}
+                                    product={product}
+                                />
                             ))}
                         </div>
                     )}
@@ -222,10 +154,7 @@ const Cart = () => {
                     Artículos que tal vez quieras agregar
                 </h2>
 
-                <ProductGrid
-                    productsList={productsList}
-                    handleLoadMore={handleLoadMore}
-                />
+                <ProductGrid />
             </article>
 
             <Footer />

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { UserContext } from './UserContext';
 
 const CartContext = createContext(null);
@@ -8,82 +8,106 @@ const CartProvider = ({ children }) => {
     const [cartTotalCost, setCarTotalCost] = useState(0);
 
     const { userData } = useContext(UserContext);
-    const userIdRef = useRef(null);
 
     useEffect(() => {
         const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
-
+        const cost = loadCart.reduce((acc, item) => acc + item.subtotal, 0);
         setCart(loadCart);
-        userIdRef.current = JSON.parse(localStorage.getItem('userId') || null);
-
-        const cost = loadCart.reduce(
-            (acc, item) =>
-                acc + item.precio_con_descuento
-                    ? item.precio_con_descuento
-                    : item.precio,
-            0,
-        );
-
         setCarTotalCost(Number(cost).toFixed(3));
     }, []);
 
     useEffect(() => {
-        if (userData.id) {
-            localStorage.setItem('userId', userData.id);
-
-            if (userIdRef.current && userIdRef.current !== userData.id) {
-                setCart([]);
-                setCarTotalCost(0);
-                localStorage.removeItem('cart');
-                localStorage.removeItem('userId');
-            }
-        }
-
-        if (userData.id === '' && userIdRef.current) {
-            setCart([]);
-            setCarTotalCost(0);
-            localStorage.removeItem('cart');
-            localStorage.removeItem('userId');
-        }
+        // mantener el carro de compra cuando el usuario inicia sesión
+        // limpiar el carrito cuando el usuario cierra sesión
     }, [userData]);
 
-    const saveLocalStorage = (newCart, newCost) => {
-        localStorage.setItem('cart', JSON.stringify(newCart));
+    useEffect(() => {
+        let newCost = cart.reduce(
+            (acc, item) => acc + parseFloat(item.subtotal),
+            0,
+        );
+        newCost = Number(newCost).toFixed(3);
         setCarTotalCost(newCost);
-        /*
-            guardar el id del usuario, si cambia a nulo (cierra sesión) se debe limpiar el carrito del localStorage
 
-            En desarrollo siempre se renderiza dos veces, lo cual elimina el carrito si el usuario
-            realizo login (desactivar el StrictMode)
-        */
-        localStorage.setItem('userId', userData.id);
-    };
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
 
     const addCart = product => {
-        const price = product.precio_con_descuento
-            ? product.precio_con_descuento
-            : product.precio;
+        const price = product.precio_con_descuento ?? product.precio;
 
         if (!cart.find(item => item.id === product.id)) {
-            const newCart = [...cart, product];
-            const newCost = Number(cartTotalCost) + Number(price);
+            // seleccionar por defecto los primeros atributos del producto
+            // agregar subtotal y cantidad
+            let atributos_seleccionados = {};
 
+            for (const key in product.atributos) {
+                atributos_seleccionados[key] = product.atributos[key][0];
+            }
+
+            const newProduct = {
+                ...product,
+                cantidad: 1,
+                subtotal: price,
+                atributos_seleccionados: atributos_seleccionados,
+            };
+
+            const newCart = [...cart, newProduct];
             setCart(newCart);
-            setCarTotalCost(newCost);
-            saveLocalStorage(newCart, Number(newCost).toFixed(3));
         }
     };
 
     const removeCart = product => {
-        const price = product.precio_con_descuento
-            ? product.precio_con_descuento
-            : product.precio;
         const newCart = cart.filter(item => item.id !== product.id);
-        const newCost = parseFloat(cartTotalCost) - parseFloat(price);
+
+        // si se encuentra el producto en el carrito
+        if (newCart.length != cart.length) {
+            setCart(newCart);
+        }
+    };
+
+    const setQuantity = (product, quantity) => {
+        // agregar cantidad del producto
+        const newCart = cart.map(item => {
+            if (item.id === product.id) {
+                let price = item.precio_con_descuento ?? item.precio;
+                const subtotal = Number(price) * Number(quantity);
+
+                return {
+                    ...item,
+                    cantidad: parseInt(quantity),
+                    subtotal: subtotal,
+                };
+            }
+
+            return item;
+        });
 
         setCart(newCart);
-        setCarTotalCost(newCost);
-        saveLocalStorage(newCart, Number(newCost).toFixed(3));
+    };
+
+    const setProductAttribute = (product, attribute, value) => {
+        const newCart = cart.map(item => {
+            if (item.id === product.id) {
+                if (
+                    !item.atributos_seleccionados ||
+                    !item.atributos_seleccionados[attribute]
+                ) {
+                    return item;
+                }
+
+                return {
+                    ...item,
+                    atributos_seleccionados: {
+                        ...item.atributos_seleccionados,
+                        [attribute]: value,
+                    },
+                };
+            }
+
+            return item;
+        });
+
+        setCart(newCart);
     };
 
     return (
@@ -93,6 +117,8 @@ const CartProvider = ({ children }) => {
                 addCart,
                 removeCart,
                 cartTotalCost,
+                setQuantity,
+                setProductAttribute,
             }}
         >
             {children}

@@ -54,7 +54,11 @@ CREATE TABLE pedidos (
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10, 2),
     estado ENUM('procesando', 'enviado', 'entregado', 'devoluciones'),
-    CONSTRAINT fk_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id)
+    cupon_id BIGINT,  -- Nuevo campo agregado
+	direccion_envio_id INT,
+    CONSTRAINT fk_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id),
+    CONSTRAINT fk_pedido_cupon FOREIGN KEY (cupon_id) REFERENCES cupones_descuento(id),
+    CONSTRAINT fk_direccion_envio FOREIGN KEY (direccion_envio_id) REFERENCES direcciones_envio(id)
 );
 
 CREATE TABLE detalles_pedido (
@@ -116,6 +120,25 @@ CREATE TABLE IF NOT EXISTS direcciones_envio (
     FOREIGN KEY (usuario_id) REFERENCES users(id)
 );
 
+CREATE TABLE cupones_descuento (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(255) UNIQUE,
+    descuento DECIMAL(10, 2),
+    fecha_expiracion DATE,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE historial_cupones (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    cupon_id BIGINT,
+    pedido_id BIGINT,
+    usuario_id INT,
+    fecha_uso TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cupon_id) REFERENCES cupones_descuento(id),
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (usuario_id) REFERENCES users(id)
+);
+
 select * from users;
 select * from categorias;
 select * from productos;
@@ -124,3 +147,4 @@ select * from medidas_usuario;
 select * from favoritos;
 delete from medidas_usuario;
 select * from direcciones_envio;
+select * from cupones_descuento;

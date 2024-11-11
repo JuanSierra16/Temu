@@ -1,11 +1,15 @@
-import { describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 import { act, render, screen, renderHook } from '@testing-library/react';
 import { useContext } from 'react';
 import { CartContext } from '../src/provider/CartContext.jsx';
-import { TestComponent } from './TestComponent.jsx';
+import { TestCartProvider, TestComponent } from './TestComponent.jsx';
 import Cart from '../src/pages/Cart.jsx';
 
 describe('Cart', () => {
+    beforeEach(() => {
+        localStorage.clear();
+    });
+
     const products = [
         {
             id: 1,
@@ -15,6 +19,7 @@ describe('Cart', () => {
             imagenes: ['1pc Protector de colchón imper.webp'],
         },
         {
+            id: 2,
             descripcion: '2 set Gorro De Satén',
             precio_con_descuento: 4.757,
             precio: 28.629,
@@ -24,7 +29,7 @@ describe('Cart', () => {
 
     test('Agregar al carrito', async () => {
         const { result } = renderHook(() => useContext(CartContext), {
-            wrapper: TestComponent,
+            wrapper: TestCartProvider,
         });
 
         await act(async () => {
@@ -52,11 +57,16 @@ describe('Cart', () => {
         await act(async () => {
             await result.current.setQuantity(products[0], 2);
         });
+
+        expect(result.current.cart[0].cantidad).toBe(2);
+        expect(result.current.cartTotalCost).toBeCloseTo(
+            products[0].precio_con_descuento * 2,
+        );
     });
 
     test('Eliminar del carrito', async () => {
         const { result } = renderHook(() => useContext(CartContext), {
-            wrapper: TestComponent,
+            wrapper: TestCartProvider,
         });
 
         await act(async () => {
@@ -64,21 +74,16 @@ describe('Cart', () => {
         });
 
         await act(async () => {
-            await result.current.removeCart(products[1]); // no existe
+            await result.current.removeCart(products[1]); // no existe en el carrito
         });
 
         await act(async () => {
             expect(result.current.cart.length).toBe(1);
-        });
-
-        await act(async () => {
             await result.current.removeCart(products[0]);
         });
 
-        await act(async () => {
-            expect(result.current.cart.length).toBe(0);
-            expect(result.current.cartTotalCost).toBeCloseTo(0);
-        });
+        expect(result.current.cart.length).toBe(0);
+        expect(result.current.cartTotalCost).toBeCloseTo(0);
     });
 
     test('Vista de carrito de compras', async () => {

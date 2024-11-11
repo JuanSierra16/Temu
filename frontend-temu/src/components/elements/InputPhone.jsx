@@ -7,6 +7,7 @@ const InputPhone = ({
     phone,
     onChangePhone,
     setPrefix,
+    initialPrefix,
     disabled = false,
     required = false,
     autoFocus = false,
@@ -16,10 +17,19 @@ const InputPhone = ({
 
     useEffect(() => {
         // por defecto el primer prefijo de la lista
-        const { countryCode, prefix } = supportPrefixPhone[0];
-        setCountryValue(`${countryCode} ${prefix}`);
-        setPrefix(prefix);
-    }, [setPrefix]);
+        if (initialPrefix) {
+            const { countryCode, prefix } = supportPrefixPhone.find(
+                item => item.prefix == initialPrefix,
+            );
+
+            setCountryValue(`${countryCode} ${prefix}`);
+            setPrefix(prefix);
+        } else {
+            const { countryCode, prefix } = supportPrefixPhone[0];
+            setCountryValue(`${countryCode} ${prefix}`);
+            setPrefix(prefix);
+        }
+    }, [setPrefix, initialPrefix]);
 
     const handleSelectChange = e => {
         // Obtener el prefijo de número de teléfono seleccionado de la lista

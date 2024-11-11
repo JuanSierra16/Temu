@@ -200,6 +200,7 @@ const UserProvider = ({ children }) => {
     const logoutAction = () => {
         Cookies.remove('user');
         Cookies.remove('token');
+        localStorage.removeItem('cart');
 
         if (userData?.nombre_plataforma === 'Google') {
             googleLogout();

@@ -39,11 +39,12 @@ import Coupons from './pages/user/Coupons';
 import Credit from './pages/user/Credit';
 import Suppliers from './pages/user/Suppliers';
 import History from './pages/user/History';
-import Directions from './pages/user/Directions';
+import Address from './pages/user/Address';
 import PaymentMethods from './pages/user/PaymantMetods';
 import AccountSecurity from './pages/user/AccountSecurity';
 import Permissions from './pages/user/Permissions';
 import Notifications from './pages/user/Notifications';
+import Favorite from './pages/user/Favorite';
 
 import ReviewForm from './pages/ReviewForm';
 
@@ -100,13 +101,14 @@ function App() {
                 <Route path="/cookies-policy" element={<CookiesPolicy />} />
 
                 <Route path="/your-orders" element={<YourOrders />} />
+                <Route path="/your-favorite" element={<Favorite />} />
                 <Route path="/your-reviews" element={<YourReviews />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/coupons" element={<Coupons />} />
                 <Route path="/credit-balance" element={<Credit />} />
                 <Route path="/followed-suppliers" element={<Suppliers />} />
                 <Route path="/history-navigation" element={<History />} />
-                <Route path="/your-addresses" element={<Directions />} />
+                <Route path="/your-addresses" element={<Address />} />
                 <Route path="/payment-methods" element={<PaymentMethods />} />
                 <Route path="/account-security" element={<AccountSecurity />} />
                 <Route path="/permissions" element={<Permissions />} />

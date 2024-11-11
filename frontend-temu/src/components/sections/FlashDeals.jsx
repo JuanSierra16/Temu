@@ -38,11 +38,11 @@ const FlashDeals = () => {
 
                             <p className="product-price">
                                 <span className="current-price">
-                                    ${product.precio}
+                                    ${product.precio_con_descuento}
                                 </span>
 
                                 <span className="old-price">
-                                    ${product.precio_con_descuento}
+                                    ${product.precio}
                                 </span>
 
                                 <span className="discount">
