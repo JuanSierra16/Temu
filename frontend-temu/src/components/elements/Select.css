@@ -50,7 +50,8 @@
 .select-dropdown {
     display: none;
     position: absolute;
-    width: 300px;
+    min-width: 300px;
+    width: 100%;
     max-height: 200px;
     top: calc(100% + 0.5em);
     overflow-y: auto;
@@ -58,7 +59,6 @@
     border: 1px solid var(--gray-color);
     scrollbar-color: var(--gray-color) var(--light-color);
     scrollbar-width: thin;
-    z-index: 200;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

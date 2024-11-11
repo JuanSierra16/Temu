@@ -9,6 +9,7 @@ import FiveStars from './pages/FiveStars';
 import NewComers from './pages/NewComers';
 import Cart from './pages/Cart';
 import SearchProduct from './pages/SearchProduct';
+import SetCountry from './pages/SetCountry';
 
 import About from './pages/company-info/About';
 import Affiliate from './pages/company-info/Affiliate';
@@ -66,6 +67,7 @@ function App() {
                 <Route path="/five-stars" element={<FiveStars />} />
                 <Route path="/new-comers" element={<NewComers />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/set-country" element={<SetCountry />} />
 
                 <Route path="/about" element={<About />} />
                 <Route path="/affiliate" element={<Affiliate />} />

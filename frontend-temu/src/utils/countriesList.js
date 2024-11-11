@@ -113,8 +113,8 @@ export const countries = [
     },
     {
         nombre: 'Brunéi Darussalam',
-        name: 'Brunei Darussalam',
-        nom: 'Brunei Darussalam',
+        name: 'Brunei',
+        nom: 'Brunei',
         iso2: 'BN',
         iso3: 'BRN',
         phone_code: '673',
@@ -209,7 +209,7 @@ export const countries = [
     },
     {
         nombre: 'Estados Unidos',
-        name: 'United States of America',
+        name: 'United States',
         nom: "États-Unis d'Amérique",
         iso2: 'US',
         iso3: 'USA',
@@ -433,7 +433,7 @@ export const countries = [
     },
     {
         nombre: 'Macedonia del Norte',
-        name: 'Macedonia',
+        name: 'North Macedonia',
         nom: 'Macédoine',
         iso2: 'MK',
         iso3: 'MKD',
@@ -577,7 +577,7 @@ export const countries = [
     },
     {
         nombre: 'República Checa',
-        name: 'Czech Republic',
+        name: 'Czechia',
         nom: 'République Tchèque',
         iso2: 'CZ',
         iso3: 'CZE',
