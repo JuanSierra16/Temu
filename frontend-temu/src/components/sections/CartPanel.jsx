@@ -1,11 +1,13 @@
-import { useContext } from 'react';
 import './CartPanel.css';
+import { useContext } from 'react';
 import { BsCartCheck } from 'react-icons/bs';
 import { CartContext } from '../../provider/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCountry } from '../../provider/UseCountry';
 
 const CartPanel = () => {
     const { cart, cartTotalCost } = useContext(CartContext);
+    const { formatCurrency } = useCountry();
     const navigate = useNavigate();
 
     return (
@@ -18,7 +20,7 @@ const CartPanel = () => {
             </div>
 
             <p>
-                <strong>${cartTotalCost}</strong>
+                <strong>{formatCurrency(cartTotalCost)}</strong>
             </p>
 
             <button className="orange-button">
@@ -35,7 +37,11 @@ const CartPanel = () => {
                         to={`/product/${encodeURIComponent(product.id)}`}
                     >
                         <img src={`/images/${product.imagenes[0]}`} alt="" />
-                        <p className="orange-text">${product.precio}</p>
+                        <p className="orange-text">
+                            {formatCurrency(
+                                product.precio_con_descuento ?? product.precio,
+                            )}
+                        </p>
                     </Link>
                 ))}
             </div>

@@ -51,7 +51,8 @@ export const useCountry = () => {
 
     const [fetchingCurrencies, setFetchingCurrencies] = useState(false);
 
-    const formatCurrency = value => currencyFormat.format(value);
+    const formatCurrency = value =>
+        currencyFormat.format(value * currency.exchangeRate);
 
     useEffect(() => {
         if (country) {

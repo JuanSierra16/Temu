@@ -12,6 +12,7 @@ import { IoIosLock } from 'react-icons/io';
 import { AiOutlineSafety } from 'react-icons/ai';
 import ModalLogin from '../components/sections/navbar/ModalLogin';
 import CartProduct from '../components/elements/CartProduct';
+import { useCountry } from '../provider/UseCountry';
 
 const Cart = () => {
     const { cart, cartTotalCost } = useContext(CartContext);
@@ -19,6 +20,7 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const [showModal, setShowModal] = useState(false);
+    const { formatCurrency } = useCountry();
 
     const certificateCards = Object.values(
         import.meta.glob(
@@ -98,7 +100,7 @@ const Cart = () => {
 
                     <div className="car-cost">
                         <p>Total ({cart.length} artículos)</p>
-                        <p>$ {cartTotalCost}</p>
+                        <p>{formatCurrency(cartTotalCost)}</p>
                     </div>
 
                     <button className="orange-button">

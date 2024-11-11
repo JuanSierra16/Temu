@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import { CartContext } from '../../provider/CartContext';
 import { MdDeleteOutline } from 'react-icons/md';
+import { useCountry } from '../../provider/UseCountry';
 
 const CartProduct = ({ product }) => {
     const { removeCart, setQuantity, setProductAttribute } =
         useContext(CartContext);
+    const { formatCurrency } = useCountry();
 
     return (
         <div key={product.descripcion} className="car-product">
@@ -30,13 +32,13 @@ const CartProduct = ({ product }) => {
                 <div className="car-product-price">
                     {product.precio_con_descuento && (
                         <span className="orange-text">
-                            ${product.precio_con_descuento}
+                            {formatCurrency(product.precio_con_descuento)}
                         </span>
                     )}
 
                     {product.precio_con_descuento && (
                         <>
-                            <del>${product.precio}</del>
+                            <del>{formatCurrency(product.precio)}</del>
 
                             <span className="orange-text">
                                 {Math.round(

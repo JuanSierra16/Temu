@@ -31,22 +31,17 @@ const ProductPrev = ({ product }) => {
                             <div className="product-prev-discount">
                                 <p className="product-prev-price">
                                     {formatCurrency(
-                                        product.precio_con_descuento *
-                                            currency.exchangeRate,
+                                        product.precio_con_descuento,
                                     )}
                                 </p>
                                 <small className="product-prev-offer">
-                                    {formatCurrency(
-                                        product.precio * currency.exchangeRate,
-                                    )}
+                                    {formatCurrency(product.precio)}
                                 </small>
                             </div>
                         )}
                         {!product.precio_con_descuento && (
                             <p className="product-prev-price">
-                                {formatCurrency(
-                                    product.precio * currency.exchangeRate,
-                                )}
+                                {formatCurrency(product.precio)}
                             </p>
                         )}
                     </div>

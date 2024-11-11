@@ -8,7 +8,7 @@ import { useCountry } from '../../provider/UseCountry';
 
 const FlashDeals = () => {
     const { offerProducts } = useContext(ProductsContext);
-    const { currency, formatCurrency } = useCountry();
+    const { formatCurrency } = useCountry();
 
     return (
         <section className="flash-deals-section max-width">
@@ -41,15 +41,12 @@ const FlashDeals = () => {
                             <p className="product-price">
                                 <span className="current-price">
                                     {formatCurrency(
-                                        product.precio_con_descuento *
-                                            currency.exchangeRate,
+                                        product.precio_con_descuento,
                                     )}
                                 </span>
 
                                 <span className="old-price">
-                                    {formatCurrency(
-                                        product.precio * currency.exchangeRate,
-                                    )}
+                                    {formatCurrency(product.precio)}
                                 </span>
                             </p>
                         </Link>
