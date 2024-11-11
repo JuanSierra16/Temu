@@ -32,9 +32,13 @@ export const useCountry = () => {
             return JSON.parse(loadedCurrency);
         }
 
+        const currencyIso = SUPPORT_CURRENCIES.find(
+            currency => currency.acronym === 'EUR',
+        );
+
         return {
-            acronym: 'EUR',
-            factor: 1, // factor en base al EURO
+            ...currencyIso,
+            exchangeRate: 1, // factor en base al EURO
         };
     });
 
@@ -69,7 +73,7 @@ export const useCountry = () => {
     };
 
     const setCurrencyByCode = currency => {
-        if (SUPPORT_CURRENCIES.includes(currency)) {
+        if (SUPPORT_CURRENCIES.find(c => c.acronym === currency)) {
             setFetchingCurrencies(true);
 
             const currencyUrl = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json`;
@@ -77,17 +81,25 @@ export const useCountry = () => {
             fetch(currencyUrl)
                 .then(res => res.json())
                 .then(data => {
+                    const newCurrency = SUPPORT_CURRENCIES.find(
+                        c => c.acronym === currency,
+                    );
+
                     setCurrency({
-                        acronym: currency,
-                        factor: data['eur'][currency.toLowerCase()],
+                        ...newCurrency,
+                        exchangeRate: data['eur'][currency.toLowerCase()],
                     });
                 })
                 .catch(error => {
                     console.error(error);
 
+                    const newCurrency = SUPPORT_CURRENCIES.find(
+                        c => c.acronym === 'EUR',
+                    );
+
                     setCurrency({
-                        acronym: 'EUR',
-                        factor: 1,
+                        ...newCurrency,
+                        exchangeRate: 1,
                     });
                 })
                 .finally(() => {

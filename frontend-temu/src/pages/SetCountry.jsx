@@ -21,6 +21,8 @@ const SetCountry = () => {
             <main className="set-country">
                 <h2>Selecciona el país de donde compras</h2>
 
+                <label htmlFor="country">País/Región</label>
+
                 <Select value={country.nombre}>
                     {supportedCountries.map(country => (
                         <span
@@ -48,20 +50,18 @@ const SetCountry = () => {
                     artículos de tu carrito).
                 </small>
 
+                <label htmlFor="currency">Moneda</label>
                 <select
                     name="currency"
                     onChange={e => setCurrencyByCode(e.target.value)}
                     defaultValue={currency.acronym}
                 >
                     {SUPPORT_CURRENCIES.map(currency => (
-                        <option key={currency}>{currency}</option>
+                        <option key={currency.acronym} value={currency.acronym}>
+                            {currency.acronym} : {currency.symbol}
+                        </option>
                     ))}
                 </select>
-
-                <p>
-                    {currency.acronym}
-                    {currency.factor}
-                </p>
             </main>
 
             <Footer />

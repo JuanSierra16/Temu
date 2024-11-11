@@ -60,7 +60,7 @@ describe('Cart', () => {
 
         expect(result.current.cart[0].cantidad).toBe(2);
         expect(result.current.cartTotalCost).toBeCloseTo(
-            products[0].precio_con_descuento * 2,
+            Number(products[0].precio_con_descuento * 2).toFixed(2),
         );
     });
 

@@ -84,7 +84,9 @@ const HelpMenu = () => {
                             <hr />
 
                             <small>Moneda</small>
-                            <small>{currency.acronym}: $</small>
+                            <small>
+                                {currency.acronym}: {currency.symbol}
+                            </small>
 
                             <hr />
 

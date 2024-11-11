@@ -13,7 +13,7 @@ const CartProvider = ({ children }) => {
         const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const cost = loadCart.reduce((acc, item) => acc + item.subtotal, 0);
         setCart(loadCart);
-        setCarTotalCost(Number(cost).toFixed(3));
+        setCarTotalCost(Number(cost).toFixed(2));
     }, []);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const CartProvider = ({ children }) => {
             (acc, item) => acc + parseFloat(item.subtotal),
             0,
         );
-        newCost = Number(newCost).toFixed(3);
+        newCost = Number(newCost).toFixed(2);
         setCarTotalCost(newCost);
 
         localStorage.setItem('cart', JSON.stringify(cart));
