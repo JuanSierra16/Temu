@@ -12,6 +12,7 @@ import ProductGrid from '../components/sections/ProductGrid';
 import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../provider/CartContext';
 import CartPanel from '../components/sections/CartPanel';
+import ReviewForm from './ReviewForm';
 import { addFavoriteProduct, getProductById } from '../API/Products.API';
 import { FaHeart } from 'react-icons/fa6';
 import { UserContext } from '../provider/UserContext';
@@ -87,6 +88,11 @@ const Product = () => {
                                     </button>
                                 )}
                             </div>
+                        </div>
+
+                        <div className='product-review'>
+                            <h3>Opiniones</h3>
+                            <ReviewForm productId={productId} />
                         </div>
 
                         <div className="product-user-info-container">

@@ -1,0 +1,35 @@
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.star-rating {
+    display: flex;
+    gap: 5px;
+    color: black;
+}
+
+textarea {
+    resize: vertical;
+    width: 100%;
+    min-height: 100px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

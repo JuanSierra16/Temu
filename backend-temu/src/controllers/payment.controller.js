@@ -3,48 +3,31 @@ import { STRIPE_PRIVATE_KEY } from "../config.js";
 
 const stripe = new Stripe(STRIPE_PRIVATE_KEY);
 
-//Necesito recibir del frontend un objeto con la siguiente estructura:
-const reqBody = {
-    usuario_id: 1,
-    productos: [
-        {
-            id: 1,
-            nombre: 'Producto 1',
-            precio: 1000,
-            cantidad: 2
-        },
-    ],
-    total: 2000,
-    cupon_id: 1,
-    success_url: 'https://example.com/success',
-    cancel_url: 'https://example.com/cancel',
-}
-
-
 // Crear una sesión de checkout
 export const createCheckoutSession = async (req, res) => {
-    const { items, success_url, cancel_url } = req.body;
+    const { usuario_id, productos, total, cupon_id, direccion_envio_id, currency, success_url, cancel_url } = req.body;
 
     try {
         const session = await stripe.checkout.sessions.create({
-            line_items: items.map(item => ({
+            line_items: productos.map(item => ({
                 price_data: {
-                    currency: 'usd',
+                    currency: currency,
                     product_data: {
-                        name: item.name,
+                        name: item.nombre,
                     },
-                    unit_amount: item.amount,
+                    unit_amount: item.precio,
                 },
-                quantity: item.quantity,
+                quantity: item.cantidad,
             })),
-            metadata: {
-                //Aqui puedo enviar información adicional, como el ID del usuario, de los productos
-                //Ejemplo
-                product_id: 1,
-            },
             mode: 'payment',
             success_url,
             cancel_url,
+            metadata: {
+                usuario_id: usuario_id.toString(),
+                total: total.toString(),
+                cupon_id: cupon_id ? cupon_id.toString() : '',
+                direccion_envio_id: direccion_envio_id ? direccion_envio_id.toString() : '',
+            },
         });
 
         res.status(201).json({ id: session.id, url: session.url });

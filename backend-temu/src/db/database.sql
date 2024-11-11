@@ -55,8 +55,10 @@ CREATE TABLE pedidos (
     total DECIMAL(10, 2),
     estado ENUM('procesando', 'enviado', 'entregado', 'devoluciones'),
     cupon_id BIGINT,  -- Nuevo campo agregado
+	direccion_envio_id INT,
     CONSTRAINT fk_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id),
-    CONSTRAINT fk_pedido_cupon FOREIGN KEY (cupon_id) REFERENCES cupones_descuento(id)
+    CONSTRAINT fk_pedido_cupon FOREIGN KEY (cupon_id) REFERENCES cupones_descuento(id),
+    CONSTRAINT fk_direccion_envio FOREIGN KEY (direccion_envio_id) REFERENCES direcciones_envio(id)
 );
 
 CREATE TABLE detalles_pedido (
