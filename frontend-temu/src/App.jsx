@@ -45,6 +45,8 @@ import AccountSecurity from './pages/user/AccountSecurity';
 import Permissions from './pages/user/Permissions';
 import Notifications from './pages/user/Notifications';
 
+import ReviewForm from './pages/ReviewForm';
+
 function App() {
     return (
         <BrowserRouter>
@@ -109,6 +111,8 @@ function App() {
                 <Route path="/account-security" element={<AccountSecurity />} />
                 <Route path="/permissions" element={<Permissions />} />
                 <Route path="/notifications" element={<Notifications />} />
+
+                <Route path="/review-form/:productId" element={<ReviewForm />} />
             </Routes>
         </BrowserRouter>
     );

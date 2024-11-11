@@ -14,6 +14,7 @@ import { CartContext } from '../provider/CartContext';
 import CartPanel from '../components/sections/CartPanel';
 import { getProductById } from '../API/Products.API';
 import { ProductsContext } from '../provider/ProductsContext';
+import ReviewForm from './ReviewForm';
 
 const Product = () => {
     const { productId } = useParams();
@@ -70,6 +71,11 @@ const Product = () => {
                             <div className="product-big-image">
                                 <img src={`/images/${bigImage}`} alt="" />
                             </div>
+                        </div>
+
+                        <div className='product-review'>
+                            <h3>Opiniones</h3>
+                            <ReviewForm productId={productId} />
                         </div>
 
                         <div className="product-user-info-container">
