@@ -7,8 +7,14 @@ import { MemoryRouter } from 'react-router-dom';
 export const TestUserProvider = ({ children, userData }) => {
     return (
         <GoogleOAuthProvider>
-            <UserProvider value={{ userData }}>
-                <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
+            <UserProvider value={{ userData: userData ?? {} }}>
+                <ProductsProvider value={{ products: [] }}>
+                    <CartProvider value={{ cart: [] }}>
+                        <MemoryRouter initialEntries={['/']}>
+                            {children}
+                        </MemoryRouter>
+                    </CartProvider>
+                </ProductsProvider>
             </UserProvider>
         </GoogleOAuthProvider>
     );
@@ -16,29 +22,33 @@ export const TestUserProvider = ({ children, userData }) => {
 
 export const TestProductsProvider = ({ children, products }) => {
     return (
-        <UserProvider value={{ userData: {} }}>
-            <ProductsProvider value={{ products }}>
-                <CartProvider value={{ cart: [] }}>
-                    <MemoryRouter initialEntries={['/']}>
-                        {children}
-                    </MemoryRouter>
-                </CartProvider>
-            </ProductsProvider>
-        </UserProvider>
+        <GoogleOAuthProvider>
+            <UserProvider value={{ userData: {} }}>
+                <ProductsProvider value={{ products: products ?? [] }}>
+                    <CartProvider value={{ cart: [] }}>
+                        <MemoryRouter initialEntries={['/']}>
+                            {children}
+                        </MemoryRouter>
+                    </CartProvider>
+                </ProductsProvider>
+            </UserProvider>
+        </GoogleOAuthProvider>
     );
 };
 
 export const TestCartProvider = ({ children, cart }) => {
     return (
-        <UserProvider value={{ userData: {} }}>
-            <ProductsProvider value={{ products: [] }}>
-                <CartProvider value={{ cart }}>
-                    <MemoryRouter initialEntries={['/']}>
-                        {children}
-                    </MemoryRouter>
-                </CartProvider>
-            </ProductsProvider>
-        </UserProvider>
+        <GoogleOAuthProvider>
+            <UserProvider value={{ userData: {} }}>
+                <ProductsProvider value={{ products: [] }}>
+                    <CartProvider value={{ cart: cart ?? [] }}>
+                        <MemoryRouter initialEntries={['/']}>
+                            {children}
+                        </MemoryRouter>
+                    </CartProvider>
+                </ProductsProvider>
+            </UserProvider>
+        </GoogleOAuthProvider>
     );
 };
 
@@ -48,6 +58,27 @@ export const TestComponent = ({ children }) => {
             <UserProvider>
                 <ProductsProvider>
                     <CartProvider>
+                        <MemoryRouter initialEntries={['/']}>
+                            {children}
+                        </MemoryRouter>
+                    </CartProvider>
+                </ProductsProvider>
+            </UserProvider>
+        </GoogleOAuthProvider>
+    );
+};
+
+export const TestComponentInitial = ({
+    children,
+    userData,
+    products,
+    cart,
+}) => {
+    return (
+        <GoogleOAuthProvider>
+            <UserProvider value={{ userData: userData ?? {} }}>
+                <ProductsProvider value={{ products: products ?? [] }}>
+                    <CartProvider value={{ cart: cart ?? [] }}>
                         <MemoryRouter initialEntries={['/']}>
                             {children}
                         </MemoryRouter>

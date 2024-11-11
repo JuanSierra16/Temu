@@ -1,0 +1,27 @@
+.set-country {
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 40vh;
+}
+
+.country-item {
+    display: block;
+    cursor: pointer;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    &:hover {
+        background-color: var(--gray-color);
+    }
+
+    & img {
+        width: 20px;
+        height: 20px;
+    }
+}

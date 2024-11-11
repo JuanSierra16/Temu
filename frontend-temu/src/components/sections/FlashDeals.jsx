@@ -4,9 +4,11 @@ import Slider from '../elements/Slider';
 import { useContext } from 'react';
 import { ProductsContext } from '../../provider/ProductsContext';
 import { Link } from 'react-router-dom';
+import { useCountry } from '../../provider/UseCountry';
 
 const FlashDeals = () => {
     const { offerProducts } = useContext(ProductsContext);
+    const { formatCurrency } = useCountry();
 
     return (
         <section className="flash-deals-section max-width">
@@ -38,15 +40,13 @@ const FlashDeals = () => {
 
                             <p className="product-price">
                                 <span className="current-price">
-                                    ${product.precio_con_descuento}
+                                    {formatCurrency(
+                                        product.precio_con_descuento,
+                                    )}
                                 </span>
 
                                 <span className="old-price">
-                                    ${product.precio}
-                                </span>
-
-                                <span className="discount">
-                                    {/* -{product.discount} */}
+                                    {formatCurrency(product.precio)}
                                 </span>
                             </p>
                         </Link>

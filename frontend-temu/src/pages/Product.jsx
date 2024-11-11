@@ -16,6 +16,7 @@ import ReviewForm from './ReviewForm';
 import { addFavoriteProduct, getProductById } from '../API/Products.API';
 import { FaHeart } from 'react-icons/fa6';
 import { UserContext } from '../provider/UserContext';
+import { useCountry } from '../provider/UseCountry';
 
 const Product = () => {
     const { userIsLogin, userData } = useContext(UserContext);
@@ -29,6 +30,7 @@ const Product = () => {
     const [successFavorite, setSuccessFavorite] = useState(false);
     const [notFoundImages, setNotFoundImages] = useState([]);
     const { addCart, cart } = useContext(CartContext);
+    const { formatCurrency } = useCountry();
 
     const handleImageError = img => {
         setNotFoundImages(prev => [...prev, img]);
@@ -133,12 +135,17 @@ const Product = () => {
                         <div className="product-price-info">
                             <h3>
                                 Precio de descuento{' '}
-                                {productInfo.precio_con_descuento}
+                                {formatCurrency(
+                                    productInfo.precio_con_descuento,
+                                )}
                             </h3>
                             <p className="orange-text">
                                 Descuento {productInfo.porcentaje_descuento}
                             </p>
-                            <p>Precio sin descuento {productInfo.precio}</p>
+                            <p>
+                                Precio sin descuento{' '}
+                                {formatCurrency(productInfo.precio)}
+                            </p>
                         </div>
 
                         <div className="product-offer">

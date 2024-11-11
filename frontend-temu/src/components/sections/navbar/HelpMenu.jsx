@@ -1,7 +1,8 @@
 import './DeskNavBar.css';
 import { LuMessageCircle } from 'react-icons/lu';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCountry } from '../../../provider/UseCountry';
 
 const HelpMenu = () => {
     const help = [
@@ -11,6 +12,9 @@ const HelpMenu = () => {
         { name: 'Protección de compras de Temu', path: '/purchase-safe' },
         { name: 'Política de privacidad y cookies', path: '/privacy-policy' },
     ];
+
+    const navigate = useNavigate();
+    const { country, currency } = useCountry();
 
     return (
         <>
@@ -43,7 +47,7 @@ const HelpMenu = () => {
                 <MenuItem>
                     <span className="navbar-hover">
                         <img
-                            src="/colombia-icon.png"
+                            src={country.flag ?? ''}
                             alt=""
                             style={{
                                 width: '20px',
@@ -80,17 +84,23 @@ const HelpMenu = () => {
                             <hr />
 
                             <small>Moneda</small>
-                            <small>Cop: $</small>
+                            <small>
+                                {currency.acronym}: {currency.symbol}
+                            </small>
 
                             <hr />
 
                             <span>
-                                <img src="/colombia-icon.png" alt="" />
+                                <img src={country.flag ?? ''} alt="" />
 
-                                <small>Estas comprando en Temu Colombia</small>
+                                <small>
+                                    Estas comprando en Temu {country.nombre}
+                                </small>
                             </span>
 
-                            <button>Cambiar país/región</button>
+                            <button onClick={() => navigate('/set-country')}>
+                                Cambiar país/región
+                            </button>
                         </div>
                     </SubMenu>
                 </MenuItem>

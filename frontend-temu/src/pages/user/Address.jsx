@@ -237,8 +237,11 @@ const Address = () => {
                                 value={addressForm.pais}
                             >
                                 {countries.map(country => (
-                                    <option key={country} value={country}>
-                                        {country}
+                                    <option
+                                        key={country.nombre}
+                                        value={country.nombre}
+                                    >
+                                        {country.nombre}
                                     </option>
                                 ))}
                             </select>
@@ -324,7 +327,7 @@ const Address = () => {
                             />
                         </label>
                         <label>
-                            <p>Información Adicional</p>
+                            <p>Información Adicional / Opciones de entrega</p>
                             <input
                                 required
                                 type="text"
@@ -332,6 +335,7 @@ const Address = () => {
                                 name="informacion_adicional"
                                 value={addressForm.informacion_adicional}
                                 onChange={handleAddressForm}
+                                placeholder="Ejemplo dejar en la puerta"
                             />
                         </label>
 
