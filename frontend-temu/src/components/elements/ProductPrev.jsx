@@ -34,9 +34,9 @@ const ProductPrev = ({ product }) => {
                                         product.precio_con_descuento,
                                     )}
                                 </p>
-                                <small className="product-prev-offer">
+                                <p className="product-prev-offer">
                                     {formatCurrency(product.precio)}
-                                </small>
+                                </p>
                             </div>
                         )}
                         {!product.precio_con_descuento && (
