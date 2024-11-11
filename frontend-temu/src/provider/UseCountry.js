@@ -42,7 +42,16 @@ export const useCountry = () => {
         };
     });
 
+    const [currencyFormat, setCurrencyFormat] = useState(
+        new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency.acronym || SUPPORT_CURRENCIES[0].acronym,
+        }),
+    );
+
     const [fetchingCurrencies, setFetchingCurrencies] = useState(false);
+
+    const formatCurrency = value => currencyFormat.format(value);
 
     useEffect(() => {
         if (country) {
@@ -53,6 +62,13 @@ export const useCountry = () => {
     useEffect(() => {
         if (currency) {
             localStorage.setItem('currency', JSON.stringify(currency));
+
+            setCurrencyFormat(
+                new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: currency.acronym,
+                }),
+            );
         }
     }, [currency]);
 
@@ -114,5 +130,6 @@ export const useCountry = () => {
         currency,
         setCurrencyByCode,
         fetchingCurrencies,
+        formatCurrency,
     };
 };

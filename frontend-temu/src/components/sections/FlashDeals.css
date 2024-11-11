@@ -78,6 +78,7 @@
     justify-content: space-around;
     align-items: center;
     gap: 0.25em;
+    flex-wrap: wrap;
 }
 
 .current-price {

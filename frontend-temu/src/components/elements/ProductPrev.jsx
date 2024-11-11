@@ -3,9 +3,11 @@ import { useContext } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../provider/CartContext';
+import { useCountry } from '../../provider/UseCountry';
 
 const ProductPrev = ({ product }) => {
     const { addCart } = useContext(CartContext);
+    const { currency, formatCurrency } = useCountry();
     const navigate = useNavigate();
 
     const goToProduct = () => {
@@ -26,18 +28,25 @@ const ProductPrev = ({ product }) => {
                 <div className="product-prev-container">
                     <div onClick={goToProduct}>
                         {product.precio_con_descuento && (
-                            <>
+                            <div className="product-prev-discount">
                                 <p className="product-prev-price">
-                                    ${product.precio_con_descuento}
+                                    {formatCurrency(
+                                        product.precio_con_descuento *
+                                            currency.exchangeRate,
+                                    )}
                                 </p>
                                 <small className="product-prev-offer">
-                                    ${product.precio}
+                                    {formatCurrency(
+                                        product.precio * currency.exchangeRate,
+                                    )}
                                 </small>
-                            </>
+                            </div>
                         )}
                         {!product.precio_con_descuento && (
                             <p className="product-prev-price">
-                                ${product.precio}
+                                {formatCurrency(
+                                    product.precio * currency.exchangeRate,
+                                )}
                             </p>
                         )}
                     </div>
