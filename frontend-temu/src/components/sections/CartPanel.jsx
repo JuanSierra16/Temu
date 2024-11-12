@@ -23,7 +23,10 @@ const CartPanel = () => {
                 <strong>{formatCurrency(cartTotalCost)}</strong>
             </p>
 
-            <button className="orange-button">
+            <button
+                className="orange-button"
+                onClick={() => navigate('/checkout')}
+            >
                 Hacer {cart.length <= 1 ? 'pedido' : 'pedidos'} ({cart.length})
             </button>
 
