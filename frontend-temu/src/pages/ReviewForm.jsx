@@ -1,8 +1,8 @@
 import './ReviewForm.css';
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { UserContext } from '../provider/UserContext';
+import { addReviewProduct } from '../API/Products.API';
 
 function ReviewForm({ productId }) {
     const [reviewText, setReviewText] = useState('');
@@ -10,40 +10,27 @@ function ReviewForm({ productId }) {
     const [hover, setHover] = useState(null);
     const [hasReviewed, setHasReviewed] = useState(false);
     const [message, setMessage] = useState('');
-    const { user } = useContext(UserContext);
-
-    console.log("Usuario autenticado:", user); 
-
-    useEffect(() => {
-        async function checkReview() {
-            if (!user) return; 
-            try {
-                const response = await axios.get(`/api/reviews/check/${productId}`, {
-                    params: { userId: user.id },
-                });
-                setHasReviewed(response.data.hasReviewed);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        checkReview();
-    }, [productId, user]);
+    const { userData, userIsLogin } = useContext(UserContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!user) {
+        if (!userIsLogin) {
             setMessage('Debes iniciar sesión para dejar una opinión.');
             return;
         }
         try {
-            const response = await axios.post(`/api/reviews`, {
+            const response = await addReviewProduct (
                 productId,
                 reviewText,
                 rating,
-                userId: user.id // Usar el ID del usuario autenticado
-            });
+                userData.id
+            )
+            if (response) {
             setMessage('Opinión guardada correctamente.');
-            setHasReviewed(true); // Actualizar el estado después de enviar la opinión
+            setHasReviewed(true);
+            }else{
+                setMessage('Hubo un error al guardar tu opinión. Por favor, inténtalo de nuevo.');
+            } 
         } catch (error) {
             console.error(error);
             setMessage('Hubo un error al guardar tu opinión. Por favor, inténtalo de nuevo.');
@@ -53,7 +40,7 @@ function ReviewForm({ productId }) {
     return (
         <div>
             {message && <p>{message}</p>}
-            {!user ? (
+            {!userIsLogin ? (
                 <p>Debes iniciar sesión para dejar una opinión.</p>
             ) : hasReviewed ? (
                 <p>Ya has dejado una opinión sobre este producto.</p>
