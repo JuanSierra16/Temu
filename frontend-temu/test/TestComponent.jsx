@@ -11,7 +11,7 @@ export const TestUserProvider = ({ children, userData }) => {
     return (
         <GoogleOAuthProvider>
             <UserContext.Provider
-                value={{ userData: userData ?? {}, userIsLogin: false }}
+                value={{ userData: userData ?? {}, userIsLogin: true }}
             >
                 <ProductsProvider value={{ products: [] }}>
                     <CartProvider value={{ cart: [] }}>
