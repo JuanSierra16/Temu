@@ -13,31 +13,10 @@ import { useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 import { ProductsContext } from '../../provider/ProductsContext';
+import { certificateCards, paymentCards } from '../../utils/Cards';
 
 const Footer = () => {
     const footer = useRef(null);
-
-    const certificateCards = Object.values(
-        import.meta.glob(
-            '../../assets/certificate-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
-            {
-                eager: true,
-                query: '?url',
-                import: 'default',
-            },
-        ),
-    );
-
-    const paymentCards = Object.values(
-        import.meta.glob(
-            '../../assets/payment-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
-            {
-                eager: true,
-                query: '?url',
-                import: 'default',
-            },
-        ),
-    );
 
     const { products } = useContext(ProductsContext);
 
