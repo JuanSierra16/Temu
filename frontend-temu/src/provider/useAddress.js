@@ -10,15 +10,15 @@ import {
 export const useAddress = () => {
     const [addresses, setAddresses] = useState([]);
     const [errorAddress, setErrorAddress] = useState('');
-    const { userData } = useContext(UserContext);
+    const { userData, userIsLogin } = useContext(UserContext);
 
     useEffect(() => {
-        if (userData) {
+        if (userIsLogin) {
             getAddresses(userData.id).then(res => {
                 setAddresses(res);
             });
         }
-    }, [userData]);
+    }, [userIsLogin, userData]);
 
     const _addAddress = async address => {
         try {

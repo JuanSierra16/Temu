@@ -1,13 +1,18 @@
-import { UserProvider } from '../src/provider/UserContext';
+import { UserProvider, UserContext } from '../src/provider/UserContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { ProductsProvider } from '../src/provider/ProductsContext';
-import { CartProvider } from '../src/provider/CartContext';
+import {
+    ProductsProvider,
+    ProductsContext,
+} from '../src/provider/ProductsContext';
+import { CartProvider, CartContext } from '../src/provider/CartContext';
 import { MemoryRouter } from 'react-router-dom';
 
 export const TestUserProvider = ({ children, userData }) => {
     return (
         <GoogleOAuthProvider>
-            <UserProvider value={{ userData: userData ?? {} }}>
+            <UserProvider
+                value={{ userData: userData ?? {}, userIsLogin: true }}
+            >
                 <ProductsProvider value={{ products: [] }}>
                     <CartProvider value={{ cart: [] }}>
                         <MemoryRouter initialEntries={['/']}>
@@ -16,6 +21,24 @@ export const TestUserProvider = ({ children, userData }) => {
                     </CartProvider>
                 </ProductsProvider>
             </UserProvider>
+        </GoogleOAuthProvider>
+    );
+};
+
+export const TestUserContext = ({ children, userData }) => {
+    return (
+        <GoogleOAuthProvider>
+            <UserContext.Provider
+                value={{ userData: userData ?? {}, userIsLogin: true }}
+            >
+                <ProductsProvider value={{ products: [] }}>
+                    <CartProvider value={{ cart: [] }}>
+                        <MemoryRouter initialEntries={['/']}>
+                            {children}
+                        </MemoryRouter>
+                    </CartProvider>
+                </ProductsProvider>
+            </UserContext.Provider>
         </GoogleOAuthProvider>
     );
 };
@@ -71,12 +94,13 @@ export const TestComponent = ({ children }) => {
 export const TestComponentInitial = ({
     children,
     userData,
+    userIsLogin,
     products,
     cart,
 }) => {
     return (
         <GoogleOAuthProvider>
-            <UserProvider value={{ userData: userData ?? {} }}>
+            <UserProvider value={{ userData: userData ?? {}, userIsLogin }}>
                 <ProductsProvider value={{ products: products ?? [] }}>
                     <CartProvider value={{ cart: cart ?? [] }}>
                         <MemoryRouter initialEntries={['/']}>

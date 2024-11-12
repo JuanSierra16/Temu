@@ -13,6 +13,7 @@ import { AiOutlineSafety } from 'react-icons/ai';
 import ModalLogin from '../components/sections/navbar/ModalLogin';
 import CartProduct from '../components/elements/CartProduct';
 import { useCountry } from '../provider/UseCountry';
+import { certificateCards, paymentCards } from '../utils/Cards';
 
 const Cart = () => {
     const { cart, cartTotalCost } = useContext(CartContext);
@@ -21,28 +22,6 @@ const Cart = () => {
 
     const [showModal, setShowModal] = useState(false);
     const { formatCurrency } = useCountry();
-
-    const certificateCards = Object.values(
-        import.meta.glob(
-            '../assets/certificate-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
-            {
-                eager: true,
-                query: '?url',
-                import: 'default',
-            },
-        ),
-    );
-
-    const paymentCards = Object.values(
-        import.meta.glob(
-            '../assets/payment-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
-            {
-                eager: true,
-                query: '?url',
-                import: 'default',
-            },
-        ),
-    );
 
     const handleCheckout = () => {
         if (userIsLogin) {

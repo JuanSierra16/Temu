@@ -1,25 +1,21 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { UserContext } from './UserContext';
+import { createContext, useEffect, useState } from 'react';
 
 const CartContext = createContext(null);
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const [cartTotalCost, setCarTotalCost] = useState(0);
-
-    const { userData } = useContext(UserContext);
+    const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
 
     useEffect(() => {
         const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const cost = loadCart.reduce((acc, item) => acc + item.subtotal, 0);
+        const quantity = loadCart.reduce((acc, item) => acc + item.cantidad, 0);
+
         setCart(loadCart);
         setCarTotalCost(Number(cost).toFixed(2));
+        setCartTotalQuantity(quantity);
     }, []);
-
-    useEffect(() => {
-        // mantener el carro de compra cuando el usuario inicia sesión
-        // limpiar el carrito cuando el usuario cierra sesión
-    }, [userData]);
 
     useEffect(() => {
         let newCost = cart.reduce(
@@ -28,6 +24,9 @@ const CartProvider = ({ children }) => {
         );
         newCost = Number(newCost).toFixed(2);
         setCarTotalCost(newCost);
+
+        const quantity = cart.reduce((acc, item) => acc + item.cantidad, 0);
+        setCartTotalQuantity(quantity);
 
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
@@ -119,6 +118,7 @@ const CartProvider = ({ children }) => {
                 cartTotalCost,
                 setQuantity,
                 setProductAttribute,
+                cartTotalQuantity,
             }}
         >
             {children}

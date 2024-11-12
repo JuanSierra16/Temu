@@ -1,6 +1,13 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { TestUserProvider } from './TestComponent.jsx';
+import {
+    act,
+    fireEvent,
+    render,
+    renderHook,
+    screen,
+    waitFor,
+} from '@testing-library/react';
+import { TestUserContext } from './TestComponent.jsx';
 import axios from 'axios';
 import Address from '../src/pages/user/Address.jsx';
 import {
@@ -9,6 +16,7 @@ import {
     getAddresses,
     updateAddress,
 } from '../src/API/Address.API.js';
+import { useAddress } from '../src/provider/useAddress.js';
 
 vi.mock('axios');
 
@@ -73,7 +81,7 @@ describe('Direcciones de entrega', () => {
         });
 
         render(<Address />, {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         await waitFor(async () => {
@@ -91,7 +99,7 @@ describe('Direcciones de entrega', () => {
         });
 
         render(<Address />, {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         await waitFor(async () => {
@@ -109,7 +117,7 @@ describe('Direcciones de entrega', () => {
         });
 
         render(<Address />, {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         fireEvent.click(screen.getByRole('button', { name: /Agregar*/i }));
@@ -129,5 +137,115 @@ describe('Direcciones de entrega', () => {
 
         expect(name).toHaveValue('Test');
         expect(lastName).toHaveValue('Test');
+    });
+
+    test('useAddress get', async () => {
+        axios.get.mockResolvedValue({
+            data: [address],
+        });
+
+        const { result } = renderHook(() => useAddress(), {
+            wrapper: TestUserContext,
+        });
+
+        await waitFor(async () => {
+            expect(result.current.addresses).toEqual([address]);
+        });
+    });
+
+    test('useAddress add', async () => {
+        const { result } = renderHook(() => useAddress(), {
+            wrapper: TestUserContext,
+        });
+
+        axios.post.mockResolvedValue({
+            data: { id: 2 },
+        });
+
+        const newAddress = {
+            ...address,
+        };
+
+        await act(async () => {
+            await result.current.addAddress(newAddress);
+        });
+
+        await act(async () => {
+            expect(result.current.addresses.length).toBe(1);
+            expect(result.current.addresses[0]).toEqual({
+                id: 2,
+                ...address,
+            });
+        });
+    });
+
+    test('useAddress update', async () => {
+        axios.get.mockResolvedValue({
+            data: [address],
+        });
+
+        axios.put.mockResolvedValue({
+            status: 200,
+        });
+
+        const { result } = renderHook(() => useAddress(), {
+            wrapper: TestUserContext,
+        });
+
+        // esperar a que se carguen las direcciones
+        await waitFor(async () => {
+            expect(result.current.addresses.length).toBe(1);
+        });
+
+        const newAddress = {
+            ...address,
+            nombre: 'Test 2',
+        };
+
+        await act(async () => {
+            const res = await result.current.updateAddress(newAddress);
+            expect(res).toBe(true);
+        });
+
+        await waitFor(async () => {
+            expect(result.current.addresses.length).toBe(1);
+            expect(result.current.addresses[0]).toEqual({
+                ...address,
+                nombre: 'Test 2',
+            });
+        });
+    });
+
+    test('useAddress delete', async () => {
+        axios.get.mockResolvedValue({
+            data: [address],
+        });
+
+        axios.delete.mockResolvedValue({
+            status: 200,
+        });
+
+        const { result } = renderHook(() => useAddress(), {
+            wrapper: TestUserContext,
+        });
+
+        // esperar a que se carguen las direcciones
+        await waitFor(async () => {
+            expect(result.current.addresses.length).toBe(1);
+        });
+
+        const newAddress = {
+            ...address,
+            nombre: 'Test 2',
+        };
+
+        await act(async () => {
+            const res = await result.current.deleteAddress(newAddress);
+            expect(res).toBe(true);
+        });
+
+        await waitFor(async () => {
+            expect(result.current.addresses.length).toBe(0);
+        });
     });
 });

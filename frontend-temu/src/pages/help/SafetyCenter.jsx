@@ -12,6 +12,7 @@ import {
 } from 'react-icons/bi';
 
 import safetyCenterImg from '../../assets/safety-center.webp';
+import { certificateCards } from '../../utils/Cards';
 
 const SafetyCenter = () => {
     const safeInformation = [
@@ -72,17 +73,6 @@ const SafetyCenter = () => {
                 'Si te encuentras con una promoción que parece demasiado buena para ser cierta, una oferta de empleo sospechosa o un fraude relacionado con tarjetas de regalo, evita interactuar o proporcionar cualquier tipo de información personal. Puedes reportar estos casos directamente en nuestra plataforma en la sección Reportar Fraude o contactando a nuestro equipo de Atención al Cliente. También te sugerimos informar a las autoridades locales y agencias de protección al consumidor. Asegúrate de incluir cualquier detalle relevante, como correos electrónicos, números de contacto o enlaces fraudulentos, para ayudarnos a tomar las acciones necesarias.',
         },
     ];
-
-    const certificateCards = Object.values(
-        import.meta.glob(
-            '../../assets/certificate-cards/*.{png,jpg,jpeg,webp,PNG,JPEG}',
-            {
-                eager: true,
-                query: '?url',
-                import: 'default',
-            },
-        ),
-    );
 
     return (
         <main>
