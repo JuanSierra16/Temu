@@ -6,6 +6,7 @@ import shippingAddressesRoutes from './routes/shippingAddresses.routes.js';
 import couponsRoutes from './routes/coupons.routes.js';
 import paymentRoutes from './routes/payment.routes.js';
 import stripeWebhookRoutes from './routes/stripeWebhook.routes.js';
+import ordersRoutes from './routes/orders.routes.js';
 import cors from 'cors';
 
 import './config.js'
@@ -29,6 +30,7 @@ app.use(productsRoutes);
 app.use(shippingAddressesRoutes);
 app.use(couponsRoutes);
 app.use(paymentRoutes);
+app.use(ordersRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
