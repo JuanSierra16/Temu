@@ -35,7 +35,7 @@ const UserProvider = ({ children }) => {
     // login
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
-    const [waitLogin, setWaitLogin] = useState(false);
+    const [waitLogin, setWaitLogin] = useState(true); // true para que de tiempo en leer la cookie
     const [sessionJWT, setSessionJWT] = useState(null);
     const [noHasProfile, setNoHasProfile] = useState(false);
 

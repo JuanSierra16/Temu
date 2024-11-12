@@ -6,8 +6,11 @@ import { useAddress } from '../provider/useAddress';
 import Modal from '../components/elements/Modal';
 import CartProduct from '../components/elements/CartProduct';
 import { useCountry } from '../provider/UseCountry';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/sections/Footer';
+import ModalLogin from '../components/sections/navbar/ModalLogin';
+import { UserContext } from '../provider/UserContext';
+import { FiShoppingCart } from 'react-icons/fi';
 
 const AddressComponent = ({ address }) => {
     return (
@@ -32,9 +35,13 @@ const Checkout = () => {
     const { cart, cartTotalCost, cartTotalQuantity } = useContext(CartContext);
     const { addresses } = useAddress();
     const { formatCurrency } = useCountry();
+    const { userIsLogin } = useContext(UserContext);
 
     const [selectAddress, setSelectAddress] = useState(null);
     const [showAddressModal, setShowAddressModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
+    const navigation = useNavigate();
 
     useEffect(() => {
         if (!selectAddress && addresses.length > 0) {
@@ -45,6 +52,22 @@ const Checkout = () => {
     useEffect(() => {
         setShowAddressModal(false);
     }, [selectAddress]);
+
+    useEffect(() => {
+        if (cart.length === 0) {
+            setShowEmptyCartModal(true);
+        }
+    }, [cart]);
+
+    const handleCheckout = () => {
+        if (!userIsLogin) {
+            setShowLoginModal(true);
+        } else if (cart.length === 0) {
+            setShowEmptyCartModal(true);
+        } else if (!selectAddress) {
+            setShowAddressModal(true);
+        }
+    };
 
     return (
         <>
@@ -140,7 +163,10 @@ const Checkout = () => {
                                 Te invitamos a plantar un árbol por $1.500
                             </label>
 
-                            <button className="orange-button">
+                            <button
+                                className="orange-button"
+                                onClick={handleCheckout}
+                            >
                                 Finalizar compra
                             </button>
 
@@ -159,21 +185,60 @@ const Checkout = () => {
             <Footer />
 
             <Modal show={showAddressModal} setShow={setShowAddressModal}>
-                <div className="modal-addresses">
-                    <h3>Direcciones de envío</h3>
+                <article className="modal-addresses">
+                    <section>
+                        <h3>Direcciones de envío</h3>
 
-                    {addresses.map(item => {
-                        return (
-                            <div key={item.id} className="modal-addresses-item">
-                                <AddressComponent address={item} />
-                                <button onClick={() => setSelectAddress(item)}>
-                                    Agregar
-                                </button>
-                            </div>
-                        );
-                    })}
-                </div>
+                        {addresses.map(item => {
+                            return (
+                                <div
+                                    key={item.id}
+                                    className="modal-addresses-item"
+                                >
+                                    <AddressComponent address={item} />
+                                    <button
+                                        onClick={() => setSelectAddress(item)}
+                                    >
+                                        Agregar
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    </section>
+
+                    <section>
+                        <h4>
+                            Agrega una nueva dirección de envío para tu compra
+                        </h4>
+
+                        <button onClick={() => navigation('/your-addresses')}>
+                            Agregar nueva dirección
+                        </button>
+                    </section>
+                </article>
             </Modal>
+
+            <Modal show={showEmptyCartModal} setShow={setShowEmptyCartModal}>
+                <article className="modal-addresses">
+                    <div className="car-empty">
+                        <FiShoppingCart size={48} />
+
+                        <div className="car-empty-text">
+                            <p>El carrito de compras está vacío </p>
+                            <small>Agrega tus artículos favoritos</small>
+                        </div>
+                    </div>
+
+                    <button onClick={() => navigation('/')}>
+                        Continuar comprando
+                    </button>
+                </article>
+            </Modal>
+
+            <ModalLogin
+                showModal={showLoginModal}
+                setShowModal={setShowLoginModal}
+            />
         </>
     );
 };
