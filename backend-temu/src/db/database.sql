@@ -53,7 +53,7 @@ CREATE TABLE pedidos (
     usuario_id INT,
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10, 2),
-    estado ENUM('procesando', 'enviado', 'entregado', 'devoluciones'),
+    estado VARCHAR(20),
     cupon_id BIGINT,  -- Nuevo campo agregado
 	direccion_envio_id INT,
     CONSTRAINT fk_usuario_id FOREIGN KEY (usuario_id) REFERENCES users(id),
@@ -145,6 +145,8 @@ select * from productos;
 select * from proveedores;
 select * from medidas_usuario;
 select * from favoritos;
-delete from medidas_usuario;
 select * from direcciones_envio;
 select * from cupones_descuento;
+select * from pedidos;
+select * from detalles_pedido;
+select * from historial_cupones;
