@@ -27,6 +27,7 @@ export const createCheckoutSession = async (req, res) => {
                 total: total.toString(),
                 cupon_id: cupon_id ? cupon_id.toString() : '',
                 direccion_envio_id: direccion_envio_id ? direccion_envio_id.toString() : '',
+                productos: JSON.stringify(productos),
             },
         });
 
