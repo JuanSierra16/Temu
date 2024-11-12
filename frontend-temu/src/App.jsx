@@ -48,6 +48,7 @@ import Notifications from './pages/user/Notifications';
 import Favorite from './pages/user/Favorite';
 
 import ReviewForm from './pages/ReviewForm';
+import Checkout from './pages/Checkout';
 
 function App() {
     return (
@@ -116,7 +117,12 @@ function App() {
                 <Route path="/permissions" element={<Permissions />} />
                 <Route path="/notifications" element={<Notifications />} />
 
-                <Route path="/review-form/:productId" element={<ReviewForm />} />
+                <Route path="/checkout" element={<Checkout />} />
+
+                <Route
+                    path="/review-form/:productId"
+                    element={<ReviewForm />}
+                />
             </Routes>
         </BrowserRouter>
     );
