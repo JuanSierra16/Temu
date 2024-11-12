@@ -11,59 +11,7 @@ const CartProvider = ({ children }) => {
     const { userData } = useContext(UserContext);
 
     useEffect(() => {
-        // const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
-        const loadCart = [
-            {
-                id: 1,
-                descripcion: 'Protector de colchón ',
-                precio_con_descuento: 85.481,
-                subtotal: 85.481,
-                precio: 122.229,
-                imagenes: ['1pc Protector de colchón imper.webp'],
-                cantidad: 2,
-                atributos_seleccionados: [],
-            },
-            {
-                id: 2,
-                descripcion: 'Protector de colchón ',
-                precio_con_descuento: 85.481,
-                precio: 122.229,
-                subtotal: 85.481,
-                imagenes: ['1pc Protector de colchón imper.webp'],
-                cantidad: 2,
-                atributos_seleccionados: [],
-            },
-            {
-                id: 3,
-                descripcion: 'Protector de colchón ',
-                precio_con_descuento: 85.481,
-                precio: 122.229,
-                subtotal: 85.481,
-                imagenes: ['1pc Protector de colchón imper.webp'],
-                cantidad: 2,
-                atributos_seleccionados: [],
-            },
-            {
-                id: 4,
-                descripcion: 'Protector de colchón ',
-                precio_con_descuento: 85.481,
-                precio: 122.229,
-                subtotal: 85.481,
-                imagenes: ['1pc Protector de colchón imper.webp'],
-                cantidad: 2,
-                atributos_seleccionados: [],
-            },
-            {
-                id: 5,
-                descripcion: 'Protector de colchón ',
-                precio_con_descuento: 85.481,
-                precio: 122.229,
-                subtotal: 85.481,
-                imagenes: ['1pc Protector de colchón imper.webp'],
-                cantidad: 2,
-                atributos_seleccionados: [],
-            },
-        ];
+        const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const cost = loadCart.reduce((acc, item) => acc + item.subtotal, 0);
         const quantity = loadCart.reduce((acc, item) => acc + item.cantidad, 0);
 
