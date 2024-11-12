@@ -8,8 +8,6 @@ const CartProvider = ({ children }) => {
     const [cartTotalCost, setCarTotalCost] = useState(0);
     const [cartTotalQuantity, setCartTotalQuantity] = useState(0);
 
-    const { userData } = useContext(UserContext);
-
     useEffect(() => {
         const loadCart = JSON.parse(localStorage.getItem('cart') || '[]');
         const cost = loadCart.reduce((acc, item) => acc + item.subtotal, 0);
@@ -19,11 +17,6 @@ const CartProvider = ({ children }) => {
         setCarTotalCost(Number(cost).toFixed(2));
         setCartTotalQuantity(quantity);
     }, []);
-
-    useEffect(() => {
-        // mantener el carro de compra cuando el usuario inicia sesión
-        // limpiar el carrito cuando el usuario cierra sesión
-    }, [userData]);
 
     useEffect(() => {
         let newCost = cart.reduce(
