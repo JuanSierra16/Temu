@@ -7,7 +7,7 @@ import {
     screen,
     waitFor,
 } from '@testing-library/react';
-import { TestUserProvider } from './TestComponent.jsx';
+import { TestUserContext } from './TestComponent.jsx';
 import axios from 'axios';
 import Address from '../src/pages/user/Address.jsx';
 import {
@@ -81,7 +81,7 @@ describe('Direcciones de entrega', () => {
         });
 
         render(<Address />, {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         await waitFor(async () => {
@@ -99,7 +99,7 @@ describe('Direcciones de entrega', () => {
         });
 
         render(<Address />, {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         await waitFor(async () => {
@@ -117,7 +117,7 @@ describe('Direcciones de entrega', () => {
         });
 
         render(<Address />, {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         fireEvent.click(screen.getByRole('button', { name: /Agregar*/i }));
@@ -145,7 +145,7 @@ describe('Direcciones de entrega', () => {
         });
 
         const { result } = renderHook(() => useAddress(), {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         await waitFor(async () => {
@@ -155,7 +155,7 @@ describe('Direcciones de entrega', () => {
 
     test('useAddress add', async () => {
         const { result } = renderHook(() => useAddress(), {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         axios.post.mockResolvedValue({
@@ -189,7 +189,7 @@ describe('Direcciones de entrega', () => {
         });
 
         const { result } = renderHook(() => useAddress(), {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         // esperar a que se carguen las direcciones
@@ -226,7 +226,7 @@ describe('Direcciones de entrega', () => {
         });
 
         const { result } = renderHook(() => useAddress(), {
-            wrapper: TestUserProvider,
+            wrapper: TestUserContext,
         });
 
         // esperar a que se carguen las direcciones
