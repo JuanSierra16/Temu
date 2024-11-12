@@ -35,7 +35,7 @@ const UserProvider = ({ children }) => {
     // login
     const [loginError, setLoginError] = useState(null);
     const [userIsLogin, setUserIsLogin] = useState(false);
-    const [waitLogin, setWaitLogin] = useState(true);
+    const [waitLogin, setWaitLogin] = useState(false);
     const [sessionJWT, setSessionJWT] = useState(null);
     const [noHasProfile, setNoHasProfile] = useState(false);
 
@@ -64,7 +64,6 @@ const UserProvider = ({ children }) => {
             setUserData(user);
             setUserIsLogin(true);
             setSessionJWT(token);
-            console.log('Usuario autenticado:', user);
         }
 
         setWaitLogin(false);

@@ -44,6 +44,14 @@ const Cart = () => {
         ),
     );
 
+    const handleCheckout = () => {
+        if (userIsLogin) {
+            navigate('/checkout');
+        } else {
+            setShowModal(true);
+        }
+    };
+
     return (
         <main>
             <SimpleNav />
@@ -103,7 +111,7 @@ const Cart = () => {
                         <p>{formatCurrency(cartTotalCost)}</p>
                     </div>
 
-                    <button className="orange-button">
+                    <button className="orange-button" onClick={handleCheckout}>
                         Hacer pedido {cart.length}
                     </button>
 

@@ -1,30 +1,28 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaLock } from 'react-icons/fa6';
 import { countries } from '../../utils/countriesList';
 import InputPhone from '../../components/elements/InputPhone';
-import { UserContext } from '../../provider/UserContext';
-import {
-    addAddress,
-    deleteAddress,
-    getAddresses,
-    updateAddress,
-} from '../../API/Address.API';
+import { useAddress } from '../../provider/useAddress';
 
 const Address = () => {
-    const { userData } = useContext(UserContext);
-
-    const [address, setAddress] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [phone, setPhone] = useState('');
     const [prefix, setPrefix] = useState('');
-    const [error, setError] = useState('');
     const [editing, setEditing] = useState(false);
 
+    const {
+        addresses,
+        addAddress,
+        updateAddress,
+        deleteAddress,
+        errorAddress,
+    } = useAddress();
+
     const [addressForm, setAddressForm] = useState({
-        pais: countries[0],
+        pais: countries[0].nombre,
         nombre: '',
         apellido: '',
         telefono: '',
@@ -34,14 +32,6 @@ const Address = () => {
         numero_direccion: '',
         informacion_adicional: '',
     });
-
-    useEffect(() => {
-        if (userData) {
-            getAddresses(userData.id).then(res => {
-                setAddress(res);
-            });
-        }
-    }, [userData]);
 
     const handleAddressForm = useCallback(
         ({ target }) => {
@@ -54,74 +44,28 @@ const Address = () => {
         [addressForm],
     );
 
-    const add = useCallback(async () => {
-        let data = { ...addressForm };
-        data.telefono = `${prefix} ${phone}`;
-
-        try {
-            const res = await addAddress(userData.id, data);
-
-            if (!res) {
-                setError('Error al guardar la dirección');
-            } else {
-                data = { id: res, ...data };
-                setAddress([data, ...address]);
-                setShowForm(false);
-                setEditing(false);
-            }
-        } catch (error) {
-            setError('Error al guardar la dirección');
-        }
-    }, [address, addressForm, phone, prefix, userData.id]);
-
-    const update = useCallback(async () => {
-        let data = { ...addressForm };
-        data.telefono = `${prefix} ${phone}`;
-
-        try {
-            const res = await updateAddress(data);
-
-            if (!res) {
-                setError('Error al guardar la dirección');
-            } else {
-                const newAddress = address.map(item => {
-                    if (item.id === data.id) {
-                        return data;
-                    }
-
-                    return item;
-                });
-
-                setAddress(newAddress);
-                setShowForm(false);
-                setEditing(false);
-            }
-        } catch (error) {
-            setError('Error al guardar la dirección');
-        }
-    }, [address, addressForm, phone, prefix]);
-
     const handleOnSubmit = useCallback(
         async e => {
             e.preventDefault();
 
-            if (!editing) await add();
-            else await update();
+            let success = false;
+            const data = { ...addressForm };
+            data.telefono = `${prefix} ${phone}`;
+
+            if (!editing) success = await addAddress(data);
+            else success = await updateAddress(data);
+
+            setShowForm(!success);
+            setEditing(editing && !success);
         },
-        [editing, add, update],
+        [addAddress, editing, updateAddress, addressForm, prefix, phone],
     );
 
     const handleOnDelete = useCallback(
         async addressItem => {
-            const res = await deleteAddress(userData.id, addressItem.id);
-
-            if (!res) {
-                setError('Error al remover la dirección');
-            } else {
-                setAddress(address.filter(item => item.id !== addressItem.id));
-            }
+            await deleteAddress(addressItem);
         },
-        [address, userData.id],
+        [deleteAddress],
     );
 
     const handleOnEdit = useCallback(async addressItem => {
@@ -138,7 +82,7 @@ const Address = () => {
         // limpiar el formulario
         if (!showForm) {
             setAddressForm({
-                pais: countries[0],
+                pais: countries[0].nombre,
                 nombre: '',
                 apellido: '',
                 telefono: '',
@@ -150,7 +94,6 @@ const Address = () => {
             });
 
             setPhone('');
-            setError('');
             setPrefix('');
             setEditing(false);
         }
@@ -160,10 +103,10 @@ const Address = () => {
         <DashBoard>
             {!showForm && (
                 <section className="user-dashboard-container address-container">
-                    {address.length > 0 && <h2>Direcciones</h2>}
+                    {addresses.length > 0 && <h2>Direcciones</h2>}
 
                     <div className="address-list">
-                        {address.map(item => (
+                        {addresses.map(item => (
                             <div key={item.id} className="address-item">
                                 <p>País</p>
                                 <p>{item.pais}</p>
@@ -194,10 +137,12 @@ const Address = () => {
                             </div>
                         ))}
 
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        {errorAddress && (
+                            <p style={{ color: 'red' }}>{errorAddress}</p>
+                        )}
                     </div>
 
-                    {address.length === 0 && (
+                    {addresses.length === 0 && (
                         <div className="dashboard-empty">
                             <FaMapMarkerAlt size={128} />
                             <p>
@@ -234,7 +179,7 @@ const Address = () => {
                             <select
                                 name="pais"
                                 onChange={handleAddressForm}
-                                value={addressForm.pais}
+                                defaultValue={addressForm.pais}
                             >
                                 {countries.map(country => (
                                     <option
@@ -339,7 +284,9 @@ const Address = () => {
                             />
                         </label>
 
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        {errorAddress && (
+                            <p style={{ color: 'red' }}>{errorAddress}</p>
+                        )}
 
                         <div className="address-form-buttons">
                             <button onClick={() => setShowForm(false)}>
