@@ -8,6 +8,9 @@ const transporter = nodemailer.createTransport({
       user: "temulabsoftware@gmail.com",
       pass: "svbf wvpb wzld uoxv",
     },
+    tls:{
+      rejectUnauthorized:false
+    }
   });
   
 
