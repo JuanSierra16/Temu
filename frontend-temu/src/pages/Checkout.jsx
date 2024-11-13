@@ -11,7 +11,7 @@ import Footer from '../components/sections/Footer';
 import ModalLogin from '../components/sections/navbar/ModalLogin';
 import { UserContext } from '../provider/UserContext';
 import { FiShoppingCart } from 'react-icons/fi';
-import { verifyCoupon } from '../API/Coupon';
+import { verifyCoupon } from '../API/Coupon.API';
 
 const AddressComponent = ({ address }) => {
     return (
@@ -36,7 +36,7 @@ const Checkout = () => {
     const { cart, cartTotalCost, cartTotalQuantity } = useContext(CartContext);
     const { addresses } = useAddress();
     const { formatCurrency } = useCountry();
-    const { userIsLogin, userData } = useContext(UserContext);
+    const { userIsLogin, userData, waitLogin } = useContext(UserContext);
     const navigation = useNavigate();
 
     const [selectAddress, setSelectAddress] = useState(null);
@@ -59,9 +59,7 @@ const Checkout = () => {
     }, [selectAddress]);
 
     useEffect(() => {
-        if (cart.length === 0) {
-            setShowEmptyCartModal(true);
-        }
+        setShowEmptyCartModal(cart.length === 0);
     }, [cart]);
 
     useEffect(() => {
@@ -164,7 +162,7 @@ const Checkout = () => {
                             </div>
 
                             <div className="orange-text">
-                                <p>Descuento del cupón:</p>
+                                <p>Descuento del cupón ({couponDiscount}%):</p>
                                 <p>
                                     {formatCurrency(
                                         cartTotalCost * (couponDiscount / 100),
@@ -174,29 +172,21 @@ const Checkout = () => {
 
                             <div>
                                 <p>Subtotal:</p>
-                                <p>{formatCurrency(cartTotalCost)}</p>
+                                <p>{formatCurrency(totalCost)}</p>
                             </div>
                         </section>
 
                         <section>
                             <div>
                                 <p>Total del pedido:</p>
-                                <p>{formatCurrency(cartTotalCost)}</p>
+                                <p>{formatCurrency(totalCost)}</p>
                             </div>
                         </section>
 
                         <section className="checkout-green">
                             <h5>Planta con Temu</h5>
 
-                            <label htmlFor="landingTree">
-                                <input
-                                    type="radio"
-                                    id="
-                            landingTree"
-                                    name="landingTree"
-                                />
-                                Te invitamos a plantar un árbol por $1.500
-                            </label>
+                            <p>Te invitamos a plantar un árbol</p>
 
                             <button
                                 className="orange-button"

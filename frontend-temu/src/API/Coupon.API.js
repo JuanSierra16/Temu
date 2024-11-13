@@ -4,7 +4,7 @@ const baseURL = 'http://localhost:3000';
 
 export const verifyCoupon = async (userId, code) => {
     try {
-        const response = await axios.get(`${baseURL}/coupons/verify`, {
+        const response = await axios.post(`${baseURL}/coupons/verify`, {
             params: {
                 codigo: code,
                 usuario_id: userId,
@@ -12,9 +12,9 @@ export const verifyCoupon = async (userId, code) => {
         });
 
         return {
-            isValid: response.status === 200,
+            isValid: response.status === 200 && response.data.descuento > 0,
             message: response.data.message,
-            discount: parseFloat(response.data.descuento),
+            discount: parseFloat(response.data.descuento || 0),
         };
     } catch (error) {
         return {
