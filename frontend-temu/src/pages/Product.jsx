@@ -17,10 +17,12 @@ import { addFavoriteProduct, getProductById } from '../API/Products.API';
 import { FaHeart } from 'react-icons/fa6';
 import { UserContext } from '../provider/UserContext';
 import { useCountry } from '../provider/UseCountry';
+import { ProductsContext } from '../provider/ProductsContext';
 
 const Product = () => {
     const { userIsLogin, userData } = useContext(UserContext);
     const { productId } = useParams();
+    const { checkLowStock } = useContext(ProductsContext);
     const [productInfo, setProductInfo] = useState({
         id: 0,
         descripcion: '',
@@ -31,6 +33,7 @@ const Product = () => {
     const [notFoundImages, setNotFoundImages] = useState([]);
     const { addCart, cart } = useContext(CartContext);
     const { formatCurrency } = useCountry();
+    const [lowStockMessage, setLowStockMessage] = useState('');
 
     const handleImageError = img => {
         setNotFoundImages(prev => [...prev, img]);
@@ -42,8 +45,11 @@ const Product = () => {
         getProductById(URIDecode).then(data => {
             setProductInfo(data);
             setBigImage(data.imagenes[0]);
+
+            const lowStockMessage = checkLowStock(data);
+            setLowStockMessage(lowStockMessage);
         });
-    }, [productId]);
+    }, [productId, checkLowStock]);
 
     const handleFavoriteProduct = () => {
         const success = addFavoriteProduct(userData.id, productInfo.id);
@@ -87,6 +93,7 @@ const Product = () => {
                                         <p>Agregarlo a tu lista de favoritos</p>
                                     </button>
                                 )}
+
                             </div>
                         </div>
 
@@ -113,6 +120,7 @@ const Product = () => {
                                         </p>
                                     </div>
                                 </div>
+                                {lowStockMessage && <p style={{ color: 'red' }}>{lowStockMessage}</p>}
                             </div>
 
                             <div className="product-user-buttons">

@@ -11,6 +11,7 @@ import Footer from '../components/sections/Footer';
 import ModalLogin from '../components/sections/navbar/ModalLogin';
 import { UserContext } from '../provider/UserContext';
 import { FiShoppingCart } from 'react-icons/fi';
+import { verifyCoupon } from '../API/Coupon.API';
 
 const AddressComponent = ({ address }) => {
     return (
@@ -35,13 +36,17 @@ const Checkout = () => {
     const { cart, cartTotalCost, cartTotalQuantity } = useContext(CartContext);
     const { addresses } = useAddress();
     const { formatCurrency } = useCountry();
-    const { userIsLogin } = useContext(UserContext);
+    const { userIsLogin, userData, waitLogin } = useContext(UserContext);
+    const navigation = useNavigate();
 
     const [selectAddress, setSelectAddress] = useState(null);
     const [showAddressModal, setShowAddressModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
-    const navigation = useNavigate();
+    const [couponCode, setCouponCode] = useState('');
+    const [couponMessage, setCouponMessage] = useState(null);
+    const [couponDiscount, setCouponDiscount] = useState(0); // porcentaje de descuento
+    const [totalCost, setTotalCost] = useState(0);
 
     useEffect(() => {
         if (!selectAddress && addresses.length > 0) {
@@ -54,10 +59,12 @@ const Checkout = () => {
     }, [selectAddress]);
 
     useEffect(() => {
-        if (cart.length === 0) {
-            setShowEmptyCartModal(true);
-        }
+        setShowEmptyCartModal(cart.length === 0);
     }, [cart]);
+
+    useEffect(() => {
+        setTotalCost(cartTotalCost - cartTotalCost * (couponDiscount / 100));
+    }, [couponDiscount, cartTotalCost]);
 
     const handleCheckout = () => {
         if (!userIsLogin) {
@@ -66,6 +73,20 @@ const Checkout = () => {
             setShowEmptyCartModal(true);
         } else if (!selectAddress) {
             setShowAddressModal(true);
+        }
+    };
+
+    const handleCoupon = async () => {
+        if (!userIsLogin) {
+            setShowLoginModal(true);
+        } else if (cart.length === 0) {
+            setShowEmptyCartModal(true);
+        } else if (couponCode === '') {
+            setCouponMessage('Ingresa el código del cupón');
+        } else {
+            const res = await verifyCoupon(userData.id, couponCode);
+            setCouponMessage(res.message);
+            setCouponDiscount(res.discount);
         }
     };
 
@@ -120,10 +141,18 @@ const Checkout = () => {
                                 <input
                                     type="text"
                                     placeholder="Ingresa el código del cupón"
+                                    value={couponCode}
+                                    onChange={e =>
+                                        setCouponCode(e.target.value)
+                                    }
                                 />
 
-                                <button>Aplicar</button>
+                                <button onClick={handleCoupon}>Aplicar</button>
                             </div>
+
+                            {couponMessage && (
+                                <p className="orange-text">{couponMessage}</p>
+                            )}
                         </section>
 
                         <section>
@@ -133,35 +162,31 @@ const Checkout = () => {
                             </div>
 
                             <div className="orange-text">
-                                <p>Descuento de artículos:</p>
-                                <p></p>
+                                <p>Descuento del cupón ({couponDiscount}%):</p>
+                                <p>
+                                    {formatCurrency(
+                                        cartTotalCost * (couponDiscount / 100),
+                                    )}
+                                </p>
                             </div>
 
                             <div>
                                 <p>Subtotal:</p>
-                                <p>{formatCurrency(cartTotalCost)}</p>
+                                <p>{formatCurrency(totalCost)}</p>
                             </div>
                         </section>
 
                         <section>
                             <div>
                                 <p>Total del pedido:</p>
-                                <p>{formatCurrency(cartTotalCost)}</p>
+                                <p>{formatCurrency(totalCost)}</p>
                             </div>
                         </section>
 
                         <section className="checkout-green">
                             <h5>Planta con Temu</h5>
 
-                            <label htmlFor="landingTree">
-                                <input
-                                    type="radio"
-                                    id="
-                            landingTree"
-                                    name="landingTree"
-                                />
-                                Te invitamos a plantar un árbol por $1.500
-                            </label>
+                            <p>Te invitamos a plantar un árbol</p>
 
                             <button
                                 className="orange-button"
