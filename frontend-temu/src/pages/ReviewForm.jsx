@@ -4,7 +4,7 @@ import { FaStar } from 'react-icons/fa';
 import { UserContext } from '../provider/UserContext';
 import { addReviewProduct } from '../API/Products.API';
 
-function ReviewForm({ productId }) {
+function ReviewForm({ productId, onReviewSubmitted }) {
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(null);
@@ -19,18 +19,21 @@ function ReviewForm({ productId }) {
             return;
         }
         try {
-            const response = await addReviewProduct (
+            const response = await addReviewProduct(
                 productId,
                 reviewText,
                 rating,
                 userData.id
-            )
+            );
             if (response) {
-            setMessage('Opinión guardada correctamente.');
-            setHasReviewed(true);
-            }else{
+                setMessage('Opinión guardada correctamente.');
+                setHasReviewed(true);
+                setReviewText('');
+                setRating(0);
+                onReviewSubmitted(); // Llama a la función para actualizar la lista de reseñas
+            } else {
                 setMessage('Hubo un error al guardar tu opinión. Por favor, inténtalo de nuevo.');
-            } 
+            }
         } catch (error) {
             console.error(error);
             setMessage('Hubo un error al guardar tu opinión. Por favor, inténtalo de nuevo.');
