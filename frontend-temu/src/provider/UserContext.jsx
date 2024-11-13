@@ -399,14 +399,18 @@ const UserProvider = ({ children }) => {
             setLoginError('Error no se pudo actualizar los datos');
         } else {
             setLoginError(null);
-            const newUserData = { ...userData };
-            newUserData.username = username;
-            newUserData.medidas.medida_pecho = medida_pecho;
-            newUserData.medidas.medida_cintura = medida_cintura;
-            newUserData.medidas.medida_cadera = medida_cadera;
-            newUserData.medidas.estatura = estatura;
-            newUserData.medidas.peso = peso;
-            newUserData.medidas.unidad_medida = unidad_medida;
+
+            const measurements = {
+                medida_pecho,
+                medida_cintura,
+                medida_cadera,
+                estatura,
+                peso,
+                unidad_medida,
+            };
+
+            const newUserData = { ...userData, medidas: measurements };
+
             setUserData(newUserData);
             saveCookies(newUserData, sessionJWT);
         }

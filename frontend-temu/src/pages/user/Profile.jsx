@@ -47,13 +47,13 @@ const Profile = () => {
 
     useEffect(() => {
         setFormData({
-            username: userData.username,
-            medida_pecho: userData.medidas.medida_pecho,
-            medida_cintura: userData.medidas.medida_cintura,
-            medida_cadera: userData.medidas.medida_cadera,
-            estatura: userData.medidas.estatura,
-            peso: userData.medidas.peso,
-            unidad_medida: userData.medidas.unidad_medida,
+            username: userData.username || '',
+            medida_pecho: userData.medidas?.medida_pecho,
+            medida_cintura: userData.medidas?.medida_cintura || 0,
+            medida_cadera: userData.medidas?.medida_cadera || 0,
+            estatura: userData.medidas?.estatura || 0,
+            peso: userData.medidas?.peso || 0,
+            unidad_medida: userData.medidas?.unidad_medida || sizes[0],
         });
     }, [userData]);
 
