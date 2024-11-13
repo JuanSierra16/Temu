@@ -18,6 +18,7 @@ import { FaHeart } from 'react-icons/fa6';
 import { UserContext } from '../provider/UserContext';
 import { useCountry } from '../provider/UseCountry';
 import { ProductsContext } from '../provider/ProductsContext';
+import ReviewsList from './ReviewsList';
 
 const Product = () => {
     const { userIsLogin, userData } = useContext(UserContext);
@@ -34,6 +35,7 @@ const Product = () => {
     const { addCart, cart } = useContext(CartContext);
     const { formatCurrency } = useCountry();
     const [lowStockMessage, setLowStockMessage] = useState('');
+    const [reviewsUpdated, setReviewsUpdated] = useState(false);
 
     const handleImageError = img => {
         setNotFoundImages(prev => [...prev, img]);
@@ -57,6 +59,11 @@ const Product = () => {
         if (success) {
             setSuccessFavorite(true);
         }
+    };
+
+    const handleReviewSubmitted = () => {
+        // Actualiza la lista de reseñas después de enviar una nueva reseña
+        setReviewsUpdated(!reviewsUpdated);
     };
 
     return (
@@ -99,7 +106,8 @@ const Product = () => {
 
                         <div className='product-review'>
                             <h3>Opiniones</h3>
-                            <ReviewForm productId={productId} />
+                            <ReviewForm productId={productId} onReviewSubmitted={handleReviewSubmitted} />
+                            <ReviewsList productId={productId} reviewsUpdated={reviewsUpdated} />
                         </div>
 
                         <div className="product-user-info-container">

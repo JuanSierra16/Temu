@@ -109,8 +109,9 @@ export const handleStripeWebhook = async (req, res) => {
 
                 const emailContent = `
                     <p>Gracias por tu compra. Tu pedido con Link de seguimiento <a href="http://localhost:5173/orders/${pedido_id}">http://localhost:5173/orders/${pedido_id}</a> ha sido recibido y está en proceso.</p>
-                    <h3>Detalles del pedido:</h3>
+                    <h3>Detalles del pedido #${pedido_id}:</h3>
                     ${productosInfo}
+                    <p><strong>Estado</strong>: Procesando</p>
                     <h3>Información de envío:</h3>
                     <p><strong>Nombre:</strong> ${direccionEnvio.nombre}</p>
                     <p><strong>Apellido:</strong> ${direccionEnvio.apellido}</p>
@@ -133,6 +134,47 @@ export const handleStripeWebhook = async (req, res) => {
                 console.log('Operaciones adicionales completadas');
             } catch (error) {
                 console.error('Error al realizar operaciones adicionales:', error);
+            }
+
+            break;
+
+        case 'checkout.session.async_payment_failed':
+            const failedSession = event.data.object;
+
+            try {
+                console.log('Evento de sesión de pago fallido recibido:', failedSession);
+
+                // Obtener el correo electrónico del usuario
+                const { usuario_id } = failedSession.metadata;
+                const usuarioId = parseInt(usuario_id, 10);
+
+                const [userRows] = await pool.query('SELECT email FROM users WHERE id = ?', [usuarioId]);
+                if (userRows.length === 0) {
+                    console.error('Usuario no encontrado');
+                    return res.status(404).json({ message: 'Usuario no encontrado' });
+                }
+
+                const userEmail = userRows[0].email;
+
+                // Construir el contenido del correo electrónico en HTML
+                const emailContentFailed = `
+                    <p>Lo sentimos, pero no pudimos completar tu pedido debido a un problema con el pago.</p>
+                    <p>Por favor, intenta nuevamente o contacta a nuestro soporte para más información.</p>
+                `;
+
+                // Enviar un correo electrónico al usuario
+                const mailOptionsFailed = {
+                    from: process.env.EMAIL_USER,
+                    to: userEmail,
+                    subject: 'Error en el Pedido',
+                    html: emailContentFailed
+                };
+
+                await transporter.sendMail(mailOptionsFailed);
+                console.log('Correo electrónico de error enviado a:', userEmail);
+
+            } catch (error) {
+                console.error('Error al manejar el evento de pago fallido:', error);
             }
 
             break;

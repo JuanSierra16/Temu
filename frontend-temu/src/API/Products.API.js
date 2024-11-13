@@ -59,7 +59,7 @@ export const addReviewProduct = async (productId, reviewText, rating, userId) =>
             usuario_id: userId,
         });
 
-        return response.status === 200;
+        return response.status === 201 ? response.data : false;
     } catch (error) {
         return false;
     }
