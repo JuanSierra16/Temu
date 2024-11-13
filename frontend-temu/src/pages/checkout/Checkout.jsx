@@ -61,15 +61,19 @@ const Checkout = () => {
         } else if (cartTotalCost < 0.5) {
             setError('El total debe ser mayor a ' + formatCurrency(0.5));
         } else {
-            const paymentProduct = cart.map(product => ({
+            let paymentProduct = cart.map(product => ({
                 id: product.id,
                 nombre: product.descripcion.split(' ').slice(0, 3).join(' '),
-                precio:
+                precio: Number(
                     parseFloat(
                         formatCurrency(
-                            product.precio_con_descuento ?? product.precio,
+                            (product.precio_con_descuento ?? product.precio) -
+                                (product.precio_con_descuento ??
+                                    product.precio) *
+                                    (couponDiscount / 100),
                         ).replace(/[^0-9.-]+/g, ''),
                     ) * 100,
+                ).toFixed(0),
                 cantidad: product.cantidad,
             }));
 
