@@ -12,12 +12,14 @@ export const verifyCoupon = async (userId, code) => {
         });
 
         return {
+            id: response.data.id || null,
             isValid: response.status === 200 && response.data.descuento > 0,
             message: response.data.message,
             discount: parseFloat(response.data.descuento || 0),
         };
     } catch (error) {
         return {
+            id: null,
             isValid: false,
             message: 'Error al verificar el cupón',
             discount: 0,

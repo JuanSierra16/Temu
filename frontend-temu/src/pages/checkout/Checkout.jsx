@@ -1,42 +1,25 @@
 import './Checkout.css';
 import { useContext, useEffect, useState } from 'react';
-import SimpleNav from '../components/sections/navbar/SimpleNav';
-import { CartContext } from '../provider/CartContext';
-import { useAddress } from '../provider/useAddress';
-import Modal from '../components/elements/Modal';
-import CartProduct from '../components/elements/CartProduct';
-import { useCountry } from '../provider/UseCountry';
+import SimpleNav from '../../components/sections/navbar/SimpleNav';
+import { CartContext } from '../../provider/CartContext';
+import { useAddress } from '../../provider/useAddress';
+import Modal from '../../components/elements/Modal';
+import CartProduct from '../../components/elements/CartProduct';
+import { useCountry } from '../../provider/UseCountry';
 import { Link, useNavigate } from 'react-router-dom';
-import Footer from '../components/sections/Footer';
-import ModalLogin from '../components/sections/navbar/ModalLogin';
-import { UserContext } from '../provider/UserContext';
+import Footer from '../../components/sections/Footer';
+import ModalLogin from '../../components/sections/navbar/ModalLogin';
+import { UserContext } from '../../provider/UserContext';
 import { FiShoppingCart } from 'react-icons/fi';
-import { verifyCoupon } from '../API/Coupon.API';
-
-const AddressComponent = ({ address }) => {
-    return (
-        <div className="address-component">
-            <p>
-                <strong>{address.nombre}</strong>{' '}
-                <strong>{address.apellido}</strong> {address.telefono}
-            </p>
-            <p className="orange-text">{address.numero_direccion}</p>
-            <p>
-                <strong>
-                    {address.municipio} {address.departamento}{' '}
-                    {address.codigo_postal}, {address.pais}
-                </strong>
-            </p>
-            <p>{address.informacion_adicional}</p>
-        </div>
-    );
-};
+import { verifyCoupon } from '../../API/Coupon.API';
+import AddressComponent from './AddressComponent';
+import { makePayment } from '../../API/Payment.API';
 
 const Checkout = () => {
     const { cart, cartTotalCost, cartTotalQuantity } = useContext(CartContext);
     const { addresses } = useAddress();
-    const { formatCurrency } = useCountry();
-    const { userIsLogin, userData, waitLogin } = useContext(UserContext);
+    const { currency, formatCurrency } = useCountry();
+    const { userIsLogin, userData } = useContext(UserContext);
     const navigation = useNavigate();
 
     const [selectAddress, setSelectAddress] = useState(null);
@@ -46,7 +29,9 @@ const Checkout = () => {
     const [couponCode, setCouponCode] = useState('');
     const [couponMessage, setCouponMessage] = useState(null);
     const [couponDiscount, setCouponDiscount] = useState(0); // porcentaje de descuento
+    const [couponId, setCouponId] = useState(null);
     const [totalCost, setTotalCost] = useState(0);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!selectAddress && addresses.length > 0) {
@@ -66,13 +51,44 @@ const Checkout = () => {
         setTotalCost(cartTotalCost - cartTotalCost * (couponDiscount / 100));
     }, [couponDiscount, cartTotalCost]);
 
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
         if (!userIsLogin) {
             setShowLoginModal(true);
         } else if (cart.length === 0) {
             setShowEmptyCartModal(true);
         } else if (!selectAddress) {
             setShowAddressModal(true);
+        } else if (cartTotalCost < 0.5) {
+            setError('El total debe ser mayor a ' + formatCurrency(0.5));
+        } else {
+            const paymentProduct = cart.map(product => ({
+                id: product.id,
+                nombre: product.descripcion.split(' ').slice(0, 3).join(' '),
+                precio:
+                    parseFloat(
+                        formatCurrency(
+                            product.precio_con_descuento ?? product.precio,
+                        ).replace(/[^0-9.-]+/g, ''),
+                    ) * 100,
+                cantidad: product.cantidad,
+            }));
+
+            const data = {
+                usuario_id: userData.id,
+                productos: paymentProduct,
+                total: totalCost,
+                cupo_id: couponId,
+                direccion_envio_id: selectAddress.id,
+                currency: currency.acronym,
+                success_url: 'http://localhost:5173/checkout/success',
+                cancel_url: 'http://localhost:5173/checkout/cancel',
+            };
+
+            const res = await makePayment(data);
+
+            if (res) {
+                window.open(res.url, '_blank', 'rel=noopener noreferrer');
+            }
         }
     };
 
@@ -87,6 +103,7 @@ const Checkout = () => {
             const res = await verifyCoupon(userData.id, couponCode);
             setCouponMessage(res.message);
             setCouponDiscount(res.discount);
+            setCouponId(res.id);
         }
     };
 
@@ -194,6 +211,8 @@ const Checkout = () => {
                             >
                                 Finalizar compra
                             </button>
+
+                            {error && <p className="orange-text">{error}</p>}
 
                             <Link
                                 to="/tree-landing"
