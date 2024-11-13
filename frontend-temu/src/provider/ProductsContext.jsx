@@ -49,6 +49,13 @@ const ProductsProvider = ({ children }) => {
         setProducts(randomProducts);
     };
 
+    const checkLowStock = (product) => {
+        if (product.stock < 10) {
+            return 'Ultimas unidades disponibles';
+        }
+        return '';
+    };
+
     const filterProducts = useCallback(
         category => {
             if (category) {
@@ -142,6 +149,7 @@ const ProductsProvider = ({ children }) => {
                 bestProductsSellers,
                 fiveStarProducts,
                 findByCategoryOrName,
+                checkLowStock,
             }}
         >
             {children}

@@ -8,7 +8,8 @@ const HelpMenu = () => {
     const help = [
         { name: 'Centro de ayuda', path: '/support-questions' },
         { name: 'Centro de seguridad', path: '/safety-center' },
-        { name: 'Chatea con temu' },
+        { name: 'Chatea con temu',  path: 'https://temu-097852.zapier.app' },
+
         { name: 'Protección de compras de Temu', path: '/purchase-safe' },
         { name: 'Política de privacidad y cookies', path: '/privacy-policy' },
     ];
