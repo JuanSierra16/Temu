@@ -48,7 +48,7 @@ import Notifications from './pages/user/Notifications';
 import Favorite from './pages/user/Favorite';
 
 import ReviewForm from './pages/ReviewForm';
-import Checkout from './pages/Checkout';
+import Checkout from './pages/checkout/Checkout';
 
 function App() {
     return (
