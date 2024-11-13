@@ -10,12 +10,14 @@ describe('Cupón de compra', () => {
     });
 
     const couponSuccess = {
+        id: 1,
         isValid: true,
         message: 'Cupón valido',
         discount: 10,
     };
 
     const couponFail = {
+        id: null,
         isValid: false,
         message: 'Cupón no valido',
         discount: 0,
@@ -23,7 +25,10 @@ describe('Cupón de compra', () => {
 
     test('API de cupones Cupón bueno', async () => {
         axios.post.mockResolvedValue({
-            data: { ...couponSuccess, descuento: 10 },
+            data: {
+                cupon: { ...couponSuccess, descuento: 10 },
+                message: couponSuccess.message,
+            },
             status: 200,
         });
 
@@ -33,7 +38,10 @@ describe('Cupón de compra', () => {
 
     test('API de cupones Cupón malo', async () => {
         axios.post.mockResolvedValueOnce({
-            data: couponFail,
+            data: {
+                cupon: { ...couponFail, descuento: 0 },
+                message: couponFail.message,
+            },
             status: 200,
         });
 
@@ -47,6 +55,7 @@ describe('Cupón de compra', () => {
         const res = await verifyCoupon(1, 'cupon30');
 
         expect(res).toEqual({
+            id: null,
             isValid: false,
             message: 'Error al verificar el cupón',
             discount: 0,

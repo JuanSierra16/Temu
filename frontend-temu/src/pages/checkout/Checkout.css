@@ -71,6 +71,22 @@
     gap: 0.5em;
 }
 
+.checkout-success-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & img {
+        max-width: 300px;
+        max-height: 300px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        -o-object-position: center;
+        object-position: center;
+        margin: 0 auto;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .checkout-summary section div {
         gap: 1em;
