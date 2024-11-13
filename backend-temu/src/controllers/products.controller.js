@@ -150,3 +150,61 @@ export const eliminarFavorito = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// Crear una reseña de un producto
+export const crearReseña = async (req, res) => {
+    const { producto_id, texto, calificacion, usuario_id } = req.body;
+
+    try {
+        // Verificar si el usuario existe
+        const [userRows] = await pool.query('SELECT * FROM users WHERE id = ?', [usuario_id]);
+        if (userRows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Verificar si el producto existe
+        const [productRows] = await pool.query('SELECT * FROM productos WHERE id = ?', [producto_id]);
+        if (productRows.length === 0) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        // Insertar la reseña en la base de datos
+        await pool.query(
+            'INSERT INTO reseñas (usuario_id, producto_id, calificacion, comentario) VALUES (?, ?, ?, ?)',
+            [usuario_id, producto_id, calificacion, texto]
+        );
+
+        res.status(201).json({ message: 'Reseña creada exitosamente' });
+    } catch (error) {
+        console.error('Error al crear la reseña:', error);
+        res.status(500).json({ message: 'Error al crear la reseña' });
+    }
+};
+
+// Obtener las reseñas de un producto
+export const obtenerReseñasProducto = async (req, res) => {
+    const { id } = req.params; // ID del producto
+
+    try {
+        const [reseñas] = await pool.query('SELECT * FROM reseñas WHERE producto_id = ?', [id]);
+
+        res.status(200).json(reseñas);
+    } catch (error) {
+        console.error('Error al obtener las reseñas del producto:', error);
+        res.status(500).json({ message: 'Error al obtener las reseñas del producto' });
+    }
+};
+
+// Obtener las reseñas que ha hecho un usuario
+export const obtenerReseñasUsuario = async (req, res) => {
+    const { usuario_id } = req.params;
+
+    try {
+        const [reseñas] = await pool.query('SELECT * FROM reseñas WHERE usuario_id = ?', [usuario_id]);
+
+        res.status(200).json(reseñas);
+    } catch (error) {
+        console.error('Error al obtener las reseñas del usuario:', error);
+        res.status(500).json({ message: 'Error al obtener las reseñas del usuario' });
+    }
+};

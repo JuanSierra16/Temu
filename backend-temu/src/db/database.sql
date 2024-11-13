@@ -150,3 +150,4 @@ select * from cupones_descuento;
 select * from pedidos;
 select * from detalles_pedido;
 select * from historial_cupones;
+select * from reseñas;
