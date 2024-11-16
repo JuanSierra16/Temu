@@ -60,7 +60,6 @@
     }
 }
 
-
 .address-list {
     display: flex;
     flex-direction: column;
@@ -115,8 +114,6 @@
     gap: 1em;
 }
 
-
-
 .your-reviews-item {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -144,6 +141,38 @@
     padding-left: 1em;
 }
 
+.your-orders-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2em 1em;
+
+    & .your-orders-item {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 0.5em;
+        padding: 1em;
+        border: 1px solid var(--gray-color);
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+    }
+
+    & button {
+        grid-column: 1/-1;
+    }
+
+    & .your-orders-address-title {
+        margin-top: 1em;
+        grid-column: 1/-1;
+    }
+
+    & .your-orders-address {
+        grid-column: 1/-1;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .dashboard {
         display: grid;
@@ -158,5 +187,4 @@
         display: flex;
         font-size: medium;
     }
-}
 }
