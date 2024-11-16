@@ -132,9 +132,12 @@ const Checkout = () => {
 
         if (checkoutState === 'success') {
             clearCart();
+            localStorage.removeItem('checkout-state');
+            localStorage.removeItem('checkout-code');
             navigation('/checkout/success');
         } else if (checkoutState === 'cancel') {
             localStorage.removeItem('checkout-state');
+            localStorage.removeItem('checkout-code');
             setError('El pago fue cancelado o hubo un error en el proceso.');
         }
     };
