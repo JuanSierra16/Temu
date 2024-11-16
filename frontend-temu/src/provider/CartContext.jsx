@@ -31,8 +31,9 @@ const CartProvider = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    const addCart = product => {
+    const addCart = (product, quantity) => {
         const price = product.precio_con_descuento ?? product.precio;
+        const productQuantity = parseInt(quantity) || 1;
 
         if (!cart.find(item => item.id === product.id)) {
             // seleccionar por defecto los primeros atributos del producto
@@ -45,8 +46,8 @@ const CartProvider = ({ children }) => {
 
             const newProduct = {
                 ...product,
-                cantidad: 1,
-                subtotal: price,
+                cantidad: productQuantity,
+                subtotal: price * productQuantity,
                 atributos_seleccionados: atributos_seleccionados,
             };
 
