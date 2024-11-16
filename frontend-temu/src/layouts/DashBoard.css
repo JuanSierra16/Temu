@@ -109,6 +109,41 @@
     }
 }
 
+.your-reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+
+
+.your-reviews-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1em;
+    padding: 1em;
+    border: 1px solid var(--gray-color);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+    & a {
+        grid-column: 1/-1;
+        text-decoration: none;
+        color: var(--dark-color);
+        padding: 0.5em 1em;
+        border: 1px solid var(--gray-color);
+        text-align: center;
+    }
+}
+
+.your-reviews-comment {
+    grid-column: 1/-1;
+    padding-left: 1em;
+}
+
 @media screen and (min-width: 768px) {
     .dashboard {
         display: grid;

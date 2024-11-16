@@ -81,3 +81,12 @@ export const fetchReviews = async productId => {
         return [];
     }
 };
+
+export const getReviewByUser = async userId => {
+    try {
+        const response = await axios.get(`${baseURL}/users/${userId}/reviews`);
+        return response.data || [];
+    } catch (error) {
+        return [];
+    }
+};
