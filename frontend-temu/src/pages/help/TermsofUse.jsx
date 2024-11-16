@@ -2,7 +2,7 @@ import Footer from '../../components/sections/Footer';
 import ScrollToTopButton from '../../components/elements/ScrollToTopButton';
 import WhiteBar from '../../components/sections/navbar/WhiteBar';
 
-import './TermsofUse.css';
+import './TermsOfUse.css';
 
 const TermsOfUse = () => {
     return (
