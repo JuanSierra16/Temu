@@ -50,7 +50,12 @@ export const deleteFavoriteProduct = async (userId, productId) => {
     }
 };
 
-export const addReviewProduct = async (productId, reviewText, rating, userId) => {
+export const addReviewProduct = async (
+    productId,
+    reviewText,
+    rating,
+    userId,
+) => {
     try {
         const response = await axios.post(`${baseURL}/products/reviews`, {
             producto_id: productId,
@@ -62,5 +67,17 @@ export const addReviewProduct = async (productId, reviewText, rating, userId) =>
         return response.status === 201 ? response.data : false;
     } catch (error) {
         return false;
+    }
+};
+
+export const fetchReviews = async productId => {
+    try {
+        const response = await axios.get(
+            `${baseURL}/products/${productId}/reviews`,
+        );
+
+        return response.data || [];
+    } catch (error) {
+        return [];
     }
 };

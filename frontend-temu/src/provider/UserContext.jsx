@@ -409,7 +409,11 @@ const UserProvider = ({ children }) => {
                 unidad_medida,
             };
 
-            const newUserData = { ...userData, medidas: measurements };
+            const newUserData = {
+                ...userData,
+                username,
+                medidas: measurements,
+            };
 
             setUserData(newUserData);
             saveCookies(newUserData, sessionJWT);

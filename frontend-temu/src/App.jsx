@@ -47,7 +47,6 @@ import Permissions from './pages/user/Permissions';
 import Notifications from './pages/user/Notifications';
 import Favorite from './pages/user/Favorite';
 
-import ReviewForm from './pages/ReviewForm';
 import Checkout from './pages/checkout/Checkout';
 import CheckoutSuccess from './pages/checkout/CheckoutSuccess';
 import CheckoutError from './pages/checkout/CheckoutError';
@@ -122,11 +121,6 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/checkout/success" element={<CheckoutSuccess />} />
                 <Route path="/checkout/cancel" element={<CheckoutError />} />
-
-                <Route
-                    path="/review-form/:productId"
-                    element={<ReviewForm />}
-                />
             </Routes>
         </BrowserRouter>
     );

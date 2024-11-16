@@ -1,22 +1,27 @@
 import './Checkout.css';
+
 import { useContext, useEffect, useState } from 'react';
-import SimpleNav from '../../components/sections/navbar/SimpleNav';
 import { CartContext } from '../../provider/CartContext';
-import { useAddress } from '../../provider/useAddress';
-import Modal from '../../components/elements/Modal';
-import CartProduct from '../../components/elements/CartProduct';
-import { useCountry } from '../../provider/UseCountry';
 import { Link, useNavigate } from 'react-router-dom';
-import Footer from '../../components/sections/Footer';
-import ModalLogin from '../../components/sections/navbar/ModalLogin';
-import { UserContext } from '../../provider/UserContext';
 import { FiShoppingCart } from 'react-icons/fi';
+
+import { useAddress } from '../../provider/useAddress';
+import { useCountry } from '../../provider/UseCountry';
+import { UserContext } from '../../provider/UserContext';
+
 import { verifyCoupon } from '../../API/Coupon.API';
-import AddressComponent from './AddressComponent';
 import { makePayment } from '../../API/Payment.API';
 
+import Modal from '../../components/elements/Modal';
+import Footer from '../../components/sections/Footer';
+import SimpleNav from '../../components/sections/navbar/SimpleNav';
+import ModalLogin from '../../components/sections/navbar/ModalLogin';
+import CartProduct from '../../components/elements/CartProduct';
+import AddressComponent from './AddressComponent';
+
 const Checkout = () => {
-    const { cart, cartTotalCost, cartTotalQuantity } = useContext(CartContext);
+    const { cart, cartTotalCost, cartTotalQuantity, clearCart } =
+        useContext(CartContext);
     const { addresses } = useAddress();
     const { currency, formatCurrency } = useCountry();
     const { userIsLogin, userData } = useContext(UserContext);
@@ -77,6 +82,14 @@ const Checkout = () => {
                 cantidad: product.cantidad,
             }));
 
+            const rand = function () {
+                return Math.random().toString(36).substr(2); // remove `0.`
+            };
+
+            const code = rand() + rand(); // para poder saber si el pago fue exitoso
+            localStorage.setItem('checkout-state', 'processing');
+            localStorage.setItem('checkout-code', code);
+
             const data = {
                 usuario_id: userData.id,
                 productos: paymentProduct,
@@ -84,7 +97,8 @@ const Checkout = () => {
                 cupo_id: couponId,
                 direccion_envio_id: selectAddress.id,
                 currency: currency.acronym,
-                success_url: 'http://localhost:5173/checkout/success',
+                success_url:
+                    'http://localhost:5173/checkout/success?code=' + code,
                 cancel_url: 'http://localhost:5173/checkout/cancel',
             };
 
@@ -108,6 +122,23 @@ const Checkout = () => {
             setCouponMessage(res.message);
             setCouponDiscount(res.discount);
             setCouponId(res.id);
+        }
+    };
+
+    // Para saber si el pago fue exitoso
+    // Las paginas de confirmación y cancelación cambian el estado del localStorage
+    window.onfocus = () => {
+        const checkoutState = localStorage.getItem('checkout-state') || null;
+
+        if (checkoutState === 'success') {
+            clearCart();
+            localStorage.removeItem('checkout-state');
+            localStorage.removeItem('checkout-code');
+            navigation('/checkout/success');
+        } else if (checkoutState === 'cancel') {
+            localStorage.removeItem('checkout-state');
+            localStorage.removeItem('checkout-code');
+            setError('El pago fue cancelado o hubo un error en el proceso.');
         }
     };
 

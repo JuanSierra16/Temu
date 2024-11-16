@@ -36,6 +36,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1em;
 }
 
 .product-big-image button {
@@ -83,6 +84,12 @@
 }
 
 .product-right-container {
+    top: 80px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    position: sticky;
+    position: -webkit-sticky;
     display: flex;
     flex-direction: column;
     gap: 2em;

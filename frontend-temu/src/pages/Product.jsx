@@ -1,24 +1,27 @@
 import './Product.css';
-import BlackBar from '../components/sections/BlackBar';
-import NavBar from '../components/sections/navbar/NavBar';
-import Footer from '../components/sections/Footer';
-import { FaUser, FaCheck } from 'react-icons/fa';
-import { FaShippingFast } from 'react-icons/fa';
+
+import { useContext, useEffect, useState } from 'react';
+
+import { FaHeart, FaShippingFast, FaUser, FaCheck } from 'react-icons/fa';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { PiPlantDuotone } from 'react-icons/pi';
 import { AiOutlineSafety } from 'react-icons/ai';
-import { useContext, useEffect, useState } from 'react';
-import ProductGrid from '../components/sections/ProductGrid';
 import { Link, useParams } from 'react-router-dom';
-import { CartContext } from '../provider/CartContext';
-import CartPanel from '../components/sections/CartPanel';
-import ReviewForm from './ReviewForm';
+
 import { addFavoriteProduct, getProductById } from '../API/Products.API';
-import { FaHeart } from 'react-icons/fa6';
+
+import { CartContext } from '../provider/CartContext';
 import { UserContext } from '../provider/UserContext';
 import { useCountry } from '../provider/UseCountry';
 import { ProductsContext } from '../provider/ProductsContext';
-import ReviewsList from './ReviewsList';
+
+import BlackBar from '../components/sections/BlackBar';
+import NavBar from '../components/sections/navbar/NavBar';
+import Footer from '../components/sections/Footer';
+import ProductGrid from '../components/sections/ProductGrid';
+import CartPanel from '../components/sections/CartPanel';
+import ReviewForm from '../components/sections/review/ReviewForm';
+import ReviewsList from '../components/sections/review/ReviewsList';
 
 const Product = () => {
     const { userIsLogin, userData } = useContext(UserContext);
@@ -53,12 +56,9 @@ const Product = () => {
         });
     }, [productId, checkLowStock]);
 
-    const handleFavoriteProduct = () => {
-        const success = addFavoriteProduct(userData.id, productInfo.id);
-
-        if (success) {
-            setSuccessFavorite(true);
-        }
+    const handleFavoriteProduct = async () => {
+        const success = await addFavoriteProduct(userData.id, productInfo.id);
+        setSuccessFavorite(success);
     };
 
     const handleReviewSubmitted = () => {
@@ -100,14 +100,19 @@ const Product = () => {
                                         <p>Agregarlo a tu lista de favoritos</p>
                                     </button>
                                 )}
-
                             </div>
                         </div>
 
-                        <div className='product-review'>
+                        <div className="product-review">
                             <h3>Opiniones</h3>
-                            <ReviewForm productId={productId} onReviewSubmitted={handleReviewSubmitted} />
-                            <ReviewsList productId={productId} reviewsUpdated={reviewsUpdated} />
+                            <ReviewForm
+                                productId={productId}
+                                onReviewSubmitted={handleReviewSubmitted}
+                            />
+                            <ReviewsList
+                                productId={productId}
+                                reviewsUpdated={reviewsUpdated}
+                            />
                         </div>
 
                         <div className="product-user-info-container">
@@ -128,7 +133,11 @@ const Product = () => {
                                         </p>
                                     </div>
                                 </div>
-                                {lowStockMessage && <p style={{ color: 'red' }}>{lowStockMessage}</p>}
+                                {lowStockMessage && (
+                                    <p style={{ color: 'red' }}>
+                                        {lowStockMessage}
+                                    </p>
+                                )}
                             </div>
 
                             <div className="product-user-buttons">
