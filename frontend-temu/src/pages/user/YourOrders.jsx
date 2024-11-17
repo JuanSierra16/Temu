@@ -12,6 +12,8 @@ import DashBoard from '../../layouts/DashBoard';
 import Slider from '../../components/elements/Slider';
 import AddressComponent from '../checkout/AddressComponent';
 
+import { useParams } from 'react-router-dom';
+
 const YourOrders = () => {
     const orderTypes = [
         'Todos',
@@ -33,6 +35,8 @@ const YourOrders = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const { orderId } = useParams();
+
     useEffect(() => {
         if (!userData.id) return;
 
@@ -50,9 +54,9 @@ const YourOrders = () => {
         selectedOrder.detalles.forEach(detail => {
             getProductById(detail.producto_id).then(product => {
                 const addDetail = {
+                    ...product,
                     cantidad: detail.cantidad,
                     precio: detail.precio,
-                    ...product,
                 };
 
                 setOrderProducts(orderProducts => [
@@ -62,6 +66,18 @@ const YourOrders = () => {
             });
         });
     }, [showDetails, selectedOrder]);
+
+    useEffect(() => {
+        if (orderId) {
+            const order = orders.find(order => order.id === parseInt(orderId));
+
+            if (order) {
+                console.log(orderId);
+                setSelectedOrder(order);
+                setShowDetails(true);
+            }
+        }
+    }, [orderId, orders]);
 
     const handleCancelOrder = async () => {
         if (!selectedOrder || !selectedOrder.id || loading) return;
@@ -208,8 +224,8 @@ const YourOrders = () => {
                                 </Slider>
 
                                 <p>
-                                    Cantidad: {product.cantidad} Precio Normal:{' '}
-                                    {formatCurrency(product.precio)}
+                                    Cantidad: {product.cantidad} Precio:{' '}
+                                    {product.precio}
                                 </p>
                                 <p>
                                     <strong>Descripción:</strong>{' '}
