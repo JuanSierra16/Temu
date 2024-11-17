@@ -13,3 +13,16 @@ export const fetchOrders = async userId => {
         return [];
     }
 };
+
+export const cancelOrder = async orderId => {
+    try {
+        const response = await axios.put(
+            `${baseURL}/pedidos/${orderId}/estado`,
+            { estado: 'Cancelado' },
+        );
+
+        return response.status === 200;
+    } catch (error) {
+        return false;
+    }
+};

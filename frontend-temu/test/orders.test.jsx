@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { TestUserContext } from './TestComponent.jsx';
-import { fetchOrders } from '../src/API/Orders.API.js';
+import { cancelOrder, fetchOrders } from '../src/API/Orders.API.js';
 import YourOrders from '../src/pages/user/YourOrders.jsx';
 import axios from 'axios';
 
@@ -10,9 +10,7 @@ vi.mock('axios');
 describe('Historial de pedidos', () => {
     beforeEach(() => {
         axios.get.mockReset();
-        axios.post.mockReset();
         axios.put.mockReset();
-        axios.delete.mockReset();
     });
 
     const order = {
@@ -92,5 +90,62 @@ describe('Historial de pedidos', () => {
         fireEvent.click(screen.getByRole('button', { name: /Ver detalles*/i }));
 
         expect(screen.getByText(/cantidad: 1/i)).toBeInTheDocument();
+    });
+
+    test('Axios cancelar pedidos', async () => {
+        axios.put.mockResolvedValue({
+            status: 200,
+        });
+
+        let res = await cancelOrder(1);
+        expect(res).toBe(true);
+
+        const url = '/pedidos/1/estado';
+        expect(axios.put.mock.calls[0][0].endsWith(url)).toBe(true);
+    });
+
+    test('Vista de ordenes cancelados', async () => {
+        const cancelOrder = {
+            ...order,
+            estado: 'Cancelado',
+        };
+
+        axios.get.mockResolvedValue({
+            data: [cancelOrder],
+        });
+
+        render(<YourOrders />, {
+            wrapper: TestUserContext,
+        });
+
+        await waitFor(async () => {
+            expect(
+                screen.getByText(order.estado, { exact: false }),
+            ).toBeInTheDocument();
+        });
+    });
+
+    test('Cancelar pedido', async () => {
+        axios.get.mockResolvedValue({
+            data: [order],
+        });
+
+        render(<YourOrders />, {
+            wrapper: TestUserContext,
+        });
+
+        await waitFor(async () => {
+            expect(
+                screen.getByText('Ver detalles', { exact: false }),
+            ).toBeInTheDocument();
+        });
+
+        fireEvent.click(screen.getByRole('button', { name: /Ver detalles*/i }));
+
+        fireEvent.click(
+            screen.getByRole('button', { name: /Cancelar pedido*/i }),
+        );
+
+        expect(screen.getByText(/Cancelado/i)).toBeInTheDocument();
     });
 });

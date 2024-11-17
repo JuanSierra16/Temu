@@ -4,7 +4,7 @@ import { BsBagX } from 'react-icons/bs';
 import { useContext, useEffect, useState } from 'react';
 
 import { getProductById } from '../../API/Products.API';
-import { fetchOrders } from '../../API/Orders.API';
+import { cancelOrder, fetchOrders } from '../../API/Orders.API';
 import { UserContext } from '../../provider/UserContext';
 import { useCountry } from '../../provider/UseCountry';
 
@@ -16,18 +16,22 @@ const YourOrders = () => {
     const orderTypes = [
         'Todos',
         'Procesando',
+        'Cancelado',
         'Enviado',
         'Entregado',
         'Devoluciones',
     ];
 
-    const [selectedOrderType, setSelectedOrderType] = useState(orderTypes[0]);
-    const [orders, setOrders] = useState([]);
-    const { userData } = useContext(UserContext);
     const { formatCurrency } = useCountry();
-    const [showDetails, setShowDetails] = useState(false);
+    const { userData } = useContext(UserContext);
+
+    const [selectedOrderType, setSelectedOrderType] = useState(orderTypes[0]);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [orderProducts, setOrderProducts] = useState([]);
+    const [showDetails, setShowDetails] = useState(false);
+    const [orders, setOrders] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (!userData.id) return;
@@ -36,14 +40,11 @@ const YourOrders = () => {
     }, [userData]);
 
     useEffect(() => {
-        console.log(orders);
-    }, [orders]);
-
-    useEffect(() => {
         if (!showDetails || !selectedOrder) {
-            setOrderProducts([]);
             return;
         }
+
+        setOrderProducts([]);
 
         // obtener información e imágenes de todos los productos
         selectedOrder.detalles.forEach(detail => {
@@ -61,6 +62,40 @@ const YourOrders = () => {
             });
         });
     }, [showDetails, selectedOrder]);
+
+    const handleCancelOrder = async () => {
+        if (!selectedOrder || !selectedOrder.id || loading) return;
+        else if (selectedOrder.estado.toLowerCase() !== 'procesando') {
+            setError('Solo se pueden cancelar pedidos en estado "Procesando"');
+            return;
+        }
+
+        setError(null);
+        setLoading(true);
+        const res = await cancelOrder(selectedOrder.id);
+
+        if (res) {
+            const newOrders = orders.map(order => {
+                if (order.id === selectedOrder.id) {
+                    return {
+                        ...order,
+                        estado: 'Cancelado',
+                    };
+                }
+
+                return order;
+            });
+
+            setSelectedOrder(
+                newOrders.find(order => order.id === selectedOrder.id),
+            );
+            setOrders(newOrders);
+        } else {
+            setError('Error al cancelar el pedido');
+        }
+
+        setLoading(false);
+    };
 
     return (
         <DashBoard>
@@ -184,18 +219,23 @@ const YourOrders = () => {
                         ))}
                     </div>
 
-                    {/* {selectedOrder.estado === 'procesando' && (
-                        <button>Cancelar pedido</button>
-                    )} */}
+                    {selectedOrder.estado === 'procesando' && (
+                        <button onClick={handleCancelOrder} disabled={loading}>
+                            Cancelar pedido
+                        </button>
+                    )}
 
                     <button
                         onClick={() => {
                             setShowDetails(false);
                             setSelectedOrder(null);
                         }}
+                        disabled={loading}
                     >
                         Volver
                     </button>
+
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                 </section>
             )}
         </DashBoard>
