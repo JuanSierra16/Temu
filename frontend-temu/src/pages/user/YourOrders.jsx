@@ -1,14 +1,16 @@
 import './UserDashboard.css';
-import DashBoard from '../../layouts/DashBoard';
-import { useContext, useEffect, useState } from 'react';
+
 import { BsBagX } from 'react-icons/bs';
+import { useContext, useEffect, useState } from 'react';
+
+import { getProductById } from '../../API/Products.API';
 import { fetchOrders } from '../../API/Orders.API';
 import { UserContext } from '../../provider/UserContext';
-import AddressComponent from '../checkout/AddressComponent';
 import { useCountry } from '../../provider/UseCountry';
-import Modal from '../../components/elements/Modal';
-import { getProductById } from '../../API/Products.API';
+
+import DashBoard from '../../layouts/DashBoard';
 import Slider from '../../components/elements/Slider';
+import AddressComponent from '../checkout/AddressComponent';
 
 const YourOrders = () => {
     const orderTypes = [
@@ -135,7 +137,7 @@ const YourOrders = () => {
                     <p>Estado:</p>
                     <p>{selectedOrder.estado}</p>
 
-                    <p>Cupon:</p>
+                    <p>Cupón:</p>
                     <p>
                         {selectedOrder.cupon !== null
                             ? 'No se uso cupón'
@@ -182,9 +184,9 @@ const YourOrders = () => {
                         ))}
                     </div>
 
-                    {selectedOrder.estado === 'procesando' && (
+                    {/* {selectedOrder.estado === 'procesando' && (
                         <button>Cancelar pedido</button>
-                    )}
+                    )} */}
 
                     <button
                         onClick={() => {
