@@ -1,27 +1,9 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-
-import {
-    act,
-    fireEvent,
-    render,
-    renderHook,
-    screen,
-    waitFor,
-} from '@testing-library/react';
-
-import {
-    addAddress,
-    deleteAddress,
-    getAddresses,
-    updateAddress,
-} from '../src/API/Address.API.js';
-
-import { useAddress } from '../src/provider/useAddress.js';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { TestUserContext } from './TestComponent.jsx';
-import axios from 'axios';
-import Address from '../src/pages/user/Address.jsx';
 import { fetchOrders } from '../src/API/Orders.API.js';
 import YourOrders from '../src/pages/user/YourOrders.jsx';
+import axios from 'axios';
 
 vi.mock('axios');
 
