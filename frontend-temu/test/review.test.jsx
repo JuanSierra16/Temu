@@ -58,4 +58,22 @@ describe('Reseñas de productos', () => {
             ).toBeInTheDocument();
         });
     });
+
+    test('Obtener y mostrar reseñas', async () => {
+        render(<Product />, {
+            wrapper: TestUserProvider,
+        });
+
+        await waitFor(async () => {
+            expect(
+                screen.getByPlaceholderText('Escribe tu opinión', {
+                    exact: false,
+                }),
+            ).toBeInTheDocument();
+
+            expect(
+                screen.getByText(/subir imagen/i, { exact: false }),
+            ).toBeInTheDocument();
+        });
+    });
 });
