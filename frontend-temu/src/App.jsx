@@ -19,7 +19,7 @@ import Press from './pages/company-info/Press';
 import TreeLanding from './pages/company-info/TreeLanding';
 
 import Partner from './pages/help/Partner';
-import TermsOfUse from './pages/help/TermsofUse';
+import TermsOfUse from './pages/help/TermsOfUse';
 import PrivacyPolicy from './pages/help/PrivacyPolicy';
 import PurchaseSafe from './pages/help/PurchaseSafe';
 import SafetyCenter from './pages/help/SafetyCenter';
@@ -41,7 +41,7 @@ import Credit from './pages/user/Credit';
 import Suppliers from './pages/user/Suppliers';
 import History from './pages/user/History';
 import Address from './pages/user/Address';
-import PaymentMethods from './pages/user/PaymantMetods';
+import PaymentMethods from './pages/user/PaymentMethods';
 import AccountSecurity from './pages/user/AccountSecurity';
 import Permissions from './pages/user/Permissions';
 import Notifications from './pages/user/Notifications';

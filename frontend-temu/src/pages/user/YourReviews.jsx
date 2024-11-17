@@ -1,10 +1,23 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SlEnvolopeLetter } from 'react-icons/sl';
+import { getReviewByUser } from '../../API/Products.API';
+import { UserContext } from '../../provider/UserContext';
+import { Link } from 'react-router-dom';
 
 const YourReviews = () => {
     const [reviews, setReviews] = useState([]);
+    const { userData } = useContext(UserContext);
+
+    useEffect(() => {
+        if (!userData.id) return;
+
+        getReviewByUser(userData.id).then(data => {
+            setReviews(data);
+            console.log(data);
+        });
+    }, [userData]);
 
     return (
         <>
@@ -12,7 +25,25 @@ const YourReviews = () => {
                 <section className="your-reviews">
                     <div className="your-reviews-container">
                         {reviews.map(review => (
-                            <div key={review}>{review}</div>
+                            <div
+                                key={review.comentario + review.id}
+                                className="your-reviews-item"
+                            >
+                                <p>Fecha de reseña: </p>
+                                <p>{review.fecha_reseña}</p>
+
+                                <p>Calificación: </p>
+                                <p>{review.calificacion}</p>
+
+                                <p>Comentario: </p>
+                                <p className="your-reviews-comment">
+                                    {review.comentario}
+                                </p>
+
+                                <Link to={`/product/${review.producto_id}`}>
+                                    Ver producto
+                                </Link>
+                            </div>
                         ))}
                     </div>
 

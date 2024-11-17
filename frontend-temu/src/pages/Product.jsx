@@ -24,21 +24,24 @@ import ReviewForm from '../components/sections/review/ReviewForm';
 import ReviewsList from '../components/sections/review/ReviewsList';
 
 const Product = () => {
-    const { userIsLogin, userData } = useContext(UserContext);
     const { productId } = useParams();
+    const { formatCurrency } = useCountry();
+    const { addCart, cart } = useContext(CartContext);
     const { checkLowStock } = useContext(ProductsContext);
+    const { userIsLogin, userData } = useContext(UserContext);
+
     const [productInfo, setProductInfo] = useState({
         id: 0,
         descripcion: '',
         imagenes: [],
     });
+
     const [bigImage, setBigImage] = useState('');
-    const [successFavorite, setSuccessFavorite] = useState(false);
     const [notFoundImages, setNotFoundImages] = useState([]);
-    const { addCart, cart } = useContext(CartContext);
-    const { formatCurrency } = useCountry();
     const [lowStockMessage, setLowStockMessage] = useState('');
     const [reviewsUpdated, setReviewsUpdated] = useState(false);
+    const [successFavorite, setSuccessFavorite] = useState(false);
+    const [quantity, setQuantity] = useState(1);
 
     const handleImageError = img => {
         setNotFoundImages(prev => [...prev, img]);
@@ -191,7 +194,13 @@ const Product = () => {
                                 <div className="product-quantity">
                                     <p>Cant</p>
 
-                                    <select name="quantity" id="">
+                                    <select
+                                        name="quantity"
+                                        value={quantity}
+                                        onChange={e =>
+                                            setQuantity(e.target.value)
+                                        }
+                                    >
                                         {[
                                             ...Array(productInfo.stock).keys(),
                                         ].map((item, index) => (
@@ -207,7 +216,9 @@ const Product = () => {
 
                                 <button
                                     className="product-cart orange-button"
-                                    onClick={() => addCart(productInfo)}
+                                    onClick={() =>
+                                        addCart(productInfo, quantity)
+                                    }
                                 >
                                     Agregar al carrito
                                 </button>
