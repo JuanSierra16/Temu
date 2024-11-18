@@ -32,6 +32,7 @@ const YourOrders = () => {
     const [orderProducts, setOrderProducts] = useState([]);
     const [showDetails, setShowDetails] = useState(false);
     const [orders, setOrders] = useState([]);
+    const [filterOrders, setFilterOrders] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -78,6 +79,20 @@ const YourOrders = () => {
             }
         }
     }, [orderId, orders]);
+
+    useEffect(() => {
+        if (selectedOrderType === 'Todos') {
+            setFilterOrders(orders);
+        } else {
+            setFilterOrders(
+                orders.filter(
+                    order =>
+                        order.estado.toLowerCase() ===
+                        selectedOrderType.toLowerCase(),
+                ),
+            );
+        }
+    }, [selectedOrderType, orders]);
 
     const handleCancelOrder = async () => {
         if (!selectedOrder || !selectedOrder.id || loading) return;
@@ -130,10 +145,14 @@ const YourOrders = () => {
                     </section>
 
                     <section className="your-orders-container">
-                        {orders.map(order => (
+                        {filterOrders.map(order => (
                             <div key={order.id} className="your-orders-item">
                                 <p>Fecha:</p>
-                                <p>{order.fecha_pedido}</p>
+                                <p>
+                                    {new Date(
+                                        order.fecha_pedido,
+                                    ).toLocaleDateString()}
+                                </p>
 
                                 <p>Total:</p>
                                 <p>{formatCurrency(order.total)}</p>
