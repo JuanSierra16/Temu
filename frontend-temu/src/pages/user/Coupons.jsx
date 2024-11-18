@@ -1,50 +1,52 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoTicketOutline } from 'react-icons/io5';
+import { verifyCoupon } from '../../API/Coupon.API';
+import { UserContext } from '../../provider/UserContext';
 
 const Coupons = () => {
-    const orderTypes = ['Disponible', 'Usado', 'Vencido'];
+    const [couponCode, setCouponCode] = useState('');
+    const [couponMessage, setCouponMessage] = useState('');
+    const [couponDiscount, setCouponDiscount] = useState(null);
 
-    const [selectedCouponType, setSelectedCouponType] = useState(orderTypes[0]);
-    const [coupons, setCoupons] = useState([]);
+    const { userData } = useContext(UserContext);
+
+    const handleCoupon = async () => {
+        if (couponCode) {
+            const res = await verifyCoupon(userData.id, couponCode);
+            setCouponMessage(res.message);
+            setCouponDiscount(res.discount);
+        }
+    };
 
     return (
         <DashBoard>
             <section className="user-dashboard-container">
-                <div className="your-orders-types">
-                    {orderTypes.map(type => (
-                        <p
-                            key={type}
-                            onClick={() => setSelectedCouponType(type)}
-                            className={`your-orders-type ${type === selectedCouponType ? 'your-orders-type-active' : ''}`}
-                        >
-                            {type}
-                        </p>
-                    ))}
-                </div>
+                <form
+                    action=""
+                    className="input-coupon"
+                    onSubmit={e => e.preventDefault()}
+                >
+                    <input
+                        type="code"
+                        placeholder="Ingresa el código del cupón"
+                        value={couponCode}
+                        onChange={e => setCouponCode(e.target.value)}
+                    />
 
-                {selectedCouponType === 'Disponible' && (
-                    <form action="" className="input-coupon">
-                        <input
-                            type="code"
-                            placeholder="Ingresa el código del cupón"
-                        />
+                    <button type="submit" onClick={handleCoupon}>
+                        Aplicar
+                    </button>
+                </form>
 
-                        <button type="submit">Aplicar</button>
-                    </form>
-                )}
+                <div className="dashboard-empty">
+                    <IoTicketOutline size={128} />
 
-                <div className="your-coupons-container">
-                    {coupons.map(order => (
-                        <div key={order}>{order}</div>
-                    ))}
-
-                    {coupons.length === 0 && (
-                        <div className="dashboard-empty">
-                            <IoTicketOutline size={128} />
-                            <p>No tienes cupones disponibles</p>
-                        </div>
+                    {!couponMessage && <p>Verifica el estado de tu cupón</p>}
+                    {couponMessage && <p>{couponMessage}</p>}
+                    {couponDiscount !== null && (
+                        <p>Descuento: {couponDiscount}</p>
                     )}
                 </div>
             </section>

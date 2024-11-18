@@ -33,21 +33,6 @@ const UserMenu = () => {
             path: '/coupons',
         },
         {
-            name: 'Saldo de crédito',
-            icon: <LuCreditCard size={16} />,
-            path: '/credit-balance',
-        },
-        {
-            name: 'Proveedores seguidos',
-            icon: <CgBox size={16} />,
-            path: '/followed-suppliers',
-        },
-        {
-            name: 'Historial de navegación',
-            icon: <FaRegClock size={16} />,
-            path: '/history-navigation',
-        },
-        {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
             path: '/your-addresses',
@@ -61,11 +46,6 @@ const UserMenu = () => {
             name: 'Permisos',
             icon: <AiOutlinePropertySafety size={16} />,
             path: '/permissions',
-        },
-        {
-            name: 'Notificaciones',
-            icon: <TbMessage2Pin size={16} />,
-            path: '/notifications',
         },
     ];
 
