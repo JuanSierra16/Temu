@@ -2,10 +2,10 @@ import './DashBoard.css';
 import BlackBar from '../components/sections/BlackBar';
 import Footer from '../components/sections/Footer';
 import Navbar from '../components/sections/navbar/NavBar';
-import { CgBox, CgNotes } from 'react-icons/cg';
-import { TbMessage2Pin, TbMessageStar } from 'react-icons/tb';
-import { FaRegClock, FaRegUser, FaRegHeart } from 'react-icons/fa';
-import { LuCreditCard, LuTicket } from 'react-icons/lu';
+import { CgNotes } from 'react-icons/cg';
+import { TbMessageStar } from 'react-icons/tb';
+import { FaRegUser, FaRegHeart } from 'react-icons/fa';
+import { LuTicket } from 'react-icons/lu';
 import { MdOutlinePlace } from 'react-icons/md';
 import { AiOutlinePropertySafety, AiOutlineSafety } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
@@ -41,21 +41,6 @@ const DashBoard = ({ children }) => {
             path: '/coupons',
         },
         {
-            name: 'Saldo de crédito',
-            icon: <LuCreditCard size={16} />,
-            path: '/credit-balance',
-        },
-        {
-            name: 'Proveedores seguidos',
-            icon: <CgBox size={16} />,
-            path: '/followed-suppliers',
-        },
-        {
-            name: 'Historial de navegación',
-            icon: <FaRegClock size={16} />,
-            path: '/history-navigation',
-        },
-        {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
             path: '/your-addresses',
@@ -74,11 +59,6 @@ const DashBoard = ({ children }) => {
             name: 'Permisos',
             icon: <AiOutlinePropertySafety size={16} />,
             path: '/permissions',
-        },
-        {
-            name: 'Notificaciones',
-            icon: <TbMessage2Pin size={16} />,
-            path: '/notifications',
         },
     ];
 

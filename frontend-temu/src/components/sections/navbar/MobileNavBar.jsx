@@ -29,11 +29,6 @@ const MobileNavBar = () => {
             icon: <LuTicket size={24} />,
             path: '/coupons',
         },
-        {
-            name: 'Saldo de crédito',
-            icon: <LuCreditCard size={24} />,
-            path: '/credit-balance',
-        },
     ];
 
     const submenu = [
@@ -48,16 +43,6 @@ const MobileNavBar = () => {
             path: '/profile',
         },
         {
-            name: 'Proveedores seguidos',
-            icon: <CgBox size={16} />,
-            path: '/followed-suppliers',
-        },
-        {
-            name: 'Historial de navegación',
-            icon: <FaRegClock size={16} />,
-            path: '/history-navigation',
-        },
-        {
             name: 'Direcciones',
             icon: <MdOutlinePlace size={16} />,
             path: '/your-addresses',
@@ -65,7 +50,7 @@ const MobileNavBar = () => {
         {
             name: 'Atención al cliente',
             icon: <FaHeadset size={16} />,
-            path: '#',
+            path: 'https://temu-097852.zapier.app',
         },
     ];
 
