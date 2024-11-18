@@ -38,7 +38,6 @@ const Product = () => {
 
     const [bigImage, setBigImage] = useState('');
     const [notFoundImages, setNotFoundImages] = useState([]);
-    const [lowStockMessage, setLowStockMessage] = useState('');
     const [reviewsUpdated, setReviewsUpdated] = useState(false);
     const [successFavorite, setSuccessFavorite] = useState(false);
     const [quantity, setQuantity] = useState(1);
@@ -53,9 +52,6 @@ const Product = () => {
         getProductById(URIDecode).then(data => {
             setProductInfo(data);
             setBigImage(data.imagenes[0]);
-
-            const lowStockMessage = checkLowStock(data);
-            setLowStockMessage(lowStockMessage);
         });
     }, [productId, checkLowStock]);
 
@@ -136,11 +132,6 @@ const Product = () => {
                                         </p>
                                     </div>
                                 </div>
-                                {lowStockMessage && (
-                                    <p style={{ color: 'red' }}>
-                                        {lowStockMessage}
-                                    </p>
-                                )}
                             </div>
 
                             <div className="product-user-buttons">
@@ -185,6 +176,14 @@ const Product = () => {
                             <p>Oferta exclusiva</p>
                         </div>
 
+                        {productInfo.stock <= 15 && (
+                            <p style={{ color: 'red' }}>
+                                {productInfo.stock === 0
+                                    ? 'No hay unidades disponibles.'
+                                    : 'Pocas unidades disponibles.'}
+                            </p>
+                        )}
+
                         {!cart.find(item => item.id === productInfo.id) && (
                             <div className="product-info">
                                 <p>
@@ -214,14 +213,16 @@ const Product = () => {
                                     </select>
                                 </div>
 
-                                <button
-                                    className="product-cart orange-button"
-                                    onClick={() =>
-                                        addCart(productInfo, quantity)
-                                    }
-                                >
-                                    Agregar al carrito
-                                </button>
+                                {productInfo.stock != 0 && (
+                                    <button
+                                        className="product-cart orange-button"
+                                        onClick={() =>
+                                            addCart(productInfo, quantity)
+                                        }
+                                    >
+                                        Agregar al carrito
+                                    </button>
+                                )}
                             </div>
                         )}
 

@@ -93,22 +93,32 @@ export const TestComponent = ({ children }) => {
 
 export const TestComponentInitial = ({
     children,
-    userData,
-    userIsLogin,
-    products,
-    cart,
+    userPrompts,
+    productPrompts,
+    cartPrompts,
+    initialRoute,
 }) => {
     return (
         <GoogleOAuthProvider>
-            <UserProvider value={{ userData: userData ?? {}, userIsLogin }}>
-                <ProductsProvider value={{ products: products ?? [] }}>
-                    <CartProvider value={{ cart: cart ?? [] }}>
-                        <MemoryRouter initialEntries={['/']}>
+            <UserContext.Provider value={{ ...userPrompts }}>
+                <ProductsContext.Provider
+                    value={{
+                        ...productPrompts,
+                        products: productPrompts?.products ?? [],
+                    }}
+                >
+                    <CartContext.Provider
+                        value={{
+                            ...cartPrompts,
+                            cart: cartPrompts?.cart ?? [],
+                        }}
+                    >
+                        <MemoryRouter initialEntries={[initialRoute ?? '/']}>
                             {children}
                         </MemoryRouter>
-                    </CartProvider>
-                </ProductsProvider>
-            </UserProvider>
+                    </CartContext.Provider>
+                </ProductsContext.Provider>
+            </UserContext.Provider>
         </GoogleOAuthProvider>
     );
 };

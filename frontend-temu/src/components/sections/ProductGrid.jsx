@@ -1,11 +1,21 @@
 import './ProductGrid.css';
 import ProductPrev from '../elements/ProductPrev';
 import { FaAngleDown } from 'react-icons/fa';
-import { memo, useContext } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { ProductsContext } from '../../provider/ProductsContext';
 
 const ProductGrid = memo(() => {
-    const { products, loadMoreProducts } = useContext(ProductsContext);
+    const { products, loadMoreProducts, clearFilter } =
+        useContext(ProductsContext);
+
+    const [alreadyCleared, setAlreadyCleared] = useState(false);
+
+    useEffect(() => {
+        if (alreadyCleared) return;
+
+        clearFilter();
+        setAlreadyCleared(true);
+    }, [clearFilter, alreadyCleared]);
 
     return (
         <>

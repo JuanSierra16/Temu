@@ -197,6 +197,20 @@
     border-bottom: 1px solid var(--temu-color);
 }
 
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & p {
+        text-align: center;
+    }
+
+    & img {
+        border: 1px solid var(--gray-color);
+    }
+}
+
 @media screen and (min-width: 768px) {
     .dashboard {
         display: grid;

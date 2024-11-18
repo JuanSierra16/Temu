@@ -28,10 +28,8 @@ const AccountSecurity = () => {
                 <div className="account-security-item">
                     <div>
                         <p>Número de teléfono celular</p>
-                        <p>{userData.phone_number}</p>
+                        <p>{userData.phone_number || 'No registrado'}</p>
                     </div>
-
-                    <button className="orange-button">Editar</button>
                 </div>
 
                 <div className="account-security-item">
@@ -39,7 +37,6 @@ const AccountSecurity = () => {
                         <p>Correo electrónico</p>
                         <p>{userData.email}</p>
                     </div>
-                    <button className="orange-button">Editar</button>
                 </div>
 
                 <div className="account-security-item">
@@ -47,18 +44,19 @@ const AccountSecurity = () => {
                         <p>Contraseña</p>
                         <p>********</p>
                     </div>
-                    <button className="orange-button">Editar</button>
                 </div>
 
                 <h3>Cuentas de terceros</h3>
+
+                {userData.nombre_plataforma && (
+                    <p>Plataforma vinculada: {userData.nombre_plataforma}</p>
+                )}
 
                 <div className="account-security-item">
                     <span>
                         <FaGoogle size={32} />
                         <p>Google</p>
                     </span>
-
-                    <button className="orange-button">Vincular</button>
                 </div>
 
                 <div className="account-security-item">
@@ -66,8 +64,6 @@ const AccountSecurity = () => {
                         <FaFacebook size={32} />
                         <p>Facebook</p>
                     </span>
-
-                    <button className="orange-button">Vincular</button>
                 </div>
 
                 <div className="account-security-item">
@@ -75,8 +71,6 @@ const AccountSecurity = () => {
                         <FaApple size={32} />
                         <p>Apple</p>
                     </span>
-
-                    <button className="orange-button">Vincular</button>
                 </div>
 
                 <div className="account-security-item">
@@ -84,8 +78,6 @@ const AccountSecurity = () => {
                         <FaXTwitter size={32} />
                         <p>Twitter</p>
                     </span>
-
-                    <button className="orange-button">Vincular</button>
                 </div>
             </section>
         </DashBoard>

@@ -1,12 +1,11 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
-import { useState } from 'react';
 import { FaLock } from 'react-icons/fa6';
 import { RiSecurePaymentLine } from 'react-icons/ri';
 
-const PaymentMethods = () => {
-    const [paymentMethods, setPaymentMethods] = useState([]);
+import stripePayments from '../../assets/stripe-payment.png';
 
+const PaymentMethods = () => {
     return (
         <DashBoard>
             <section className="user-dashboard-container">
@@ -26,15 +25,14 @@ const PaymentMethods = () => {
                         </strong>
                     </p>
 
-                    <button className="orange-button">
-                        Agregar método de pago
-                    </button>
-                </div>
+                    <p>
+                        En el momento de realizar un pago identifica la opción
+                        de guardar mis datos de forma segura.
+                    </p>
 
-                <div>
-                    {paymentMethods.map(item => (
-                        <div key={item.id} className="direction-item"></div>
-                    ))}
+                    <p>Formulario al momento de pago</p>
+
+                    <img src={stripePayments} alt="" />
                 </div>
             </section>
         </DashBoard>

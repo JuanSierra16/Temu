@@ -121,6 +121,8 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/checkout/success" element={<CheckoutSuccess />} />
                 <Route path="/checkout/cancel" element={<CheckoutError />} />
+
+                <Route path="/orders/:orderId" element={<YourOrders />} />
             </Routes>
         </BrowserRouter>
     );
