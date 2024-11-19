@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../../provider/useTheme';
 
 const DeskNavBar = () => {
-    const navigation = [
+    const [navigation, setNavigation] = useState([
         {
             name: 'Más vendidos',
             icon: <AiFillLike size={18} />,
@@ -34,10 +34,24 @@ const DeskNavBar = () => {
             icon: null,
             path: '/new-comers',
         },
-    ];
+    ]);
 
     const navbarRef = useRef(null);
     const lastScrollTop = useRef(0);
+
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+
+    const { theme } = useTheme();
+
+    useEffect(() => {
+        if (!theme) return;
+
+        const newNavigation = [...navigation];
+        newNavigation[2].name = theme.special_name;
+
+        setNavigation(newNavigation);
+    }, [theme, navigation]);
 
     const handleScroll = () => {
         let scrollTop = window.scrollY;
@@ -58,11 +72,6 @@ const DeskNavBar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    const [search, setSearch] = useState('');
-    const navigate = useNavigate();
-
-    const { theme } = useTheme();
 
     const handleSearch = () => {
         if (search) {
