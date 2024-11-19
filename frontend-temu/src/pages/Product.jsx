@@ -133,11 +133,6 @@ const Product = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="product-user-buttons">
-                                <button>Seguir</button>
-                                <button>Ver todos (#)</button>
-                            </div>
                         </div>
                     </section>
 
