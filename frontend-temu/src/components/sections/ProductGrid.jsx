@@ -23,13 +23,22 @@ const ProductGrid = memo(() => {
                 {products.map(product => (
                     <ProductPrev key={product.id} product={product} />
                 ))}
+
+                {products.length === 0 && (
+                    <h2 className="max-width">No se encontraron productos.</h2>
+                )}
             </section>
 
-            <div className="max-width product-button">
-                <button className="orange-button" onClick={loadMoreProducts}>
-                    Ver más <FaAngleDown />
-                </button>
-            </div>
+            {products.length > 0 && (
+                <div className="max-width product-button">
+                    <button
+                        className="orange-button"
+                        onClick={loadMoreProducts}
+                    >
+                        Ver más <FaAngleDown />
+                    </button>
+                </div>
+            )}
         </>
     );
 });
