@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUlr = 'http://localhost:3000';
+const baseUlr = import.meta.env.VITE_BASE_URL || 'http://localhost:3000';
 
 export const addAddress = async (userId, address) => {
     try {
