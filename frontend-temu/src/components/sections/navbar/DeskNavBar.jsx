@@ -10,6 +10,7 @@ import './DeskNavBar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import HelpMenu from './helpMenu';
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '../../../provider/useTheme';
 
 const DeskNavBar = () => {
     const navigation = [
@@ -60,6 +61,8 @@ const DeskNavBar = () => {
 
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
+
+    const { theme } = useTheme();
 
     const handleSearch = () => {
         if (search) {
