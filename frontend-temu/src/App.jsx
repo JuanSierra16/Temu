@@ -19,7 +19,7 @@ import Press from './pages/company-info/Press';
 import TreeLanding from './pages/company-info/TreeLanding';
 
 import Partner from './pages/help/Partner';
-import TermsOfUse from './pages/help/TermsOfUse.jsx';
+/* import TermsOfUse from './pages/help/TermsOfUse'; */
 import PrivacyPolicy from './pages/help/PrivacyPolicy';
 import PurchaseSafe from './pages/help/PurchaseSafe';
 import SafetyCenter from './pages/help/SafetyCenter';
@@ -76,7 +76,7 @@ function App() {
                 <Route path="/press" element={<Press />} />
                 <Route path="/tree-landing" element={<TreeLanding />} />
 
-                <Route path="/terms-of-use" element={<TermsOfUse />} />
+                {/* <Route path="/terms-of-use" element={<TermsOfUse />} /> */}
                 <Route
                     path="/support-questions"
                     element={<SupportQuestions />}
