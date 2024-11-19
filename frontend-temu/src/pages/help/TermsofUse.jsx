@@ -19,17 +19,17 @@ const TermsOfUse = () => {
                 </p>
 
                 <p className="intro">
-                    ¡Gracias por usar Temu! Estos Términos de uso ("Términos")
+                    ¡Gracias por usar Temu! Estos Términos de uso (Términos)
                     contienen las reglas y restricciones que rigen el uso de
                     nuestras aplicaciones, productos, servicios y sitios web
-                    ("Servicios"). Estos Términos constituyen un acuerdo
+                    (Servicios). Estos Términos constituyen un acuerdo
                     vinculante entre usted y nosotros. Al completar el proceso
                     de registro o explorar los Servicios, usted declara que (1)
                     ha leído, comprende y acepta los Términos; (2) es mayor de
                     edad para celebrar un contrato vinculante con nosotros; (3)
                     tiene la autoridad para aceptar los Términos personalmente;
                     y (4) si utiliza los Servicios en nombre de una empresa u
-                    otra entidad, (a) acepta que "usted" los incluye a usted y a
+                    otra entidad, (a) acepta que usted los incluye a usted y a
                     dicha entidad, (b) es un representante autorizado de la
                     entidad con autoridad para obligarla mediante estos
                     Términos, y (c) acepta estos Términos en nombre de la
@@ -47,21 +47,21 @@ const TermsOfUse = () => {
                 <p>
                     <b>1.2</b> Se hace referencia a Elementary Innovation Pte.
                     Ltd. en estos Términos y Políticas (según se define a
-                    continuación) como "nosotros" o "nos". A efectos de estos
+                    continuación) como nosotros o nos. A efectos de estos
                     Términos y Políticas, también nos referimos a:
                 </p>
 
                 <li>
                     nuestro sitio web y aplicaciones móviles, que pueden ofrecer
                     funciones, productos, servicios o contenido, incluidos
-                    intercambios de información, como "Temu" o "nuestra
-                    aplicación";
+                    intercambios de información, como Temu o nuestra
+                    aplicación;
                 </li>
 
                 <li>
                     los Usuarios finales, incluidos los visitantes de Temu y
                     aquellos que utilizan Temu para comprar productos, como
-                    "usted".
+                    usted.
                 </li>
 
                 <p>
@@ -74,7 +74,7 @@ const TermsOfUse = () => {
                 <p>
                     <b>1.4</b> Su uso y la participación en determinados
                     Servicios también están sujetos a políticas adicionales que
-                    podemos publicar cada cierto tiempo (las "Políticas"),
+                    podemos publicar cada cierto tiempo (las Políticas),
                     incluidas nuestra{' '}
                     <u className="colored-underline">Política de privacidad</u>{' '}
                     y nuestra{' '}
@@ -121,7 +121,7 @@ const TermsOfUse = () => {
                     CRITERIO, EN CUALQUIER MOMENTO. Cuando se realicen cambios,
                     publicaremos una copia de los Términos actuales y las
                     políticas actualizadas disponibles en Temu, y también
-                    actualizaremos la fecha de la "última actualización" en la
+                    actualizaremos la fecha de la última actualización en la
                     parte superior de los Términos. Le recomendamos que revise
                     periódicamente los Términos y las políticas para ver la
                     versión más reciente. A menos que se indique lo contrario en
@@ -154,7 +154,7 @@ const TermsOfUse = () => {
                     En Temu se pueden vender productos para uso infantil. Sin
                     embargo, estos productos están previstos para la venta a
                     adultos. Ciertos productos pueden estar destinados solo a
-                    personas de ciertas edades o "audiencias maduras". Al pedir
+                    personas de ciertas edades o audiencias maduras. Al pedir
                     dichos productos, certifica que tiene la edad suficiente
                     para verlos, usarlos, poseerlos o recibirlos. No somos
                     responsables del contenido de terceros que pueda ser
@@ -176,7 +176,7 @@ const TermsOfUse = () => {
                 <p>
                     <b>2.3</b> Para acceder a algunos de nuestros Servicios o
                     utilizarlos, es posible que deba crear una cuenta con
-                    nosotros. Al crear su cuenta en Temu ("Cuenta"), usted se
+                    nosotros. Al crear su cuenta en Temu (Cuenta), usted se
                     compromete a proporcionar información verdadera, precisa,
                     completa y actualizada sobre sí mismo, incluidos los datos
                     de contacto. Usted es responsable de mantener actualizada su
@@ -200,8 +200,8 @@ const TermsOfUse = () => {
 
                 <p>
                     <b>2.4</b> También puede registrar una Cuenta si se conecta
-                    a través de una cuenta de servicio de red social ("SNS") y
-                    sus credenciales (una "cuenta de SNS"). Si accede a los
+                    a través de una cuenta de servicio de red social (SNS) y
+                    sus credenciales (una cuenta de SNS). Si accede a los
                     Servicios a través de un SNS como parte de la funcionalidad
                     de los Servicios, puede vincular su Cuenta con cuentas de
                     SNS; a estos efectos, deberá brindarnos permiso para acceder
@@ -217,7 +217,7 @@ const TermsOfUse = () => {
                     podemos acceder, poner a disposición y almacenar (si
                     corresponde) cualquier contenido (como se define abajo) que
                     haya proporcionado y almacenado en su cuenta de SNS
-                    ("contenido de SNS") para que esté disponible en los
+                    (contenido de SNS) para que esté disponible en los
                     servicios por medio de su cuenta o a través de estos. A
                     menos que se especifique lo contrario en el acuerdo, todo el
                     contenido de SNS se considerará como envíos de usuario para
@@ -232,7 +232,7 @@ const TermsOfUse = () => {
                     de SNS ya no estará disponible en los Servicios ni a través
                     de ellos. Puede desactivar la conexión entre su Cuenta y sus
                     Cuentas de SNS en cualquier momento mediante la sección
-                    "Configuración" de los Servicios. TENGA EN CUENTA QUE SU
+                    Configuración de los Servicios. TENGA EN CUENTA QUE SU
                     RELACIÓN CON LOS PROVEEDORES DE SNS ASOCIADOS A SUS CUENTAS
                     DE SNS SE RIGE EXCLUSIVAMENTE POR SU(S) ACUERDO(S) CON
                     DICHOS PROVEEDORES DE SNS, POR LO QUE NO ASUMIMOS NINGUNA
@@ -272,7 +272,7 @@ const TermsOfUse = () => {
 
                 <p>
                     <b>3.3</b> Los sorteos, concursos, rifas, encuestas, juegos
-                    o promociones similares (colectivamente, "Promociones") que
+                    o promociones similares (colectivamente, Promociones) que
                     estén disponibles a través de los Servicios pueden regirse
                     por normas independientes. Si las reglas para una Promoción
                     presentan discrepancias con estos Términos, regirán las
@@ -281,7 +281,7 @@ const TermsOfUse = () => {
 
                 <p>
                     <b>3.4</b> Los sorteos, concursos, rifas, encuestas, juegos
-                    o promociones similares (colectivamente, "Promociones") que
+                    o promociones similares (colectivamente, Promociones) que
                     estén disponibles a través de los Servicios pueden regirse
                     por normas independientes. Si las reglas para una Promoción
                     presentan discrepancias con estos Términos, regirán las
@@ -355,13 +355,13 @@ const TermsOfUse = () => {
 
                     <p>
                         (11) ejecutar cualquier forma de respuesta automática o
-                        "spam" en los Servicios, cualquier proceso que se
+                        spam en los Servicios, cualquier proceso que se
                         ejecute o se active mientras no esté conectado a los
                         Servicios, o cualquier proceso que interfiera de otro
                         modo con el funcionamiento correcto de los Servicios
                         (incluso al colocar una carga poco razonable sobre la
                         infraestructura de los Servicios mediante sobrecarga,
-                        "inundación", "bombardeo por correo" o bloqueo de los
+                        inundación, bombardeo por correo o bloqueo de los
                         Servicios);
                     </p>
 
@@ -489,7 +489,7 @@ const TermsOfUse = () => {
                     <b>5.1</b> Usted acepta recibir comunicaciones de nuestra
                     parte de forma electrónica, como emails, mensajes de texto,
                     notificaciones push móviles, y avisos y mensajes en los
-                    Servicios o a través de estos ("Mensajes Push"), y, cuando
+                    Servicios o a través de estos (Mensajes Push), y, cuando
                     lo exija la ley, obtendremos su consentimiento de
                     participación voluntaria para enviar dichos Mensajes Push.
                     Reconoce que, cuando utiliza la Aplicación, su proveedor de
@@ -506,7 +506,7 @@ const TermsOfUse = () => {
                     condiciones, acuerdos, notificaciones, divulgaciones y otras
                     comunicaciones y documentos que le proporcionamos de manera
                     electrónica constituyen y tendrán el mismo efecto legal que
-                    si estuvieran "por escrito".
+                    si estuvieran por escrito.
                 </p>
 
                 <p>
@@ -554,13 +554,13 @@ const TermsOfUse = () => {
                     consentimiento ni de inclusión ni cancelación de la
                     suscripción que tenemos en nuestros registros con terceros
                     que no sean proveedores de servicios de mensajería de texto
-                    ni agregadores. También puede responder "HELP" para obtener
+                    ni agregadores. También puede responder HELP para obtener
                     ayuda. Para obtener más ayuda, comuníquese con nosotros (1)
                     si está utilizando un sitio web de Temu, a la dirección de
-                    email correspondiente en enlace de la página "Comuníquese
-                    con nosotros" al pie de página del sitio web, y (2) si está
+                    email correspondiente en enlace de la página Comuníquese
+                    con nosotros al pie de página del sitio web, y (2) si está
                     utilizando una aplicación de Temu, a través de la sección
-                    "Atención al Cliente" en el menú "Usted" en la parte
+                    Atención al Cliente en el menú Usted en la parte
                     inferior de la página de inicio.
                 </p>
 
@@ -586,7 +586,7 @@ const TermsOfUse = () => {
                 <h3>6. Envíos de Usuario</h3>
 
                 <p>
-                    <b>6.1</b> El término "Envío de Usuario" se refiere a todo
+                    <b>6.1</b> El término Envío de Usuario se refiere a todo
                     aquello publicado, cargado, compartido, enviado, almacenado
                     o proporcionado de otra manera por usted a través de los
                     Servicios, incluidas las sugerencias, los comentarios, las
@@ -669,7 +669,7 @@ const TermsOfUse = () => {
                     mostrados, realizados o disponibles en los Servicios o a
                     través de estos, incluidos, entre otros, texto, gráficos,
                     datos, artículos, fotos, imágenes, ilustraciones y Envíos de
-                    Usuario (colectivamente, "Contenido"), se encuentran
+                    Usuario (colectivamente, Contenido), se encuentran
                     protegidos por los derechos de autor u otras leyes de
                     propiedad intelectual en todo el mundo. Se compromete a
                     cumplir con todos los avisos de derechos de autor, las
@@ -983,7 +983,7 @@ const TermsOfUse = () => {
                 <p>
                     <b>12.1</b> Puede recibir créditos, cupones, dinero, regalos
                     u otros tipos de recompensas mediante el uso de los
-                    Servicios (colectivamente, "Recompensas"). Algunas
+                    Servicios (colectivamente, Recompensas). Algunas
                     recompensas solo se pueden utilizar para obtener descuentos
                     o pagos para compras seleccionadas en los Servicios o a
                     través de estos (pero tenga en cuenta que puede que no todos
@@ -1058,8 +1058,8 @@ const TermsOfUse = () => {
                     PERMITIDA POR LA LEY APLICABLE, A MENOS QUE SE INDIQUE
                     EXPRESAMENTE LO CONTRARIO, LOS SERVICIOS, LOS PRODUCTOS
                     OFRECIDOS Y ADQUIRIDOS EN LOS SERVICIOS O A TRAVÉS DE ESTOS
-                    Y EL CONTENIDO SE PONEN A SU DISPOSICIÓN "TAL COMO ESTÁN" Y
-                    "SEGÚN DISPONIBILIDAD", A RIESGO DEL COMPRADOR Y SIN
+                    Y EL CONTENIDO SE PONEN A SU DISPOSICIÓN TAL COMO ESTÁN Y
+                    SEGÚN DISPONIBILIDAD, A RIESGO DEL COMPRADOR Y SIN
                     GARANTÍAS DE NINGÚN TIPO.
                 </p>
 
@@ -1185,8 +1185,8 @@ const TermsOfUse = () => {
                     aplicable, usted acepta indemnizarnos y eximirnos a
                     nosotros, nuestras empresas matrices, subsidiarias,
                     filiales, directores, directivos, agentes, empleados,
-                    proveedores, licenciantes y socios (cada uno, una "Parte
-                    Temu" y colectivamente, las "Partes Temu") de cualquier
+                    proveedores, licenciantes y socios (cada uno, una Parte
+                    Temu y colectivamente, las Partes Temu) de cualquier
                     reclamación, responsabilidad, daños, pérdidas y gastos
                     (incluidos las tarifas razonables de abogados) que surjan o
                     estén relacionados con cualquier reclamación de terceros
@@ -1198,7 +1198,7 @@ const TermsOfUse = () => {
                     propiedad o derecho de privacidad o cualquier acuerdo de
                     terceros; o (d) la vulneración de cualquier ley, norma o
                     reglamento aplicables. En el caso de dicha reclamación,
-                    demanda o acción ("Reclamación"), intentaremos notificar al
+                    demanda o acción (Reclamación), intentaremos notificar al
                     respecto mediante la información de contacto que tenemos en
                     su Cuenta (siempre que el incumplimiento de la entrega de
                     dicha notificación no elimine ni reduzca sus obligaciones de
@@ -1226,20 +1226,20 @@ const TermsOfUse = () => {
                     cumplimiento de los Términos, le otorgamos una licencia
                     limitada, no exclusiva, intransferible, no sublicenciable y
                     revocable para descargar, instalar y utilizar una copia de
-                    la aplicación móvil de Temu ("Aplicación") en un dispositivo
+                    la aplicación móvil de Temu (Aplicación) en un dispositivo
                     móvil o computadora que posea o controle únicamente para su
                     uso personal o no comercial. Además, con respecto a
                     cualquier Aplicación a la que se accede o que se descarga
-                    desde Apple App Store (una "Aplicación provista por App
-                    Store"), solo utilizará la Aplicación provista por App Store
+                    desde Apple App Store (una Aplicación provista por App
+                    Store), solo utilizará la Aplicación provista por App Store
                     (a) en un producto de la marca Apple que ejecute iOS (el
                     sistema operativo propio de Apple) y (b) según lo permitido
-                    por las "Normas de uso" establecidas en los Términos de
+                    por las Normas de uso establecidas en los Términos de
                     servicio de la App Store de Apple. Sin perjuicio de la
                     primera oración de esta sección, con respecto a cualquier
                     aplicación provista por App Store o cualquier aplicación a
-                    la que se acceda o descargue desde Google Play Store (una
-                    "Aplicación provista por Google Play"), es posible que tenga
+                    la que se acceda o descargue desde Google Play Store una
+                    Aplicación provista por Google Play, es posible que tenga
                     derechos adicionales con respecto al acceso y el uso de la
                     Aplicación correspondiente en lo que respecta a la compra
                     por volumen o a través de Compartir en Familia en productos
@@ -1252,8 +1252,8 @@ const TermsOfUse = () => {
                     <b>17.2 Tiendas de aplicaciones.</b> Reconoce y acepta que
                     la disponibilidad de la Aplicación y los Servicios depende
                     del tercero de quien recibió la licencia de la Aplicación,
-                    p. ej., la App Store de Apple o Google Play (cada uno, una
-                    "App Store"). Usted reconoce que los Términos son entre
+                    p. ej., la App Store de Apple o Google Play cada uno, una
+                    App Store. Usted reconoce que los Términos son entre
                     usted y nosotros y no con la App Store. Nosotros, y no la
                     App Store, somos el único responsable de los Servicios,
                     incluida la Aplicación, su contenido, el mantenimiento, los
@@ -1440,7 +1440,7 @@ const TermsOfUse = () => {
                     de Comercio. Declara y garantiza que (i) no se encuentra en
                     un país sujeto a una ley estadounidense de embargo o que
                     haya sido designado por el gobierno de los Estados Unidos
-                    como un país que "apoya el terrorismo" y (ii) no está
+                    como un país que apoya el terrorismo y (ii) no está
                     incluido en ninguna lista de partes prohibidas o
                     restringidas por el gobierno de los Estados Unidos. Tampoco
                     utilizará los Servicios ni los Productos comprados en los
