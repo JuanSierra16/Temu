@@ -1,8 +1,8 @@
-import { FaHeadset, FaRegUser, FaList, FaRegClock } from 'react-icons/fa';
+import { FaHeadset, FaRegUser, FaList } from 'react-icons/fa';
 import { TbLogout2, TbMessageStar } from 'react-icons/tb';
-import { LuCreditCard, LuTicket } from 'react-icons/lu';
+import { LuTicket } from 'react-icons/lu';
 import { FiShoppingCart } from 'react-icons/fi';
-import { CgBox, CgNotes } from 'react-icons/cg';
+import { CgNotes } from 'react-icons/cg';
 import { MdOutlinePlace } from 'react-icons/md';
 import { CiSearch } from 'react-icons/ci';
 

@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { ProductsContext } from '../../provider/ProductsContext';
 import { Link } from 'react-router-dom';
 import SmallBanner from './themes/SmallBanner';
-import { useCountry } from '../../provider/useCountry';
+import { useCountry } from '../../provider/UseCountry';
 
 const FlashDeals = () => {
     const { offerProducts } = useContext(ProductsContext);
