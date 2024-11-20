@@ -1,10 +1,10 @@
 import './FlashDeals.css';
-import { FaAngleRight } from 'react-icons/fa';
 import Slider from '../elements/Slider';
 import { useContext } from 'react';
 import { ProductsContext } from '../../provider/ProductsContext';
 import { Link } from 'react-router-dom';
-import { useCountry } from '../../provider/UseCountry';
+import SmallBanner from './themes/SmallBanner';
+import { useCountry } from '../../provider/useCountry';
 
 const FlashDeals = () => {
     const { offerProducts } = useContext(ProductsContext);
@@ -13,14 +13,7 @@ const FlashDeals = () => {
     return (
         <section className="flash-deals-section max-width">
             <div className="flash-deals-container">
-                <div className="flash-deals-header">
-                    <h2>⚡ Ofertas relámpago ⚡</h2>
-
-                    <div className="flash-deals-link">
-                        <p>Por tiempo limitado</p>
-                        <FaAngleRight />
-                    </div>
-                </div>
+                <SmallBanner />
 
                 <Slider>
                     {offerProducts.map(product => (

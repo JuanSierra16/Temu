@@ -72,11 +72,11 @@
     gap: 1em;
     padding: 1em;
     border: 1px solid var(--gray-color);
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .address-form {
@@ -142,26 +142,27 @@
 }
 
 .your-orders-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 
     & button {
-        grid-column: 1/-1;
+        width: 100%;
+    }
+
+    & .your-orders-item-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1em;
     }
 }
 
 .your-orders-item {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     padding: 1em;
-    border: 1px solid var(--gray-color);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    background: #fdfdfd;
 
     & img {
         max-width: 100%;
@@ -171,19 +172,29 @@
         -o-object-fit: cover;
         object-fit: cover;
     }
+
+    & h4 {
+        margin-top: 1em;
+    }
 }
 
-.your-orders-address-title {
-    margin-top: 1em;
-    grid-column: 1/-1;
+.your-orders-actions {
+    display: flex;
+    gap: 1em;
+
+    & button {
+        width: 100%;
+    }
 }
 
-.your-orders-address {
-    grid-column: 1/-1;
+.your-orders-grid {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1em;
 }
 
 .your-orders-products {
-    grid-column: 1/-1;
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -194,7 +205,15 @@
     flex-direction: column;
     gap: 1em;
     padding: 1em 0;
-    border-bottom: 1px solid var(--temu-color);
+
+    & img {
+        max-width: 100%;
+        max-height: 300px;
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
 }
 
 .payment-container {

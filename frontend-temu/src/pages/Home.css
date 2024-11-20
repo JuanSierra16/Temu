@@ -1,7 +1,7 @@
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 3em;
+    gap: 1em;
     width: 100%;
 }
 
@@ -70,7 +70,7 @@
     width: auto;
 }
 
-.banner-background {
+/* .banner-background {
     background-color: var(--special-banner-color);
     width: 100%;
 }
@@ -82,7 +82,7 @@
 .banner {
     width: 100%;
     height: auto;
-}
+} */
 
 .product-slider {
     display: flex;

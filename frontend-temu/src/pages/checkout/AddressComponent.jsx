@@ -2,7 +2,7 @@ import './Checkout.css';
 
 const AddressComponent = ({ address }) => {
     return (
-        <div className="address-component">
+        <div className="address-component cookieCard">
             <p>
                 <strong>{address.nombre}</strong>{' '}
                 <strong>{address.apellido}</strong> {address.telefono}

@@ -14,26 +14,6 @@
     -o-border-radius: 5px;
 }
 
-.flash-deals-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    color: var(--light-color);
-    background-color: var(--special-color);
-    padding: 1em;
-    border-radius: 5px;
-    text-align: center;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-
-.flash-deals-link {
-    display: none;
-}
-
 .flash-deal-item {
     margin: 2em 1em;
     min-width: 200px;
@@ -101,12 +81,6 @@
     .product-image {
         width: 100%;
         min-height: 200px;
-    }
-
-    .flash-deals-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .flash-deal-item {

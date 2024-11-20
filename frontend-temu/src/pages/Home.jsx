@@ -9,6 +9,8 @@ import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
 import CartPanel from '../components/sections/CartPanel';
 import { Link } from 'react-router-dom';
+import Banner from '../components/sections/themes/Banner';
+import TitleImg from '../components/sections/themes/TitleIMG';
 
 const Home = () => {
     const firstSubs = categoriesList
@@ -37,28 +39,16 @@ const Home = () => {
 
                 <article className="main-content">
                     <header className="main-header">
-                        <div className="banner-background">
-                            <div className="max-width banner-container">
-                                <img
-                                    src="/themes/Amor y Amistad/banner.png"
-                                    alt=""
-                                    className="banner"
-                                />
-                            </div>
-                        </div>
-
-                        <Compromise />
+                        <Banner />
                     </header>
 
+                    <Compromise />
                     <FlashDeals />
 
                     <section className="categories-slider">
                         <div className="max-width">
                             <div className="img-title">
-                                <img
-                                    src="/themes/Amor y Amistad/title.png"
-                                    alt=""
-                                />
+                                <TitleImg />
                                 <h2 className="max-width">Categorias</h2>
                             </div>
                         </div>
@@ -88,10 +78,7 @@ const Home = () => {
                     <section className="categories-slider">
                         <div className="max-width">
                             <div className="img-title">
-                                <img
-                                    src="/themes/Amor y Amistad/title.png"
-                                    alt=""
-                                />
+                                <TitleImg />
                                 <h2>PROVEEDORES RECOMENDADOS</h2>
                             </div>
                         </div>

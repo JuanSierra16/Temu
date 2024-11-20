@@ -127,7 +127,10 @@ const Address = () => {
                                 <p>Información adicional </p>
                                 <p>{item.informacion_adicional}</p>
 
-                                <button onClick={() => handleOnDelete(item)}>
+                                <button
+                                    onClick={() => handleOnDelete(item)}
+                                    className="danger-button"
+                                >
                                     Eliminar
                                 </button>
 
