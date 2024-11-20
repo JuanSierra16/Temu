@@ -2,7 +2,7 @@ import { IoClose } from 'react-icons/io5';
 import { IoChevronBackSharp } from 'react-icons/io5';
 
 import './Modal.css';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const Modal = ({ show, setShow, children, className, setBack }) => {
     const modalRef = useRef(null);

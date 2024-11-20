@@ -1,8 +1,5 @@
 import './UserDashboard.css';
 import DashBoard from '../../layouts/DashBoard';
-import { useContext } from 'react';
-import { AiFillSafetyCertificate } from 'react-icons/ai';
-import { UserContext } from '../../provider/UserContext';
 import {
     FaLock,
     FaRegUserCircle,

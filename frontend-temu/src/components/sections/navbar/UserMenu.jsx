@@ -1,8 +1,8 @@
-import { LuCreditCard, LuTicket } from 'react-icons/lu';
-import { CgNotes, CgBox } from 'react-icons/cg';
+import { LuTicket } from 'react-icons/lu';
+import { CgNotes } from 'react-icons/cg';
 import { MdOutlinePlace } from 'react-icons/md';
-import { FaRegUser, FaRegClock } from 'react-icons/fa';
-import { TbMessageStar, TbMessage2Pin, TbLogout2 } from 'react-icons/tb';
+import { FaRegUser } from 'react-icons/fa';
+import { TbMessageStar, TbLogout2 } from 'react-icons/tb';
 import { AiOutlineSafety, AiOutlinePropertySafety } from 'react-icons/ai';
 import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import { useContext, useState } from 'react';
