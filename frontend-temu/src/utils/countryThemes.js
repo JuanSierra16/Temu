@@ -18,7 +18,7 @@ export const countryThemes = {
     CAN: { theme: 'Promocion de Otoño' },
     CHL: { theme: 'PAYDAY SALE' },
     CYP: { theme: 'Autumn Selections' },
-    COL: { theme: 'Amor y Amistad' },
+    COL: { theme: 'BlackFriday' },
     KOR: { theme: 'Promocion de Otoño' },
     HRV: { theme: 'Early Autumn Offers' },
     DNK: { theme: 'Early Autumn Deals' },
