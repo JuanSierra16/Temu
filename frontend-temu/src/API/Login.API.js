@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL || 'http://localhost:3000',
-});
-
 const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:3000';
+
+const API = axios.create({
+    baseURL: baseURL,
+});
 
 export const login = async (email, password) => {
     const response = await API.post('/users/login', { email, password });
