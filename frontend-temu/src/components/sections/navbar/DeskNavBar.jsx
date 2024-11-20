@@ -8,7 +8,7 @@ import Categories from '../../elements/category/Categories';
 
 import './DeskNavBar.css';
 import { Link, useNavigate } from 'react-router-dom';
-import HelpMenu from './helpMenu';
+import HelpMenu from './HelpMenu';
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../../provider/useTheme';
 
