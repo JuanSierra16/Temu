@@ -47,6 +47,8 @@ import Checkout from './pages/checkout/Checkout';
 import CheckoutSuccess from './pages/checkout/CheckoutSuccess';
 import CheckoutError from './pages/checkout/CheckoutError';
 
+import SpecialPage from './pages/SpecialPage';
+
 function App() {
     return (
         <BrowserRouter>
@@ -115,6 +117,8 @@ function App() {
                 <Route path="/checkout/cancel" element={<CheckoutError />} />
 
                 <Route path="/orders/:orderId" element={<YourOrders />} />
+
+                <Route path="/special" element={<SpecialPage />} />
             </Routes>
         </BrowserRouter>
     );

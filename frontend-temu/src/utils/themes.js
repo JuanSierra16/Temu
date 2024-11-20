@@ -167,4 +167,10 @@ export const themes = [
         special_color: '#f9697f',
         special_color2: '#eb495e',
     },
+    {
+        folder: 'BlackFriday',
+        special_name: 'Black Friday',
+        special_color: '#BE0404',
+        special_color2: '#7D0400',
+    },
 ];

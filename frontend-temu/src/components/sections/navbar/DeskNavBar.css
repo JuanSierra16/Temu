@@ -87,6 +87,11 @@
     color: var(--light-color);
 }
 
+.navbar-menu li a {
+    cursor: pointer;
+    text-align: center;
+}
+
 .navbar-menu,
 .navbar-hover {
     display: flex;

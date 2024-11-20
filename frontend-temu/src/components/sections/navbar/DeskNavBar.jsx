@@ -27,7 +27,7 @@ const DeskNavBar = () => {
         {
             name: 'Amor y Amistad',
             icon: <FaHeart size={18} />,
-            path: '#',
+            path: '/special',
         },
         {
             name: 'Recién llegados',
@@ -92,10 +92,10 @@ const DeskNavBar = () => {
                     <div className="navbar-menu">
                         {navigation.map((item, index) => (
                             <li key={index}>
-                                <a href={item.path}>
+                                <Link to={item.path}>
                                     {item.icon}
                                     {item.name}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </div>
