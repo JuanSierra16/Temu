@@ -25,7 +25,7 @@ const ProductGrid = memo(() => {
                 ))}
 
                 {products.length === 0 && (
-                    <h2 className="max-width">No se encontraron productos.</h2>
+                    <h2 className="max-width">No se encontraron productos</h2>
                 )}
             </section>
 

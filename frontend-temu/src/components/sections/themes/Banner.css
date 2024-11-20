@@ -48,6 +48,14 @@
     display: none;
 }
 
+.title-img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
 @media screen and (min-width: 768px) {
     .flash-deals-link {
         display: flex;

@@ -27,7 +27,7 @@ const DeskNavBar = () => {
         {
             name: 'Amor y Amistad',
             icon: <FaHeart size={18} />,
-            path: '#',
+            path: '/special',
         },
         {
             name: 'Recién llegados',
