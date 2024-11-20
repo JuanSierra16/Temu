@@ -4,8 +4,8 @@ import {
     render,
     screen,
     renderHook,
-    fireEvent,
     waitFor,
+    cleanup,
 } from '@testing-library/react';
 import { TestComponent, TestProductsProvider } from './TestComponent.jsx';
 import { useCountry } from '../src/provider/UseCountry.js';
@@ -15,6 +15,7 @@ import ProductGrid from '../src/components/sections/ProductGrid.jsx';
 describe('Moneda de compra', () => {
     beforeEach(() => {
         localStorage.clear();
+        cleanup();
     });
 
     const products = [

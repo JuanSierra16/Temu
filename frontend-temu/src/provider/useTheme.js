@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { countryThemes } from '../utils/countryThemes';
 import { themes } from '../utils/themes';
-import { useCountry } from './useCountry';
+import { useCountry } from './UseCountry';
 
 export const useTheme = () => {
     const { country } = useCountry();

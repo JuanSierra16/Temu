@@ -9,7 +9,7 @@ import Footer from '../components/sections/Footer';
 import ProductGrid from '../components/sections/ProductGrid';
 import CartPanel from '../components/sections/CartPanel';
 import { Link } from 'react-router-dom';
-import Banner from '../components/sections/themes/banner';
+import Banner from '../components/sections/themes/Banner';
 import TitleImg from '../components/sections/themes/TitleIMG';
 
 const Home = () => {

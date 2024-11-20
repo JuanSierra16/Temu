@@ -51,7 +51,7 @@ const DeskNavBar = () => {
         newNavigation[2].name = theme.special_name;
 
         setNavigation(newNavigation);
-    }, [theme, navigation]);
+    }, [theme]);
 
     const handleScroll = () => {
         let scrollTop = window.scrollY;
