@@ -81,6 +81,12 @@ const DeskNavBar = () => {
         setSearch('');
     };
 
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     return (
         <nav className="navbar" ref={navbarRef}>
             <div className="navbar-container max-width">
@@ -120,6 +126,7 @@ const DeskNavBar = () => {
                         placeholder="Buscar"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
+                        onKeyDown={handleKeyDown}
                     />
 
                     <button onClick={handleSearch}>

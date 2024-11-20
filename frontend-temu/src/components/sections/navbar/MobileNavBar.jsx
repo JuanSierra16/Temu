@@ -12,10 +12,11 @@ import { MenuItem, SubMenu } from '../../elements/MenuItem';
 import Modal from '../../elements/Modal';
 
 import Categories from '../../elements/category/Categories';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ModalLogin from './ModalLogin';
 
 import './MobileNavBar.css';
+import { AiOutlinePropertySafety } from 'react-icons/ai';
 
 const MobileNavBar = () => {
     const submenuCol = [
@@ -28,6 +29,11 @@ const MobileNavBar = () => {
             name: 'Cupones y ofertas',
             icon: <LuTicket size={24} />,
             path: '/coupons',
+        },
+        {
+            name: 'Permisos',
+            icon: <AiOutlinePropertySafety size={24} />,
+            path: '/permissions',
         },
     ];
 
@@ -58,11 +64,28 @@ const MobileNavBar = () => {
     const [showCategories, setShowCategories] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
+    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (userIsLogin) {
             setShowLogin(false);
         }
     }, [userIsLogin]);
+
+    const handleSearch = () => {
+        if (search) {
+            navigate(`/search-product/${encodeURIComponent(search)}`);
+        }
+
+        setSearch('');
+    };
+
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    };
 
     return (
         <>
@@ -75,7 +98,13 @@ const MobileNavBar = () => {
                     <span>
                         <CiSearch />
                     </span>
-                    <input type="text" placeholder="Buscar..." />
+                    <input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                    />
                 </div>
 
                 <ul className="mobile-navbar-icons">
@@ -137,10 +166,10 @@ const MobileNavBar = () => {
                                     ))}
 
                                     {userIsLogin && (
-                                        <a href="" onClick={logoutAction}>
+                                        <Link href="" onClick={logoutAction}>
                                             <TbLogout2 size={16} /> Cerrar
                                             sesión
-                                        </a>
+                                        </Link>
                                     )}
                                 </div>
                             </div>
@@ -148,7 +177,9 @@ const MobileNavBar = () => {
                     </MenuItem>
 
                     <li>
-                        <FiShoppingCart size={20} />
+                        <Link to="/cart">
+                            <FiShoppingCart size={20} />
+                        </Link>
                     </li>
                 </ul>
             </nav>
