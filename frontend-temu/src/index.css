@@ -78,6 +78,11 @@ button {
     -o-transform: scale(1.025);
 }
 
+.danger-button {
+    color: var(--light-color);
+    background-color: hsl(0, 80%, 60%);
+}
+
 .orange-text {
     color: var(--temu-color);
 }

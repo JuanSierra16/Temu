@@ -147,32 +147,35 @@ const YourOrders = () => {
                     <section className="your-orders-container">
                         {filterOrders.map(order => (
                             <div key={order.id} className="your-orders-item">
-                                <p>Fecha:</p>
-                                <p>
-                                    {new Date(
-                                        order.fecha_pedido,
-                                    ).toLocaleDateString()}
-                                </p>
+                                <div className="your-orders-item-grid">
+                                    <div className="your-orders-grid">
+                                        <p>Fecha:</p>
+                                        <p>
+                                            {new Date(
+                                                order.fecha_pedido,
+                                            ).toLocaleDateString()}
+                                        </p>
 
-                                <p>Total:</p>
-                                <p>{formatCurrency(order.total)}</p>
+                                        <p>Total:</p>
+                                        <p>{formatCurrency(order.total)}</p>
 
-                                <p>Estado:</p>
-                                <p>{order.estado}</p>
+                                        <p>Estado:</p>
+                                        <p>{order.estado}</p>
 
-                                <p>Cupon:</p>
-                                <p>
-                                    {order.cupon !== null
-                                        ? 'No se uso cupón'
-                                        : 'Se uso cupón de descuento'}
-                                </p>
+                                        <p>Cupon:</p>
+                                        <p>
+                                            {order.cupon !== null
+                                                ? 'No se uso cupón'
+                                                : 'Se uso cupón de descuento'}
+                                        </p>
+                                    </div>
 
-                                <h4 className="your-orders-address-title">
-                                    Datos de Envío
-                                </h4>
-
-                                <div className="your-orders-address">
-                                    <AddressComponent address={order.envio} />
+                                    <div>
+                                        <h4>Datos de Envío</h4>
+                                        <AddressComponent
+                                            address={order.envio}
+                                        />
+                                    </div>
                                 </div>
 
                                 <button
@@ -198,33 +201,32 @@ const YourOrders = () => {
 
             {showDetails && (
                 <section className="your-orders-item">
-                    <p>Fecha:</p>
-                    <p>{selectedOrder.fecha_pedido}</p>
+                    <div className="your-orders-grid">
+                        <p>Fecha:</p>
+                        <p>
+                            {new Date(
+                                selectedOrder.fecha_pedido,
+                            ).toLocaleDateString()}
+                        </p>
 
-                    <p>Total:</p>
-                    <p>{formatCurrency(selectedOrder.total)}</p>
+                        <p>Total:</p>
+                        <p>{formatCurrency(selectedOrder.total)}</p>
 
-                    <p>Estado:</p>
-                    <p>{selectedOrder.estado}</p>
+                        <p>Estado:</p>
+                        <p>{selectedOrder.estado}</p>
 
-                    <p>Cupón:</p>
-                    <p>
-                        {selectedOrder.cupon !== null
-                            ? 'No se uso cupón'
-                            : 'Se uso cupón de descuento'}
-                    </p>
-
-                    <h4 className="your-orders-address-title">
-                        Datos de Envío
-                    </h4>
-
-                    <div className="your-orders-address">
-                        <AddressComponent address={selectedOrder.envio} />
+                        <p>Cupón:</p>
+                        <p>
+                            {selectedOrder.cupon !== null
+                                ? 'No se uso cupón'
+                                : 'Se uso cupón de descuento'}
+                        </p>
                     </div>
 
-                    <h4 className="your-orders-address-title">
-                        Productos del pedido
-                    </h4>
+                    <h4>Datos de Envío</h4>
+
+                    <AddressComponent address={selectedOrder.envio} />
+                    <h4>Productos del pedido</h4>
 
                     <div className="your-orders-products">
                         {orderProducts.map(product => (
@@ -232,6 +234,16 @@ const YourOrders = () => {
                                 key={product.id}
                                 className="your-orders-product-item"
                             >
+                                <p>
+                                    <strong>Descripción:</strong>{' '}
+                                    {product.descripcion}
+                                </p>
+
+                                <p>
+                                    Cantidad: {product.cantidad} Precio:{' '}
+                                    {product.precio}
+                                </p>
+
                                 <Slider>
                                     {product.imagenes.map((image, index) => (
                                         <img
@@ -241,34 +253,31 @@ const YourOrders = () => {
                                         />
                                     ))}
                                 </Slider>
-
-                                <p>
-                                    Cantidad: {product.cantidad} Precio:{' '}
-                                    {product.precio}
-                                </p>
-                                <p>
-                                    <strong>Descripción:</strong>{' '}
-                                    {product.descripcion}
-                                </p>
                             </div>
                         ))}
                     </div>
 
-                    {selectedOrder.estado === 'procesando' && (
-                        <button onClick={handleCancelOrder} disabled={loading}>
-                            Cancelar pedido
+                    <div className="your-orders-actions">
+                        <button
+                            onClick={() => {
+                                setShowDetails(false);
+                                setSelectedOrder(null);
+                            }}
+                            disabled={loading}
+                        >
+                            Volver
                         </button>
-                    )}
 
-                    <button
-                        onClick={() => {
-                            setShowDetails(false);
-                            setSelectedOrder(null);
-                        }}
-                        disabled={loading}
-                    >
-                        Volver
-                    </button>
+                        {selectedOrder.estado === 'procesando' && (
+                            <button
+                                className="danger-button"
+                                onClick={handleCancelOrder}
+                                disabled={loading}
+                            >
+                                Cancelar pedido
+                            </button>
+                        )}
+                    </div>
 
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </section>
