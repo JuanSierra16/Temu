@@ -97,9 +97,8 @@ const Checkout = () => {
                 cupo_id: couponId,
                 direccion_envio_id: selectAddress.id,
                 currency: currency.acronym,
-                success_url:
-                    'http://localhost:5173/checkout/success?code=' + code,
-                cancel_url: 'http://localhost:5173/checkout/cancel',
+                success_url: `${window.location.origin}/checkout/success?code=${code}`,
+                cancel_url: `${window.location.origin}/checkout/cancel`,
             };
 
             const res = await makePayment(data);
