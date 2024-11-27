@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { STRIPE_PRIVATE_KEY, STRIPE_WEBHOOK_SECRET } from "../config.js";
+import { STRIPE_PRIVATE_KEY, STRIPE_WEBHOOK_SECRET, TRACKING_URL } from "../config.js";
 import { pool } from "../db.js";
 import transporter from "./../config/nodemailer.js";
 
@@ -107,8 +107,10 @@ export const handleStripeWebhook = async (req, res) => {
                     return `<p><strong>Producto:</strong> ${item.nombre}, <strong>Cantidad:</strong> ${item.cantidad}, <strong>Precio:</strong> ${item.precio}</p>`;
                 }).join('');
 
+                const trackingUrl = TRACKING_URL || 'http://localhost:5173';
+
                 const emailContent = `
-                    <p>Gracias por tu compra. Tu pedido con Link de seguimiento <a href="http://localhost:5173/orders/${pedido_id}">http://localhost:5173/orders/${pedido_id}</a> ha sido recibido y está en proceso.</p>
+                    <p>Gracias por tu compra. Tu pedido con Link de seguimiento <a href="${trackingUrl}/orders/${pedido_id}">${trackingUrl}/orders/${pedido_id}</a> ha sido recibido y está en proceso.</p>
                     <h3>Detalles del pedido #${pedido_id}:</h3>
                     ${productosInfo}
                     <p><strong>Estado</strong>: Procesando</p>
